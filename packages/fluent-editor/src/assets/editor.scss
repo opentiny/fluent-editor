@@ -4,6 +4,10 @@
 @import './emoji/emoji';
 
 @mixin editor {
+  .ql-container.ql-snow {
+    border-top: 0;
+  }
+
   .ql-editor {
     padding-bottom: 33px;
     font-size: $defaultFontSize;

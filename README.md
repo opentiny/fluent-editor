@@ -1,25 +1,25 @@
-# FluentEditor 富文本编辑器
+# FluentEditor
 
-FluentEditor 是一个基于 Quill 2.0 的富文本编辑器，在 Quill 基础上扩展了表格、图片、超链接、复制粘贴、插入表情、文件上传、@提醒、斜杆菜单等丰富的模块和格式，框架无关、兼容 Quill API、兼容 Quill 模块生态。
+FluentEditor is a rich text editor based on Quill 2.0, which extends Quill with rich modules and formats such as tables, images, hyperlinks, copy and paste, inserting emoticons, file uploads, @ reminders, and diagonal menu. It is framework-independent, compatible with Quill API, and compatible with Quill module ecosystem.
 
-## 项目优势
+## Features
 
-FluentEditor 主要有以下特点和优势：
+FluentEditor has the following features and advantages:
 
-* 包含30多种丰富的模块和格式，除了 Quill 内置的21种格式之外，还扩展和增强了表格、图片、超链接、字数统计、表情、文件上传、复制粘贴、@提醒、斜杆快捷菜单、截图等15种模块和格式
-* 强大的表格功能，支持在工具栏插入指定行列的表格、表格行高/列宽拖拽、插入行/列、删除行/列、合并/拆分单元格等丰富的表格操作
-* 与框架无关，可以在 Vue、React、Angular 等多种框架中使用
-* 兼容 Quill 所有 API，兼容 Quill 生态模块和格式
+- Contains more than 30 rich modules and formats, in addition to the 21 built-in formats in Quill, it also extends and enhances 15 modules and formats such as tables, images, hyperlinks, word counts, emoticons, file uploads, copy and paste, @ reminders, slash shortcut menus, screenshots, etc
+- Powerful table function, supports inserting tables with specified rows and columns in the toolbar, table row height/column width dragging, inserting rows/columns, deleting rows/columns, merging/splitting cells, and other rich table operations
+- It is not related to frameworks and can be used in multiple frameworks such as Vue, React, Angular, etc
+- Compatible with all Quill APIs, Quill ecosystem modules and formats
 
-## 快速入门
+## Quick Start
 
-安装 FluentEditor：
+Install FluentEditor:
 
 ```shell
 npm i @opentiny/fluent-editor
 ```
 
-编写html：
+Write html：
 
 ```html
 <div id="editor">
@@ -27,13 +27,13 @@ npm i @opentiny/fluent-editor
 </div>
 ```
 
-引入样式：
+Import style:
 
 ```css
 @import '@opentiny/fluent-editor/dist/style.css'
 ```
 
-初始化 FluentEditor 编辑器：
+Initialize the FluentEditor editor:
 
 ```javascript
 import FluentEditor from '@opentiny/fluent-editor'
@@ -43,11 +43,22 @@ const editor = new FluentEditor('#editor', {
 })
 ```
 
-## ❤️ 致谢
+## Development
 
-感谢：
+```shell
+git clone git@github.com:opentiny/fluent-editor.git
+cd fluent-editor
+pnpm i
+pnpm dev
+```
 
-- [quill](https://github.com/slab/quill) 项目，它是一款API驱动的富文本编辑器，采用模块化架构，可扩展性好，易于使用，支持跨平台，FluentEditor 基于 Quill 扩展和增强了表格、图片、超链接等大量模块和格式。
-- [quill-better-table](https://github.com/soccerloway/quill-better-table) 项目，它增强了 Quill 内置表格模块，增加了丰富的功能，FluentEditor 的表格操作功能基于 quill-better-table。
-- [quill-emoji](https://github.com/contentco/quill-emoji) 项目，它是一个用于表情符号的 Quill 模块，FluentEditor 的插入表情功能基于 quill-emoji。
-- [quill-blot-formatter](https://github.com/Fandom-OSS/quill-blot-formatter) 项目，它是一个用于调整图像和视频大小的 Quill 模块，FluentEditor 的图片缩放功能基于 quill-blot-formatter。
+Open your browser and visit: [http://localhost:5173/](http://localhost:5173/)
+
+## ❤️ Credits
+
+Thanks to:
+
+- The [quill](https://github.com/slab/quill) project, which is an API-driven rich text editor with a modular architecture, good scalability, ease of use, and cross-platform support. FluentEditor extends and enhances a large number of modules and formats such as tables, images, and hyperlinks based on Quill.
+- The [quill-better-table](https://github.com/soccerloway/quill-better-table) project, which enhances the built-in table module of Quill and adds rich functionality. FluentEditor's table operation functionality is based on quill-better-table.
+- The [quill-emoji](https://github.com/contentco/quill-emoji) project, which is a Quill module for emoji. FluentEditor's insert emoji function is based on quill-emoji.
+- The [quill-blot-formatter](https://github.com/Fandom-OSS/quill-blot-formatter) project, which is a Quill module for resizing images and videos. FluentEditor's image scaling function is based on quill-blot-formatter.
