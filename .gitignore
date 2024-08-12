@@ -1,0 +1,33 @@
+.DS_Store
+node_modules
+dist/
+coverage/
+test-results
+
+# local env
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.history
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.log
+*.stackdump
+
+tgzs
+*.tgz
+
+# 屏蔽测试用例报告相关文件
+allure-report
+allure-results
+test-results
