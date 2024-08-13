@@ -52,7 +52,7 @@ pnpm i
 pnpm dev
 ```
 
-Open your browser and visit: [http://localhost:5173/](http://localhost:5173/)
+Open your browser and visit: [http://localhost:5173/fluent-editor/](http://localhost:5173/fluent-editor/)
 
 ## ❤️ Credits
 

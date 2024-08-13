@@ -52,7 +52,7 @@ pnpm i
 pnpm dev
 ```
 
-打开浏览器访问：[http://localhost:5173/](http://localhost:5173/)
+打开浏览器访问：[http://localhost:5173/fluent-editor/](http://localhost:5173/fluent-editor/)
 
 ## ❤️ 致谢
 
