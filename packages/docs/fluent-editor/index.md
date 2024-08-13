@@ -7,7 +7,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /guide/quick-start
+      link: /docs/quick-start
 features:
 - title: 开箱即用
   details: 内置 30 多种丰富的模块和格式。
