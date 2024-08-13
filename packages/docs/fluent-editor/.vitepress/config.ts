@@ -1,4 +1,6 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vitepress'
+import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 import { sidebar } from './sidebar'
 
 export default defineConfig({
@@ -22,5 +24,11 @@ export default defineConfig({
     sidebar: {
       '/docs/': sidebar(),
     }
-  }
+  },
+  markdown: {
+    config(md) {
+      const docRoot = fileURLToPath(new URL('../', import.meta.url))
+      md.use(demoPreviewPlugin, { docRoot })
+    },
+  },
 })

@@ -9,6 +9,12 @@
     "preview": "vitepress preview fluent-editor"
   },
   "devDependencies": {
+    "@vitepress-code-preview/container": "^1.0.7",
+    "@vitepress-code-preview/plugin": "^1.0.4",
+    "vite": "^2.3.0",
     "vitepress": "^1.3.2"
+  },
+  "dependencies": {
+    "@opentiny/fluent-editor": "workspace:^"
   }
 }
