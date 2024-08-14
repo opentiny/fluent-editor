@@ -4,6 +4,7 @@ dist/
 coverage/
 test-results
 cache
+.temp
 
 # local env
 .env.local
