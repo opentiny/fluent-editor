@@ -14,3 +14,8 @@
     max-height: 260px;
   }
 }
+
+/* 隐藏 Playground 和全屏按钮 */
+._example-tooltip_18ews_2:nth-child(1) svg {
+  display: none;
+}
