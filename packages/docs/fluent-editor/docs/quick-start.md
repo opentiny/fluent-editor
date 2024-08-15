@@ -1,6 +1,6 @@
 # 快速开始
 
-安装 FluentEditor：
+安装 Fluent Editor：
 
 ```shell
 npm i @opentiny/fluent-editor
@@ -10,7 +10,7 @@ npm i @opentiny/fluent-editor
 
 ```html
 <div id="editor">
-  <p>Hello FluentEditor!</p>
+  <p>Hello Fluent Editor!</p>
 </div>
 ```
 
@@ -20,7 +20,7 @@ npm i @opentiny/fluent-editor
 @import '@opentiny/fluent-editor/dist/style.css'
 ```
 
-初始化 FluentEditor 编辑器：
+初始化 Fluent Editor 编辑器：
 
 ```javascript
 import FluentEditor from '@opentiny/fluent-editor'

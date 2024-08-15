@@ -18,6 +18,6 @@ onMounted(() => {
 
 <template>
   <div id="editor">
-    <p>Hello <strong>FluentEditor</strong>!</p>
+    <p>Hello <strong>Fluent Editor</strong>!</p>
   </div>
 </template>
