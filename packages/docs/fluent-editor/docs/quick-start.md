@@ -17,7 +17,7 @@ npm i @opentiny/fluent-editor
 引入样式：
 
 ```css
-@import '@opentiny/fluent-editor/dist/style.css'
+@import '@opentiny/fluent-editor/style.css'
 ```
 
 初始化 Fluent Editor 编辑器：
