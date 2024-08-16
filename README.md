@@ -30,7 +30,7 @@ Write html：
 Import style:
 
 ```css
-@import '@opentiny/fluent-editor/dist/style.css'
+@import '@opentiny/fluent-editor/style.css'
 ```
 
 Initialize the FluentEditor editor:

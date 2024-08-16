@@ -1,6 +1,6 @@
 {
   "name": "@opentiny/fluent-editor",
-  "version": "3.17.1",
+  "version": "3.17.2",
   "description": "A rich text editor based on Quill 2.0, which extends rich modules and formats on the basis of Quill. It's powerful and out-of-the-box.",
   "homepage": "https://opentiny.github.io/fluent-editor/",
   "keywords": [
@@ -23,24 +23,21 @@
     "url": "https://github.com/opentiny/fluent-editor/issues"
   },
   "main": "src/index.ts",
-  "files": [
-    "dist/*"
-  ],
   "module": "src/index.ts",
   "exports": {
     ".": {
       "import": "./src/index.ts",
       "require": "./src/index.ts"
     },
-    "./dist/style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
+    "./style.css": {
+      "import": "./style.css",
+      "require": "./style.css"
     }
   },
   "scripts": {
     "start": "vite build && vite",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/pre-release.js",
     "test": "jest",
     "format": "prettier './{src,test}/**/*.{js,ts,tsx,vue}' --write"
   },
@@ -60,12 +57,14 @@
     "@types/quill": "^2.0.9",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
+    "commander": "^6.2.0",
     "eslint": "^8.5.0",
     "jest": "^26.6.3",
     "lint-staged": "^12.1.4",
     "lodash-es": "^4.17.15",
     "prettier": "^2.3.0",
     "sass": "^1.47.0",
+    "shelljs": "^0.8.4",
     "ts-jest": "^26.5.6",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4",
