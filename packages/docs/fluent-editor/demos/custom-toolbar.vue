@@ -21,9 +21,7 @@ onMounted(() => {
     editor = new FluentEditor('#editor', {
       theme: 'snow',
       modules: {
-        toolbar: {
-          container: TOOLBAR_CONFIG
-        }
+        toolbar: TOOLBAR_CONFIG
       }
     })
   })
