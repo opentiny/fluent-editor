@@ -19,3 +19,12 @@
 .example-actions-playground, .example-actions-fullscreen {
   display: none;
 }
+
+/* 解决 Fluent Editor 与 VitePress 样式冲突 */
+._example-showcase_8jhae_14 {
+  position: relative;
+}
+
+.ql-mention-list-container .ql-mention-list {
+  margin: 0;
+}
