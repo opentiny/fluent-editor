@@ -109,7 +109,7 @@ class TableCellLine extends Block {
     }
     switch (true) {
       case name === 'cell-bg': {
-        this.domNode[`${value ? 'set' : 'remove'}Attribute`]('data-cell-bg', value)
+        this.toggleAttribute('data-cell-bg', value);
       }
     }
   }
