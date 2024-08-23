@@ -54,6 +54,21 @@ pnpm dev
 
 打开浏览器访问：[http://localhost:5173/fluent-editor/](http://localhost:5173/fluent-editor/)
 
+## ✨ 贡献者
+
+贡献者是在 OpenTiny 社区中合并了 1 个或多个 PR 的社区成员。
+
+感谢以下 OpenTiny 的贡献者们 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ## ❤️ 致谢
 
 感谢：
