@@ -88,15 +88,6 @@ Thanks to:
 - The [quill-emoji](https://github.com/contentco/quill-emoji) project, which is a Quill module for emoji. Fluent Editor's insert emoji function is based on quill-emoji.
 - The [quill-blot-formatter](https://github.com/Fandom-OSS/quill-blot-formatter) project, which is a Quill module for resizing images and videos. Fluent Editor's image scaling function is based on quill-blot-formatter.
 
-## Contributors ✨
+## License
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+[MIT](LICENSE)
