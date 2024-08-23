@@ -32,7 +32,7 @@ class TableCellLine extends Block {
   static create(value) {
     const node = super.create(value);
 
-    // fix: when td has background-color, quill can't set it to table-cell bolt
+    // fix: when td has background-color, quill can't set it to table-cell blot
     if (value.tdBgColor) {
       node.setAttribute(`data-parent-bg`, value.tdBgColor);
       delete value.tdBgColor;
@@ -43,8 +43,9 @@ class TableCellLine extends Block {
       node.setAttribute(`data-${key}`, value[key] || identityMaker());
     });
 
-    CELL_ATTRIBUTES.forEach((attrName) => {
-      node.setAttribute(`data-${attrName}`, value[attrName] || CELL_DEFAULT[attrName]);
+    [...CELL_ATTRIBUTES, 'cell-bg'].forEach((attrName) => {
+      const keyValue = value[attrName] || CELL_DEFAULT[attrName];
+      keyValue && node.setAttribute(`data-${attrName}`, keyValue);
     });
 
     if (value.height) {
@@ -59,7 +60,7 @@ class TableCellLine extends Block {
     if (formats['list']) {
       formats['list'] = domNode.classList.item(0);
     }
-    return reduceFormats(domNode, formats);
+    return reduceFormats(domNode, formats, ['cell-bg']);
   }
 
   toggleAttribute(name, value) {
@@ -108,8 +109,7 @@ class TableCellLine extends Block {
     }
     switch (true) {
       case name === 'cell-bg': {
-        this.toggleAttribute('data-cell-bg', value)
-        this.formatChildren(name, value)
+        this.toggleAttribute('data-cell-bg', value);
       }
     }
   }
@@ -119,16 +119,17 @@ class TableCellLine extends Block {
 
     // cover shadowBlot's wrap call, pass params parentBlot initialize
     // needed
-    const { row, cell, rowspan, colspan } = this.domNode.dataset;
-    const formats: any = TableCellLine.formats(this.domNode);
+    const { row, cell, rowspan, colspan, cellBg } = this.domNode.dataset;
+    const formats: Record<string, any> = TableCellLine.formats(this.domNode);
     const parentFormats = this.parent.formats();
     if (this.statics.requiredContainer && !(this.parent instanceof this.statics.requiredContainer)) {
-      this.wrap(this.statics.requiredContainer.blotName, { row, cell, rowspan, colspan });
+      this.wrap(this.statics.requiredContainer.blotName, { row, cell, rowspan, colspan, cellBg });
     } else if (!compare(formats, parentFormats)) {
       this.parent.format('row', formats.row);
       this.parent.format('cell', formats.cell);
       this.parent.format('rowspan', formats.rowspan);
       this.parent.format('colspan', formats.colspan);
+      formats['cell-bg'] && this.parent.setCellBg(formats['cell-bg']);
     }
 
     const parentHeight = this.domNode.getAttribute('height');
@@ -259,6 +260,18 @@ class TableCell extends Container {
     })
   }
     
+  /** this method is for TableCellLine to change cell background color 
+   *  if use `format('cell-bg', value)` will loop trigger 
+   *  TableCellLine.optimize -> TableCell.format -> TableCellLine.optimize ...
+   */
+  setCellBg(value?: string) {
+    if (value) {
+      this.domNode.style.backgroundColor = value
+    } else {
+      this.domNode.style.backgroundColor = 'initial'
+    }
+  }
+
   format(name, value) {
     const quill = Quill.find(this.scroll.domNode.parentNode);
     switch (true) {
@@ -268,7 +281,8 @@ class TableCell extends Container {
       case ['row', 'cell'].indexOf(name) > -1:
         this.toggleAttribute(`data-${name}`, value);
         break;
-      case name === 'background': {      const hasBgColor = this.domNode.querySelectorAll('div.qlbt-cell-line[data-parent-bg]');
+      case name === 'background': {      
+        const hasBgColor = this.domNode.querySelectorAll('div.qlbt-cell-line[data-parent-bg]');
         hasBgColor.forEach((child) => child.removeAttribute('data-parent-bg'));
         this.domNode.style.background = '';
         this.domNode.style.backgroundColor = value;
@@ -289,11 +303,7 @@ class TableCell extends Container {
         this.toggleAttribute('data-cell-bg', value)
         this.toggleAttribute('data-parent-bg', value)
         this.formatChildren(name, value)
-        if (value) {
-          this.domNode.style.backgroundColor = value
-        } else {
-          this.domNode.style.backgroundColor = 'initial'
-        }
+        this.setCellBg(value);
       }
     }
   }
@@ -1207,8 +1217,8 @@ function cellId() {
   return `cell-${id}`;
 }
 
-function reduceFormats(domNode, formats) {
-  return CELL_ATTRIBUTES.concat(CELL_IDENTITY_KEYS).reduce((tableFormats, attribute) => {
+function reduceFormats(domNode:HTMLElement, formats:Record<string, any>, extraFormat: string[] = []) {
+  return [...CELL_ATTRIBUTES, ...CELL_IDENTITY_KEYS, ...extraFormat].reduce((tableFormats, attribute) => {
     if (domNode.hasAttribute(`data-${attribute}`)) {
       tableFormats[attribute] = domNode.getAttribute(`data-${attribute}`) || undefined;
     }
