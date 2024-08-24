@@ -7,23 +7,23 @@ const { Scope } = Quill.imports['parchment'];
 const Delta = Quill.imports['delta'];
 
 interface MentionOption {
-  remove?: (data: any) => void;
-  defaultLink?: string;
-  target?: string;
-  mentionChar?: string;
-  maxHeight?: number;
-  search?: (term: string) => Promise<any[]>;
-  renderMentionItem?: (data: any) => HTMLElement;
-  renderMentionText?: (data: any) => HTMLElement | string;
   containerClass?: string;
-  listClass?: string;
-  listHideClass?: string;
-  searchKey: string;
+  dataAttributes?: string[];
+  defaultLink?: string;
+  itemActiveClass?: string;
   itemKey: string;
   itemClass?: string;
-  itemActiveClass?: string;
-  dataAttributes?: string[];
+  listClass?: string;
+  listHideClass?: string;
+  maxHeight?: number;
+  mentionChar?: string;
+  remove?: (data: any) => void;
+  renderMentionItem?: (data: any) => HTMLElement;
+  renderMentionText?: (data: any) => HTMLElement | string;
+  search?: (term: string) => Promise<any[]>;
+  searchKey: string;
   select?: (data: any) => void;
+  target?: string;
 }
 
 // @dynamic
