@@ -59,7 +59,7 @@ pnpm dev
 
 Open your browser and visit: [http://localhost:5173/fluent-editor/](http://localhost:5173/fluent-editor/)
 
-## ✨ Contributors
+## Contributors ✨
 
 Contributors are community members who have 1 or more PR merged in OpenTiny.
 
@@ -82,7 +82,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-## ❤️ Credits
+## Credits ❤️
 
 Thanks to:
 
