@@ -43,7 +43,7 @@ class TableCellLine extends Block {
       node.setAttribute(`data-${key}`, value[key] || identityMaker());
     });
 
-    [...CELL_ATTRIBUTES, 'cell-bg'].forEach((attrName) => {
+    CELL_ATTRIBUTES.forEach((attrName) => {
       const keyValue = value[attrName] || CELL_DEFAULT[attrName];
       keyValue && node.setAttribute(`data-${attrName}`, keyValue);
     });
@@ -60,7 +60,7 @@ class TableCellLine extends Block {
     if (formats['list']) {
       formats['list'] = domNode.classList.item(0);
     }
-    return reduceFormats(domNode, formats, ['cell-bg']);
+    return reduceFormats(domNode, formats);
   }
 
   toggleAttribute(name, value) {
@@ -1217,8 +1217,8 @@ function cellId() {
   return `cell-${id}`;
 }
 
-function reduceFormats(domNode:HTMLElement, formats:Record<string, any>, extraFormat: string[] = []) {
-  return [...CELL_ATTRIBUTES, ...CELL_IDENTITY_KEYS, ...extraFormat].reduce((tableFormats, attribute) => {
+function reduceFormats(domNode:HTMLElement, formats:Record<string, any>) {
+  return [...CELL_ATTRIBUTES, ...CELL_IDENTITY_KEYS].reduce((tableFormats, attribute) => {
     if (domNode.hasAttribute(`data-${attribute}`)) {
       tableFormats[attribute] = domNode.getAttribute(`data-${attribute}`) || undefined;
     }
