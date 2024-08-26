@@ -43,7 +43,7 @@ class TableCellLine extends Block {
       node.setAttribute(`data-${key}`, value[key] || identityMaker());
     });
 
-    [...CELL_ATTRIBUTES, 'cell-bg'].forEach((attrName) => {
+    CELL_ATTRIBUTES.forEach((attrName) => {
       const keyValue = value[attrName] || CELL_DEFAULT[attrName];
       keyValue && node.setAttribute(`data-${attrName}`, keyValue);
     });
