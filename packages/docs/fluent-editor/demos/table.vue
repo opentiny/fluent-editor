@@ -36,16 +36,11 @@ onMounted(() => {
         }
       }
     })
-    
   })
 })
 
-const con = () => {
-  console.log(editor.getContents())
-}
 </script>
 
 <template>
-  <button @click="con">some</button>
   <div id="editor"></div>
 </template>

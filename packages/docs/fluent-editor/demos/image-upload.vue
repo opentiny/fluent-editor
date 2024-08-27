@@ -9,7 +9,7 @@ const TOOLBAR_CONFIG = [
   ['bold', 'italic', 'underline', 'link'],
   [{ list: 'ordered' }, { list: 'bullet' }],
   ['clean'],
-  ['image', 'video']
+  ['image']
 ]
 
 onMounted(() => {
@@ -26,12 +26,8 @@ onMounted(() => {
   })
 })
 
-const con = () => {
-  console.log(editor.getContents())
-}
 </script>
 
 <template>
-  <button @click="con">some</button>
   <div id="editor"></div>
 </template>
