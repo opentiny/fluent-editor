@@ -142,7 +142,9 @@ export default class Tooltip extends BaseTooltip {
     });
     this.root.querySelector('input[type="text"]').addEventListener('blur', () => {
       this.isInputFocus = false;
-      this.save();
+      if(this.isHover) {
+        this.save();
+      }
     });
     this.quill.on(
       Emitter.events.SELECTION_CHANGE,
@@ -231,7 +233,19 @@ export default class Tooltip extends BaseTooltip {
       }
       break;
     }
-    default:
+    case 'video' : {
+      const { scrollTop } = this.quill.root;
+      const { autoProtocol } = this.quill.options;
+      if (autoProtocol) {
+        value = this.addHttpProtocol(value);
+      }
+      this.isHover = false
+      this.restoreFocus();
+      this.quill.format('video', value);
+      this.quill.root.scrollTop = scrollTop;
+      break;
+    }
+      default:
     }
   }
 
