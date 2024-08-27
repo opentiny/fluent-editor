@@ -47,7 +47,7 @@ class ListItem extends Block {
   wrap: any;
   children: any;
   prev: any;
-  remove: () => {};
+  remove: () => void;
 
   static create(value) {
     const node = super.create();

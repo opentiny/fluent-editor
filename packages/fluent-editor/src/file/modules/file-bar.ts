@@ -2,10 +2,9 @@ import Quill from 'quill'
 // devui-internal api: utils\public-api.ts
 
 import { unshiftString } from '../../utils/method';
-import { LANG_CONF } from '../../config/editor.config'
 import File from '../formats/file'
 const Delta = Quill.imports['delta']
-import {Range } from 'quill/core/selection'
+import { Range } from 'quill/core/selection'
 
 export default class FileBar {
   quill: any
@@ -24,7 +23,7 @@ export default class FileBar {
     this.fileRange = new Range(index - offset, length)
 
     const timestamp = Number(this.file.dataset.lastModified)
-    const lastModifiedDate = this.formatDate(timestamp)
+    const _lastModifiedDate = this.formatDate(timestamp)
     this.template = [
       // `<a class="ql-last-modified-date" href="${this.file.href}" target="_blank">${this.file.href}</a>`,
       // '<span class="ql-split"></span>',

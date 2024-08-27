@@ -17,7 +17,7 @@ export function createTable(data: any[]) {
 
 function createColGroup(table: HTMLTableElement) {
   const colGroup = document.createElement<'colgroup'>('colgroup');
-  tableConfig.forEach(({width}) => {
+  tableConfig.forEach(({ width }) => {
     const col = document.createElement<'col'>('col');
     col.setAttribute('width', width);
     colGroup.appendChild(col);
@@ -28,7 +28,7 @@ function createColGroup(table: HTMLTableElement) {
 function createTableHead(table: HTMLTableElement) {
   const tHead = table.createTHead();
   const tRow = tHead.insertRow();
-  tableConfig.forEach(({title}) => {
+  tableConfig.forEach(({ title }) => {
     const tCell = tRow.insertCell();
     tCell.textContent = title;
   });
@@ -42,7 +42,7 @@ function createTableBody(table: HTMLTableElement, data: any[]) {
     const tRow = tBody.insertRow();
     // @ts-ignore
     tRow.setAttribute('href', d.url);
-    tableConfig.forEach(({field}) => {
+    tableConfig.forEach(({ field }) => {
       const tCell = tRow.insertCell();
       tCell.classList.add(`work-item-${field}`);
       // @ts-ignore

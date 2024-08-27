@@ -38,11 +38,11 @@ export function compareArray(arr1, arr2) {
 }
 
 export function compareObject(object1, object2) {
-  let o1keys = Object.keys(object1)
-  let o2keys = Object.keys(object2)
+  const o1keys = Object.keys(object1)
+  const o2keys = Object.keys(object2)
   if (o2keys.length !== o1keys.length) return false
   for (let i = 0; i <= o1keys.length - 1; i++) {
-    let key = o1keys[i]
+    const key = o1keys[i]
     if (!o2keys.includes(key)) return false
     if (!compare(object2[key], object1[key])) return false
   }

@@ -9,12 +9,12 @@ export default class Counter {
     format: 'text',
     unit: 'char',
     template: LANG_CONF['counter-template'],
-    count: 500
+    count: 500,
   };
 
   // @ts-ignore
   constructor(private quill: Quill, options: ICounterOption) {
-    this.options = { ...this.defaultOptions, ...options};
+    this.options = { ...this.defaultOptions, ...options };
     this.container = quill.addContainer('ql-counter');
     quill.on(Quill.events.TEXT_CHANGE, this.renderCount);
     this.renderCount();

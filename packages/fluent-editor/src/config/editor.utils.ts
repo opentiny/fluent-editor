@@ -31,7 +31,7 @@ export function imageFileToUrl(imageFile) {
       resolve(e.target['result'])
     }
     reader.onerror = reject
-  }).catch(err => null)
+  }).catch(() => null)
 }
 
 /**

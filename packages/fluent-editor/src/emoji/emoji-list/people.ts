@@ -105,6 +105,6 @@ const peopleEmojiArr = [
   ['eyes', '1f440', ':eyes:', '&#128064;', 'p', '1279'],
   ['eye', '1f441', ':eye:', '&#128065;', 'p', '1280'],
   ['lips', '1f444', ':lips:', '&#128068;', 'p', '1283'],
-  ['fire', '1f525', ':fire:', '&#128293;', 'n', '1753']
+  ['fire', '1f525', ':fire:', '&#128293;', 'n', '1753'],
 ];
 export const peopleEmoji = createEmoji(peopleEmojiArr);

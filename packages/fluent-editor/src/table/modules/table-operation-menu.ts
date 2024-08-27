@@ -2,7 +2,7 @@ import Quill from 'quill';
 import { LANG_CONF } from '../../config/editor.config'
 import { elementRemove, arrayFrom, css, getRelativeRect } from '../utils';
 import {
-  OPERATE_MENU_ITEM_CLASS, 
+  OPERATE_MENU_ITEM_CLASS,
   OPERATE_MENU_COLORPICKER_ITEM_CLASS,
   OPERATE_MENU_DIVIDING_CLASS,
   OPERATE_MENU_SUBTITLE_CLASS,
@@ -13,7 +13,7 @@ import {
   ERROR_LIMIT,
   MENU_ITEM_HEIGHT,
   MENU_MIN_HEIGHT,
-  MENU_WIDTH
+  MENU_WIDTH,
 } from '../table-config';
 
 const MENU_ITEMS_DEFAULT = {
@@ -21,7 +21,7 @@ const MENU_ITEMS_DEFAULT = {
     text: 'Copy Cells',
     handler() {
       this.onCopy('copy');
-    }
+    },
   },
   copyTable: {
     text: 'Copy Table',
@@ -40,13 +40,13 @@ const MENU_ITEMS_DEFAULT = {
       this.setCopyRange(dom);
       document.execCommand('copy');
       dom.remove();
-    }
+    },
   },
   cutCells: {
     text: 'Cut Cells',
     handler() {
       this.onCopy('cut');
-    }
+    },
   },
   emptyCells: {
     text: 'Empty Cells',
@@ -54,7 +54,7 @@ const MENU_ITEMS_DEFAULT = {
       const tableContainer = Quill.find(this.table);
       const { selectedTds } = this.tableSelection;
       tableContainer.emptyCells(selectedTds);
-    }
+    },
   },
   insertColumnRight: {
     text: 'Insert Column After',
@@ -66,7 +66,7 @@ const MENU_ITEMS_DEFAULT = {
         (cellRect, boundary) => {
           return Math.abs(cellRect.x + cellRect.width - boundary.x1) <= ERROR_LIMIT;
         },
-        this.quill.root.parentNode
+        this.quill.root.parentNode,
       );
 
       const newColumn = tableContainer.insertColumn(this.boundary, colIndex, true, this.quill.root.parentNode);
@@ -81,11 +81,11 @@ const MENU_ITEMS_DEFAULT = {
       // )
       this.tableSelection.setSelection(
         newColumn[0].domNode.getBoundingClientRect(),
-        newColumn[0].domNode.getBoundingClientRect()
+        newColumn[0].domNode.getBoundingClientRect(),
       );
 
       setTimeout(() => this.tableScrollBar.updateScrollBar());
-    }
+    },
   },
 
   insertColumnLeft: {
@@ -98,7 +98,7 @@ const MENU_ITEMS_DEFAULT = {
         (cellRect, boundary) => {
           return Math.abs(cellRect.x - boundary.x) <= ERROR_LIMIT;
         },
-        this.quill.root.parentNode
+        this.quill.root.parentNode,
       );
 
       const newColumn = tableContainer.insertColumn(this.boundary, colIndex, false, this.quill.root.parentNode);
@@ -112,11 +112,11 @@ const MENU_ITEMS_DEFAULT = {
       // )
       this.tableSelection.setSelection(
         newColumn[0].domNode.getBoundingClientRect(),
-        newColumn[0].domNode.getBoundingClientRect()
+        newColumn[0].domNode.getBoundingClientRect(),
       );
 
       setTimeout(() => this.tableScrollBar.updateScrollBar());
-    }
+    },
   },
 
   insertRowUp: {
@@ -134,11 +134,11 @@ const MENU_ITEMS_DEFAULT = {
       // )
       this.tableSelection.setSelection(
         affectedCells[0].domNode.getBoundingClientRect(),
-        affectedCells[0].domNode.getBoundingClientRect()
+        affectedCells[0].domNode.getBoundingClientRect(),
       );
 
       setTimeout(() => this.tableScrollBar.resetTableHeight(this.table));
-    }
+    },
   },
 
   insertRowDown: {
@@ -156,11 +156,11 @@ const MENU_ITEMS_DEFAULT = {
       // )
       this.tableSelection.setSelection(
         affectedCells[0].domNode.getBoundingClientRect(),
-        affectedCells[0].domNode.getBoundingClientRect()
+        affectedCells[0].domNode.getBoundingClientRect(),
       );
 
       setTimeout(() => this.tableScrollBar.resetTableHeight(this.table));
-    }
+    },
   },
 
   mergeCells: {
@@ -196,14 +196,14 @@ const MENU_ITEMS_DEFAULT = {
         this.selectedTds,
         rowspan,
         colspan,
-        this.quill.root.parentNode
+        this.quill.root.parentNode,
       );
       this.quill.update(Quill.sources.USER);
       this.tableSelection.setSelection(
         mergedCell.domNode.getBoundingClientRect(),
-        mergedCell.domNode.getBoundingClientRect()
+        mergedCell.domNode.getBoundingClientRect(),
       );
-    }
+    },
   },
 
   unmergeCells: {
@@ -213,7 +213,7 @@ const MENU_ITEMS_DEFAULT = {
       tableContainer.unmergeCells(this.selectedTds, this.quill.root.parentNode);
       this.quill.update(Quill.sources.USER);
       this.tableSelection.clearSelection();
-    }
+    },
   },
 
   deleteColumn: {
@@ -226,7 +226,7 @@ const MENU_ITEMS_DEFAULT = {
         (cellRect, boundary) => {
           return cellRect.x + ERROR_LIMIT > boundary.x && cellRect.x + cellRect.width - ERROR_LIMIT < boundary.x1;
         },
-        this.quill.root.parentNode
+        this.quill.root.parentNode,
       );
 
       const isDeleteTable = tableContainer.deleteColumns(this.boundary, colIndexes, this.quill.root.parentNode);
@@ -237,7 +237,7 @@ const MENU_ITEMS_DEFAULT = {
       }
 
       setTimeout(() => this.tableScrollBar.updateScrollBar());
-    }
+    },
   },
 
   deleteRow: {
@@ -250,7 +250,7 @@ const MENU_ITEMS_DEFAULT = {
         this.quill.update(Quill.sources.USER);
         this.tableSelection.clearSelection();
       }
-    }
+    },
   },
 
   deleteTable: {
@@ -263,13 +263,14 @@ const MENU_ITEMS_DEFAULT = {
       this.quill.update(Quill.sources.USER);
       // fix: 右键菜单删除表格后编辑器失焦
       this.quill.focus();
-    }
-  }
+    },
+  },
 };
 const DEFAULT_CELL_COLORS = ['white', 'red', 'yellow', 'blue'];
 const NODE_EVENT_MAP = new WeakMap();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MENU_MIN_HEIHGT = 150;
-let DEFAULT_COLOR_SUBTITLE = LANG_CONF['subTitleBgColor'];
+const DEFAULT_COLOR_SUBTITLE = LANG_CONF['subTitleBgColor'];
 export default class TableOperationMenu {
   tableSelection: any;
   table: any;
@@ -292,7 +293,7 @@ export default class TableOperationMenu {
     this.table = params.table;
     this.quill = quill;
     this.options = options
-    this.menuItems = { ...MENU_ITEMS_DEFAULT, ...options.items};
+    this.menuItems = { ...MENU_ITEMS_DEFAULT, ...options.items };
     this.tableColumnTool = betterTableModule.columnTool;
     //this.tableRowTool = betterTableModule.rowTool
     this.tableScrollBar = betterTableModule.tableScrollBar;
@@ -320,10 +321,10 @@ export default class TableOperationMenu {
 
   destroy() {
     const menuItems = arrayFrom(
-      this.domNode.querySelectorAll('.' + OPERATE_MENU_ITEM_CLASS)
+      this.domNode.querySelectorAll('.' + OPERATE_MENU_ITEM_CLASS),
     )
     const colorPickerItems = arrayFrom(
-      this.domNode.querySelectorAll('.' + OPERATE_MENU_COLORPICKER_ITEM_CLASS)
+      this.domNode.querySelectorAll('.' + OPERATE_MENU_COLORPICKER_ITEM_CLASS),
     )
     const nodes = menuItems.concat(colorPickerItems)
 
@@ -370,7 +371,7 @@ export default class TableOperationMenu {
 
     for (const name in this.menuItems) {
       if (this.menuItems[name]) {
-        const item = { ...MENU_ITEMS_DEFAULT[name], ...this.menuItems[name]};
+        const item = { ...MENU_ITEMS_DEFAULT[name], ...this.menuItems[name] };
         const dom = this.menuItemCreator(item);
         if (
           (name === 'mergeCells' && this.tableSelection.selectedTds.length === 1) ||
@@ -468,7 +469,7 @@ export default class TableOperationMenu {
     }
   }
 
-  createVirtualTable(selectedTds, operation) {
+  createVirtualTable(selectedTds, _operation) {
     const virtualTable: any = document.createElement('table');
     virtualTable.style.position = 'fixed';
     virtualTable.style.top = 0;

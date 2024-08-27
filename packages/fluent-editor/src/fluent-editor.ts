@@ -93,13 +93,13 @@ const registerModules = function () {
               this.quill.format('list', curListValue, Quill.sources.USER);
             }
           },
-        }
+        },
       },
       'better-table': {
         operationMenu: {
           items: TABLE_RIGHT_MENU_CONFIG,
-          color: true
-        }
+          color: true,
+        },
       },
       image: {
         specs: [CustomImageSpec],
@@ -115,8 +115,8 @@ const registerModules = function () {
             right: '<i class="icon-text-align-right"></i>',
           },
         },
-      }
-    }
+      },
+    },
   }
 
   Quill.register(
@@ -139,7 +139,7 @@ const registerModules = function () {
       'modules/emoji-toolbar': Emoji.ToolbarEmoji,
       'modules/emoji-shortname': Emoji.ShortNameEmoji,
       // 'modules/global-link': GlobalLink,//暂未开发
-      'modules/link': Link,     // 报错
+      'modules/link': Link, // 报错
       // 'modules/screenshot': Screenshot,//暂未开发
       // 'modules/quickmenu': QuickMenu,//暂未开发
       'modules/syntax': CustomSyntax,

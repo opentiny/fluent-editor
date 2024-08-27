@@ -140,7 +140,7 @@ class Screenshot extends Module {
           0,
           0,
           this.width,
-          this.height
+          this.height,
         );
         this.insertEditor(cropCanvas);
         cropCanvas.remove();

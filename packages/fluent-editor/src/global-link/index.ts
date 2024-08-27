@@ -77,7 +77,7 @@ class GlobalLink extends Module {
     }
   }
 
-  handleGlobalLinkButtonClick(value) {
+  handleGlobalLinkButtonClick(_value) {
     this.open = !this.open;
     this.triggerPanel();
   }
@@ -97,8 +97,8 @@ class GlobalLink extends Module {
       op.insert({
         [WikiLink.blotName]: {
           link: wiki.link,
-          text: wiki.text
-        }
+          text: wiki.text,
+        },
       });
       return op;
     }, new Delta().retain(index));
@@ -118,8 +118,8 @@ class GlobalLink extends Module {
         [DocumentLink.blotName]: {
           link: doc.link,
           text: doc.text,
-          icon: doc.icon
-        }
+          icon: doc.icon,
+        },
       });
       return op;
     }, new Delta().retain(index));
@@ -138,8 +138,8 @@ class GlobalLink extends Module {
       op.insert({
         [WorkItemLink.blotName]: {
           link: workItem.url,
-          data: workItem.table
-        }
+          data: workItem.table,
+        },
       });
       return op;
     }, new Delta().retain(index));

@@ -66,7 +66,7 @@ export default class TableColumnTool {
       width: '100%',
       height: `${COL_TOOL_HEIGHT}px`,
       left: '0px',
-      top: `${tableViewRect.top - containerRect.top + parent.scrollTop - 25}px`
+      top: `${tableViewRect.top - containerRect.top + parent.scrollTop - 25}px`,
     });
   }
 
@@ -98,7 +98,7 @@ export default class TableColumnTool {
       return;
     }
     const tableCols = tableContainer.colGroup().children;
-    const tableColsNum =  Math.max(Array.from(tableCols).length, tableContainer.colGroup().domNode.children.length);
+    const tableColsNum = Math.max(Array.from(tableCols).length, tableContainer.colGroup().domNode.children.length);
     const existCells: any = Array.from(this.columnCtrlPanel.querySelectorAll('.qlbt-col-tool-cell'));
     const cellsNumber = Math.max(existCells.length, tableColsNum);
 
@@ -120,7 +120,7 @@ export default class TableColumnTool {
         this.addColCellHolderHandler(colToolCell);
         // set tool cell min-width
         css(colToolCell, {
-          'min-width': `${colWidth}px`
+          'min-width': `${colWidth}px`,
         });
       } else if (existCells[index] && index >= tableColsNum) {
         existCells[index].remove();
@@ -128,7 +128,7 @@ export default class TableColumnTool {
         colToolCell = existCells[index];
         // set tool cell min-width
         css(colToolCell, {
-          'min-width': `${colWidth}px`
+          'min-width': `${colWidth}px`,
         });
       }
     }
@@ -201,7 +201,7 @@ export default class TableColumnTool {
         y: domRect.top - containerRect.top, // 表格左上角Y轴坐标
         y1: domRect.top - containerRect.top + domRect.height - 1, // 表格右上角Y轴坐标
         width: tableRect.width - 2,
-        height: domRect.height - 1
+        height: domRect.height - 1,
       };
       tableSelection.selectedTds = tableSelection.computeSelectedTds();
       tableSelection.repositionHelpLines();
@@ -238,7 +238,7 @@ export default class TableColumnTool {
         }
 
         css(helpLine, {
-          top: `${cellRect.top + cellRect.height + delta}px`
+          top: `${cellRect.top + cellRect.height + delta}px`,
         });
       }
     };
@@ -307,7 +307,7 @@ export default class TableColumnTool {
         zIndex: '100',
         width: `${width + ROW_TOOL_WIDTH + 9}px`,
         height: '1px',
-        backgroundColor: PRIMARY_COLOR
+        backgroundColor: PRIMARY_COLOR,
       });
 
       this.quill.root.parentNode.appendChild(helpLine);
@@ -339,7 +339,7 @@ export default class TableColumnTool {
         y: tableRect.top - containerRect.top,
         y1: tableRect.top - containerRect.top + tableRect.height - 2,
         width: domRect.width,
-        height: tableRect.height - 2
+        height: tableRect.height - 2,
       };
       tableSelection.selectedTds = tableSelection.computeSelectedTds();
       tableSelection.repositionHelpLines();
@@ -381,7 +381,7 @@ export default class TableColumnTool {
         }
 
         css(helpLine, {
-          left: `${left}px`
+          left: `${left}px`,
         });
       }
     };
@@ -403,7 +403,7 @@ export default class TableColumnTool {
         }else {
           colBlot.width = colWidth
         }
-        
+
         css(cell, { 'min-width': `${colWidth}px` });
 
         x0 = 0;
@@ -461,7 +461,7 @@ export default class TableColumnTool {
         zIndex: '100',
         height: `${tableRect.height + COL_TOOL_HEIGHT + 8}px`,
         width: '1px',
-        backgroundColor: PRIMARY_COLOR
+        backgroundColor: PRIMARY_COLOR,
       });
 
       this.quill.root.parentNode.appendChild(helpLine);

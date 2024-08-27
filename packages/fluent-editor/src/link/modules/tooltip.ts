@@ -108,7 +108,7 @@ export default class Tooltip extends BaseTooltip {
         }
         this.handleMouseEnter(event);
       },
-      false
+      false,
     );
 
     this.quill.root.addEventListener(
@@ -119,15 +119,15 @@ export default class Tooltip extends BaseTooltip {
         }
         this.handleMouseLeave();
       },
-      false
+      false,
     );
 
     this.root.addEventListener(
       'mouseenter',
-      (event) => {
+      () => {
         this.isHover = true;
       },
-      false
+      false,
     );
 
     this.root.addEventListener('mouseleave', this.handleMouseLeave.bind(this), false);
@@ -137,16 +137,16 @@ export default class Tooltip extends BaseTooltip {
       window.open(link, '_blank');
       event.preventDefault();
     });
-    this.root.querySelector('input[type="text"]').addEventListener('focus', event => {
+    this.root.querySelector('input[type="text"]').addEventListener('focus', () => {
       this.isInputFocus = true;
     });
-    this.root.querySelector('input[type="text"]').addEventListener('blur', event => {
+    this.root.querySelector('input[type="text"]').addEventListener('blur', () => {
       this.isInputFocus = false;
       this.save();
     });
     this.quill.on(
       Emitter.events.SELECTION_CHANGE,
-      (range, oldRange, source) => {
+      (range, _oldRange, source) => {
         if (isNullOrUndefined(range)) { return; }
         if (source === Emitter.sources.USER) {
           const [link, offset] = this.quill.scroll.descendant(
@@ -170,7 +170,7 @@ export default class Tooltip extends BaseTooltip {
     );
     this.quill.on(
       Emitter.events.TEXT_CHANGE,
-      (range, oldRange, source) => {
+      () => {
         const selection = this.quill.getSelection();
         const index = selection && selection.index;
         setTimeout(() => {
@@ -182,7 +182,7 @@ export default class Tooltip extends BaseTooltip {
             this.handleMouseLeave();
           }
         });
-      }
+      },
     );
   }
 

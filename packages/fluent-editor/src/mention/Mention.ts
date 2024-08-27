@@ -65,8 +65,8 @@ class Mention {
     itemKey: 'name',
     searchKey: 'name',
     dataAttributes: ['id'],
-    select(data: any) {},
-    remove(data: any) {},
+    select(_data: any) {},
+    remove(_data: any) {},
   };
 
   static register() {
@@ -186,7 +186,7 @@ class Mention {
       (index, item, idx) => item === itemEl ? idx : index, -1);
   }
 
-  handleTextChange = (delta, oldDelta, source) => {
+  handleTextChange = (_delta, _oldDelta, source) => {
     // defer handler to make sure that we can get correct quill selection range.
     setTimeout(() => {
       if (Quill.sources.USER === source) {
@@ -225,12 +225,12 @@ class Mention {
     });
   };
 
-  handleMouseClick(itemEl: HTMLLIElement, index: number) {
+  handleMouseClick(_itemEl: HTMLLIElement, index: number) {
     this.selectMentionItem(index, true);
     this.quill.focus();
   }
 
-  handleMouseEnter(itemEl: HTMLLIElement, index: number) {
+  handleMouseEnter(_itemEl: HTMLLIElement, index: number) {
     this.activeMentionIndex = index;
     this.highlightMentionItem(index);
   }

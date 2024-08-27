@@ -122,44 +122,44 @@ export const ICONS_CONFIG: { [key: string]: any } = {
 
 export const TABLE_RIGHT_MENU_CONFIG = {
   copyCells: {
-    text: LANG_CONF['copy-cells']
+    text: LANG_CONF['copy-cells'],
   },
   copyTable: {
-    text: LANG_CONF['copy-table']
+    text: LANG_CONF['copy-table'],
   },
   cutCells: {
-    text: LANG_CONF['cut-cells']
+    text: LANG_CONF['cut-cells'],
   },
   emptyCells: {
-    text: LANG_CONF['empty-cells']
+    text: LANG_CONF['empty-cells'],
   },
   insertRowUp: {
-    text: LANG_CONF['insert-row-up']
+    text: LANG_CONF['insert-row-up'],
   },
   insertRowDown: {
-    text: LANG_CONF['insert-row-down']
+    text: LANG_CONF['insert-row-down'],
   },
   insertColumnLeft: {
-    text: LANG_CONF['insert-column-left']
+    text: LANG_CONF['insert-column-left'],
   },
   insertColumnRight: {
-    text: LANG_CONF['insert-column-right']
+    text: LANG_CONF['insert-column-right'],
   },
   mergeCells: {
-    text: LANG_CONF['merge-cells']
+    text: LANG_CONF['merge-cells'],
   },
   unmergeCells: {
-    text: LANG_CONF['unmerge-cells']
+    text: LANG_CONF['unmerge-cells'],
   },
   deleteRow: {
-    text: LANG_CONF['delete-row']
+    text: LANG_CONF['delete-row'],
   },
   deleteColumn: {
-    text: LANG_CONF['delete-column']
+    text: LANG_CONF['delete-column'],
   },
   deleteTable: {
-    text: LANG_CONF['delete-table']
-  }
+    text: LANG_CONF['delete-table'],
+  },
 }
 
 // 触发上传

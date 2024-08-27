@@ -26,7 +26,7 @@ class Video extends Embed {
       if (value[key]) {
         switch (key) {
         case 'src':
-        {    const src = Video.sanitize(value[key]);
+        { const src = Video.sanitize(value[key]);
           node.setAttribute(key, src);
           break;}
         case 'title':

@@ -192,7 +192,7 @@ export default class CustomResizeAction extends Action {
     this.formatter.update();
   };
 
-  onMouseUp = (event: MouseEvent) => {
+  onMouseUp = () => {
     this.setCursor('');
     document.removeEventListener('mousemove', this.onDrag);
     document.removeEventListener('mouseup', this.onMouseUp);

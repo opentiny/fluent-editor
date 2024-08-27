@@ -18,13 +18,13 @@ export const OPERATE_MENU_COLORPICKER_ITEM_CLASS =
   'qlrte__op-menu-color-picker-item'
 export const COL_ATTRIBUTES = ['width'];
 export const COL_DEFAULT = {
-  width: 100
+  width: 100,
 };
 export const CELL_IDENTITY_KEYS = ['row', 'cell'];
 export const CELL_ATTRIBUTES = ['rowspan', 'colspan', 'cell-bg'];
 export const CELL_DEFAULT = {
   rowspan: 1,
-  colspan: 1
+  colspan: 1,
 };
 export const ERROR_LIMIT = 5;
 

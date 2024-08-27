@@ -41,26 +41,13 @@
     "test": "jest",
     "format": "prettier './{src,test}/**/*.{js,ts,tsx,vue}' --write"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged",
-    "commit-msg": "node verifyCommit.js"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
+  
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/node": "^15.0.2",
     "@types/quill": "^2.0.9",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
     "commander": "^6.2.0",
-    "eslint": "^8.5.0",
     "jest": "^26.6.3",
-    "lint-staged": "^12.1.4",
     "lodash-es": "^4.17.15",
     "prettier": "^2.3.0",
     "sass": "^1.47.0",

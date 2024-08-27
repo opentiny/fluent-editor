@@ -58,14 +58,14 @@ export class CustomImageSpec extends ImageSpec {
     const target = event.target;
     const {
       left: imgLeft,
-      width: imgWidth
+      width: imgWidth,
     } = target.getBoundingClientRect();
       // fix: 解决 ql-container 容器设置 calc(100vh - 180px) 这样的视窗相对单位时，滚动视窗导致图片相对视窗的 top 相应改变，从而导致图片预览按钮的位置显示错误
     const imgTop = target.getBoundingClientRect().top + this.formatter.quill.container.scrollTop;
 
     const {
       left: editorLeft,
-      top: editorTop
+      top: editorTop,
     } = event.currentTarget.getBoundingClientRect();
 
     const imgRelativeLeft = imgLeft - editorLeft;

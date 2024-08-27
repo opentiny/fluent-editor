@@ -134,7 +134,7 @@ class BetterToolbar extends Toolbar {
       // @ts-ignore
       if (this.handlers[format] != null) {
         // @ts-ignore
-        if(!isNullOrUndefined(window.quillIsIntable) && window.quillIsIntable === true && (format === "blockquote" || format === "code-block" || format === "list" || format === "indent" || format === "clean")) {
+        if(!isNullOrUndefined(window.quillIsIntable) && window.quillIsIntable === true && (format === 'blockquote' || format === 'code-block' || format === 'list' || format === 'indent' || format === 'clean')) {
           return
         }
         // @ts-ignore
@@ -154,7 +154,7 @@ class BetterToolbar extends Toolbar {
         );
       } else {
         // @ts-ignore
-        if(!isNullOrUndefined(window.quillIsIntable) && window.quillIsIntable === true && (format === "blockquote" || format === "code-block" || format === "list" || format === "indent" || format === "clean")) {
+        if(!isNullOrUndefined(window.quillIsIntable) && window.quillIsIntable === true && (format === 'blockquote' || format === 'code-block' || format === 'list' || format === 'indent' || format === 'clean')) {
           return
         }
         this.quill.format(format, value, Quill.sources.USER);

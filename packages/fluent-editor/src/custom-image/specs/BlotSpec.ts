@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+
 import ResizeAction from '../actions/CustomResizeAction';
 import DeleteAction from '../actions/DeleteAction';
 

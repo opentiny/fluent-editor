@@ -4,6 +4,17 @@ import {
   FILE_UPLOADER_MIME_TYPES,
   IMAGE_UPLOADER_MIME_TYPES,
 } from './config/editor.config'
+import type { Range } from 'quill/core/quill'
+
+type InsertFileData = {
+  code: number;
+  message?: string;
+  data: {
+    title: string
+    size:number
+    src:string
+  }
+}
 
 const Uploader = Quill.imports['modules/uploader']
 const Delta = Quill.imports['delta']
@@ -58,7 +69,7 @@ class CustomUploader extends Uploader {
               .toLowerCase()
               .indexOf(
                 validType.toLowerCase(),
-                file.name.toLowerCase().length - validType.toLowerCase().length
+                file.name.toLowerCase().length - validType.toLowerCase().length,
               ) > -1
           )
           // mime type like 'image/*'
@@ -73,19 +84,19 @@ class CustomUploader extends Uploader {
   }
 
   // 处理上传文件
-  handleUploadFile(range, files, hasRejectedFile) {
+  handleUploadFile(range, files, _hasRejectedFile) {
     this.insertFileToEditor(range, files[0], {
       code: 0,
       data: {
         title: files[0].name,
         size: files[0].size,
-        src: files[0].src
-      }
+        src: files[0].src,
+      },
     })
   }
 
   // 将文件插入编辑器
-  insertFileToEditor(range, file, { code, message, data }) {
+  insertFileToEditor(range: Range, file: File, { code, message, data }: InsertFileData) {
     if (code === 0) {
       const oldContent = new Delta().retain(range.index).delete(range.length);
       const videoFlag = this.uploadOption && this.uploadOption.isVideoPlay && /^video\/[-\w.]+$/.test(file.type);
@@ -103,7 +114,6 @@ class CustomUploader extends Uploader {
   handleUploadImage(range, { file, files }, hasRejectedImage) {
     if (this.imageUploadToServer) {
       const imageEnableMultiUpload = this.enableMultiUpload === true || this.enableMultiUpload['image']
-      const target = this.editorElem.parentElement.querySelector('.ql-image')
 
       const result = {
         file,

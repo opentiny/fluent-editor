@@ -25,6 +25,25 @@
   "scripts": {
     "dev": "pnpm -F fluent-editor-docs dev",
     "build": "pnpm -F fluent-editor-docs build",
-    "build:lib": "pnpm -F @opentiny/fluent-editor build"
+    "build:lib": "pnpm -F @opentiny/fluent-editor build",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "eslint-plugin-vue": "^9.27.0",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "eslint": "^8.5.0",
+    "lint-staged": "^12.1.4"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "node verifyCommit.js"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }

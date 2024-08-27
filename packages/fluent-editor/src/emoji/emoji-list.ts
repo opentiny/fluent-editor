@@ -1,9 +1,9 @@
 import {
-  peopleEmoji
+  peopleEmoji,
 } from './emoji-list/index';
 
 const emojiList = [
-  ...peopleEmoji
+  ...peopleEmoji,
 ];
 
 export default emojiList;

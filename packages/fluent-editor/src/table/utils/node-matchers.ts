@@ -95,7 +95,7 @@ export function matchTableCell(node, delta) {
 }
 
 // replace th tag with td tag
-export function matchTableHeader(node, delta, scroll) {
+export function matchTableHeader(node, delta, _scroll) {
   const row = node.parentNode;
   const cells = Array.from(row.querySelectorAll('th'));
   let rowId = row.dataset.row;
@@ -137,9 +137,9 @@ export function matchTableHeader(node, delta, scroll) {
 
   delta = delta.reduce((newDelta, op) => {
     if (op.insert && typeof op.insert === 'string' && op.insert.startsWith('\n')) {
-      newDelta.insert(op.insert, { 'table-cell-line': { row: rowId, cell: cellId, rowspan, colspan }});
+      newDelta.insert(op.insert, { 'table-cell-line': { row: rowId, cell: cellId, rowspan, colspan } });
     } else {
-      newDelta.insert(op.insert, { ...omit(op.attributes, ['table', 'table-cell-line'])});
+      newDelta.insert(op.insert, { ...omit(op.attributes, ['table', 'table-cell-line']) });
     }
 
     return newDelta;
@@ -150,7 +150,7 @@ export function matchTableHeader(node, delta, scroll) {
 
 // supplement colgroup and col
 export function matchTable(node, delta, scroll) {
-  let isWordTable =  node.children.length === 1 
+  const isWordTable = node.children.length === 1
   if (!(node instanceof Element)) {
     return;
   }
@@ -197,7 +197,7 @@ export function matchTable(node, delta, scroll) {
       maxCellsNumber = Math.max(getMaxColNumber(tds), maxCellsNumber);
       maxCells = tds;
   });
-  
+
 
   // 列的累计器
   let colCount = 0;
@@ -210,7 +210,7 @@ export function matchTable(node, delta, scroll) {
       for (let i = 0; i < fillNumber; i++) {
         const index = outset + i;
         const colWidth = parseInt(
-          index<maxCells.length ? 
+          index<maxCells.length ?
           maxCells[index].width :
           // maxCells[index].style && maxCells[index].style.width ? maxCells[index].style.width :
           maxCells[maxCells.length-1].width,
@@ -232,7 +232,7 @@ export function matchTable(node, delta, scroll) {
       }
       break;
     case !!attr['notFilled']:
-    {      // 将标记的空tr填充对应列数的单元格
+    { // 将标记的空tr填充对应列数的单元格
       const rowId = tableRowId();
       for (let x = 0; x < maxCellsNumber; x++) {
         newDelta.insert('\n', { 'table-cell-line': { row: rowId, cell: tableCellId(), rowspan: 1, colspan: 1 } });
@@ -264,7 +264,7 @@ export function matchTable(node, delta, scroll) {
   return delta;
 }
 
-export function matchTableRow(node, delta) {
+export function matchTableRow(_node, delta) {
   // fix: 处理空<tr>标签被忽略的情况
   if (delta.ops.length === 1 && !delta.ops[0].attributes) {
     delta = new Delta().insert('\n', { notFilled: true });
@@ -281,7 +281,7 @@ export function matchHeader(node, delta) {
       op.insert,
       Object.assign(op.attributes, {
         size: fontSize,
-      })
+      }),
     );
   });
   return newDelta;

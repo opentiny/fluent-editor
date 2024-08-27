@@ -63,7 +63,7 @@ class ShortNameEmoji extends Module {
 
     quill.keyboard.addBinding({
       // TODO: Once Quill supports using event.key change this to ":"
-      key: 186,  // ":" instead of 190 in Safari. Since it's the same key it doesn't matter if we register both.
+      key: 186, // ":" instead of 190 in Safari. Since it's the same key it doesn't matter if we register both.
       shiftKey: true,
     }, this.triggerPicker.bind(this));
 
@@ -75,18 +75,18 @@ class ShortNameEmoji extends Module {
     }, this.triggerPicker.bind(this));
 
     quill.keyboard.addBinding({
-      key: 39,  // ArrowRight
-      collapsed: true
+      key: 39, // ArrowRight
+      collapsed: true,
     }, this.handleArrow.bind(this));
 
     quill.keyboard.addBinding({
-      key: 40,  // ArrowRight
-      collapsed: true
+      key: 40, // ArrowRight
+      collapsed: true,
     }, this.handleArrow.bind(this));
     // TODO: Add keybindings for Enter (13) and Tab (9) directly on the quill editor
   }
 
-  triggerPicker(range, context) {
+  triggerPicker(range, _context) {
     if (this.open) { return true; }
     if (range.length > 0) {
       this.quill.deleteText(range.index, range.length, Quill.sources.USER);
@@ -134,7 +134,7 @@ class ShortNameEmoji extends Module {
         this.close(null);
         return;
       }
-    } catch (e) {
+    } catch (_e) {
       throw new Error('Close failed');
     }
 
@@ -175,7 +175,7 @@ class ShortNameEmoji extends Module {
         }
       }
       if (evt) { return; }
-    } catch (e) {
+    } catch (_e) {
       throw new Error('Render failed');
     }
 
@@ -218,8 +218,8 @@ class ShortNameEmoji extends Module {
         makeElement(
           'button', { type: 'button' },
           makeElement('span', { className: 'button-emoji ap ap-' + emoji.name, innerHTML: emoji.code_decimal }),
-          makeElement('span', { className: 'unmatched' }, emoji.shortname)
-        )
+          makeElement('span', { className: 'unmatched' }, emoji.shortname),
+        ),
       );
       this.container.appendChild(li);
       buttons[i] = li.firstChild;
@@ -276,9 +276,9 @@ ShortNameEmoji.DEFAULTS = {
     maxPatternLength: 32,
     minMatchCharLength: 1,
     keys: [
-      'shortname'
-    ]
-  }
+      'shortname',
+    ],
+  },
 };
 
 function makeElement(tag, attrs, ...children) {

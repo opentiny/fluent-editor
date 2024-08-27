@@ -10,7 +10,7 @@ class QuickMenu {
   private hostElement: HTMLDivElement;
   private quickMenu: HTMLDivElement;
   private quickMenuContainer: HTMLDivElement;
-  
+
 // @ts-ignore
   constructor(private quill: Quill, private options: QuickMenuOptions) {
     this.quill = quill;
@@ -19,15 +19,15 @@ class QuickMenu {
     this.hostElement = this.container.parentNode as HTMLDivElement;
     this.quickMenu = this.hostElement.querySelector('.quick-menu');
     this.quickMenuContainer = this.quickMenu.querySelector('.quick-menu-container');
-    quill.keyboard.addBinding({key: '/'}, this.handleSlashKeyDown);
-    quill.keyboard.addBinding({key: 'ArrowUp'}, this.handleArrowUpKey);
-    quill.keyboard.addBinding({key: 'ArrowDown'}, this.handleArrowDownKey);
-    quill.keyboard.addBinding({key: 'Enter'}, this.handleEnterKey);
+    quill.keyboard.addBinding({ key: '/' }, this.handleSlashKeyDown);
+    quill.keyboard.addBinding({ key: 'ArrowUp' }, this.handleArrowUpKey);
+    quill.keyboard.addBinding({ key: 'ArrowDown' }, this.handleArrowDownKey);
+    quill.keyboard.addBinding({ key: 'Enter' }, this.handleEnterKey);
     quill.keyboard.bindings['Enter'].unshift(quill.keyboard.bindings['Enter'].pop());
     document.body.addEventListener('click', this.hideQuickMenu.bind(this));
   }
 
-  handleSlashKeyDown = (range, context) => {
+  handleSlashKeyDown = (_range, context) => {
     const index = this.quill.selection.savedRange.index;
     this.quill.insertText(index, '/');
 
@@ -36,9 +36,9 @@ class QuickMenu {
     if (shouldTriggerQuickMenu) {
       const cursorIndex = this.quill.selection.savedRange.index;
       const cursorBounds = this.quill.getBounds(cursorIndex);
-      const {left, top} = cursorBounds;
-      const {left: editorLeft, top: editorTop} = this.container.getBoundingClientRect();
-      const {left: hostElementLeft, top: hostElementTop} = this.hostElement.getBoundingClientRect();
+      const { left, top } = cursorBounds;
+      const { left: editorLeft, top: editorTop } = this.container.getBoundingClientRect();
+      const { left: hostElementLeft, top: hostElementTop } = this.hostElement.getBoundingClientRect();
       const relativeLeft = editorLeft - hostElementLeft;
       const relativeTop = editorTop - hostElementTop;
       const menuLeft = left + relativeLeft - 5;
@@ -67,7 +67,7 @@ class QuickMenu {
     }
   };
 
-  handleArrowUpKey = (range, context) => {
+  handleArrowUpKey = (_range, _context) => {
     if (this.isOpen()) {
       const index = this.options.component.activeIndex;
       const total = this.options.component.quickMenus.length;
@@ -77,7 +77,7 @@ class QuickMenu {
     return true;
   };
 
-  handleArrowDownKey = (range, context) => {
+  handleArrowDownKey = (_range, _context) => {
     if (this.isOpen()) {
       const index = this.options.component.activeIndex;
       const total = this.options.component.quickMenus.length;
@@ -87,7 +87,7 @@ class QuickMenu {
     return true;
   };
 
-  handleEnterKey = (range, context) => {
+  handleEnterKey = (_range, _context) => {
     if (this.isOpen()) {
       this.options.component.onEnter();
       return false;

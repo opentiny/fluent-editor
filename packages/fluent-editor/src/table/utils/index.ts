@@ -30,7 +30,7 @@ export function getRelativeRect(targetRect, container) {
     x1: (targetRect.x || targetRect.left) - (containerRect.x || containerRect.left) - container.scrollLeft + targetRect.width,
     y1: (targetRect.y || targetRect.top) - (containerRect.y || containerRect.top) - container.scrollTop + targetRect.height,
     width: targetRect.width,
-    height: targetRect.height
+    height: targetRect.height,
   };
 }
 
@@ -42,12 +42,12 @@ export const elementRemove = function (node) {
 export const arrayFrom = function (arrayLike, mapFn?, thisArg?) {
   if (!arrayLike) {
     throw new TypeError(
-      'Array.from requires an array-like object - not null or undefined'
+      'Array.from requires an array-like object - not null or undefined',
     )
   }
 
-  let length = arrayLike.length
-  let resArray = []
+  const length = arrayLike.length
+  const resArray = []
 
   for (let i = 0; i < length; i++) {
     if (typeof mapFn === 'function') {

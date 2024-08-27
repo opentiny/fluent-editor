@@ -12,6 +12,6 @@ export default defineConfig({
   server: {
     host: 'localhost', //ip地址
     port: 8080, //端口号
-    open: true //启动后是否自动打开浏览器
-  }
+    open: true, //启动后是否自动打开浏览器
+  },
 })

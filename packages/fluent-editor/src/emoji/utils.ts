@@ -1,14 +1,14 @@
 export function createEmoji(emojiArr) {
   const emojiList = [];
   emojiArr.forEach(emojiItem => {
-    const [ name, unicode, shortname, code_decimal, category, emoji_order ] = emojiItem;
+    const [ name, unicode, shortname, codeDecimal, category, emojiOrder ] = emojiItem;
     emojiList.push({
       name,
       unicode,
       shortname,
-      code_decimal,
+      codeDecimal,
       category,
-      emoji_order
+      emojiOrder,
     });
   });
   return emojiList;

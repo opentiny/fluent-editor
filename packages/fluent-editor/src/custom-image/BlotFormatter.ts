@@ -6,7 +6,7 @@ import BlotSpec from './specs/BlotSpec';
 import { CustomImageSpec } from './specs/CustomImageSpec';
 import { merge as deepmerge } from 'lodash-es';
 
-const dontMerge = (destination: Array<any>, source: Array<any>) => source;
+const dontMerge = (_destination: Array<any>, source: Array<any>) => source;
 
 // @dynamic
 export default class BlotFormatter {

@@ -1,3 +1,5 @@
+import { AnyFunction } from './type';
+
 export interface FileOperation {
   operation: string
   hasRejectedFile?: boolean
@@ -6,5 +8,5 @@ export interface FileOperation {
     file?: File
     files?: Array<File>
   }
-  callback?: Function
+  callback?: AnyFunction
 }
