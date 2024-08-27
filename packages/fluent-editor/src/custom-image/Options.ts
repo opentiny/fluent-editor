@@ -4,14 +4,14 @@ export interface OverlayOptions {
   // classname applied to the overlay element
   className: string;
   // style applied to overlay element, or null to prevent styles
-  style: Record<string, any>;
+  style: Record<string, string>;
 }
 
 export interface ResizeOptions {
   // class name applied to the resize handles
   handleClassName: string;
   // style applied to resize handles, or null to prevent styles
-  handleStyle: Record<string, any>;
+  handleStyle: Record<string, string>;
 }
 
 export interface AlignOptions {

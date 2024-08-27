@@ -31,7 +31,9 @@ export function imageFileToUrl(imageFile) {
       resolve(e.target['result'])
     }
     reader.onerror = reject
-  }).catch(() => null)
+  }).catch((error) => {
+    console.error('Error reading file:', error);
+  })
 }
 
 /**
