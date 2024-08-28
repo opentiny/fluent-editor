@@ -34,7 +34,7 @@ jobs:
         with:
           version: 8
       - name: Install deps
-        run: pnpm i
+        run: pnpm i --no-frozen-lockfile
       - name: Build site
         run: pnpm build
       - name: Setup Pages
