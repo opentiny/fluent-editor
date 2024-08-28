@@ -27,7 +27,9 @@
     "build": "pnpm -F fluent-editor-docs build",
     "build:lib": "pnpm -F @opentiny/fluent-editor build",
     "lint": "eslint . --cache",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test": "pnpm -F fluent-editor-docs test",
+    "report": "pnpm -F fluent-editor-docs report"
   },
   "devDependencies": {
     "eslint-plugin-vue": "^9.27.0",
