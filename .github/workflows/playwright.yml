@@ -15,8 +15,10 @@ jobs:
         node-version: lts/*
     - name: Install dependencies
       run: npm install -g pnpm && pnpm install
+    - name: dev start
+      run: pnpm dev & sleep 5
     - name: Install Playwright Browsers
-      run: pnpm exec playwright install --with-deps
+      run: pnpm install:browser
     - name: Run Playwright tests
       run: pnpm test
     - uses: actions/upload-artifact@v4
