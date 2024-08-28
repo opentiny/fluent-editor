@@ -3,7 +3,7 @@ import {
   getEventComposedPath,
   insideTable,
   isNullOrUndefined,
-  isPureIE
+  isPureIE,
 } from '../config/editor.utils';
 import Header from './formats/header';
 import List from './formats/list';
@@ -17,7 +17,7 @@ import {
   TableColGroup,
   TableContainer,
   TableRow,
-  TableViewWrapper
+  TableViewWrapper,
 } from './formats/table';
 import TableColumnTool from './modules/table-column-tool';
 import TableOperationMenu from './modules/table-operation-menu';
@@ -33,7 +33,7 @@ import {
   matchTableCell,
   matchTableHeader,
   matchTableRow,
-  matchWordShapeImage
+  matchWordShapeImage,
 } from './utils/node-matchers';
 
 const Block = Quill.imports['blots/block'];
@@ -120,14 +120,14 @@ class BetterTable extends Module {
               row: rowNode,
               cell: cellNode,
               left: evt.x + 15,
-              top: evt.y
+              top: evt.y,
             },
             quill,
-            options.operationMenu
+            options.operationMenu,
           );
         }
       },
-      false
+      false,
     );
 
     // add keyboard binding：Backspace
@@ -143,7 +143,7 @@ class BetterTable extends Module {
             let tableBlot;
             try {
               tableBlot = prev.parent.parent.parent.parent;
-            } catch (e) { }
+            } catch (_e) { }
             if (tableBlot && tableBlot.domNode !== betterTableModule.table) {
               betterTableModule.hideTableTools();
               tableBlot.remove();
@@ -185,7 +185,7 @@ class BetterTable extends Module {
       if (!tableContainer) { this.hideTableTools(); }
     });
 
-    this.quill.on(Quill.events.SELECTION_CHANGE, (range, oldRange, source) => {
+    this.quill.on(Quill.events.SELECTION_CHANGE, (range, _oldRange, source) => {
       if (!range) { return; }
       const selectionStart = range.index;
       const selectionEnd = range.index + range.length;
@@ -364,7 +364,7 @@ class BetterTable extends Module {
     this.columnTool = new TableColumnTool(table, quill, this.modulesContainer);
     this.tableScrollBar = new TableScrollBar(table, quill, this.modulesContainer);
     let timeoutID
-    this.subscriber = () => { 
+    this.subscriber = () => {
       clearTimeout(timeoutID)
       timeoutID = setTimeout(this.hideTableTools,300)
      }
@@ -406,7 +406,7 @@ BetterTable.keyboardBindings = {
         }
       }
       return true;
-    }
+    },
   },
   'table-col enter': {
     key: 'Enter',
@@ -424,7 +424,7 @@ BetterTable.keyboardBindings = {
           this.quill.setSelection(range.index, 0, Quill.sources.USER);
         }
       }
-    }
+    },
   },
   'table-col delete': {
     key: 'Delete',
@@ -440,7 +440,7 @@ BetterTable.keyboardBindings = {
           let tableBlot;
           try {
             tableBlot = col.parent.parent.parent;
-          } catch (e) { }
+          } catch (_e) { }
           if (tableBlot && tableBlot.domNode !== betterTableModule.table) {
             betterTableModule.hideTableTools();
             tableBlot.remove();
@@ -448,7 +448,7 @@ BetterTable.keyboardBindings = {
           }
         }
       }
-    }
+    },
   },
   'table-col backspace': {
     key: 'Backspace',
@@ -456,7 +456,8 @@ BetterTable.keyboardBindings = {
     format: ['table-col'],
     collapsed: true,
     offset: 0,
-    handler() { }
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    handler() { },
   },
   'table-cell-line backspace': {
     key: 'Backspace',
@@ -470,12 +471,12 @@ BetterTable.keyboardBindings = {
         return false;
       }
       return true;
-    }
+    },
   },
   'table-cell-line delete': {
     key: 'Delete',
     format: ['table-cell-line'],
-    handler(range, context) {
+    handler(range, _context) {
       // 获取table-cell-line的索引和长度
       const [line] = this.quill.getLine(range.index);
       const index = this.quill.getIndex(line);
@@ -486,7 +487,7 @@ BetterTable.keyboardBindings = {
         return false;
       }
       return true;
-    }
+    },
   },
   'table-cell-line enter': {
     key: 'Enter',
@@ -524,8 +525,8 @@ BetterTable.keyboardBindings = {
         if (name === 'link') { return; }
         this.quill.format(name, context.format[name], Quill.sources.USER);
       });
-    }
-  }
+    },
+  },
 };
 
 export default BetterTable;

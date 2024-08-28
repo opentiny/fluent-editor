@@ -24,7 +24,7 @@ class WorkItemLink extends BlockEmbed {
   static value(domNode) {
     return {
       link: domNode.getAttribute('href'),
-      data: JSON.parse(domNode.getAttribute('__work_item_data__'))
+      data: JSON.parse(domNode.getAttribute('__work_item_data__')),
     };
   }
 

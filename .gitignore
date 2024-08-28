@@ -5,6 +5,7 @@ coverage/
 test-results
 cache
 .temp
+.eslintcache
 
 # local env
 .env.local

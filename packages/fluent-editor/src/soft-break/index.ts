@@ -9,7 +9,7 @@ class SoftBreak extends Embed {
   domNode: any;
   prev: any;
   next: any;
-  remove: () => {};
+  remove: () => void;
 
   static create() {
     const node = super.create();

@@ -64,7 +64,7 @@ export default class TableScrollBar {
         css(this.domNode, {
           display: 'block',
           top: `${this.containerRect.height - SCROLL_BAR_PANEL_HEIGHT}px`,
-          marginTop: '0px'
+          marginTop: '0px',
         });
       }
     } else if (containerBottom <= tableTop) { // 表格上端溢出容器下端
@@ -187,7 +187,7 @@ export default class TableScrollBar {
     const containerRect = parent.getBoundingClientRect(); // 编辑器容器宽度
     this.containerRect = containerRect;
     css(this.columnCtrlPanel, {
-      left: `${this.tableViewRect.left - containerRect.left - this.table.parentNode.scrollLeft}px`
+      left: `${this.tableViewRect.left - containerRect.left - this.table.parentNode.scrollLeft}px`,
     });
 
     // 创建滚动条

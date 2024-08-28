@@ -18,7 +18,7 @@ class Header extends Block {
   statics: any;
   appendChild: any;
   remove: any;
-  cache: {};
+  cache: Record<string, any>;
   scroll: any;
   static create(value) {
     if (typeof value === 'string') {
@@ -64,7 +64,7 @@ class Header extends Block {
           row,
           cell,
           rowspan,
-          colspan
+          colspan,
         });
       } else {
         if (row) {
@@ -72,7 +72,7 @@ class Header extends Block {
             row,
             cell,
             rowspan,
-            colspan
+            colspan,
           });
         } else {
           super.format(name, value);
@@ -83,7 +83,7 @@ class Header extends Block {
     }
   }
 
-  optimize(context) {
+  optimize(_context) {
     const { row, cell, rowspan, colspan } = Header.formats(this.domNode);
 
     if (row && this.parent.statics.blotName !== 'table') {
@@ -91,7 +91,7 @@ class Header extends Block {
         row,
         cell,
         colspan,
-        rowspan
+        rowspan,
       });
     }
 

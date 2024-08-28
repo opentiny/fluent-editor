@@ -60,7 +60,7 @@ class Picker {
     if (option.textContent) {
       item.setAttribute('data-label', option.textContent);
     }
-    item.addEventListener('click', (e) => {
+    item.addEventListener('click', () => {
       this.selectItem(item, true);
     });
     item.addEventListener('keydown', event => {
@@ -323,7 +323,7 @@ SnowTheme.prototype.buildPickers = function(selects, icons) {
       if (isNullOrUndefined(select.querySelector('option'))) {
         fillSelect(
           select,
-          COLORS
+          COLORS,
         );
       }
       return new ColorPicker(select, icons[format]);

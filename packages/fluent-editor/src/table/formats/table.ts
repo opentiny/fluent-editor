@@ -8,7 +8,7 @@ import {
   CELL_MIN_HEIGHT,
   COL_ATTRIBUTES,
   COL_DEFAULT,
-  ERROR_LIMIT
+  ERROR_LIMIT,
 } from '../table-config';
 import { getRelativeRect } from '../utils';
 import Header from './header';
@@ -193,7 +193,7 @@ class TableCell extends Container {
     if (domNode.hasAttribute('data-cell-bg')) {
       formats['cell-bg'] = domNode.getAttribute('data-cell-bg') || undefined
     }
-    return  CELL_ATTRIBUTES.reduce((formats, attribute) => {
+    return CELL_ATTRIBUTES.reduce((formats, attribute) => {
       if (domNode.hasAttribute(attribute)) {
         formats[attribute] = domNode.getAttribute(attribute)
       }
@@ -259,9 +259,9 @@ class TableCell extends Container {
       child.format(name, value)
     })
   }
-    
-  /** this method is for TableCellLine to change cell background color 
-   *  if use `format('cell-bg', value)` will loop trigger 
+
+  /** this method is for TableCellLine to change cell background color
+   *  if use `format('cell-bg', value)` will loop trigger
    *  TableCellLine.optimize -> TableCell.format -> TableCellLine.optimize ...
    */
   setCellBg(value?: string) {
@@ -281,7 +281,7 @@ class TableCell extends Container {
       case ['row', 'cell'].indexOf(name) > -1:
         this.toggleAttribute(`data-${name}`, value);
         break;
-      case name === 'background': {      
+      case name === 'background': {
         const hasBgColor = this.domNode.querySelectorAll('div.qlbt-cell-line[data-parent-bg]');
         hasBgColor.forEach((child) => child.removeAttribute('data-parent-bg'));
         this.domNode.style.background = '';
@@ -290,7 +290,7 @@ class TableCell extends Container {
         break;
       }
       // TODO: 其他格式可同理实现，但已有格式清除时会清除所有格式，待解决
-      case name === 'size': { 
+      case name === 'size': {
           const start = quill.getIndex(this.children.head);
           const total = quill.getIndex(this.children.tail) + this.children.tail.length();
           const length = total - start > 0 ? total - start : 0;
@@ -532,20 +532,20 @@ class TableColGroup extends Container {
     }
     // 此时colgroup创建完毕，检查colgroup的col数量是否正确
     // fix：colgroup的col数量不正确导致最后一列宽度为空
-    if(this.parent.parent.domNode.className === 'quill-better-table-wrapper' 
-      && this.parent.parent.domNode.tagName === 'DIV' 
-      && this.parent.domNode.children.length >= 2 
-      && this.parent.domNode.children[0].tagName === 'COLGROUP' 
+    if(this.parent.parent.domNode.className === 'quill-better-table-wrapper'
+      && this.parent.parent.domNode.tagName === 'DIV'
+      && this.parent.domNode.children.length >= 2
+      && this.parent.domNode.children[0].tagName === 'COLGROUP'
       && this.parent.domNode.children[1].tagName === 'TBODY'
     ) {
 
-      let trId = ""
+      let trId = ''
       let colSpan = 0
       let colgroupNumber = 0
       for(let i = 0; i< this.parent.domNode.children.length; i++) {
         if(this.parent.domNode.children[i].tagName === 'TBODY') {
-          if(trId === ""){
-            trId = this.parent.domNode.children[i].children[0].getAttribute("data-row")
+          if(trId === ''){
+            trId = this.parent.domNode.children[i].children[0].getAttribute('data-row')
           }
           colSpan = this.findTdColspanInTbody(this.parent.domNode.children[i],trId)
         } else if (this.parent.domNode.children[i].tagName === 'COLGROUP') {
@@ -553,7 +553,7 @@ class TableColGroup extends Container {
         }
       }
       let elementSibling = this.parent.domNode.nextElementSibling
-      
+
       while(elementSibling && elementSibling.tagName === 'TABLE'){
         for(let i = 0; i < elementSibling.children.length; i++) {
           if(elementSibling.children[i].tagName === 'TBODY') {
@@ -564,12 +564,12 @@ class TableColGroup extends Container {
       }
 
       if(colgroupNumber < colSpan) {
-        let length = colSpan - colgroupNumber
+        const length = colSpan - colgroupNumber
 
         for(let i =0; i<length; i++) {
-          let newCol = document.createElement("col");
+          const newCol = document.createElement('col');
           newCol.width = this.parent.domNode.children[0].children[this.parent.domNode.children[0].children.length-1].width
-          let newBr = document.createElement("br");
+          const newBr = document.createElement('br');
           newCol.appendChild(newBr)
           this.parent.domNode.children[0].appendChild(newCol)
           this.parent.domNode.style.width+=newCol.width
@@ -582,7 +582,7 @@ class TableColGroup extends Container {
     let colSpan = 0
     // let tbodyChildrenLength
     for(let i = 0; i<tbody.children.length ;i++){
-      if(tbody.children[i].getAttribute("data-row")!==trId){
+      if(tbody.children[i].getAttribute('data-row')!==trId){
         return colSpan
       }
       for(let j = 0; j<tbody.children[i].children.length;j++) {
@@ -629,7 +629,7 @@ class TableContainer extends Container {
       if (this.parent && this.parent.children.head && this.domNode.hasAttribute('style')) {
         colGroup = this.parent.children.head.children.head;
         this.domNode = this.parent.children.head.domNode;
-      } else if(this.domNode.tagName==="TABLE"){
+      } else if(this.domNode.tagName==='TABLE'){
         // this.domNode.forEach
         return;
       } else {
@@ -710,13 +710,13 @@ class TableContainer extends Container {
 
     // remove the matches column tool cell
     delIndexes.forEach(() => {
-      let col = this.colGroup().children.at(delIndexes[0])
+      const col = this.colGroup().children.at(delIndexes[0])
       if(!col || this.colGroup().children.at(delIndexes[0]).domNode !== this.colGroup().domNode.children[delIndexes[0]]){
         this.colGroup().domNode.removeChild(this.colGroup().domNode.children[delIndexes[0]])
       }else {
         col.remove();
       }
-      
+
     });
 
     removedCells.forEach((cell) => {
@@ -832,7 +832,7 @@ class TableContainer extends Container {
     const rId = tableRow.formats().row;
     const tableCell = this.scroll.create(
       TableCell.blotName,
-      { ...CELL_DEFAULT, row: rId,}
+      { ...CELL_DEFAULT, row: rId },
     );
     tableCell.domNode.style.backgroundColor = bg
     const cellLine = this.scroll.create(TableCellLine.blotName, {
@@ -895,7 +895,7 @@ class TableContainer extends Container {
       const tableCell = this.scroll.create(
         TableCell.blotName,
         { ...CELL_DEFAULT, row: rId,
-          rowspan: cellFormats.rowspan,}
+          rowspan: cellFormats.rowspan },
       );
       const cellLine = this.scroll.create(TableCellLine.blotName, {
         row: rId,
@@ -914,13 +914,13 @@ class TableContainer extends Container {
 
     // insert new tableCol
     const tableCol = this.scroll.create(TableCol.blotName, true);
-    let colRef 
+    let colRef
     if (isRight) {
       colRef = tableCols[colIndex] && tableCols[colIndex].next
     }else {
-      colRef = tableCols[colIndex] 
+      colRef = tableCols[colIndex]
     }
-    
+
     if (colRef) {
       tableColGroup.insertBefore(tableCol, colRef);
     } else {
@@ -991,7 +991,7 @@ class TableContainer extends Container {
 
       const tableCell = this.scroll.create(
         TableCell.blotName,
-        { ...CELL_DEFAULT, row: rId, cell: cId, colspan: cellFormats.colspan}
+        { ...CELL_DEFAULT, row: rId, cell: cId, colspan: cellFormats.colspan },
       );
       const cellLine = this.scroll.create(TableCellLine.blotName, {
         row: rId,
@@ -1026,7 +1026,7 @@ class TableContainer extends Container {
     return affectedCells;
   }
 
-  mergeCells(compareRect, mergingCells, rowspan, colspan, editorWrapper) {
+  mergeCells(_compareRect, mergingCells, rowspan, colspan, _editorWrapper) {
     const mergedCell = mergingCells.reduce((result, tableCell, index) => {
       if (index !== 0) {
         if (result) {
@@ -1057,7 +1057,7 @@ class TableContainer extends Container {
       if(cellLine.children['head'].domNode.style) {
         cellLine.children['head'].domNode.style.backgroundColor=mergedCell.domNode.style.backgroundColor
       }
-       
+
       if (!cellLine.prev || cellLine.domNode.innerText.trim()) {
         cellLine.format('cell', cId);
         cellLine.format('row', rId);
@@ -1077,7 +1077,7 @@ class TableContainer extends Container {
     let cellColspan = 1;
 
     unmergingCells.forEach((tableCell) => {
-      const  tableCellBgColor = tableCell.domNode.style.backgroundColor
+      const tableCellBgColor = tableCell.domNode.style.backgroundColor
       cellFormats = tableCell.formats();
       cellRowspan = cellFormats.rowspan;
       cellColspan = cellFormats.colspan;
@@ -1179,7 +1179,7 @@ class TableViewWrapper extends Container {
           tableModule.tableSelection.repositionHelpLines();
         }
       },
-      false
+      false,
     );
   }
 }

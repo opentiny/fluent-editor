@@ -1,6 +1,8 @@
+import { AnyFunction } from './type';
+
 export interface IAdditionalToolItemData {
   name: string
   content: string
   icon: string
-  handler: Function
+  handler: AnyFunction
 }

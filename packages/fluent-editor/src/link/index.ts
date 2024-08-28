@@ -23,7 +23,7 @@ SnowTheme.prototype.extendToolbar = function(toolbar) {
   if (toolbar.container.querySelector('.ql-link')) {
     this.quill.keyboard.addBinding(
       { key: 'k', shortKey: true },
-      (range, context) => {
+      (_range, context) => {
         toolbar.handlers.link.call(toolbar, !context.format.link);
       },
     );

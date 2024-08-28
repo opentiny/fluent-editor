@@ -72,7 +72,7 @@ class CustomClipboard extends Clipboard {
     if (!e.clipboardData) {
       e.clipboardData = {
         types: 'text/plain',
-        setData: (type, value) => {
+        setData: (_type, value) => {
           return window['clipboardData'].setData('Text', value)
         },
       }
@@ -182,7 +182,7 @@ class CustomClipboard extends Clipboard {
           anchorNode.classList.contains('quill-better-table-wrapper')
         ) {
           const list = pastedContent.filter(
-            (op) => op.attributes && op.attributes['list']
+            (op) => op.attributes && op.attributes['list'],
           )
           if (list && list.length) {
             return
@@ -219,7 +219,7 @@ class CustomClipboard extends Clipboard {
           // fix: 解决从表格外粘贴多行文本导致表格断开的问题
           pastedContent = rebuildDelta(
             new Delta(pastedContent.ops),
-            formats['table-cell-line']
+            formats['table-cell-line'],
           )
         }
       }
@@ -245,12 +245,12 @@ class CustomClipboard extends Clipboard {
 
       const oldDelta = new Delta().retain(linePos.index).delete(linePos.length)
       const delta = oldDelta.concat(pastedContent)
-      
+
       setTimeout(() => {
         this.quill.updateContents(delta, Quill.sources.USER)
         this.quill.setSelection(
           delta.length() - linePos.length - linePos.fix,
-          Quill.sources.SILENT
+          Quill.sources.SILENT,
         )
         this.quill.scrollIntoView()
         if (loadingTipsContainer) {
@@ -265,8 +265,8 @@ class CustomClipboard extends Clipboard {
           await this.extractFilesFromDelta(
             pastedDelta,
             clipboardFiles,
-            hexImages
-          )
+            hexImages,
+          ),
         )
 
         if (files.length === 0) {
@@ -282,7 +282,7 @@ class CustomClipboard extends Clipboard {
                   pastedDelta = replaceDeltaImage(
                     pastedDelta,
                     imageUrls,
-                    placeholders
+                    placeholders,
                   )
                   handlePasteContent(pastedDelta)
                 } else {
@@ -299,18 +299,18 @@ class CustomClipboard extends Clipboard {
                 placeholders,
                 originalUrls,
                 pastedDelta,
-                imageIndexs
+                imageIndexs,
               )
               pastedDelta = replaceDeltaImage(
                 pastedDelta,
                 imageUrls,
-                placeholders
+                placeholders,
               )
             }
             handlePasteContent(pastedDelta)
           }
         }
-      } catch (e) {
+      } catch (_e) {
         throw new Error('Paste failed.')
       }
     })()
@@ -336,7 +336,7 @@ class CustomClipboard extends Clipboard {
           // 占位图或者跨域图需要手动转换成url格式
           return imageFileToUrl(imageFile)
         }
-      })
+      }),
     )
   }
 
@@ -367,7 +367,7 @@ class CustomClipboard extends Clipboard {
         .map((char) => {
           return String.fromCharCode(parseInt(char, 16))
         })
-        .join('')
+        .join(''),
     )
   }
 
@@ -381,7 +381,7 @@ class CustomClipboard extends Clipboard {
       /{\\pict[\s\S]+?\\bliptag-?\d+(\\blipupi-?\d+)?({\\\*\\blipuid\s?[\da-fA-F]+)?[\s}]*?/
     const regexPicture = new RegExp(
       '(?:(' + regexPictureHeader.source + '))([\\da-fA-F\\s]+)\\}',
-      'g'
+      'g',
     )
     const images = rtfData.match(regexPicture)
     const result = []
@@ -429,11 +429,11 @@ class CustomClipboard extends Clipboard {
           const newImage =
             hexImage &&
             `data:${hexImage.type};base64,${this.convertHexToBase64(
-              hexImage.hex
+              hexImage.hex,
             )}`
           imageIndex = index
           file = await imageUrlToFile(newImage || image.src || image)
-        } catch (err) {
+        } catch (_err) {
           if (clipboardFiles.length !== 0) {
             // 跨域获取图片失败时从剪切板获取图片
             const clipboardFile = clipboardFiles[0]
@@ -459,7 +459,7 @@ class CustomClipboard extends Clipboard {
         }
 
         return [file, isPlaceholderImage, image, imageIndex]
-      })
+      }),
     )
   }
 
@@ -474,9 +474,9 @@ class CustomClipboard extends Clipboard {
       }
       return true
     })
-    let range = {
+    const range = {
       index: length,
-      length: 0
+      length: 0,
     }
     return range
   }
@@ -499,7 +499,7 @@ function rebuildDelta(delta, cellLine) {
           text = text.endsWith('\r') ? text.slice(0, -1) : text
           newDelta.insert(
             text,
-            omit(op.attributes, ['table', 'table-cell-line'])
+            omit(op.attributes, ['table', 'table-cell-line']),
           )
         }
       })
@@ -567,11 +567,11 @@ function renderStyles(html) {
   // Trim unnecessary parts.
   htmlString = htmlString.substring(
     htmlString.indexOf('<html '),
-    htmlString.length
+    htmlString.length,
   )
   htmlString = htmlString.substring(
     0,
-    htmlString.lastIndexOf('</html>') + '</html>'.length
+    htmlString.lastIndexOf('</html>') + '</html>'.length,
   )
 
   // Add temporary iframe.
@@ -595,7 +595,7 @@ function renderStyles(html) {
       continue
     }
     collection = iframeDoc.body.querySelectorAll(
-      (rules[idx] as CSSStyleRule).selectorText
+      (rules[idx] as CSSStyleRule).selectorText,
     )
 
     for (pointer = 0; pointer < collection.length; pointer++) {

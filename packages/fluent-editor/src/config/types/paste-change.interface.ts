@@ -1,4 +1,6 @@
+import { AnyFunction } from './type';
+
 export interface IPasteChange {
   files: File[]
-  callback: Function
+  callback: AnyFunction
 }

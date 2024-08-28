@@ -318,7 +318,7 @@ export default class TableSelection {
     const startRect = getRelativeRect(this.selectedTds[0].domNode.getBoundingClientRect(), this.quill.root.parentNode);
     const endRect = getRelativeRect(
       this.selectedTds[this.selectedTds.length - 1].domNode.getBoundingClientRect(),
-      this.quill.root.parentNode
+      this.quill.root.parentNode,
     );
     this.boundary = computeBoundaryFromRects(startRect, endRect);
     this.repositionHelpLines();
@@ -345,7 +345,7 @@ export default class TableSelection {
   setSelection(startRect, endRect) {
     this.boundary = computeBoundaryFromRects(
       getRelativeRect(startRect, this.quill.root.parentNode),
-      getRelativeRect(endRect, this.quill.root.parentNode)
+      getRelativeRect(endRect, this.quill.root.parentNode),
     );
     this.correctBoundary();
     this.selectedTds = this.computeSelectedTds();
