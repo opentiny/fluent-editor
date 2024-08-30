@@ -37,6 +37,11 @@ const registerModules = function () {
   const SnowTheme = Quill.imports['themes/snow']
   SnowTheme.DEFAULTS = {
     modules: {
+      keyboard: {
+        bindings: {
+          ...BetterTable.keyboardBindings,
+        },
+      },
       toolbar: {
         handlers: {
           ...SnowTheme.DEFAULTS.modules.toolbar.handlers,
