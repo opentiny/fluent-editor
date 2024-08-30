@@ -18,8 +18,8 @@ interface MentionOption {
   maxHeight?: number;
   mentionChar?: string;
   remove?: (data: any) => void;
-  renderMentionItem?: (data: any) => HTMLElement;
-  renderMentionText?: (data: any) => HTMLElement | string;
+  renderMentionItem?: (data: any) => string | HTMLElement;
+  renderMentionText?: (data: any) => string | HTMLElement;
   search?: (term: string) => Promise<any[]>;
   searchKey: string;
   select?: (data: any) => void;
@@ -82,7 +82,10 @@ class Mention {
 
     this.options = Object.assign(this.defaultOptions, options);
     const container = document.createElement('div');
-    container.classList.add(this.options.containerClass);
+    container.classList.add('ql-mention-list-container');
+    if (this.options.containerClass !== 'ql-mention-list-container') {
+      container.classList.add(this.options.containerClass);
+    }
     this.mentionListEL = document.createElement('ul');
     this.mentionListEL.classList.add(this.options.listClass, this.options.listHideClass);
     this.mentionListEL.style.cssText += `
@@ -332,7 +335,11 @@ class Mention {
         mentionItemEl.classList.add(this.options.itemActiveClass);
       }
       const renderResult = this.options.renderMentionItem(mentionItem);
-      mentionItemEl.insertAdjacentElement('afterbegin', renderResult);
+      if (typeof renderResult === 'string') {
+        mentionItemEl.insertAdjacentHTML('afterbegin', renderResult);
+      } else {
+        mentionItemEl.insertAdjacentElement('afterbegin', renderResult);
+      }
       wrapEl.appendChild(mentionItemEl);
     });
 
