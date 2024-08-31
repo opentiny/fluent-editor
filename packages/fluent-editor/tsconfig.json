@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client", "@types/node", "@types/jest"],
+    "types": ["vite/client", "@types/node", "@types/jest", "quill/quill.d.ts", "quill/core.d.ts"],
 
     "baseUrl": "./",
     "downlevelIteration": true,
