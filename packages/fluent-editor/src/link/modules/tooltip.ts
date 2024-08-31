@@ -187,7 +187,9 @@ export default class Tooltip extends BaseTooltip {
   }
 
   save() {
-    let { value } = this.textbox;
+    let value = this.textbox.value;
+    if (!value) return
+    this.textbox.value = '';
     switch (this.root.getAttribute('data-mode')) {
     case 'link': {
       const { scrollTop } = this.quill.root;
@@ -212,9 +214,6 @@ export default class Tooltip extends BaseTooltip {
       break;
     }
     case 'formula': {
-      if (!value) {
-        break;
-      }
       const range = this.quill.getSelection(true);
       if (!isNullOrUndefined(range)) {
         const index = range.index + range.length;
@@ -229,6 +228,16 @@ export default class Tooltip extends BaseTooltip {
         }
         this.quill.setSelection(index + 2, Emitter.sources.USER);
       }
+      break;
+    }
+    case 'video': {
+      const range = this.quill.getSelection(true);
+      this.quill.insertText(range.index , '\n', Emitter.sources.USER);
+      this.quill.insertEmbed(range.index+ 1, 'video', { src: value }, Emitter.sources.USER)
+      this.quill.insertText(range.index + 2, '\n', Emitter.sources.USER);
+      this.quill.setSelection(range.index + 3, Emitter.sources.SILENT);
+      this.textbox.value = '';
+      this.hide()
       break;
     }
     default:

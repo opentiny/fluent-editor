@@ -2,10 +2,10 @@ import Quill from 'quill';
 import { sanitize } from '../config/editor.utils';
 
 
-const Embed = Quill.imports['blots/embed'];
+const BlockEmbed = Quill.imports['blots/block/embed'];
 const VIDEO_ATTRIBUTES = ['id', 'title', 'src'];
 
-class Video extends Embed {
+class Video extends BlockEmbed {
   static blotName: string;
   static tagName: string;
   static SANITIZED_URL: string;
@@ -41,17 +41,6 @@ class Video extends Embed {
   }
 
   static value(domNode) {
-    const formats: any = {};
-    VIDEO_ATTRIBUTES.forEach(key => {
-      const value = domNode.getAttribute(key) || domNode.dataset[key];
-      if (value) {
-        formats[key] = value;
-      }
-    });
-    return formats;
-  }
-
-  static formats(domNode) {
     const formats: any = {};
     VIDEO_ATTRIBUTES.forEach(key => {
       const value = domNode.getAttribute(key) || domNode.dataset[key];
