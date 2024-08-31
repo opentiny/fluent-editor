@@ -19,6 +19,8 @@ class Video extends Embed {
   }
 
   static create(value) {
+    const parentNode = document.createElement("div")
+    parentNode.setAttribute("className", 'warp-video')
     const node = super.create(value);
     node.setAttribute('contenteditable', false);
     node.setAttribute('controls', 'controls');
@@ -37,7 +39,8 @@ class Video extends Embed {
         }
       }
     });
-    return node;
+    parentNode.appendChild(node)
+    return parentNode;
   }
 
   static value(domNode) {
@@ -60,6 +63,10 @@ class Video extends Embed {
       }
     });
     return formats;
+  }
+  // parchment默认使用该函数添加鼠标光点在后面
+  appendChild(cursor) {
+    this.domNode.parentNode.appendChild(cursor.domNode)
   }
 }
 Video.blotName = 'video';
