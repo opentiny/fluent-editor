@@ -1,5 +1,5 @@
 import Quill from 'quill'
-import type { Parchment as TypeParchment } from 'quill'
+import type { Module, Parchment as TypeParchment } from 'quill'
 import { FONT_FAMILY_CONFIG, FONT_SIZE_CONFIG, ICONS_CONFIG, TABLE_RIGHT_MENU_CONFIG, inputFile, getListValue } from './config'
 import Counter from './counter' // 字符统计
 import CustomClipboard from './custom-clipboard' // 粘贴板
@@ -24,10 +24,10 @@ import { FormatPainter } from './format-painter'
 
 
 const registerModules = function () {
-  const FontClass = Quill.imports['formats/font'] as any
+  const FontClass = Quill.imports['formats/font'] as TypeParchment.ClassAttributor
   FontClass.whitelist = FONT_FAMILY_CONFIG
 
-  const SizeStyle = Quill.imports['attributors/style/size'] as any
+  const SizeStyle = Quill.imports['attributors/style/size'] as TypeParchment.StyleAttributor
   // const SizeClass = Quill.imports['attributors/class/size']
   SizeStyle.whitelist = FONT_SIZE_CONFIG
 
@@ -37,7 +37,7 @@ const registerModules = function () {
     Icons[iconKey] = ICONS_CONFIG[iconKey]
   })
 
-  const SnowTheme = Quill.imports['themes/snow'] as any
+  const SnowTheme = Quill.imports['themes/snow'] as typeof Module
   SnowTheme.DEFAULTS = {
     modules: {
       keyboard: {
@@ -47,7 +47,7 @@ const registerModules = function () {
       },
       toolbar: {
         handlers: {
-          ...SnowTheme.DEFAULTS.modules.toolbar.handlers,
+          ...(SnowTheme.DEFAULTS as Record<string,any>).modules.toolbar.handlers,
           undo: function() {
             this.quill.history.undo()
           },
