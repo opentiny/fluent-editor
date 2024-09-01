@@ -21,6 +21,7 @@
     "vitepress": "^1.3.2"
   },
   "dependencies": {
-    "@opentiny/fluent-editor": "workspace:^"
+    "@opentiny/fluent-editor": "workspace:^",
+    "katex": "^0.16.11"
   }
 }

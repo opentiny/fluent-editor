@@ -1,0 +1,8 @@
+# 公式
+
+通过配置 `formula` 为 true，并配置工具栏按钮 `formula`，可以开启插入公式功能。
+
+由于插入公式依赖 `KaTeX`，需要安装 `katex` 依赖包，并引入对应的样式。
+
+:::demo src=demos/formula.vue
+:::
