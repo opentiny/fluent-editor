@@ -1,0 +1,19 @@
+{
+  "npm.packageManager": "pnpm",
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+  "eslint.enable": true,
+  "eslint.runtime": "node",
+  "eslint.format.enable": true,
+  "eslint.useFlatConfig": false,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "vue",
+  ]
+}
