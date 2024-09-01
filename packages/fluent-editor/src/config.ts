@@ -27,6 +27,7 @@ import {
   TRIANGLE_DOWN_ICON,
   UNDERLINE_ICON,
   UNDO_ICON,
+  FORMAT_PAINTER_ICON,
 } from './config/icons.config'
 import { isNullOrUndefined } from './config/editor.utils';
 
@@ -118,6 +119,7 @@ export const ICONS_CONFIG: { [key: string]: any } = {
   emoji: EMOJI_ICON,
   help: HELP_ICON,
   screenshot: SCREENSHOT_ICON,
+  'format-painter': FORMAT_PAINTER_ICON,
 }
 
 export const TABLE_RIGHT_MENU_CONFIG = {
