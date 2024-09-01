@@ -1,11 +1,12 @@
 import Quill from 'quill';
+import type { Parchment as TypeParchment } from 'quill';
 import { sanitize } from '../config/editor.utils';
 
 
-const Embed = Quill.imports['blots/embed'];
+const BlockEmbed = Quill.imports['blots/block/embed'] as TypeParchment.BlotConstructor;
 const VIDEO_ATTRIBUTES = ['id', 'title', 'src'];
 
-class Video extends Embed {
+class Video extends BlockEmbed {
   static blotName: string;
   static tagName: string;
   static SANITIZED_URL: string;
@@ -19,16 +20,16 @@ class Video extends Embed {
   }
 
   static create(value) {
-    const node = super.create(value);
-    node.setAttribute('contenteditable', false);
+    const node = super.create(value) as HTMLElement;
+    node.setAttribute('contenteditable', 'false');
     node.setAttribute('controls', 'controls');
     VIDEO_ATTRIBUTES.forEach(key => {
       if (value[key]) {
         switch (key) {
         case 'src':
-        { const src = Video.sanitize(value[key]);
+          const src = Video.sanitize(value[key]);
           node.setAttribute(key, src);
-          break;}
+          break;
         case 'title':
           node.setAttribute(key, value[key]);
           break;
@@ -41,17 +42,6 @@ class Video extends Embed {
   }
 
   static value(domNode) {
-    const formats: any = {};
-    VIDEO_ATTRIBUTES.forEach(key => {
-      const value = domNode.getAttribute(key) || domNode.dataset[key];
-      if (value) {
-        formats[key] = value;
-      }
-    });
-    return formats;
-  }
-
-  static formats(domNode) {
     const formats: any = {};
     VIDEO_ATTRIBUTES.forEach(key => {
       const value = domNode.getAttribute(key) || domNode.dataset[key];
