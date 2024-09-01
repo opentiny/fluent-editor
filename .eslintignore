@@ -1,6 +1,7 @@
 # Common
 node_modules
 dist
-
+# No rules to lint
+**/*.md
 **/*.json
 **/*.yaml
