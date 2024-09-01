@@ -13,6 +13,7 @@ export function sidebar() {
         { text: '@提醒', link: '/docs/mention' },
         { text: '插入表情', link: '/docs/emoji' },
         { text: '格式刷', link: '/docs/format-painter' },
+        { text: '公式', link: '/docs/formula' },
       ]
     }
   ]
