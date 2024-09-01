@@ -26,17 +26,19 @@
     "dev": "pnpm -F fluent-editor-docs dev",
     "build": "pnpm -F fluent-editor-docs build",
     "build:lib": "pnpm -F @opentiny/fluent-editor build",
-    "lint": "eslint . --cache",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint \"packages/**/*.{js,ts,vue}\" --cache",
+    "lint:fix": "eslint \"packages/**/*.{js,ts,vue}\" --fix",
     "install:browser": "pnpm -F fluent-editor-docs install:browser",
     "test": "pnpm -F fluent-editor-docs test",
     "report": "pnpm -F fluent-editor-docs report"
   },
   "devDependencies": {
-    "eslint-plugin-vue": "^9.27.0",
+    "@types/node": "^15.0.2",
+    "@stylistic/eslint-plugin": "^2.7.2",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
-    "eslint": "^8.5.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.27.0",
     "lint-staged": "^12.1.4"
   },
   "gitHooks": {

@@ -1,8 +1,8 @@
 export default class Action {
-  formatter;
+  formatter
 
   constructor(formatter) {
-    this.formatter = formatter;
+    this.formatter = formatter
   }
 
   onCreate() {}

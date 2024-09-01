@@ -1,9 +1,9 @@
-import emojiList from './emoji-list';
+import emojiList from './emoji-list'
 
-const emojiMap = {};
+const emojiMap = {}
 
 emojiList.forEach((emojiListObject) => {
-  emojiMap[emojiListObject.name] = emojiListObject;
-});
+  emojiMap[emojiListObject.name] = emojiListObject
+})
 
-export default emojiMap;
+export default emojiMap

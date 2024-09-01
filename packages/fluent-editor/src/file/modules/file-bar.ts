@@ -1,7 +1,7 @@
 import Quill from 'quill'
 // devui-internal api: utils\public-api.ts
 
-import { unshiftString } from '../../utils/method';
+import { unshiftString } from '../../utils/method'
 import File from '../formats/file'
 const Delta = Quill.imports['delta']
 import { Range } from 'quill/core/selection'
@@ -88,15 +88,15 @@ export default class FileBar {
         data: { fileId, fileDownloadUrl },
       })
     }
-    if(operate === 'download'){
-      const a = document.createElement('a');
-      a.href = fileDownloadUrl;
-      a.target = '_blank';
-      a.id='exppub';
-      document.body.appendChild(a);
-      const alink = document.getElementById('exppub');
-      alink.click();
-      alink.parentNode.removeChild(a);
+    if (operate === 'download') {
+      const a = document.createElement('a')
+      a.href = fileDownloadUrl
+      a.target = '_blank'
+      a.id = 'exppub'
+      document.body.appendChild(a)
+      const alink = document.getElementById('exppub')
+      alink.click()
+      alink.parentNode.removeChild(a)
     }
     this.destroy()
   }
@@ -123,7 +123,8 @@ export default class FileBar {
             rules[prop].forEach((val) => {
               domNode.style[prop] = val
             })
-          } else {
+          }
+          else {
             domNode.style[prop] = rules[prop]
           }
         }
@@ -135,10 +136,10 @@ export default class FileBar {
     const date = new Date(timestamp)
     const year = date.getFullYear()
     // TODO
-    const month = unshiftString(`${date.getMonth() + 1}`, 2, '0');
-    const day = unshiftString(`${date.getDate()}`, 2, '0');
-    const hour = unshiftString(`${date.getHours()}`, 2, '0');
-    const minute = unshiftString(`${date.getMinutes()}`, 2, '0');
+    const month = unshiftString(`${date.getMonth() + 1}`, 2, '0')
+    const day = unshiftString(`${date.getDate()}`, 2, '0')
+    const hour = unshiftString(`${date.getHours()}`, 2, '0')
+    const minute = unshiftString(`${date.getMinutes()}`, 2, '0')
     return isNaN(year) ? '--' : `${year}/${month}/${day} ${hour}:${minute}`
   }
 }

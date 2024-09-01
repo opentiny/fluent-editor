@@ -1,4 +1,4 @@
-import { AnyFunction } from './type';
+import { AnyFunction } from './type'
 
 export interface ICounterOption {
   format?: 'text' | 'html'

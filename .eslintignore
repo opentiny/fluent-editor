@@ -1,4 +1,6 @@
 # Common
 node_modules
 dist
-# Examples
+
+**/*.json
+**/*.yaml

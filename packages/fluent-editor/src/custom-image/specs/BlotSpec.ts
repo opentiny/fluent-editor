@@ -1,31 +1,31 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-import ResizeAction from '../actions/CustomResizeAction';
-import DeleteAction from '../actions/DeleteAction';
+import ResizeAction from '../actions/CustomResizeAction'
+import DeleteAction from '../actions/DeleteAction'
 
 export default class BlotSpec {
-  formatter;
+  formatter
 
   constructor(formatter) {
-    this.formatter = formatter;
+    this.formatter = formatter
   }
 
   init(): void {}
 
   getActions() {
-    return [ResizeAction, DeleteAction];
+    return [ResizeAction, DeleteAction]
   }
 
   getTargetElement() {
-    return null;
+    return null
   }
 
   getOverlayElement() {
-    return this.getTargetElement();
+    return this.getTargetElement()
   }
 
   setSelection(): void {
-    this.formatter.quill.setSelection(null);
+    this.formatter.quill.setSelection(null)
   }
 
   onHide() {}

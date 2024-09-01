@@ -6,7 +6,7 @@ let editor
 
 const TOOLBAR_CONFIG = [
   ['undo', 'redo', 'clean'],
-  [{ header: [1, 2, 3, 4, 5, 6, false] }, { size: ['12px', '14px', '16px', '18px', '20px', '24px', '32px', '36px', '48px', '72px']}],
+  [{ header: [1, 2, 3, 4, 5, 6, false] }, { size: ['12px', '14px', '16px', '18px', '20px', '24px', '32px', '36px', '48px', '72px'] }],
   ['bold', 'italic', 'strike', 'underline'],
   [{ color: [] }, { background: [] }],
   [{ align: [] }, { list: 'ordered' }, { list: 'bullet' }, { list: 'check' }],
@@ -21,13 +21,13 @@ onMounted(() => {
     editor = new FluentEditor('#editor', {
       theme: 'snow',
       modules: {
-        toolbar: TOOLBAR_CONFIG
-      }
+        toolbar: TOOLBAR_CONFIG,
+      },
     })
   })
 })
 </script>
 
 <template>
-  <div id="editor"></div>
+  <div id="editor" />
 </template>

@@ -9,7 +9,7 @@ const TOOLBAR_CONFIG = [
   ['bold', 'italic', 'underline', 'link'],
   [{ list: 'ordered' }, { list: 'bullet' }],
   ['clean'],
-  ['code-block']
+  ['code-block'],
 ]
 
 onMounted(() => {
@@ -21,13 +21,13 @@ onMounted(() => {
       theme: 'snow',
       modules: {
         toolbar: TOOLBAR_CONFIG,
-        syntax: true
-      }
+        syntax: true,
+      },
     })
   })
 })
 </script>
 
 <template>
-  <div id="editor"></div>
+  <div id="editor" />
 </template>

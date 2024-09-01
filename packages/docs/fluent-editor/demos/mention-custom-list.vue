@@ -11,20 +11,20 @@ const mentionList = [
     name: 'kagol',
     cn: '卡哥',
     followers: 156,
-    avatar: 'https://avatars.githubusercontent.com/u/9566362?v=4'
+    avatar: 'https://avatars.githubusercontent.com/u/9566362?v=4',
   },
   {
     name: 'zzcr',
     cn: '超哥',
     followers: 10,
-    avatar: 'https://avatars.githubusercontent.com/u/18521562?v=4'
+    avatar: 'https://avatars.githubusercontent.com/u/18521562?v=4',
   },
   {
     name: 'hexqi',
     cn: '小伍哥',
     followers: 2,
-    avatar: 'https://avatars.githubusercontent.com/u/18585869?v=4'
-  }
+    avatar: 'https://avatars.githubusercontent.com/u/18585869?v=4',
+  },
 ]
 
 onMounted(() => {
@@ -39,12 +39,12 @@ onMounted(() => {
           containerClass: 'ql-mention-list-container__custom-list',
           itemKey: 'cn',
           searchKey,
-          search: function(term) {
-            return mentionList.filter(item => {
+          search: function (term) {
+            return mentionList.filter((item) => {
               return item[searchKey] && String(item[searchKey]).includes(term)
             })
           },
-          renderMentionItem: function(item) {
+          renderMentionItem: function (item) {
             return `
               <div class="item-avatar">
                 <img src="${item.avatar}">
@@ -54,16 +54,16 @@ onMounted(() => {
                 <div class="item-desc">${item.followers}粉丝</div>
               </div>
             `
-          }
-        }
-      }
+          },
+        },
+      },
     })
   })
 })
 </script>
 
 <template>
-  <div id="editor-mention-custom-list"></div>
+  <div id="editor-mention-custom-list" />
 </template>
 
 <style lang="less">

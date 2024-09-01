@@ -1,12 +1,12 @@
-import Quill from 'quill';
-import * as hljs from 'highlight.js';
+import Quill from 'quill'
+import * as hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
 
-const Syntax = Quill.imports['modules/syntax'];
+const Syntax = Quill.imports['modules/syntax']
 
 // @dynamic
 class CustomSyntax extends Syntax {
-  static DEFAULTS: { hljs: any; interval: number; languages: { key: string; label: string }[] };
+  static DEFAULTS: { hljs: any, interval: number, languages: { key: string, label: string }[] }
 }
 
 CustomSyntax.DEFAULTS = {
@@ -28,6 +28,6 @@ CustomSyntax.DEFAULTS = {
     { key: 'ruby', label: 'Ruby' },
     { key: 'sql', label: 'SQL' },
   ],
-};
+}
 
-export default CustomSyntax;
+export default CustomSyntax

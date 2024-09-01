@@ -1,4 +1,4 @@
-import { createEmoji } from '../utils';
+import { createEmoji } from '../utils'
 const peopleEmojiArr = [
   ['grinning', '1f600', ':grinning:', '&#128512;', 'p', '1'],
   ['grin', '1f601', ':grin:', '&#128513;', 'p', '2'],
@@ -106,5 +106,5 @@ const peopleEmojiArr = [
   ['eye', '1f441', ':eye:', '&#128065;', 'p', '1280'],
   ['lips', '1f444', ':lips:', '&#128068;', 'p', '1283'],
   ['fire', '1f525', ':fire:', '&#128293;', 'n', '1753'],
-];
-export const peopleEmoji = createEmoji(peopleEmojiArr);
+]
+export const peopleEmoji = createEmoji(peopleEmojiArr)

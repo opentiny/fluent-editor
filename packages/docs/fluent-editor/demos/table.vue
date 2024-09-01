@@ -9,7 +9,7 @@ const TOOLBAR_CONFIG = [
   ['bold', 'italic', 'underline', 'link'],
   [{ list: 'ordered' }, { list: 'bullet' }],
   ['clean'],
-  ['better-table']
+  ['better-table'],
 ]
 
 onMounted(() => {
@@ -20,7 +20,7 @@ onMounted(() => {
     editor = new FluentEditor('#editor', {
       theme: 'snow',
       modules: {
-        toolbar: TOOLBAR_CONFIG,
+        'toolbar': TOOLBAR_CONFIG,
         'better-table': {
           operationMenu: {
             color: {
@@ -30,11 +30,11 @@ onMounted(() => {
                 '#c00000', '#ff0000', '#ffc8d3', '#ffc000', '#ffff00', '#fff4cb',
                 '#92d050', '#00b050', '#dff3d2', '#00b0f0', '#0070c0', '#d4f1f5',
                 '#002060', '#7030a0', '#7b69ee', '#1476ff', '#ec66ab', '#42b883',
-              ]
-            }
-          }
-        }
-      }
+              ],
+            },
+          },
+        },
+      },
     })
   })
 })
@@ -42,5 +42,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="editor"></div>
+  <div id="editor" />
 </template>

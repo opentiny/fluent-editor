@@ -30,72 +30,73 @@ const registerModules = function () {
 
   const Icons = Quill.imports['ui/icons']
   const iconKeys = Object.keys(ICONS_CONFIG)
-  iconKeys.forEach(iconKey => {
+  iconKeys.forEach((iconKey) => {
     Icons[iconKey] = ICONS_CONFIG[iconKey]
   })
 
   const SnowTheme = Quill.imports['themes/snow']
   SnowTheme.DEFAULTS = {
     modules: {
-      keyboard: {
+      'keyboard': {
         bindings: {
           ...BetterTable.keyboardBindings,
         },
       },
-      toolbar: {
+      'toolbar': {
         handlers: {
           ...SnowTheme.DEFAULTS.modules.toolbar.handlers,
-          undo: function() {
+          'undo': function () {
             this.quill.history.undo()
           },
-          redo: function() {
+          'redo': function () {
             this.quill.history.redo()
           },
-          'better-table': function() {
+          'better-table': function () {
             this.quill.getModule('better-table').insertTable(3, 3)
           },
-          file: function () {
+          'file': function () {
             const accept = this.quill.options?.uploadOption?.fileAccept
             inputFile.call(this, 'file', accept)
           },
-          image: function () {
+          'image': function () {
             const accept = this.quill.options?.uploadOption?.imageAccept
             inputFile.call(this, 'image', accept)
           },
-          emoji: function() {},
-          fullscreen: function() {},
-          list: function (value) {
-            const range = this.quill.getSelection();
-            const formats = this.quill.getFormat(range);
-            const preListValue = Array.isArray(formats.list) ? formats.list[0]?.value : formats.list?.value;
-            const curListValue = getListValue(value, preListValue);
+          'emoji': function () {},
+          'fullscreen': function () {},
+          'list': function (value) {
+            const range = this.quill.getSelection()
+            const formats = this.quill.getFormat(range)
+            const preListValue = Array.isArray(formats.list) ? formats.list[0]?.value : formats.list?.value
+            const curListValue = getListValue(value, preListValue)
             // 如果设置list的选区中有表格，判断第一个table-col位置，将表格前的内容设置为list格式
-            const lines = this.quill.getLines(range.index, range.length);
-            const tableCols = lines.filter((line) => line.statics.blotName === 'table-col' && !line.prev);
+            const lines = this.quill.getLines(range.index, range.length)
+            const tableCols = lines.filter(line => line.statics.blotName === 'table-col' && !line.prev)
             if (tableCols.length) {
-              let start = range.index;
+              let start = range.index
               // 遍历table-col群组，以之获取表格，将表格前选区设置为对应list格式
               tableCols.forEach((item, index) => {
-                const table = item.domNode.closest('table.quill-better-table');
-                const tableBlot = Quill.find(table);
-                const tableLength = tableBlot.length();
-                const tableStart = this.quill.getIndex(item);
-                const tableEnd = tableStart + tableLength;
-                const beforeTableRangeLength = tableStart - start;
+                const table = item.domNode.closest('table.quill-better-table')
+                const tableBlot = Quill.find(table)
+                const tableLength = tableBlot.length()
+                const tableStart = this.quill.getIndex(item)
+                const tableEnd = tableStart + tableLength
+                const beforeTableRangeLength = tableStart - start
                 // 在表格前设置列表
-                this.quill.setSelection(start, beforeTableRangeLength, Quill.sources.SILENT);
-                this.quill.format('list', curListValue, Quill.sources.USER);
-                table.parentNode.classList.remove('quill-better-table-selected');
+                this.quill.setSelection(start, beforeTableRangeLength, Quill.sources.SILENT)
+                this.quill.format('list', curListValue, Quill.sources.USER)
+                table.parentNode.classList.remove('quill-better-table-selected')
                 // 当前表格末尾为下一个选取的开始
-                start = tableEnd;
+                start = tableEnd
                 if (index === tableCols.length - 1) {
                   // 将最后一个表格之后所有选区内容设置list格式
-                  this.quill.setSelection(tableEnd, range.index + range.length - tableEnd);
-                  this.quill.format('list', curListValue, Quill.sources.USER);
+                  this.quill.setSelection(tableEnd, range.index + range.length - tableEnd)
+                  this.quill.format('list', curListValue, Quill.sources.USER)
                 }
-              });
-            } else {
-              this.quill.format('list', curListValue, Quill.sources.USER);
+              })
+            }
+            else {
+              this.quill.format('list', curListValue, Quill.sources.USER)
             }
           },
         },
@@ -106,7 +107,7 @@ const registerModules = function () {
           color: true,
         },
       },
-      image: {
+      'image': {
         specs: [CustomImageSpec],
         overlay: {
           style: {
@@ -149,7 +150,7 @@ const registerModules = function () {
       // 'modules/quickmenu': QuickMenu,//暂未开发
       'modules/syntax': CustomSyntax,
     },
-    true, //覆盖内部模块
+    true, // 覆盖内部模块
   )
 
   return Quill

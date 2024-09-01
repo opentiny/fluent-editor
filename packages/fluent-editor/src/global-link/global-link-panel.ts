@@ -1,20 +1,20 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter } from '@angular/core'
 
 interface WikiLink {
-  link: string;
-  text: string;
+  link: string
+  text: string
 }
 
 interface DocLink {
-  link: string;
-  text: string;
-  icon: string;
+  link: string
+  text: string
+  icon: string
 }
 
 export interface GlobalLinkPanel {
-  wikiLink: EventEmitter<WikiLink[]>;
-  docLink: EventEmitter<DocLink[]>;
-  workItemLink: EventEmitter<any>;
-  close?: EventEmitter<any>;
-  autoClose?: boolean;
+  wikiLink: EventEmitter<WikiLink[]>
+  docLink: EventEmitter<DocLink[]>
+  workItemLink: EventEmitter<any>
+  close?: EventEmitter<any>
+  autoClose?: boolean
 }

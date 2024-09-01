@@ -1,1 +1,1 @@
-export { peopleEmoji } from './people';
+export { peopleEmoji } from './people'
