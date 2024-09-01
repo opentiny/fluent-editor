@@ -3,8 +3,9 @@ import type { Range } from 'quill';
 import type Toolbar from 'quill/modules/toolbar';
 
 export class FormatPainter {
-   static toolName = 'format-painter';
-   static moduleName = 'format-painter';
+  static toolName = 'format-painter';
+  static moduleName = 'format-painter';
+
   formatterBtn: HTMLElement | null;
   isFormatterLock = false;
   isFormating = false;
