@@ -4,11 +4,12 @@ export function css(domNode, rules) {
       if (prop) {
         if (Array.isArray(rules[prop])) {
           // 兼容IE11浏览器
-          rules[prop].forEach(val => {
-            domNode.style[prop] = val;
-          });
-        } else {
-          domNode.style[prop] = rules[prop];
+          rules[prop].forEach((val) => {
+            domNode.style[prop] = val
+          })
+        }
+        else {
+          domNode.style[prop] = rules[prop]
         }
       }
     }
@@ -22,7 +23,7 @@ export function css(domNode, rules) {
  * @return             an object with rect data {Object}
  */
 export function getRelativeRect(targetRect, container) {
-  const containerRect = container.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect()
 
   return { // ie浏览器中getBoundingClientRect输出为left、right、top、bottom，与chrome的x、y不同
     x: (targetRect.x || targetRect.left) - (containerRect.x || containerRect.left) - container.scrollLeft,
@@ -31,9 +32,8 @@ export function getRelativeRect(targetRect, container) {
     y1: (targetRect.y || targetRect.top) - (containerRect.y || containerRect.top) - container.scrollTop + targetRect.height,
     width: targetRect.width,
     height: targetRect.height,
-  };
+  }
 }
-
 
 export const elementRemove = function (node) {
   node && node.parentNode && node.parentNode.removeChild(node)
@@ -52,12 +52,11 @@ export const arrayFrom = function (arrayLike, mapFn?, thisArg?) {
   for (let i = 0; i < length; i++) {
     if (typeof mapFn === 'function') {
       resArray.push(mapFn.call(thisArg, arrayLike[i]))
-    } else {
+    }
+    else {
       resArray.push(arrayLike[i])
     }
   }
 
   return resArray
 }
-
-

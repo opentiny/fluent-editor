@@ -4,21 +4,21 @@ export interface IEditorModules {
   [key: string]: any
   clipboard?:
     | {
-        matchers?: any[]
-        matchVisual?: boolean
-      }
+      matchers?: any[]
+      matchVisual?: boolean
+    }
     | boolean
   history?:
     | {
-        delay?: number
-        maxStack?: number
-        userOnly?: boolean
-      }
+      delay?: number
+      maxStack?: number
+      userOnly?: boolean
+    }
     | boolean
   keyboard?:
     | {
-        bindings?: any
-      }
+      bindings?: any
+    }
     | boolean
   syntax?: boolean
   toolbar?:
@@ -26,10 +26,10 @@ export interface IEditorModules {
     | ToolbarOption
     | string
     | {
-        container?: string | string[] | ToolbarOption
-        handlers?: {
-          [key: string]: any
-        }
+      container?: string | string[] | ToolbarOption
+      handlers?: {
+        [key: string]: any
       }
+    }
     | boolean
 }

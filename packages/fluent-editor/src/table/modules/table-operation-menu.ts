@@ -1,6 +1,6 @@
-import Quill from 'quill';
+import Quill from 'quill'
 import { LANG_CONF } from '../../config/editor.config'
-import { elementRemove, arrayFrom, css, getRelativeRect } from '../utils';
+import { elementRemove, arrayFrom, css, getRelativeRect } from '../utils'
 import {
   OPERATE_MENU_ITEM_CLASS,
   OPERATE_MENU_COLORPICKER_ITEM_CLASS,
@@ -14,65 +14,65 @@ import {
   MENU_ITEM_HEIGHT,
   MENU_MIN_HEIGHT,
   MENU_WIDTH,
-} from '../table-config';
+} from '../table-config'
 
 const MENU_ITEMS_DEFAULT = {
   copyCells: {
     text: 'Copy Cells',
     handler() {
-      this.onCopy('copy');
+      this.onCopy('copy')
     },
   },
   copyTable: {
     text: 'Copy Table',
     handler() {
-      this.tableColumnTool.destroy();
-      this.tableScrollBar.destroy();
-      this.tableSelection.clearSelection();
-      const dom = this.table.cloneNode(true);
-      const trArr = dom.querySelectorAll('tr[data-row]');
-      trArr.forEach(tr => tr.removeAttribute('data-row'));
-      dom.style.position = 'fixed';
-      dom.style.top = 0;
-      dom.style.left = 0;
-      dom.style.clip = 'rect(0,0,0,0)';
-      document.body.appendChild(dom);
-      this.setCopyRange(dom);
-      document.execCommand('copy');
-      dom.remove();
+      this.tableColumnTool.destroy()
+      this.tableScrollBar.destroy()
+      this.tableSelection.clearSelection()
+      const dom = this.table.cloneNode(true)
+      const trArr = dom.querySelectorAll('tr[data-row]')
+      trArr.forEach(tr => tr.removeAttribute('data-row'))
+      dom.style.position = 'fixed'
+      dom.style.top = 0
+      dom.style.left = 0
+      dom.style.clip = 'rect(0,0,0,0)'
+      document.body.appendChild(dom)
+      this.setCopyRange(dom)
+      document.execCommand('copy')
+      dom.remove()
     },
   },
   cutCells: {
     text: 'Cut Cells',
     handler() {
-      this.onCopy('cut');
+      this.onCopy('cut')
     },
   },
   emptyCells: {
     text: 'Empty Cells',
     handler() {
-      const tableContainer = Quill.find(this.table);
-      const { selectedTds } = this.tableSelection;
-      tableContainer.emptyCells(selectedTds);
+      const tableContainer = Quill.find(this.table)
+      const { selectedTds } = this.tableSelection
+      tableContainer.emptyCells(selectedTds)
     },
   },
   insertColumnRight: {
     text: 'Insert Column After',
     handler() {
-      const tableContainer = Quill.find(this.table);
+      const tableContainer = Quill.find(this.table)
       const colIndex = getColToolCellIndexByBoundary(
         this.columnToolCells,
         this.boundary,
         (cellRect, boundary) => {
-          return Math.abs(cellRect.x + cellRect.width - boundary.x1) <= ERROR_LIMIT;
+          return Math.abs(cellRect.x + cellRect.width - boundary.x1) <= ERROR_LIMIT
         },
         this.quill.root.parentNode,
-      );
+      )
 
-      const newColumn = tableContainer.insertColumn(this.boundary, colIndex, true, this.quill.root.parentNode);
+      const newColumn = tableContainer.insertColumn(this.boundary, colIndex, true, this.quill.root.parentNode)
 
-      this.tableColumnTool.updateColToolCells();
-      this.quill.update(Quill.sources.USER);
+      this.tableColumnTool.updateColToolCells()
+      this.quill.update(Quill.sources.USER)
       // fix: the scroll bar will go to the top when insert row/column to the table
       // this.quill.setSelection(
       //   this.quill.getIndex(newColumn[0]),
@@ -82,29 +82,29 @@ const MENU_ITEMS_DEFAULT = {
       this.tableSelection.setSelection(
         newColumn[0].domNode.getBoundingClientRect(),
         newColumn[0].domNode.getBoundingClientRect(),
-      );
+      )
 
-      setTimeout(() => this.tableScrollBar.updateScrollBar());
+      setTimeout(() => this.tableScrollBar.updateScrollBar())
     },
   },
 
   insertColumnLeft: {
     text: 'Insert Column Before',
     handler() {
-      const tableContainer = Quill.find(this.table);
+      const tableContainer = Quill.find(this.table)
       const colIndex = getColToolCellIndexByBoundary(
         this.columnToolCells,
         this.boundary,
         (cellRect, boundary) => {
-          return Math.abs(cellRect.x - boundary.x) <= ERROR_LIMIT;
+          return Math.abs(cellRect.x - boundary.x) <= ERROR_LIMIT
         },
         this.quill.root.parentNode,
-      );
+      )
 
-      const newColumn = tableContainer.insertColumn(this.boundary, colIndex, false, this.quill.root.parentNode);
+      const newColumn = tableContainer.insertColumn(this.boundary, colIndex, false, this.quill.root.parentNode)
 
-      this.tableColumnTool.updateColToolCells();
-      this.quill.update(Quill.sources.USER);
+      this.tableColumnTool.updateColToolCells()
+      this.quill.update(Quill.sources.USER)
       // this.quill.setSelection(
       //   this.quill.getIndex(newColumn[0]),
       //   0,
@@ -113,20 +113,20 @@ const MENU_ITEMS_DEFAULT = {
       this.tableSelection.setSelection(
         newColumn[0].domNode.getBoundingClientRect(),
         newColumn[0].domNode.getBoundingClientRect(),
-      );
+      )
 
-      setTimeout(() => this.tableScrollBar.updateScrollBar());
+      setTimeout(() => this.tableScrollBar.updateScrollBar())
     },
   },
 
   insertRowUp: {
     text: 'Insert Row Above',
     handler() {
-      const tableContainer = Quill.find(this.table);
-      const affectedCells = tableContainer.insertRow(this.boundary, false, this.quill.root.parentNode);
+      const tableContainer = Quill.find(this.table)
+      const affectedCells = tableContainer.insertRow(this.boundary, false, this.quill.root.parentNode)
 
-      this.tableColumnTool.updateRowToolCells();
-      this.quill.update(Quill.sources.USER);
+      this.tableColumnTool.updateRowToolCells()
+      this.quill.update(Quill.sources.USER)
       // this.quill.setSelection(
       //   this.quill.getIndex(affectedCells[0]),
       //   0,
@@ -135,20 +135,20 @@ const MENU_ITEMS_DEFAULT = {
       this.tableSelection.setSelection(
         affectedCells[0].domNode.getBoundingClientRect(),
         affectedCells[0].domNode.getBoundingClientRect(),
-      );
+      )
 
-      setTimeout(() => this.tableScrollBar.resetTableHeight(this.table));
+      setTimeout(() => this.tableScrollBar.resetTableHeight(this.table))
     },
   },
 
   insertRowDown: {
     text: 'Insert Row Below',
     handler() {
-      const tableContainer = Quill.find(this.table);
-      const affectedCells = tableContainer.insertRow(this.boundary, true, this.quill.root.parentNode);
+      const tableContainer = Quill.find(this.table)
+      const affectedCells = tableContainer.insertRow(this.boundary, true, this.quill.root.parentNode)
 
-      this.tableColumnTool.updateRowToolCells();
-      this.quill.update(Quill.sources.USER);
+      this.tableColumnTool.updateRowToolCells()
+      this.quill.update(Quill.sources.USER)
       // this.quill.setSelection(
       //   this.quill.getIndex(affectedCells[0]),
       //   0,
@@ -157,39 +157,39 @@ const MENU_ITEMS_DEFAULT = {
       this.tableSelection.setSelection(
         affectedCells[0].domNode.getBoundingClientRect(),
         affectedCells[0].domNode.getBoundingClientRect(),
-      );
+      )
 
-      setTimeout(() => this.tableScrollBar.resetTableHeight(this.table));
+      setTimeout(() => this.tableScrollBar.resetTableHeight(this.table))
     },
   },
 
   mergeCells: {
     text: 'Merge Cells',
     handler() {
-      const tableContainer = Quill.find(this.table);
+      const tableContainer = Quill.find(this.table)
       // compute merged Cell rowspan, equal to length of selected rows
       const rowspan = tableContainer.rows().reduce((sum, row) => {
-        const rowRect = getRelativeRect(row.domNode.getBoundingClientRect(), this.quill.root.parentNode);
+        const rowRect = getRelativeRect(row.domNode.getBoundingClientRect(), this.quill.root.parentNode)
         if (
-          rowRect.y > this.boundary.y - ERROR_LIMIT &&
-          rowRect.y + rowRect.height < this.boundary.y + this.boundary.height + ERROR_LIMIT
+          rowRect.y > this.boundary.y - ERROR_LIMIT
+          && rowRect.y + rowRect.height < this.boundary.y + this.boundary.height + ERROR_LIMIT
         ) {
-          sum += 1;
+          sum += 1
         }
-        return sum;
-      }, 0);
+        return sum
+      }, 0)
 
       // compute merged cell colspan, equal to length of selected cols
       const colspan = this.columnToolCells.reduce((sum, cell) => {
-        const cellRect = getRelativeRect(cell.getBoundingClientRect(), this.quill.root.parentNode);
+        const cellRect = getRelativeRect(cell.getBoundingClientRect(), this.quill.root.parentNode)
         if (
-          cellRect.x > this.boundary.x - ERROR_LIMIT &&
-          cellRect.x + cellRect.width < this.boundary.x + this.boundary.width + ERROR_LIMIT
+          cellRect.x > this.boundary.x - ERROR_LIMIT
+          && cellRect.x + cellRect.width < this.boundary.x + this.boundary.width + ERROR_LIMIT
         ) {
-          sum += 1;
+          sum += 1
         }
-        return sum;
-      }, 0);
+        return sum
+      }, 0)
 
       const mergedCell = tableContainer.mergeCells(
         this.boundary,
@@ -197,58 +197,58 @@ const MENU_ITEMS_DEFAULT = {
         rowspan,
         colspan,
         this.quill.root.parentNode,
-      );
-      this.quill.update(Quill.sources.USER);
+      )
+      this.quill.update(Quill.sources.USER)
       this.tableSelection.setSelection(
         mergedCell.domNode.getBoundingClientRect(),
         mergedCell.domNode.getBoundingClientRect(),
-      );
+      )
     },
   },
 
   unmergeCells: {
     text: 'Split Cells',
     handler() {
-      const tableContainer = Quill.find(this.table);
-      tableContainer.unmergeCells(this.selectedTds, this.quill.root.parentNode);
-      this.quill.update(Quill.sources.USER);
-      this.tableSelection.clearSelection();
+      const tableContainer = Quill.find(this.table)
+      tableContainer.unmergeCells(this.selectedTds, this.quill.root.parentNode)
+      this.quill.update(Quill.sources.USER)
+      this.tableSelection.clearSelection()
     },
   },
 
   deleteColumn: {
     text: 'Delete Columns',
     handler() {
-      const tableContainer = Quill.find(this.table);
+      const tableContainer = Quill.find(this.table)
       const colIndexes = getColToolCellIndexesByBoundary(
         this.columnToolCells,
         this.boundary,
         (cellRect, boundary) => {
-          return cellRect.x + ERROR_LIMIT > boundary.x && cellRect.x + cellRect.width - ERROR_LIMIT < boundary.x1;
+          return cellRect.x + ERROR_LIMIT > boundary.x && cellRect.x + cellRect.width - ERROR_LIMIT < boundary.x1
         },
         this.quill.root.parentNode,
-      );
+      )
 
-      const isDeleteTable = tableContainer.deleteColumns(this.boundary, colIndexes, this.quill.root.parentNode);
+      const isDeleteTable = tableContainer.deleteColumns(this.boundary, colIndexes, this.quill.root.parentNode)
       if (!isDeleteTable) {
-        this.tableColumnTool.updateColToolCells();
-        this.quill.update(Quill.sources.USER);
-        this.tableSelection.clearSelection();
+        this.tableColumnTool.updateColToolCells()
+        this.quill.update(Quill.sources.USER)
+        this.tableSelection.clearSelection()
       }
 
-      setTimeout(() => this.tableScrollBar.updateScrollBar());
+      setTimeout(() => this.tableScrollBar.updateScrollBar())
     },
   },
 
   deleteRow: {
     text: 'Delete Rows',
     handler() {
-      const tableContainer = Quill.find(this.table);
-      const isDeleteTable = tableContainer.deleteRow(this.boundary, this.quill.root.parentNode);
+      const tableContainer = Quill.find(this.table)
+      const isDeleteTable = tableContainer.deleteRow(this.boundary, this.quill.root.parentNode)
       if (!isDeleteTable) {
-        this.tableColumnTool.updateRowToolCells();
-        this.quill.update(Quill.sources.USER);
-        this.tableSelection.clearSelection();
+        this.tableColumnTool.updateRowToolCells()
+        this.quill.update(Quill.sources.USER)
+        this.tableSelection.clearSelection()
       }
     },
   },
@@ -256,67 +256,67 @@ const MENU_ITEMS_DEFAULT = {
   deleteTable: {
     text: 'Remove Table',
     handler() {
-      const betterTableModule = this.quill.getModule('better-table');
-      const tableContainer = Quill.find(this.table);
-      betterTableModule.hideTableTools();
-      tableContainer.remove();
-      this.quill.update(Quill.sources.USER);
+      const betterTableModule = this.quill.getModule('better-table')
+      const tableContainer = Quill.find(this.table)
+      betterTableModule.hideTableTools()
+      tableContainer.remove()
+      this.quill.update(Quill.sources.USER)
       // fix: 右键菜单删除表格后编辑器失焦
-      this.quill.focus();
+      this.quill.focus()
     },
   },
-};
-const DEFAULT_CELL_COLORS = ['white', 'red', 'yellow', 'blue'];
-const NODE_EVENT_MAP = new WeakMap();
+}
+const DEFAULT_CELL_COLORS = ['white', 'red', 'yellow', 'blue']
+const NODE_EVENT_MAP = new WeakMap()
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const MENU_MIN_HEIHGT = 150;
-const DEFAULT_COLOR_SUBTITLE = LANG_CONF['subTitleBgColor'];
+const MENU_MIN_HEIHGT = 150
+const DEFAULT_COLOR_SUBTITLE = LANG_CONF['subTitleBgColor']
 export default class TableOperationMenu {
-  tableSelection: any;
-  table: any;
-  quill: any;
-  options: any;
-  menuItems: any;
-  tableColumnTool: any;
-  tableScrollBar: any;
-  boundary: any;
-  selectedTds: any;
-  destroyHandler: any;
-  columnToolCells: any;
-  colorSubTitle: any;
-  cellColors: any;
-  domNode: any;
+  tableSelection: any
+  table: any
+  quill: any
+  options: any
+  menuItems: any
+  tableColumnTool: any
+  tableScrollBar: any
+  boundary: any
+  selectedTds: any
+  destroyHandler: any
+  columnToolCells: any
+  colorSubTitle: any
+  cellColors: any
+  domNode: any
 
   constructor(params, quill, options) {
-    const betterTableModule = quill.getModule('better-table');
-    this.tableSelection = betterTableModule.tableSelection;
-    this.table = params.table;
-    this.quill = quill;
+    const betterTableModule = quill.getModule('better-table')
+    this.tableSelection = betterTableModule.tableSelection
+    this.table = params.table
+    this.quill = quill
     this.options = options
-    this.menuItems = { ...MENU_ITEMS_DEFAULT, ...options.items };
-    this.tableColumnTool = betterTableModule.columnTool;
-    //this.tableRowTool = betterTableModule.rowTool
-    this.tableScrollBar = betterTableModule.tableScrollBar;
-    this.boundary = this.tableSelection.boundary;
-    this.selectedTds = this.tableSelection.selectedTds;
-    this.destroyHandler = this.destroy.bind(this);
-    this.columnToolCells = this.tableColumnTool.colToolCells();
-    this.colorSubTitle =
-      options.color && options.color.text
+    this.menuItems = { ...MENU_ITEMS_DEFAULT, ...options.items }
+    this.tableColumnTool = betterTableModule.columnTool
+    // this.tableRowTool = betterTableModule.rowTool
+    this.tableScrollBar = betterTableModule.tableScrollBar
+    this.boundary = this.tableSelection.boundary
+    this.selectedTds = this.tableSelection.selectedTds
+    this.destroyHandler = this.destroy.bind(this)
+    this.columnToolCells = this.tableColumnTool.colToolCells()
+    this.colorSubTitle
+      = options.color && options.color.text
         ? options.color.text
         : DEFAULT_COLOR_SUBTITLE
-    this.cellColors =
-      options.color && options.color.colors
+    this.cellColors
+      = options.color && options.color.colors
         ? options.color.colors
         : DEFAULT_CELL_COLORS
 
-    this.menuInitial(params);
-    this.mount();
-    document.addEventListener('click', this.destroyHandler, false);
+    this.menuInitial(params)
+    this.mount()
+    document.addEventListener('click', this.destroyHandler, false)
   }
 
   mount() {
-    this.quill.root.parentNode.appendChild(this.domNode);
+    this.quill.root.parentNode.appendChild(this.domNode)
   }
 
   destroy() {
@@ -345,43 +345,44 @@ export default class TableOperationMenu {
   }
 
   menuInitial({ cell, left, top }) {
-    const rowspan = cell.getAttribute('rowspan');
-    const colspan = cell.getAttribute('colspan');
-    const winHeight = window.innerHeight || Math.max(document.documentElement.clientHeight, document.body.clientHeight);
-    const num = Object.keys(this.menuItems) || [];
-    const menuHeight = MENU_ITEM_HEIGHT * num.length || MENU_MIN_HEIGHT;
-    const transformOffset = checkAndGetViewPointChange(this.quill.root.parentNode, left, top);
-    const leftPos = left - transformOffset.offsetX;
-    const topPos = top - transformOffset.offsetY;
+    const rowspan = cell.getAttribute('rowspan')
+    const colspan = cell.getAttribute('colspan')
+    const winHeight = window.innerHeight || Math.max(document.documentElement.clientHeight, document.body.clientHeight)
+    const num = Object.keys(this.menuItems) || []
+    const menuHeight = MENU_ITEM_HEIGHT * num.length || MENU_MIN_HEIGHT
+    const transformOffset = checkAndGetViewPointChange(this.quill.root.parentNode, left, top)
+    const leftPos = left - transformOffset.offsetX
+    const topPos = top - transformOffset.offsetY
     const cssContent = {
-      left: `${leftPos}px`,
-      top: `${topPos}px`,
+      'left': `${leftPos}px`,
+      'top': `${topPos}px`,
       'min-height': `${MENU_MIN_HEIGHT}px`,
-      width: `${MENU_WIDTH}px`,
-    };
-
-    if (menuHeight + top > winHeight && menuHeight < winHeight) {
-      delete cssContent.top;
-      cssContent['bottom'] = '10px';
+      'width': `${MENU_WIDTH}px`,
     }
 
-    this.domNode = document.createElement('div');
-    this.domNode.classList.add('qlbt-operation-menu');
-    css(this.domNode, cssContent);
+    if (menuHeight + top > winHeight && menuHeight < winHeight) {
+      delete cssContent.top
+      cssContent['bottom'] = '10px'
+    }
+
+    this.domNode = document.createElement('div')
+    this.domNode.classList.add('qlbt-operation-menu')
+    css(this.domNode, cssContent)
 
     for (const name in this.menuItems) {
       if (this.menuItems[name]) {
-        const item = { ...MENU_ITEMS_DEFAULT[name], ...this.menuItems[name] };
-        const dom = this.menuItemCreator(item);
+        const item = { ...MENU_ITEMS_DEFAULT[name], ...this.menuItems[name] }
+        const dom = this.menuItemCreator(item)
         if (
-          (name === 'mergeCells' && this.tableSelection.selectedTds.length === 1) ||
-          (name === 'unmergeCells' && rowspan === 1 && colspan === 1)
+          (name === 'mergeCells' && this.tableSelection.selectedTds.length === 1)
+          || (name === 'unmergeCells' && rowspan === 1 && colspan === 1)
         ) {
-          dom.classList.add('qlbt-operation-menu-disabled');
-        } else {
-          dom.addEventListener('mouseup', item.handler.bind(this), false);
+          dom.classList.add('qlbt-operation-menu-disabled')
         }
-        this.domNode.appendChild(dom);
+        else {
+          dom.addEventListener('mouseup', item.handler.bind(this), false)
+        }
+        this.domNode.appendChild(dom)
       }
     }
 
@@ -424,11 +425,11 @@ export default class TableOperationMenu {
       box.setAttribute('data-color', color)
       box.style.backgroundColor = color
 
-      const clickHandler = function(){
+      const clickHandler = function () {
         const selectedTds = self.tableSelection.selectedTds
         if (selectedTds && selectedTds.length > 0) {
           selectedTds.forEach((tableCell) => {
-            tableCell.domNode.children[0].setAttribute('data-parent-bg',color)
+            tableCell.domNode.children[0].setAttribute('data-parent-bg', color)
             tableCell.format('cell-bg', color)
           })
         }
@@ -447,115 +448,115 @@ export default class TableOperationMenu {
   }
 
   menuItemCreator({ text }) {
-    const node = document.createElement('div');
-    node.classList.add('qlbt-operation-menu-item');
-    node.innerText = text;
+    const node = document.createElement('div')
+    node.classList.add('qlbt-operation-menu-item')
+    node.innerText = text
     // node.addEventListener('click', handler.bind(this), false)
-    return node;
+    return node
   }
 
   onCopy(operation) {
-    const { selectedTds } = this.tableSelection;
-    const virtualTable = this.createVirtualTable(selectedTds, operation);
-    document.body.appendChild(virtualTable);
-    this.setCopyRange(virtualTable);
-    this.tableSelection.preSelectedTable = virtualTable;
-    this.tableSelection.preSelectedTds = selectedTds;
-    document.execCommand('copy');
-    virtualTable.remove();
+    const { selectedTds } = this.tableSelection
+    const virtualTable = this.createVirtualTable(selectedTds, operation)
+    document.body.appendChild(virtualTable)
+    this.setCopyRange(virtualTable)
+    this.tableSelection.preSelectedTable = virtualTable
+    this.tableSelection.preSelectedTds = selectedTds
+    document.execCommand('copy')
+    virtualTable.remove()
     if (operation === 'cut') {
-      const tableContainer = Quill.find(this.table);
-      tableContainer.emptyCells(selectedTds);
+      const tableContainer = Quill.find(this.table)
+      tableContainer.emptyCells(selectedTds)
     }
   }
 
   createVirtualTable(selectedTds, _operation) {
-    const virtualTable: any = document.createElement('table');
-    virtualTable.style.position = 'fixed';
-    virtualTable.style.top = 0;
-    virtualTable.style.left = 0;
-    virtualTable.style.clip = 'rect(0,0,0,0)';
-    let preParentSign = '';
-    let virtualTr = null;
-    selectedTds.forEach(selectedCell => {
-      const { domNode, parent } = selectedCell;
-      const currentParentSign = parent.domNode.getAttribute('data-row');
-      const rowspan = domNode.firstChild.dataset.rowspan;
-      const colspan = domNode.firstChild.dataset.colspan;
-      const row = domNode.firstChild.dataset.row;
-      const cell = domNode.firstChild.dataset.cell;
+    const virtualTable: any = document.createElement('table')
+    virtualTable.style.position = 'fixed'
+    virtualTable.style.top = 0
+    virtualTable.style.left = 0
+    virtualTable.style.clip = 'rect(0,0,0,0)'
+    let preParentSign = ''
+    let virtualTr = null
+    selectedTds.forEach((selectedCell) => {
+      const { domNode, parent } = selectedCell
+      const currentParentSign = parent.domNode.getAttribute('data-row')
+      const rowspan = domNode.firstChild.dataset.rowspan
+      const colspan = domNode.firstChild.dataset.colspan
+      const row = domNode.firstChild.dataset.row
+      const cell = domNode.firstChild.dataset.cell
 
-      selectedCell.dataCell = cell;
-      selectedCell.dataRow = row;
-      selectedCell.dataColSpan = colspan;
-      selectedCell.dataRowSpan = rowspan;
+      selectedCell.dataCell = cell
+      selectedCell.dataRow = row
+      selectedCell.dataColSpan = colspan
+      selectedCell.dataRowSpan = rowspan
 
       if (currentParentSign !== preParentSign) {
         if (preParentSign !== '') {
-          virtualTable.appendChild(virtualTr);
+          virtualTable.appendChild(virtualTr)
         }
-        virtualTr = document.createElement('tr');
-        preParentSign = currentParentSign;
+        virtualTr = document.createElement('tr')
+        preParentSign = currentParentSign
       }
 
-      const domNodeWidth = domNode.offsetWidth;
-      const cloneNode = domNode.cloneNode(true);
-      cloneNode.setAttribute('width', domNodeWidth);
+      const domNodeWidth = domNode.offsetWidth
+      const cloneNode = domNode.cloneNode(true)
+      cloneNode.setAttribute('width', domNodeWidth)
 
-      virtualTr.appendChild(cloneNode);
-    });
-    virtualTable.appendChild(virtualTr);
-    return virtualTable;
+      virtualTr.appendChild(cloneNode)
+    })
+    virtualTable.appendChild(virtualTr)
+    return virtualTable
   }
 
   setCopyRange(selectedNodes) {
-    const range = document.createRange();
-    const windowSelectionRange = window.getSelection();
-    range.selectNodeContents(selectedNodes);
-    windowSelectionRange.removeAllRanges();
-    windowSelectionRange.addRange(range);
+    const range = document.createRange()
+    const windowSelectionRange = window.getSelection()
+    range.selectNodeContents(selectedNodes)
+    windowSelectionRange.removeAllRanges()
+    windowSelectionRange.addRange(range)
   }
 
   groupTableCell(selectedTds) {
-    const rowGroup = [];
-    let dataRow = '';
-    let preDataRow = '';
-    let index = 0;
-    selectedTds.forEach(tableCell => {
-      dataRow = tableCell.parent.domNode.getAttribute('data-row');
+    const rowGroup = []
+    let dataRow = ''
+    let preDataRow = ''
+    let index = 0
+    selectedTds.forEach((tableCell) => {
+      dataRow = tableCell.parent.domNode.getAttribute('data-row')
 
       if (dataRow !== preDataRow) {
         if (preDataRow !== '') {
-          index++;
+          index++
         }
-        rowGroup[index] = [];
-        preDataRow = dataRow;
+        rowGroup[index] = []
+        preDataRow = dataRow
       }
 
-      rowGroup[index].push(tableCell);
-    });
-    return rowGroup;
+      rowGroup[index].push(tableCell)
+    })
+    return rowGroup
   }
 }
 
 function getColToolCellIndexByBoundary(cells, boundary, conditionFn, container) {
   return cells.reduce((findIndex, cell) => {
-    const cellRect = getRelativeRect(cell.getBoundingClientRect(), container);
+    const cellRect = getRelativeRect(cell.getBoundingClientRect(), container)
     if (conditionFn(cellRect, boundary)) {
-      findIndex = cells.indexOf(cell);
+      findIndex = cells.indexOf(cell)
     }
-    return findIndex;
-  }, false);
+    return findIndex
+  }, false)
 }
 
 function getColToolCellIndexesByBoundary(cells, boundary, conditionFn, container) {
   return cells.reduce((findIndexes, cell) => {
-    const cellRect = getRelativeRect(cell.getBoundingClientRect(), container);
+    const cellRect = getRelativeRect(cell.getBoundingClientRect(), container)
     if (conditionFn(cellRect, boundary)) {
-      findIndexes.push(cells.indexOf(cell));
+      findIndexes.push(cells.indexOf(cell))
     }
-    return findIndexes;
-  }, []);
+    return findIndexes
+  }, [])
 }
 
 function checkAndGetViewPointChange(parentContainer: HTMLElement, left: number, top: number) {
@@ -563,10 +564,10 @@ function checkAndGetViewPointChange(parentContainer: HTMLElement, left: number, 
     return {
       offsetX: 0,
       offsetY: 0,
-    };
+    }
   }
   // 模拟一个元素测预测位置和最终位置是否符合，如果不符合则是有transform等造成的偏移
-  const testEl = document.createElement('div');
+  const testEl = document.createElement('div')
   css(testEl, {
     opacity: '0',
     position: 'fixed',
@@ -575,12 +576,12 @@ function checkAndGetViewPointChange(parentContainer: HTMLElement, left: number, 
     width: '1px',
     height: '1px',
     zIndex: '-999999',
-  });
-  parentContainer.appendChild(testEl);
-  const testElPosition = testEl.getBoundingClientRect();
-  parentContainer.removeChild(testEl);
+  })
+  parentContainer.appendChild(testEl)
+  const testElPosition = testEl.getBoundingClientRect()
+  parentContainer.removeChild(testEl)
   return {
     offsetX: testElPosition.left - left,
     offsetY: testElPosition.top - top,
-  };
+  }
 }

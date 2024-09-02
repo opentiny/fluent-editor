@@ -29,7 +29,7 @@ import {
   UNDO_ICON,
   FORMAT_PAINTER_ICON,
 } from './config/icons.config'
-import { isNullOrUndefined } from './config/editor.utils';
+import { isNullOrUndefined } from './config/editor.utils'
 
 import { EN_US } from './config/i18n/en-us'
 import { ZH_CN } from './config/i18n/zh-cn'
@@ -72,53 +72,53 @@ export const FONT_SIZE_CONFIG = [
 ]
 
 export const ICONS_CONFIG: { [key: string]: any } = {
-  undo: UNDO_ICON,
-  redo: REDO_ICON,
-  clean: CLEAN_ICON,
+  'undo': UNDO_ICON,
+  'redo': REDO_ICON,
+  'clean': CLEAN_ICON,
 
-  bold: BOLD_ICON,
-  italic: ITALIC_ICON,
-  underline: UNDERLINE_ICON,
-  strike: STRIKE_ICON,
+  'bold': BOLD_ICON,
+  'italic': ITALIC_ICON,
+  'underline': UNDERLINE_ICON,
+  'strike': STRIKE_ICON,
 
-  font: '',
-  size: '',
+  'font': '',
+  'size': '',
 
-  color: `<span class="ql-color-inner">
+  'color': `<span class="ql-color-inner">
     ${COLOR_ICON}
     ${TRIANGLE_DOWN_ICON}
     <span class="current-color-line"></span>
   </span>`,
-  background: `<span class="ql-color-inner">
+  'background': `<span class="ql-color-inner">
     ${BACKGROUND_COLOR_ICON}
     ${TRIANGLE_DOWN_ICON}
     <span class="current-color-line color-line-background"></span>
   </span>`,
 
-  align: {
+  'align': {
     '': ALIGN_LEFT_ICON,
-    center: ALIGN_CENTER_ICON,
-    right: ALIGN_RIGHT_ICON,
+    'center': ALIGN_CENTER_ICON,
+    'right': ALIGN_RIGHT_ICON,
   },
-  list: {
+  'list': {
     bullet: LIST_UNORDERED_ICON,
     ordered: LIST_ORDERED_ICON,
     check: LIST_CHECK_ICON,
   },
 
-  code: CODE_ICON,
+  'code': CODE_ICON,
   'code-block': CODE_BLOCK_ICON,
-  blockquote: BLOCKQUOTE_ICON,
+  'blockquote': BLOCKQUOTE_ICON,
 
-  image: IMAGE_ICON,
-  file: FILE_ICON,
+  'image': IMAGE_ICON,
+  'file': FILE_ICON,
   'better-table': TABLE_ICON,
-  link: LINK_ICON,
+  'link': LINK_ICON,
   'global-link': GLOBAL_LINK_ICON,
-  fullscreen: FULLSCREEN_ICON,
-  emoji: EMOJI_ICON,
-  help: HELP_ICON,
-  screenshot: SCREENSHOT_ICON,
+  'fullscreen': FULLSCREEN_ICON,
+  'emoji': EMOJI_ICON,
+  'help': HELP_ICON,
+  'screenshot': SCREENSHOT_ICON,
   'format-painter': FORMAT_PAINTER_ICON,
 }
 
@@ -175,9 +175,9 @@ export function inputFile(type, accept) {
     fileInput.setAttribute('type', 'file')
     fileInput.setAttribute('accept', mimeTypes)
     if (
-      this.quill.uploader.options.enableMultiUpload === true ||
-      (this.quill.uploader.options.enableMultiUpload.file && type === 'file') ||
-      (this.quill.uploader.options.enableMultiUpload.image && type === 'image')
+      this.quill.uploader.options.enableMultiUpload === true
+      || (this.quill.uploader.options.enableMultiUpload.file && type === 'file')
+      || (this.quill.uploader.options.enableMultiUpload.image && type === 'image')
     ) {
       fileInput.setAttribute('multiple', '')
     }
@@ -192,15 +192,17 @@ export function inputFile(type, accept) {
 }
 
 export function getListValue(value, preListValue) {
-  let curListValue = value;
+  let curListValue = value
   if (preListValue && preListValue === value) {
-    curListValue = false;
-  } else if (value === 'check') {
+    curListValue = false
+  }
+  else if (value === 'check') {
     if (preListValue === 'checked' || preListValue === 'unchecked') {
-      curListValue = false;
-    } else {
-      curListValue = 'unchecked';
+      curListValue = false
+    }
+    else {
+      curListValue = 'unchecked'
     }
   }
-  return curListValue;
+  return curListValue
 }

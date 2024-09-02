@@ -7,12 +7,12 @@ import {
 import type { Range } from 'quill/core/quill'
 
 type InsertFileData = {
-  code: number;
-  message?: string;
+  code: number
+  message?: string
   data: {
     title: string
-    size:number
-    src:string
+    size: number
+    src: string
   }
 }
 
@@ -31,16 +31,16 @@ class CustomUploader extends Uploader {
       image: false,
     }
     const uploadOption = this.quill.options.uploadOption
-    const acceptObj =
-      (uploadOption && {
+    const acceptObj
+      = (uploadOption && {
         image: uploadOption.imageAccept,
         file: uploadOption.fileAccept,
-      }) ||
-      {}
+      })
+      || {}
     Array.from(files).forEach((file: any) => {
       if (file) {
-        const fileFlag =
-          typeof isFile === 'boolean'
+        const fileFlag
+          = typeof isFile === 'boolean'
             ? isFile
             : !/^image\/[-\w.]+$/.test(file.type)
         const fileType = fileFlag ? 'file' : 'image'
@@ -48,7 +48,8 @@ class CustomUploader extends Uploader {
         if (this.isAllowedFileType(accept, file)) {
           uploads.push(file)
           fileFlags.push(fileFlag)
-        } else {
+        }
+        else {
           rejectFlags[fileType] = true
         }
       }
@@ -73,7 +74,8 @@ class CustomUploader extends Uploader {
               ) > -1
           )
           // mime type like 'image/*'
-        } else if (/\/\*$/.test(validType)) {
+        }
+        else if (/\/\*$/.test(validType)) {
           return baseMimeType === validType.replace(/\/.*$/, '')
         }
         //  mime type like 'text/plain,application/json'
@@ -98,15 +100,16 @@ class CustomUploader extends Uploader {
   // 将文件插入编辑器
   insertFileToEditor(range: Range, file: File, { code, message, data }: InsertFileData) {
     if (code === 0) {
-      const oldContent = new Delta().retain(range.index).delete(range.length);
-      const videoFlag = this.uploadOption && this.uploadOption.isVideoPlay && /^video\/[-\w.]+$/.test(file.type);
-      const insertObj = videoFlag ? { video: data } : { file: data };
-      const currentContent = new Delta([{ insert: insertObj }]);
-      const newContent = oldContent.concat(currentContent);
-      this.quill.updateContents(newContent, Quill.sources.USER);
-      this.quill.setSelection(range.index + 1);
-    } else {
-      console.error('error message:', message);
+      const oldContent = new Delta().retain(range.index).delete(range.length)
+      const videoFlag = this.uploadOption && this.uploadOption.isVideoPlay && /^video\/[-\w.]+$/.test(file.type)
+      const insertObj = videoFlag ? { video: data } : { file: data }
+      const currentContent = new Delta([{ insert: insertObj }])
+      const newContent = oldContent.concat(currentContent)
+      this.quill.updateContents(newContent, Quill.sources.USER)
+      this.quill.setSelection(range.index + 1)
+    }
+    else {
+      console.error('error message:', message)
     }
   }
 
@@ -124,8 +127,9 @@ class CustomUploader extends Uploader {
             return
           }
           if (imageEnableMultiUpload && Array.isArray(res)) {
-            res.forEach((value) => this.insertImageToEditor(range, value))
-          } else {
+            res.forEach(value => this.insertImageToEditor(range, value))
+          }
+          else {
             this.insertImageToEditor(range, res)
           }
         },
@@ -134,7 +138,8 @@ class CustomUploader extends Uploader {
         result['data'] = { files }
       }
       this.imageUpload.emit(result)
-    } else {
+    }
+    else {
       const promises = files.map((fileItem) => {
         return new Promise((resolve) => {
           const reader = new FileReader()

@@ -9,7 +9,7 @@ const TOOLBAR_CONFIG = [
   ['bold', 'italic', 'underline', 'link'],
   [{ list: 'ordered' }, { list: 'bullet' }],
   ['clean'],
-  ['emoji']
+  ['emoji'],
 ]
 
 onMounted(() => {
@@ -20,14 +20,14 @@ onMounted(() => {
     editor = new FluentEditor('#editor', {
       theme: 'snow',
       modules: {
-        toolbar: TOOLBAR_CONFIG,
-        'emoji-toolbar': true
-      }
+        'toolbar': TOOLBAR_CONFIG,
+        'emoji-toolbar': true,
+      },
     })
   })
 })
 </script>
 
 <template>
-  <div id="editor"></div>
+  <div id="editor" />
 </template>

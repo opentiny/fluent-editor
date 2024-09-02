@@ -1,24 +1,24 @@
 /** Detect free variable `global` from Node.js. */
-const freeGlobal =
-  typeof global === 'object' &&
-  global !== null &&
-  global.Object === Object &&
-  global
+const freeGlobal
+  = typeof global === 'object'
+  && global !== null
+  && global.Object === Object
+  && global
 
 /** Detect free variable `globalThis` */
-const freeGlobalThis =
-  typeof globalThis === 'object' &&
-  globalThis !== null &&
-  globalThis.Object == Object &&
-  globalThis
+const freeGlobalThis
+  = typeof globalThis === 'object'
+  && globalThis !== null
+  && globalThis.Object == Object
+  && globalThis
 
 /** Detect free variable `self`. */
-const freeSelf =
-  typeof self === 'object' && self !== null && self.Object === Object && self
+const freeSelf
+  = typeof self === 'object' && self !== null && self.Object === Object && self
 
 /** Used as a reference to the global object. */
-export const root =
-  freeGlobalThis || freeGlobal || freeSelf || Function('return this')()
+export const root
+  = freeGlobalThis || freeGlobal || freeSelf || Function('return this')()
 
 export function isObject(value) {
   const type = typeof value
@@ -66,16 +66,17 @@ export function compare(value, other) {
 }
 
 export function unshiftString(str: string, targetLength: number, addString: string): string {
-  targetLength = targetLength > 0 ? targetLength : 0;
-  addString = String((typeof addString !== 'undefined' && typeof addString !== 'object') ? addString : ' ');
-  str = (str === undefined || str === null) ? '' : String(str);
+  targetLength = targetLength > 0 ? targetLength : 0
+  addString = String((typeof addString !== 'undefined' && typeof addString !== 'object') ? addString : ' ')
+  str = (str === undefined || str === null) ? '' : String(str)
   if (str.length >= targetLength) {
-    return String(str);
-  } else {
-    targetLength = targetLength - str.length;
+    return String(str)
+  }
+  else {
+    targetLength = targetLength - str.length
     if (targetLength > addString.length) {
-      addString += addString.repeat(targetLength / addString.length);
+      addString += addString.repeat(targetLength / addString.length)
     }
-    return addString.slice(0, targetLength) + String(str);
+    return addString.slice(0, targetLength) + String(str)
   }
 }

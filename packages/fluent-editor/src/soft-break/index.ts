@@ -1,34 +1,34 @@
-import Quill from 'quill';
+import Quill from 'quill'
 
-const Embed = Quill.imports['blots/embed'];
+const Embed = Quill.imports['blots/embed']
 
 class SoftBreak extends Embed {
-  static blotName: string;
-  static tagName: string;
-  static className: string;
-  domNode: any;
-  prev: any;
-  next: any;
-  remove: () => void;
+  static blotName: string
+  static tagName: string
+  static className: string
+  domNode: any
+  prev: any
+  next: any
+  remove: () => void
 
   static create() {
-    const node = super.create();
-    return node;
+    const node = super.create()
+    return node
   }
 
   optimize() {
     // li的开头结尾，移除软回车
     if (this.prev === null) {
-      this.remove();
+      this.remove()
     }
   }
 
   length() {
-    return 1;
+    return 1
   }
 }
-SoftBreak.blotName = 'soft-break';
-SoftBreak.tagName = 'BR';
-SoftBreak.className = 'ql-soft-break';
+SoftBreak.blotName = 'soft-break'
+SoftBreak.tagName = 'BR'
+SoftBreak.className = 'ql-soft-break'
 
-export default SoftBreak;
+export default SoftBreak

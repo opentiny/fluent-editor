@@ -12,9 +12,9 @@ export function hexToRgbA(hex: string) {
     }
     color = '0x' + color.join('')
     return (
-      'rgba(' +
-      [(color >> 16) & 255, (color >> 8) & 255, color & 255].join(',') +
-      ',1)'
+      'rgba('
+      + [(color >> 16) & 255, (color >> 8) & 255, color & 255].join(',')
+      + ',1)'
     )
   }
 }
@@ -32,7 +32,7 @@ export function imageFileToUrl(imageFile) {
     }
     reader.onerror = reject
   }).catch((error) => {
-    console.error('Error reading file:', error);
+    console.error('Error reading file:', error)
   })
 }
 
@@ -47,7 +47,7 @@ export function imageUrlToFile(imageUrl, isErrorImage?: boolean) {
       mode: 'no-cors',
     })
       .then(res => res.blob())
-      .then(blob => {
+      .then((blob) => {
         if (blob.type.indexOf('image') === -1 || !blob.type) {
           return reject()
         }
@@ -84,8 +84,8 @@ export function isNullOrUndefined(param) {
  */
 export function omit(obj, uselessKeys) {
   return (
-    obj &&
-    Object.keys(obj).reduce((acc, key) => {
+    obj
+    && Object.keys(obj).reduce((acc, key) => {
       return uselessKeys.includes(key) ? acc : { ...acc, [key]: obj[key] }
     }, {})
   )
@@ -107,7 +107,8 @@ export function replaceDeltaImage(delta, imageUrls, imagePlaceholder) {
         : op.attributes
       newDelta.insert({ image: imageUrls[imageIndex] }, attributes)
       imageIndex++
-    } else {
+    }
+    else {
       newDelta.insert(op.insert, op.attributes)
     }
     return newDelta
@@ -122,7 +123,8 @@ export function splitWithBreak(insertContent: string) {
     if (insertStr.charAt(i) === '\n') {
       if (i === 0) {
         lines.push('\n')
-      } else {
+      }
+      else {
         lines.push(insertStr.substring(start, i))
         lines.push('\n')
       }
@@ -185,11 +187,11 @@ export const isInside = (position, dom) => {
     width: areaWidth,
     height: areaHeight,
   } = areaPosition
-  const inside =
-    left > areaLeft &&
-    left < areaLeft + areaWidth &&
-    top > areaTop &&
-    top < areaTop + areaHeight
+  const inside
+    = left > areaLeft
+    && left < areaLeft + areaWidth
+    && top > areaTop
+    && top < areaTop + areaHeight
   return inside
 }
 

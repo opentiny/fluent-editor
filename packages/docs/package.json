@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.46.1",
-    "@types/node": "^15.0.2",
     "@vitepress-code-preview/container": "^1.0.8",
     "@vitepress-code-preview/plugin": "^1.0.4",
     "less": "^4.2.0",
@@ -22,6 +21,7 @@
   },
   "dependencies": {
     "@opentiny/fluent-editor": "workspace:^",
+    "vue": "^3.4.38",
     "katex": "^0.16.11",
     "quill-markdown-shortcuts": "^0.0.10"
   }

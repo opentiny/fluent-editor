@@ -10,13 +10,13 @@ const mentionList = [
   {
     name: 'Jack',
     age: 26,
-    cn: 'Jack 杰克'
+    cn: 'Jack 杰克',
   },
   {
     name: 'Lucy',
     age: 22,
-    cn: 'Lucy 露西'
-  }
+    cn: 'Lucy 露西',
+  },
 ]
 
 onMounted(() => {
@@ -30,18 +30,18 @@ onMounted(() => {
         mention: {
           itemKey: 'cn',
           searchKey,
-          search: function(term) {
-            return mentionList.filter(item => {
+          search: function (term) {
+            return mentionList.filter((item) => {
               return item[searchKey] && String(item[searchKey]).includes(term)
             })
-          }
-        }
-      }
+          },
+        },
+      },
     })
   })
 })
 </script>
 
 <template>
-  <div id="editor"></div>
+  <div id="editor" />
 </template>
