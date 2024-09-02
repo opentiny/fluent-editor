@@ -10,13 +10,17 @@ onMounted(() => {
   import('@opentiny/fluent-editor').then((module) => {
     const FluentEditor = module.default
 
-    FluentEditor.register('modules/markdownShortcuts', MarkdownShortcuts)
+    import('quill-markdown-shortcuts').then(markdown => {
+      const MarkdownShortcuts = markdown.default
 
-    editor = new FluentEditor('#editor', {
-      theme: 'snow',
-      modules: {
-        markdownShortcuts: true,
-      },
+      FluentEditor.register('modules/markdownShortcuts', MarkdownShortcuts)
+
+      editor = new FluentEditor('#editor', {
+        theme: 'snow',
+        modules: {
+          markdownShortcuts: true,
+        },
+      })
     })
   })
 })
