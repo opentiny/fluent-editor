@@ -1,4 +1,5 @@
 import Quill from 'quill'
+import type { Module, Parchment as TypeParchment } from 'quill'
 import { FONT_FAMILY_CONFIG, FONT_SIZE_CONFIG, ICONS_CONFIG, TABLE_RIGHT_MENU_CONFIG, inputFile, getListValue } from './config'
 import Counter from './counter' // 字符统计
 import CustomClipboard from './custom-clipboard' // 粘贴板
@@ -19,12 +20,13 @@ import BetterTable from './table/better-table' // 表格
 import CustomSyntax from './syntax' // 代码块高亮
 import Toolbar from './toolbar' // 工具栏
 import Video from './video' // 视频
+import { FormatPainter } from './format-painter'
 
 const registerModules = function () {
-  const FontClass = Quill.imports['formats/font']
+  const FontClass = Quill.imports['formats/font'] as TypeParchment.ClassAttributor
   FontClass.whitelist = FONT_FAMILY_CONFIG
 
-  const SizeStyle = Quill.imports['attributors/style/size']
+  const SizeStyle = Quill.imports['attributors/style/size'] as TypeParchment.StyleAttributor
   // const SizeClass = Quill.imports['attributors/class/size']
   SizeStyle.whitelist = FONT_SIZE_CONFIG
 
@@ -34,7 +36,7 @@ const registerModules = function () {
     Icons[iconKey] = ICONS_CONFIG[iconKey]
   })
 
-  const SnowTheme = Quill.imports['themes/snow']
+  const SnowTheme = Quill.imports['themes/snow'] as typeof Module
   SnowTheme.DEFAULTS = {
     modules: {
       'keyboard': {
@@ -44,7 +46,7 @@ const registerModules = function () {
       },
       'toolbar': {
         handlers: {
-          ...SnowTheme.DEFAULTS.modules.toolbar.handlers,
+          ...(SnowTheme.DEFAULTS as Record<string, any>).modules.toolbar.handlers,
           'undo': function () {
             this.quill.history.undo()
           },
@@ -77,7 +79,7 @@ const registerModules = function () {
               // 遍历table-col群组，以之获取表格，将表格前选区设置为对应list格式
               tableCols.forEach((item, index) => {
                 const table = item.domNode.closest('table.quill-better-table')
-                const tableBlot = Quill.find(table)
+                const tableBlot = Quill.find(table) as TypeParchment.Blot
                 const tableLength = tableBlot.length()
                 const tableStart = this.quill.getIndex(item)
                 const tableEnd = tableStart + tableLength
@@ -122,6 +124,7 @@ const registerModules = function () {
           },
         },
       },
+      'format-painter': {},
     },
   }
 
@@ -149,6 +152,7 @@ const registerModules = function () {
       // 'modules/screenshot': Screenshot,//暂未开发
       // 'modules/quickmenu': QuickMenu,//暂未开发
       'modules/syntax': CustomSyntax,
+      'modules/format-painter': FormatPainter,
     },
     true, // 覆盖内部模块
   )
