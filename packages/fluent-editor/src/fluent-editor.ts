@@ -21,6 +21,13 @@ import CustomSyntax from './syntax' // 代码块高亮
 import Toolbar from './toolbar' // 工具栏
 import Video from './video' // 视频
 import { FormatPainter } from './format-painter'
+import { IEditorConfig } from './config/types'
+
+class FluentEditor extends Quill {
+  constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
+    super(container, options)
+  }
+}
 
 const registerModules = function () {
   const FontClass = Quill.imports['formats/font'] as TypeParchment.ClassAttributor
@@ -128,7 +135,7 @@ const registerModules = function () {
     },
   }
 
-  Quill.register(
+  FluentEditor.register(
     {
       'modules/toolbar': Toolbar,
       'modules/mention': Mention,
@@ -157,7 +164,7 @@ const registerModules = function () {
     true, // 覆盖内部模块
   )
 
-  return Quill
+  return FluentEditor
 }
 
 export default registerModules()
