@@ -108,6 +108,7 @@ const registerModules = function () {
               this.quill.format('list', curListValue, Quill.sources.USER)
             }
           },
+          [FormatPainter.toolName]: FormatPainter,
         },
       },
       'better-table': {
@@ -131,7 +132,6 @@ const registerModules = function () {
           },
         },
       },
-      'format-painter': {},
     },
   }
 
@@ -159,7 +159,6 @@ const registerModules = function () {
       // 'modules/screenshot': Screenshot,//暂未开发
       // 'modules/quickmenu': QuickMenu,//暂未开发
       'modules/syntax': CustomSyntax,
-      'modules/format-painter': FormatPainter,
     },
     true, // 覆盖内部模块
   )

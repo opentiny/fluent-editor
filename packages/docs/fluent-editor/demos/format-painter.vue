@@ -21,8 +21,8 @@ onMounted(() => {
     editor = new FluentEditor('#editor', {
       theme: 'snow',
       modules: {
-        toolbar: TOOLBAR_CONFIG
-      }
+        toolbar: TOOLBAR_CONFIG,
+      },
     })
   })
 })
@@ -30,5 +30,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="editor"></div>
+  <div id="editor" />
 </template>
