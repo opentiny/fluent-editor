@@ -1,7 +1,6 @@
 import Quill from 'quill'
 
-// import Quill from 'quill';
-const Parchment = Quill.imports['parchment']
+const Parchment = Quill.import('parchment')
 
 const LineHeightStyle = new Parchment.StyleAttributor('lineheight', 'line-height', {
   scope: Parchment.Scope.INLINE,
