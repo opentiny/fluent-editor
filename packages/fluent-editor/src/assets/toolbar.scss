@@ -358,30 +358,28 @@ $arrowWidth: 5px; // 下拉框箭头宽度
     }
   }
 
-  .ql-formats {
-    button,
-    span.ql-picker-label {
-      &:hover,
-      &.ql-active {
-        @include toolbarSvgColor {
-          fill: #5e7ce0;
-        }
-        @include toolbarFontIconColor {
-          color: #5e7ce0;
-        }
-      }
+  button,
+  span.ql-picker-label {
+    &:hover,
+    &.ql-active {
       @include toolbarSvgColor {
-        fill: #252b3a;
+        fill: #5e7ce0;
       }
       @include toolbarFontIconColor {
-        color: #252b3a;
+        color: #5e7ce0;
       }
+    }
+    @include toolbarSvgColor {
+      fill: #252b3a;
+    }
+    @include toolbarFontIconColor {
+      color: #252b3a;
+    }
 
-      &.ql-disabled {
-        @include toolbarSvgColor {
-          fill: #adb0b8;
-          cursor: not-allowed;
-        }
+    &.ql-disabled {
+      @include toolbarSvgColor {
+        fill: #adb0b8;
+        cursor: not-allowed;
       }
     }
   }
