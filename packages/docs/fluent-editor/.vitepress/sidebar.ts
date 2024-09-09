@@ -16,6 +16,7 @@ export function sidebar() {
         { text: '公式', link: '/docs/formula' },
         { text: 'Markdown', link: '/docs/markdown' },
         { text: '字符统计', link: '/docs/counter' },
+        { text: '视频', link: '/docs/video' },
       ],
     },
   ]
