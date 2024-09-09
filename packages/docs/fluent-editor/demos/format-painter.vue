@@ -9,7 +9,6 @@ const TOOLBAR_CONFIG = [
   ['bold', 'italic', 'underline', 'link'],
   [{ list: 'ordered' }, { list: 'bullet' }],
   ['clean'],
-  ['image'],
   ['format-painter'],
 ]
 
