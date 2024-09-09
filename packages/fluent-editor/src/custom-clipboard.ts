@@ -117,7 +117,7 @@ class CustomClipboard extends Clipboard {
     const files = Array.from(e.clipboardData.files || [])
     const msExcelCheck = /<meta.*?Microsoft Excel\s[\d].*?>/
 
-    if (html.search(msExcelCheck) === -1 && this.quill.options.uploadOption?.imageUploadToServer && files.length > 0) {
+    if (html.search(msExcelCheck) === -1 && files.length > 0) {
       this.quill.uploader.upload(range, files)
     }
     else {

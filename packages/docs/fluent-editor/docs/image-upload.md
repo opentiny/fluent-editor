@@ -4,3 +4,8 @@
 
 :::demo src=demos/image-upload.vue
 :::
+
+## 上传到服务器
+
+:::demo src=demos/image-upload-to-server.vue
+:::
