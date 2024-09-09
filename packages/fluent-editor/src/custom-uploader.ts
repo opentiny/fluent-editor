@@ -113,10 +113,31 @@ class CustomUploader extends Uploader {
     }
   }
 
+  // 将图片插入编辑器
+  insertImageToEditor(range, { code, message, data }) {
+    if (code === 0) {
+      const { imageId, imageUrl } = data
+      // 粘贴截图或者从外源直接拷贝的单图时，需要将编辑器中已选中的内容删除
+      const oldContent = new Delta().retain(range.index).delete(range.length)
+      const currentContent = new Delta([
+        {
+          insert: { image: imageUrl },
+          attributes: { 'image-id': imageId },
+        },
+      ])
+      const newContent = oldContent.concat(currentContent)
+      this.quill.updateContents(newContent, Quill.sources.USER)
+      this.quill.setSelection(range.index + 1)
+    }
+    else {
+      console.error('error message:', message)
+    }
+  }
+
   // 处理上传图片
   handleUploadImage(range, { file, files }, hasRejectedImage) {
-    if (this.imageUploadToServer) {
-      const imageEnableMultiUpload = this.enableMultiUpload === true || this.enableMultiUpload['image']
+    if (this.quill.options.uploadOption?.imageUpload) {
+      const imageEnableMultiUpload = this.enableMultiUpload === true || this.enableMultiUpload?.['image']
 
       const result = {
         file,
@@ -137,7 +158,7 @@ class CustomUploader extends Uploader {
       if (imageEnableMultiUpload) {
         result['data'] = { files }
       }
-      this.imageUpload.emit(result)
+      this.quill.options.uploadOption?.imageUpload(result)
     }
     else {
       const promises = files.map((fileItem) => {
