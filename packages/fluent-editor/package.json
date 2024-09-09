@@ -41,14 +41,17 @@
     "test": "jest",
     "format": "prettier './{src,test}/**/*.{js,ts,tsx,vue}' --write"
   },
-  
+  "peerDependencies": {
+    "quill": "^2.0.0"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/node": "^15.0.2",
-    "@types/quill": "^2.0.9",
     "commander": "^6.2.0",
+    "glob": "^11.0.0",
+    "highlight.js": "^10.2.0",
+    "html2canvas": "^1.0.0-rc.7",
     "jest": "^26.6.3",
-    "lodash-es": "^4.17.15",
     "prettier": "^2.3.0",
     "sass": "^1.47.0",
     "shelljs": "^0.8.4",
@@ -58,9 +61,6 @@
     "vite": "^2.3.0"
   },
   "dependencies": {
-    "highlight.js": "^10.2.0",
-    "html2canvas": "^1.0.0-rc.7",
-    "quill": "^2.0.0",
-    "quill-delta": "^5.1.0"
+    "lodash-es": "^4.17.15"
   }
 }

@@ -1,9 +1,9 @@
 import Quill from 'quill'
 import { isNullOrUndefined } from '../config/editor.utils'
 import './better-picker'
-import Delta from 'quill-delta'
 import type TypeToolbar from 'quill/modules/toolbar'
 
+const Delta = Quill.import('delta')
 const Parchment = Quill.import('parchment')
 const levels = ['error', 'warn', 'log', 'info'] as const
 let level = 'warn' as const
