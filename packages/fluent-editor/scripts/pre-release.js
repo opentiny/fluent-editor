@@ -28,10 +28,11 @@ console.log('newVersion:', newVersion)
 
 function preRelease() {
   shelljs.sed('-i', `"version": "${currentVersion}"`, `"version": "${newVersion}"`, targetFile)
-  shelljs.sed('-i', `"main": "src/index.ts"`, `"main": "index.cjs.js"`, targetFile)
-  shelljs.sed('-i', `"module": "src/index.ts"`, `"module": "index.es.js"`, targetFile)
-  shelljs.sed('-i', `"import": "./src/index.ts"`, `"import": "./index.es.js"`, targetFile)
-  shelljs.sed('-i', `"require": "./src/index.ts"`, `"require": "./index.cjs.js"`, targetFile)
+  shelljs.sed('-i', `"main": "src/index.ts"`, `"main": "lib/index.cjs.js"`, targetFile)
+  shelljs.sed('-i', `"module": "src/index.ts"`, `"module": "es/index.es.js"`, targetFile)
+  shelljs.sed('-i', `"import": "./src/index.ts"`, `"import": "./es/index.es.js"`, targetFile)
+  shelljs.sed('-i', `"require": "./src/index.ts"`, `"require": "./lib/index.cjs.js"`, targetFile)
+  shelljs.sed('-i', `"./index.scss": "./src/assets/index.scss"`, `"./index.css": "./theme/index.css"`, targetFile)
   shelljs.cp('-rf', '../../README.md', 'dist')
 }
 
