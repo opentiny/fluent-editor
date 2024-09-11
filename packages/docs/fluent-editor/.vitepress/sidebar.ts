@@ -17,6 +17,7 @@ export function sidebar() {
         { text: 'Markdown', link: '/docs/markdown' },
         { text: '字符统计', link: '/docs/counter' },
         { text: '视频', link: '/docs/video' },
+        { text: '获取 HTML', link: '/docs/get-html' },
       ],
     },
   ]
