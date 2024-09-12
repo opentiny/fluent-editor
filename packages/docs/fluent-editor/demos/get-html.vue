@@ -48,7 +48,6 @@ onMounted(() => {
         'syntax': true,
         'emoji-toolbar': true,
         'file': true,
-        'formula': true,
         'mention': {
           itemKey: 'cn',
           searchKey,
