@@ -17,18 +17,17 @@ npm i @opentiny/fluent-editor
 引入样式：
 
 ```css
-@import '@opentiny/fluent-editor/style.css'
+@import '@opentiny/fluent-editor/style.css';
 ```
 
 初始化 Fluent Editor 编辑器：
 
 ```javascript
 import FluentEditor from '@opentiny/fluent-editor'
-import '@opentiny/fluent-editor/style.css'
 
 // 执行初始化时，请确保能获取到 DOM 元素，如果是在 Vue 项目中，需要在 onMounted 事件中执行。
 const editor = new FluentEditor('#editor', {
-  theme: 'snow'
+  theme: 'snow',
 })
 ```
 
@@ -47,7 +46,10 @@ const editor = new FluentEditor('#editor', {
     }
   </script>
   <!-- 引入 @opentiny/fluent-editor 样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/@opentiny/fluent-editor@3.18.3/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/@opentiny/fluent-editor@3.18.3/style.css"
+  />
 </head>
 ```
 
@@ -59,11 +61,10 @@ const editor = new FluentEditor('#editor', {
   <script type="module">
     // 引入 @opentiny/fluent-editor
     import FluentEditor from '@opentiny/fluent-editor'
-    import '@opentiny/fluent-editor/style.css'
 
     // 初始化 Fluent Editor 富文本编辑器
     const editor = new FluentEditor('#editor', {
-      theme: 'snow'
+      theme: 'snow',
     })
   </script>
 </body>
