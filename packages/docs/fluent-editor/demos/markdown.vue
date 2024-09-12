@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import FluentEditor from '@opentiny/fluent-editor'
-import '@opentiny/fluent-editor/style.scss'
 import MarkdownShortcuts from 'quill-markdown-shortcuts'
 
 let editor
@@ -11,7 +10,7 @@ onMounted(() => {
   import('@opentiny/fluent-editor').then((module) => {
     const FluentEditor = module.default
 
-    import('quill-markdown-shortcuts').then(markdown => {
+    import('quill-markdown-shortcuts').then((markdown) => {
       const MarkdownShortcuts = markdown.default
 
       FluentEditor.register('modules/markdownShortcuts', MarkdownShortcuts)
