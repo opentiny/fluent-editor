@@ -1,8 +1,7 @@
 import Quill from 'quill'
-import * as hljs from 'highlight.js'
-import 'highlight.js/styles/atom-one-dark.css'
+import TypeSyntax from 'quill/modules/syntax'
 
-const Syntax = Quill.imports['modules/syntax']
+const Syntax = Quill.import('modules/syntax') as typeof TypeSyntax
 
 // @dynamic
 class CustomSyntax extends Syntax {
@@ -10,7 +9,10 @@ class CustomSyntax extends Syntax {
 }
 
 CustomSyntax.DEFAULTS = {
-  hljs,
+  hljs: (() => {
+    // @ts-ignore
+    return window.hljs
+  })(),
   interval: 1000,
   languages: [
     { key: 'plain', label: 'Plain' },

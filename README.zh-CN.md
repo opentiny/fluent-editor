@@ -42,6 +42,7 @@ npm i @opentiny/fluent-editor
 
 ```javascript
 import FluentEditor from '@opentiny/fluent-editor'
+import '@opentiny/fluent-editor/style.scss'
 
 const editor = new FluentEditor('#editor', {
   theme: 'snow'

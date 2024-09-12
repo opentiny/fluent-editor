@@ -1,12 +1,22 @@
 import Quill from 'quill'
-import Html2Canvas from 'html2canvas'
 import { isPureIE } from '../config/editor.utils'
 
-const Delta = Quill.imports['delta']
-const Module = Quill.imports['core/module']
+const Delta = Quill.import('delta')
 
-class Screenshot extends Module {
-  quill: any
+interface ScreenShotOptions {
+  Html2Canvas: any
+  screenshotOnStaticPage?: boolean
+}
+
+class Screenshot {
+  static DEFAULTS = {
+    Html2Canvas: (() => {
+      // @ts-ignore
+      return window.Html2Canvas
+    })(),
+    screenshotOnStaticPage: false,
+  }
+
   range: any
   cutter: HTMLDivElement
   mask: HTMLDivElement
@@ -19,9 +29,12 @@ class Screenshot extends Module {
     y: number
   }
 
-  constructor(quill, options, range) {
-    super(quill, options)
-    this.quill = quill
+  constructor(public quill, protected options: Partial<ScreenShotOptions> = {}, range) {
+    if (this.options.Html2Canvas == null) {
+      throw new Error(
+        'ScreenShot module requires html2canvas. Please include the library on the page before FluentEditor.',
+      )
+    }
     this.range = range
   }
 
@@ -119,10 +132,10 @@ class Screenshot extends Module {
 
   renderImage(rect) {
     if (isPureIE) {
-      Html2Canvas(document.body, rect).then(canvas => this.insertEditor(canvas))
+      this.options.Html2Canvas(document.body, rect).then(canvas => this.insertEditor(canvas))
     }
     else {
-      Html2Canvas(document.body, {
+      this.options.Html2Canvas(document.body, {
         allowTaint: true, // 是否允许跨域图片渲染
         foreignObjectRendering: this.quill.options.screenshotOnStaticPage, // 是否使用svg方式
         logging: false, // 是否启用日志记录
