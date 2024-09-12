@@ -1,9 +1,9 @@
 # 快速开始
 
-安装 Fluent Editor：
+安装 Fluent Editor 和 Quill：
 
 ```shell
-npm i @opentiny/fluent-editor
+npm i @opentiny/fluent-editor quill
 ```
 
 编写 html：
