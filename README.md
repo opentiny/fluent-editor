@@ -42,7 +42,7 @@ Initialize the Fluent Editor editor:
 
 ```javascript
 import FluentEditor from '@opentiny/fluent-editor'
-import '@opentiny/fluent-editor/index.scss'
+import '@opentiny/fluent-editor/style.scss'
 
 const editor = new FluentEditor('#editor', {
   theme: 'snow'

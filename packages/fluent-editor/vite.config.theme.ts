@@ -6,12 +6,12 @@ export default defineConfig({
     sourcemap: false,
     minify: false,
     rollupOptions: {
-      input: 'src/assets/index.scss',
+      input: 'src/assets/style.scss',
       treeshake: false,
       preserveEntrySignatures: 'strict',
       output: {
         dir: resolve(__dirname, 'dist/theme'),
-        assetFileNames: 'index.css',
+        assetFileNames: 'style.css',
         preserveModules: true,
         preserveModulesRoot: resolve(__dirname, 'src/assets'),
       },

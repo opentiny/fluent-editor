@@ -32,7 +32,7 @@ function preRelease() {
   shelljs.sed('-i', `"module": "src/index.ts"`, `"module": "es/index.es.js"`, targetFile)
   shelljs.sed('-i', `"import": "./src/index.ts"`, `"import": "./es/index.es.js"`, targetFile)
   shelljs.sed('-i', `"require": "./src/index.ts"`, `"require": "./lib/index.cjs.js"`, targetFile)
-  shelljs.sed('-i', `"./index.scss": "./src/assets/index.scss"`, `"./index.css": "./theme/index.css"`, targetFile)
+  shelljs.sed('-i', `"./style.scss": "./src/assets/style.scss"`, `"./style.css": "./theme/style.css"`, targetFile)
   shelljs.cp('-rf', '../../README.md', 'dist')
 }
 

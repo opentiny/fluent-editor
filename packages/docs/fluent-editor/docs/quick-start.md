@@ -24,7 +24,7 @@ npm i @opentiny/fluent-editor
 
 ```javascript
 import FluentEditor from '@opentiny/fluent-editor'
-import '@opentiny/fluent-editor/index.scss'
+import '@opentiny/fluent-editor/style.css'
 
 // 执行初始化时，请确保能获取到 DOM 元素，如果是在 Vue 项目中，需要在 onMounted 事件中执行。
 const editor = new FluentEditor('#editor', {
@@ -59,7 +59,7 @@ const editor = new FluentEditor('#editor', {
   <script type="module">
     // 引入 @opentiny/fluent-editor
     import FluentEditor from '@opentiny/fluent-editor'
-import '@opentiny/fluent-editor/index.scss'
+    import '@opentiny/fluent-editor/style.css'
 
     // 初始化 Fluent Editor 富文本编辑器
     const editor = new FluentEditor('#editor', {

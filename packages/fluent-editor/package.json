@@ -29,7 +29,7 @@
       "import": "./src/index.ts",
       "require": "./src/index.ts"
     },
-    "./index.scss": "./src/assets/index.scss"
+    "./style.scss": "./src/assets/style.scss"
   },
   "scripts": {
     "start": "vite build && vite",
