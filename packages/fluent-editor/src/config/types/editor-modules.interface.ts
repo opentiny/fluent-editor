@@ -20,7 +20,11 @@ export interface IEditorModules {
       bindings?: any
     }
     | boolean
-  syntax?: boolean
+  syntax?: {
+    interval?: number
+    languages?: { key: string, label: string }[]
+    hljs?: any
+  }
   toolbar?:
     | (string | string[])[][]
     | ToolbarOption

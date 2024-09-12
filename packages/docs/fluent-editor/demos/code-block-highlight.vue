@@ -2,6 +2,12 @@
 import { onMounted } from 'vue'
 import FluentEditor from '@opentiny/fluent-editor'
 import '@opentiny/fluent-editor/index.scss'
+import hljs from 'highlight.js'
+// import the highlight.js theme you want
+import 'highlight.js/styles/atom-one-dark.css'
+// config extra languages
+import go from 'highlight.js/lib/languages/go'
+hljs.registerLanguage('go', go)
 
 let editor
 
@@ -22,7 +28,12 @@ onMounted(() => {
       theme: 'snow',
       modules: {
         toolbar: TOOLBAR_CONFIG,
-        syntax: true,
+        syntax: {
+          hljs,
+          languages: [
+            { key: 'go', label: 'Golang' },
+          ],
+        },
       },
     })
   })
