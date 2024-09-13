@@ -6,7 +6,6 @@ import 'katex/dist/katex.min.css'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
 window.katex = katex
-window.hljs = hljs
 
 let editor
 
@@ -45,10 +44,9 @@ onMounted(() => {
       theme: 'snow',
       modules: {
         'toolbar': TOOLBAR_CONFIG,
-        'syntax': true,
+        'syntax': { hljs },
         'emoji-toolbar': true,
         'file': true,
-        'formula': true,
         'mention': {
           itemKey: 'cn',
           searchKey,
