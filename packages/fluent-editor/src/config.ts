@@ -36,20 +36,6 @@ import { ZH_CN } from './config/i18n/zh-cn'
 const localLang = localStorage.getItem('lang') || 'zh-cn'
 export const LANG_CONF = localLang === 'en-us' ? EN_US : ZH_CN
 
-export const FONT_FAMILY_CONFIG = [
-  'songti',
-  'yahei',
-  'kaiti',
-  'heiti',
-  'lishu',
-  'mono',
-  'arial',
-  'arialblack',
-  'comic',
-  'impact',
-  'times',
-]
-
 export const ICONS_CONFIG: { [key: string]: any } = {
   'undo': UNDO_ICON,
   'redo': REDO_ICON,
