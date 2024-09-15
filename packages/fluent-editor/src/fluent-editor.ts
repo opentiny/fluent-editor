@@ -21,7 +21,7 @@ import Toolbar from './toolbar' // 工具栏
 import Video from './video' // 视频
 import { FormatPainter } from './format-painter'
 import { IEditorConfig } from './config/types'
-import { LineHeightStyle, SizeStyle, FontStyle } from './attributors'
+import { LineHeightStyle, SizeStyle, FontStyle, TextIndentStyle } from './attributors'
 
 class FluentEditor extends Quill {
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
@@ -153,6 +153,7 @@ const registerModules = function () {
       'formats/font': FontStyle,
       'formats/size': SizeStyle,
       'formats/line-height': LineHeightStyle,
+      'formats/text-indent': TextIndentStyle,
     },
     true, // 覆盖内部模块
   )
