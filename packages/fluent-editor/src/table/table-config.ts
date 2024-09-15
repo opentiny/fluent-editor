@@ -21,7 +21,7 @@ export const COL_DEFAULT = {
   width: 100,
 }
 export const CELL_IDENTITY_KEYS = ['row', 'cell']
-export const CELL_ATTRIBUTES = ['rowspan', 'colspan', 'cell-bg']
+export const CELL_ATTRIBUTES = ['rowspan', 'colspan', 'cell-bg', 'list']
 export const CELL_DEFAULT = {
   rowspan: 1,
   colspan: 1,
