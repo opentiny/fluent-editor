@@ -9,7 +9,6 @@ import CustomUploader from './custom-uploader' // 上传
 import Emoji from './emoji' // 表情
 import FileModule from './file' // 文件
 // import GlobalLink from './global-link' // 全局链接
-import LineHeightStyle from './lineheight'
 import Link from './link' // 超链接0
 import Mention from './mention/Mention' // @提醒
 // import QuickMenu from './quick-menu' // 快捷菜单
@@ -22,6 +21,7 @@ import Toolbar from './toolbar' // 工具栏
 import Video from './video' // 视频
 import { FormatPainter } from './format-painter'
 import { IEditorConfig } from './config/types'
+import { LineHeightStyle } from './attributors'
 
 class FluentEditor extends Quill {
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
@@ -145,13 +145,6 @@ const registerModules = function () {
       'modules/image': CustomImage, // 三者关联性最强
       'modules/file': FileModule, // 三者关联性最强
       'modules/counter': Counter,
-      'formats/font': FontClass,
-      'formats/size': SizeStyle,
-      'formats/strike': Strike,
-      'formats/softBreak': SoftBreak,
-      'formats/lineheight': LineHeightStyle,
-      'formats/video': Video,
-      'formats/emoji': Emoji.EmojiBlot,
       'modules/emoji-toolbar': Emoji.ToolbarEmoji,
       'modules/emoji-shortname': Emoji.ShortNameEmoji,
       // 'modules/global-link': GlobalLink,//暂未开发
@@ -159,6 +152,14 @@ const registerModules = function () {
       // 'modules/screenshot': Screenshot,//暂未开发
       // 'modules/quickmenu': QuickMenu,//暂未开发
       'modules/syntax': CustomSyntax,
+
+      'formats/strike': Strike,
+      'formats/softBreak': SoftBreak,
+      'formats/video': Video,
+      'formats/emoji': Emoji.EmojiBlot,
+      'formats/font': FontClass,
+      'formats/size': SizeStyle,
+      'formats/line-height': LineHeightStyle,
     },
     true, // 覆盖内部模块
   )
