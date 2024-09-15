@@ -50,27 +50,6 @@ export const FONT_FAMILY_CONFIG = [
   'times',
 ]
 
-export const FONT_SIZE_CONFIG = [
-  '12px',
-  '13px',
-  '14px',
-  '15px',
-  '16px',
-  '17px',
-  '18px',
-  '19px',
-  '20px',
-  '22px',
-  '24px',
-  '26px',
-  '29px',
-  '32px',
-  '36px',
-  '40px',
-  '48px',
-  '72px',
-]
-
 export const ICONS_CONFIG: { [key: string]: any } = {
   'undo': UNDO_ICON,
   'redo': REDO_ICON,

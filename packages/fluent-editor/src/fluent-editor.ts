@@ -1,6 +1,6 @@
 import Quill from 'quill'
 import type { Module, Parchment as TypeParchment } from 'quill'
-import { FONT_FAMILY_CONFIG, FONT_SIZE_CONFIG, ICONS_CONFIG, TABLE_RIGHT_MENU_CONFIG, inputFile, getListValue } from './config'
+import { FONT_FAMILY_CONFIG, ICONS_CONFIG, TABLE_RIGHT_MENU_CONFIG, inputFile, getListValue } from './config'
 import Counter from './counter' // 字符统计
 import CustomClipboard from './custom-clipboard' // 粘贴板
 import CustomImage from './custom-image/BlotFormatter' // 图片
@@ -21,7 +21,7 @@ import Toolbar from './toolbar' // 工具栏
 import Video from './video' // 视频
 import { FormatPainter } from './format-painter'
 import { IEditorConfig } from './config/types'
-import { LineHeightStyle } from './attributors'
+import { LineHeightStyle, SizeStyle } from './attributors'
 
 class FluentEditor extends Quill {
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
@@ -32,10 +32,6 @@ class FluentEditor extends Quill {
 const registerModules = function () {
   const FontClass = Quill.imports['formats/font'] as TypeParchment.ClassAttributor
   FontClass.whitelist = FONT_FAMILY_CONFIG
-
-  const SizeStyle = Quill.imports['attributors/style/size'] as TypeParchment.StyleAttributor
-  // const SizeClass = Quill.imports['attributors/class/size']
-  SizeStyle.whitelist = FONT_SIZE_CONFIG
 
   const Icons = Quill.imports['ui/icons']
   const iconKeys = Object.keys(ICONS_CONFIG)
