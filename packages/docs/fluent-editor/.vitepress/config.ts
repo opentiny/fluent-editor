@@ -13,7 +13,7 @@ export default defineConfig({
     ['link', { rel: 'icon', href: 'favicon.ico' }]
   ],
   themeConfig: {
-    logo: 'logo.svg',
+    logo: '/logo.svg',
     nav: [
       { text: '文档', link: '/docs/quick-start', activeMatch: '/docs/' },
       {
