@@ -1,0 +1,73 @@
+
+.ql-screenshot{
+  &-mask {
+    --ql-screenshot-color-bg: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    inset: 0;
+    background-color: var(--ql-screenshot-color-bg);
+    z-index: 50;
+  }
+  &-cutter {
+    position: fixed;
+    border: 1px solid #fff;
+    z-index: 50;
+  }
+  &-coordinate,
+  &-done  {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 14px;
+  }
+  &-done {
+    display: flex;
+    border-top: 1px solid #333;
+    border-left: 1px solid #333;
+    .ql-screenshot-cancel,
+    .ql-screenshot-ok {
+      position: relative;
+      height: 16px;
+      width: 16px;
+      cursor: pointer;
+    }
+    .ql-screenshot-ok {
+      background-color: #2196F3;
+      &::after {
+        content: '';
+        position: absolute;
+        left: 6px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid #fff;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+    }
+    .ql-screenshot-cancel {
+      background-color: #ef1749;
+      &::after {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 2px;
+        width: 2px;
+        height: 12px;
+        border: solid #fff;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 2px;
+        width: 2px;
+        height: 12px;
+        border: solid #fff;
+        border-width: 0 3px 3px 0;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
