@@ -261,10 +261,10 @@ export const SCREENSHOT_ICON = `<svg width="16px" height="16px" viewBox="0 0 16 
     <g transform="translate(-1529.000000, -96.000000)">
         <g transform="translate(1529.000000, 96.000000)">
             <rect fill="#000000" fill-rule="nonzero" opacity="0" x="0" y="0" width="16" height="16"></rect>
-            <polyline stroke="#293040" points="16 14 2 14 2 0 2 0"></polyline>
-            <polyline stroke="#293040" points="4 2 14 2 14 12"></polyline>
-            <rect fill="#293040" x="0" y="1.5" width="2" height="1"></rect>
-            <rect fill="#293040"
+            <polyline stroke="currentColor" points="16 14 2 14 2 0 2 0"></polyline>
+            <polyline stroke="currentColor" points="4 2 14 2 14 12"></polyline>
+            <rect fill="currentColor" x="0" y="1.5" width="2" height="1"></rect>
+            <rect fill="currentColor"
               transform="translate(14.000000, 15.000000)
               rotate(-90.000000)
               translate(-14.000000, -15.000000) " x="13" y="14.5" width="2" height="1">
