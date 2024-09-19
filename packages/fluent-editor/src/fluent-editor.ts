@@ -1,6 +1,6 @@
 import Quill from 'quill'
 import type { Module, Parchment as TypeParchment } from 'quill'
-import { FONT_FAMILY_CONFIG, FONT_SIZE_CONFIG, ICONS_CONFIG, TABLE_RIGHT_MENU_CONFIG, inputFile, getListValue } from './config'
+import { ICONS_CONFIG, TABLE_RIGHT_MENU_CONFIG, inputFile, getListValue } from './config'
 import Counter from './counter' // 字符统计
 import CustomClipboard from './custom-clipboard' // 粘贴板
 import CustomImage from './custom-image/BlotFormatter' // 图片
@@ -9,7 +9,6 @@ import CustomUploader from './custom-uploader' // 上传
 import Emoji from './emoji' // 表情
 import FileModule from './file' // 文件
 // import GlobalLink from './global-link' // 全局链接
-import LineHeightStyle from './lineheight'
 import Link from './link' // 超链接0
 import Mention from './mention/Mention' // @提醒
 // import QuickMenu from './quick-menu' // 快捷菜单
@@ -22,6 +21,7 @@ import Toolbar from './toolbar' // 工具栏
 import Video from './video' // 视频
 import { FormatPainter } from './format-painter'
 import { IEditorConfig } from './config/types'
+import { LineHeightStyle, SizeStyle, FontStyle, TextIndentStyle } from './attributors'
 
 class FluentEditor extends Quill {
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
@@ -30,13 +30,6 @@ class FluentEditor extends Quill {
 }
 
 const registerModules = function () {
-  const FontClass = Quill.imports['formats/font'] as TypeParchment.ClassAttributor
-  FontClass.whitelist = FONT_FAMILY_CONFIG
-
-  const SizeStyle = Quill.imports['attributors/style/size'] as TypeParchment.StyleAttributor
-  // const SizeClass = Quill.imports['attributors/class/size']
-  SizeStyle.whitelist = FONT_SIZE_CONFIG
-
   const Icons = Quill.imports['ui/icons']
   const iconKeys = Object.keys(ICONS_CONFIG)
   iconKeys.forEach((iconKey) => {
@@ -145,13 +138,6 @@ const registerModules = function () {
       'modules/image': CustomImage, // 三者关联性最强
       'modules/file': FileModule, // 三者关联性最强
       'modules/counter': Counter,
-      'formats/font': FontClass,
-      'formats/size': SizeStyle,
-      'formats/strike': Strike,
-      'formats/softBreak': SoftBreak,
-      'formats/lineheight': LineHeightStyle,
-      'formats/video': Video,
-      'formats/emoji': Emoji.EmojiBlot,
       'modules/emoji-toolbar': Emoji.ToolbarEmoji,
       'modules/emoji-shortname': Emoji.ShortNameEmoji,
       // 'modules/global-link': GlobalLink,//暂未开发
@@ -159,6 +145,15 @@ const registerModules = function () {
       // 'modules/screenshot': Screenshot,//暂未开发
       // 'modules/quickmenu': QuickMenu,//暂未开发
       'modules/syntax': CustomSyntax,
+
+      'formats/strike': Strike,
+      'formats/softBreak': SoftBreak,
+      'formats/video': Video,
+      'formats/emoji': Emoji.EmojiBlot,
+      'formats/font': FontStyle,
+      'formats/size': SizeStyle,
+      'formats/line-height': LineHeightStyle,
+      'formats/text-indent': TextIndentStyle,
     },
     true, // 覆盖内部模块
   )

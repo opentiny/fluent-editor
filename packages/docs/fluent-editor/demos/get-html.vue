@@ -35,6 +35,13 @@ const TOOLBAR_CONFIG = [
   ['emoji', 'video', 'formula'],
 ]
 
+const articleRef = ref<HTMLElement>()
+const updateHTML = (html: string) => {
+  if (articleRef.value) {
+    articleRef.value.innerHTML = html
+  }
+}
+
 onMounted(() => {
   // ssr compat, reference: https://vitepress.dev/guide/ssr-compat#importing-in-mounted-hook
   import('@opentiny/fluent-editor').then((module) => {
@@ -72,10 +79,10 @@ onMounted(() => {
       },
     })
 
-    document.querySelector('.article').innerHTML = editor.root.innerHTML
+    updateHTML(editor.root.innerHTML)
 
     editor.on('text-change', () => {
-      document.querySelector('.article').innerHTML = editor.root.innerHTML
+      updateHTML(editor.root.innerHTML)
     })
   })
 })
@@ -87,5 +94,8 @@ onMounted(() => {
   </div>
   <br>
   预览效果：
-  <div class="article ql-editor" />
+  <div
+    ref="articleRef"
+    class="article ql-editor"
+  />
 </template>
