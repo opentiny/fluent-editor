@@ -23,7 +23,6 @@ const resolveOptions = (options: Partial<ScreenShotOptions>) => {
     // @ts-ignore
     Html2Canvas: window.Html2Canvas,
     useCORS: true,
-    logging: false,
     foreignObjectRendering: true,
     beforeCreateImage: undefined,
     beforeCreateCanvas: undefined,
@@ -115,8 +114,8 @@ export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
     Object.assign(document.body.style, { overflow: null })
     const cutterRect = cutter.getBoundingClientRect()
     const target = event.target as HTMLElement
+    wrapper.remove()
     if (target && target.className === 'ql-screenshot-confirm') {
-      wrapper.remove()
       const image = await renderImage(Html2Canvas, html2CanvasOptions, cutterRect, { beforeCreateCanvas, beforeCreateImage })
 
       const delta = new Delta()

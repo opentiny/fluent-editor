@@ -13,6 +13,28 @@ const TOOLBAR_CONFIG = [
   ['screenshot'],
 ]
 
+// to solve html2canvas get image empty
+const imgToBase64 = (imageUrl: string) => new Promise<string>((resolve, reject) => {
+  let canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')
+  let img = new Image()
+  img.crossOrigin = 'Anonymous'
+  img.src = imageUrl
+  img.onload = function () {
+    canvas.height = img.height
+    canvas.width = img.width
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.drawImage(img, 0, 0)
+    const dataURL = canvas.toDataURL('image/png', 1)
+    resolve(dataURL)
+    canvas = null
+    img = null
+  }
+  img.onerror = function () {
+    reject(new Error('Could not load image at ' + imageUrl))
+  }
+})
+
 onMounted(() => {
   // ssr compat, reference: https://vitepress.dev/guide/ssr-compat#importing-in-mounted-hook
   import('@opentiny/fluent-editor').then((module) => {
@@ -25,6 +47,12 @@ onMounted(() => {
       },
       screenshot: {
         Html2Canvas,
+        onclone: async (doc: Document) => {
+          const imgs = doc.querySelectorAll('img')
+          for (let i = 0; i < imgs.length; i++) {
+            imgs[i].src = await imgToBase64(imgs[i].src)
+          }
+        },
       },
     })
   })
