@@ -7,6 +7,8 @@ const Delta = Quill.import('delta')
 
 export type ScreenShotOptions = Partial<Html2CanvasOptions> & {
   Html2Canvas: typeof html2canvas
+  beforeCreateImage: (canvas: HTMLCanvasElement) => HTMLCanvasElement | Promise<HTMLCanvasElement>
+  beforeCreateCanvas: () => void | Promise<void>
 }
 type ScreenShotOptionsInQuill = {
   quill: {
@@ -20,7 +22,11 @@ const resolveOptions = (options: Partial<ScreenShotOptions>) => {
   return Object.assign({
     // @ts-ignore
     Html2Canvas: window.Html2Canvas,
-    screenshotOnStaticPage: false,
+    allowTaint: true,
+    logging: true,
+    foreignObjectRendering: false,
+    beforeCreateImage: undefined,
+    beforeCreateCanvas: undefined,
   }, options)
 }
 
@@ -50,10 +56,14 @@ async function renderImage(
   Html2Canvas: typeof html2canvas,
   html2canvasOptions: Partial<Html2CanvasOptions>,
   rect: DOMRect,
+  options?: Omit<ScreenShotOptions, 'Html2Canvas' | keyof Html2CanvasOptions>,
 ) {
+  if (options.beforeCreateCanvas) {
+    await options.beforeCreateCanvas()
+  }
   const canvas: CanvasImageSource = await Html2Canvas(document.body, html2canvasOptions)
   // 当前canvas为body全局截图，从当前截图中截取想要的部分重新绘制转成base64插入富文本
-  const cropCanvas = document.createElement('canvas')
+  let cropCanvas = document.createElement('canvas')
   cropCanvas.width = rect.width
   cropCanvas.height = rect.height
   const cropCanvasCtx = cropCanvas.getContext('2d')
@@ -68,6 +78,9 @@ async function renderImage(
     rect.width,
     rect.height,
   )
+  if (options.beforeCreateImage) {
+    cropCanvas = await options.beforeCreateImage(cropCanvas)
+  }
   const image = cropCanvas.toDataURL()
   cropCanvas.remove()
   return image
@@ -77,7 +90,7 @@ export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
   this.quill.options.screenshot = resolveOptions(this.quill.options.screenshot)
   const options = this.quill.options.screenshot
   // @ts-ignore
-  const { Html2Canvas, ...html2CanvasOptions } = options
+  const { Html2Canvas, beforeCreateImage, beforeCreateCanvas, ...html2CanvasOptions } = options
   if (!options.Html2Canvas) {
     throw new Error('ScreenShot module requires html2canvas. Please include the library on the page before FluentEditor.')
   }
@@ -100,7 +113,7 @@ export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
     const target = event.target as HTMLElement
     if (target && target.className === 'ql-screenshot-confirm') {
       wrapper.remove()
-      const image = await renderImage(Html2Canvas, html2CanvasOptions, cutterRect)
+      const image = await renderImage(Html2Canvas, html2CanvasOptions, cutterRect, { beforeCreateCanvas, beforeCreateImage })
 
       const delta = new Delta()
         .retain(range.index)
