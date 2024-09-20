@@ -7,8 +7,8 @@ const Delta = Quill.import('delta')
 
 export type ScreenShotOptions = Partial<Html2CanvasOptions> & {
   Html2Canvas: typeof html2canvas
-  beforeCreateImage: (canvas: HTMLCanvasElement) => HTMLCanvasElement | Promise<HTMLCanvasElement>
   beforeCreateCanvas: () => void | Promise<void>
+  beforeCreateImage: (canvas: HTMLCanvasElement) => HTMLCanvasElement | string | Promise<HTMLCanvasElement | string>
 }
 type ScreenShotOptionsInQuill = {
   quill: {
@@ -22,9 +22,9 @@ const resolveOptions = (options: Partial<ScreenShotOptions>) => {
   return Object.assign({
     // @ts-ignore
     Html2Canvas: window.Html2Canvas,
-    allowTaint: true,
-    logging: true,
-    foreignObjectRendering: false,
+    useCORS: true,
+    logging: false,
+    foreignObjectRendering: true,
     beforeCreateImage: undefined,
     beforeCreateCanvas: undefined,
   }, options)
@@ -58,12 +58,12 @@ async function renderImage(
   rect: DOMRect,
   options?: Omit<ScreenShotOptions, 'Html2Canvas' | keyof Html2CanvasOptions>,
 ) {
-  if (options.beforeCreateCanvas) {
+  if (options && options.beforeCreateCanvas) {
     await options.beforeCreateCanvas()
   }
   const canvas: CanvasImageSource = await Html2Canvas(document.body, html2canvasOptions)
   // 当前canvas为body全局截图，从当前截图中截取想要的部分重新绘制转成base64插入富文本
-  let cropCanvas = document.createElement('canvas')
+  let cropCanvas: HTMLCanvasElement | string = document.createElement('canvas')
   cropCanvas.width = rect.width
   cropCanvas.height = rect.height
   const cropCanvasCtx = cropCanvas.getContext('2d')
@@ -78,12 +78,10 @@ async function renderImage(
     rect.width,
     rect.height,
   )
-  if (options.beforeCreateImage) {
+  if (options && options.beforeCreateImage) {
     cropCanvas = await options.beforeCreateImage(cropCanvas)
   }
-  const image = cropCanvas.toDataURL()
-  cropCanvas.remove()
-  return image
+  return typeof cropCanvas === 'string' ? cropCanvas : cropCanvas.toDataURL()
 }
 
 export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
@@ -96,7 +94,13 @@ export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
   }
   const range = this.quill.getSelection(true)
   const { wrapper, mask, cutter, coordinate } = init()
-  const status = {
+  const status: {
+    leftClickLockFlag: boolean
+    start?: {
+      x: number
+      y: number
+    }
+  } = {
     leftClickLockFlag: false,
     start: undefined,
   }
