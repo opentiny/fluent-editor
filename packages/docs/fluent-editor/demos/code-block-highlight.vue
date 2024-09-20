@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import FluentEditor from '@opentiny/fluent-editor'
 import hljs from 'highlight.js'
 // import the highlight.js theme you want
 import 'highlight.js/styles/atom-one-dark.css'
