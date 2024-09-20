@@ -12,8 +12,7 @@ import FileModule from './file' // 文件
 import Link from './link' // 超链接0
 import Mention from './mention/Mention' // @提醒
 // import QuickMenu from './quick-menu' // 快捷菜单
-import Screenshot from './screenshot' // 截图
-// import { Screenshot } from './screenshot'
+import { Screenshot } from './screenshot'// 截图
 import SoftBreak from './soft-break' // 软回车
 import Strike from './strike' // 删除线
 import BetterTable from './table/better-table' // 表格
@@ -103,6 +102,7 @@ const registerModules = function () {
             }
           },
           [FormatPainter.toolName]: FormatPainter,
+          [Screenshot.toolName]: Screenshot,
         },
       },
       'better-table': {
@@ -143,7 +143,6 @@ const registerModules = function () {
       'modules/emoji-shortname': Emoji.ShortNameEmoji,
       // 'modules/global-link': GlobalLink,//暂未开发
       'modules/link': Link, // 报错
-      'modules/screenshot': Screenshot, // 暂未开发
       // 'modules/quickmenu': QuickMenu,//暂未开发
       'modules/syntax': CustomSyntax,
 

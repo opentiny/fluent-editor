@@ -22,9 +22,6 @@ onMounted(() => {
       theme: 'snow',
       modules: {
         toolbar: TOOLBAR_CONFIG,
-        screenshot: {
-          Html2Canvas,
-        },
       },
       screenshot: {
         Html2Canvas,

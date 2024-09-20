@@ -1,295 +1,175 @@
 import Quill from 'quill'
-import type { Range } from 'quill'
 import type Toolbar from 'quill/modules/toolbar'
+import type html2canvas from 'html2canvas'
+import type { Options as Html2CanvasOptions } from 'html2canvas'
 
 const Delta = Quill.import('delta')
 
-export interface ScreenShotOptions {
-  Html2Canvas: any
-  screenshotOnStaticPage: boolean
+export type ScreenShotOptions = Partial<Html2CanvasOptions> & {
+  Html2Canvas: typeof html2canvas
 }
-// type ScreenShotOptionsInQuill = {
-//   quill: {
-//     options: {
-//       screenshot: Partial<ScreenShotOptions>
-//     }
-//   }
-// }
-
-// const resolveOptions = (options: Partial<ScreenShotOptions>) => {
-//   return Object.assign({
-//     // @ts-ignore
-//     Html2Canvas: window.Html2Canvas,
-//     screenshotOnStaticPage: false,
-//   }, options)
-// }
-
-// const init = () => {
-//   const maskExits = document.querySelectorAll('.ql-screenshot-mask')
-//   if (maskExits) {
-//     maskExits.forEach(item => item && item.remove())
-//   }
-//   // 创建截图图层
-//   const mask = document.createElement('div')
-//   mask.className = 'ql-screenshot-mask'
-//   const cutter = document.createElement('div')
-//   cutter.className = 'ql-screenshot-cutter'
-//   const coordinate = document.createElement('p')
-//   coordinate.className = 'ql-screenshot-coordinate'
-//   for (let i = 0; i < 7; i++) {
-//     const blockItem = document.createElement('div')
-//     blockItem.className = 'ql-screenshot-border-block'
-//     cutter.appendChild(blockItem)
-//   }
-//   cutter.appendChild(coordinate)
-//   mask.appendChild(cutter)
-//   document.body.appendChild(mask)
-//   return {
-//     mask,
-//     cutter,
-//     coordinate,
-//   }
-// }
-
-// const toggleRect = (event: MouseEvent) => {
-//   // 右键取消截图操作
-//   if (event.button === 2) {
-//     document.removeEventListener('mousemove', this.drawRect)
-//     document.removeEventListener('mousedown', this.toggleRect)
-//     document.addEventListener('contextmenu', this.removeContextmenu)
-//     return
-//   }
-//   if (!this.leftClickLockFlag) {
-//     if (this.start) {
-//       // 如果有起点，则当前触发坐标为终点，移除监听事件并添加确认和取消按钮
-//       document.removeEventListener('mousemove', this.drawRect)
-//       const doneBtn = document.createElement('div')
-//       doneBtn.innerHTML = `<span class="ql-screenshot-ok"></span><span class="ql-screenshot-cancel"></span>`
-//       doneBtn.className = 'ql-screenshot-done'
-//       doneBtn.addEventListener('click', this.afterShotCtrl)
-//       this.coordinate.remove()
-//       this.cutter.appendChild(doneBtn)
-//       this.leftClickLockFlag = true
-//     }
-//     else {
-//       // 无起点则设置起点坐标，监听鼠标移动
-//       this.start = { x: event.clientX, y: event.clientY }
-//       this.cutter.style.left = `${this.start.x}px`
-//       this.cutter.style.top = `${this.start.y}px`
-//       document.addEventListener('mousemove', this.drawRect)
-//     }
-//   }
-// }
-
-// export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
-//   this.quill.options.screenshot = resolveOptions(this.quill.options.screenshot)
-//   const Html2Canvas = this.quill.options.screenshot.Html2Canvas
-//   if (!Html2Canvas) {
-//     throw new Error('ScreenShot module requires html2canvas. Please include the library on the page before FluentEditor.')
-//   }
-//   const range = this.quill.getSelection(true)
-//   const { mask, cutter, coordinate } = init()
-//   document.addEventListener('mousedown', toggleRect)
-// }
-// Screenshot.toolName = 'screenshot'
-
-type HTML2CanvasOptions = {
-  allowTaint: boolean // 是否允许跨域图片渲染
-  foreignObjectRendering: boolean // 是否使用svg方式
-  logging: boolean // 是否启用日志记录
+type ScreenShotOptionsInQuill = {
+  quill: {
+    options: {
+      screenshot: Partial<ScreenShotOptions>
+    }
+  }
 }
-class Screenshot {
-  options: ScreenShotOptions
-  range?: Range
-  cutter: HTMLElement
-  mask: HTMLElement
-  coordinate: HTMLElement
-  width: number
-  height: number
-  leftClickLockFlag = false
-  start: {
-    x: number
-    y: number
+
+const resolveOptions = (options: Partial<ScreenShotOptions>) => {
+  return Object.assign({
+    // @ts-ignore
+    Html2Canvas: window.Html2Canvas,
+    screenshotOnStaticPage: false,
+  }, options)
+}
+
+function init() {
+  const maskExits = document.querySelectorAll('.ql-screenshot-mask')
+  if (maskExits) {
+    maskExits.forEach(item => item && item.remove())
+  }
+  // 创建截图图层
+  const wrapper = document.createElement('div')
+  wrapper.classList.add('ql-screenshot-wrapper')
+  const mask = document.createElement('div')
+  mask.className = 'ql-screenshot-mask'
+  const cutter = document.createElement('div')
+  cutter.className = 'ql-screenshot-cutter'
+  const coordinate = document.createElement('p')
+  coordinate.className = 'ql-screenshot-coordinate'
+  cutter.appendChild(coordinate)
+  wrapper.appendChild(mask)
+  wrapper.appendChild(cutter)
+  document.body.appendChild(wrapper)
+  document.body.style.overflow = 'hidden'
+  return { wrapper, mask, cutter, coordinate }
+}
+
+async function renderImage(
+  Html2Canvas: typeof html2canvas,
+  html2canvasOptions: Partial<Html2CanvasOptions>,
+  rect: DOMRect,
+) {
+  const canvas: CanvasImageSource = await Html2Canvas(document.body, html2canvasOptions)
+  // 当前canvas为body全局截图，从当前截图中截取想要的部分重新绘制转成base64插入富文本
+  const cropCanvas = document.createElement('canvas')
+  cropCanvas.width = rect.width
+  cropCanvas.height = rect.height
+  const cropCanvasCtx = cropCanvas.getContext('2d')
+  cropCanvasCtx.drawImage(
+    canvas,
+    rect.x + window.scrollX,
+    rect.y + window.scrollY,
+    rect.width,
+    rect.height,
+    0,
+    0,
+    rect.width,
+    rect.height,
+  )
+  const image = cropCanvas.toDataURL()
+  cropCanvas.remove()
+  return image
+}
+
+export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
+  this.quill.options.screenshot = resolveOptions(this.quill.options.screenshot)
+  const options = this.quill.options.screenshot
+  // @ts-ignore
+  const { Html2Canvas, ...html2CanvasOptions } = options
+  if (!options.Html2Canvas) {
+    throw new Error('ScreenShot module requires html2canvas. Please include the library on the page before FluentEditor.')
+  }
+  const range = this.quill.getSelection(true)
+  const { wrapper, mask, cutter, coordinate } = init()
+  const status = {
+    leftClickLockFlag: false,
+    start: undefined,
   }
 
-  originOverflow: string
-  wrapper: any
-
-  constructor(public quill: Quill, options: Partial<ScreenShotOptions> = {}) {
-    this.options = this.resolveOptions(options)
-    if (this.options.Html2Canvas == null) {
-      throw new Error(
-        'ScreenShot module requires html2canvas. Please include the library on the page before FluentEditor.',
-      )
-    }
-    console.log(this)
-    this.init()
-  }
-
-  resolveOptions(options: Partial<ScreenShotOptions>) {
-    return Object.assign({
-      // @ts-ignore
-      Html2Canvas: window.Html2Canvas,
-      screenshotOnStaticPage: false,
-    }, options)
-  }
-
-  init() {
-    const maskExits = document.querySelectorAll('.ql-screenshot-mask')
-    if (maskExits) {
-      maskExits.forEach(item => item && item.remove())
-    }
-    // 创建截图图层
-    this.wrapper = document.createElement('div')
-    this.wrapper.classList.add('ql-screenshot-wrapper')
-    this.mask = document.createElement('div')
-    this.mask.className = 'ql-screenshot-mask'
-    this.cutter = document.createElement('div')
-    this.cutter.className = 'ql-screenshot-cutter'
-    this.coordinate = document.createElement('p')
-    this.coordinate.className = 'ql-screenshot-coordinate'
-    this.cutter.appendChild(this.coordinate)
-    this.wrapper.appendChild(this.mask)
-    this.wrapper.appendChild(this.cutter)
-    document.body.appendChild(this.wrapper)
-    this.range = this.quill.getSelection(true)
-    document.addEventListener('mousedown', this.toggleRect)
-    document.body.style.overflow = 'hidden'
-  }
-
-  removeContextmenu = (event: Event) => {
+  const removeContextmenu = (event: Event) => {
     event.preventDefault()
-    this.wrapper.remove()
-    document.removeEventListener('contextmenu', this.removeContextmenu)
+    wrapper.remove()
+    document.removeEventListener('contextmenu', removeContextmenu)
   }
+  const afterShotCtrl = async (event: MouseEvent) => {
+    document.removeEventListener('mousedown', toggleRect)
+    Object.assign(document.body.style, { overflow: null })
+    const cutterRect = cutter.getBoundingClientRect()
+    const target = event.target as HTMLElement
+    if (target && target.className === 'ql-screenshot-confirm') {
+      wrapper.remove()
+      const image = await renderImage(Html2Canvas, html2CanvasOptions, cutterRect)
 
-  toggleRect = (event: MouseEvent) => {
-    // 右键取消截图操作
-    if (event.button === 2) {
-      document.removeEventListener('mousemove', this.drawRect)
-      document.removeEventListener('mousedown', this.toggleRect)
-      document.addEventListener('contextmenu', this.removeContextmenu)
-      return
+      const delta = new Delta()
+        .retain(range.index)
+        .delete(range.length)
+        .insert({ image })
+      this.quill.updateContents(delta, Quill.sources.USER)
+      this.quill.setSelection(range.index + 1, Quill.sources.SILENT)
     }
-    if (!this.leftClickLockFlag) {
-      if (this.start) {
-        // 如果有起点，则当前触发坐标为终点，移除监听事件并添加确认和取消按钮
-        document.removeEventListener('mousemove', this.drawRect)
-        const doneBtn = document.createElement('div')
-        doneBtn.innerHTML = `<div class="ql-screenshot-ok"></div><div class="ql-screenshot-cancel"></div>`
-        doneBtn.className = 'ql-screenshot-done'
-        doneBtn.addEventListener('click', this.afterShotCtrl)
-        this.coordinate.remove()
-        this.cutter.appendChild(doneBtn)
-        this.leftClickLockFlag = true
-      }
-      else {
-        // 无起点则设置起点坐标，监听鼠标移动
-        this.start = { x: event.clientX, y: event.clientY }
-        document.addEventListener('mousemove', this.drawRect)
-      }
-    }
+    status.start = undefined
   }
-
-  drawRect = (event: MouseEvent) => {
+  const drawRect = (event: MouseEvent) => {
     // 通过鼠标移动描绘截图图层
-    this.width = Math.abs(event.clientX - this.start.x)
-    this.height = Math.abs(event.clientY - this.start.y)
-    const startX = this.start.x
-    const startY = this.start.y
+    const startX = status.start.x
+    const startY = status.start.y
     const endX = event.clientX
     const endY = event.clientY
+    const width = Math.abs(endX - startX)
+    const height = Math.abs(endY - startY)
     const top = startY < endY ? startY : endY
     const left = startX < endX ? startX : endX
-    const bottom = window.innerHeight - this.height - top
-    const right = window.innerWidth - this.width - left
+    const bottom = window.innerHeight - height - top
+    const right = window.innerWidth - width - left
 
-    const mask = `
+    const maskPath = `
       linear-gradient(to top, #fff, #fff) top / 100% ${top}px,
       linear-gradient(to bottom, #fff, #fff) bottom /100% ${bottom}px,
       linear-gradient(to left, #fff, #fff) left / ${left}px 100%,
       linear-gradient(to right, #fff, #fff) right / ${right}px 100%
     `
-    Object.assign(this.cutter.style, {
-      width: `${this.width}px`,
-      height: `${this.height}px`,
+    Object.assign(cutter.style, {
+      width: `${width}px`,
+      height: `${height}px`,
       left: `${left}px`,
       top: `${top}px`,
     })
-    Object.assign(this.mask.style, {
-      'mask': mask,
+    Object.assign(mask.style, {
+      'mask': maskPath,
       '-webkit-mask-repeat': 'no-repeat',
     })
-    this.coordinate.textContent = `${this.width}, ${this.height}`
+    coordinate.textContent = `${width}, ${height}`
   }
-
-  afterShotCtrl = (event: MouseEvent) => {
-    document.removeEventListener('mousedown', this.toggleRect)
-    Object.assign(document.body.style, {
-      overflow: null,
-    })
-    this.wrapper.remove()
-    const target = event.target as HTMLElement
-    if (target && target.className === 'ql-screenshot-ok') {
-      const rect = {
-        x: this.start.x,
-        y: this.start.y,
-        width: this.width,
-        height: this.height,
-        scrollX: document.body.scrollLeft,
-        scrollY: document.body.scrollTop,
-        allowTaint: true,
-        logging: false,
-        foreignObjectRendering: this.options.screenshotOnStaticPage,
-      }
-      this.renderImage(rect)
+  const toggleRect = (event: MouseEvent) => {
+    // 右键取消截图操作
+    if (event.button === 2) {
+      document.removeEventListener('mousemove', drawRect)
+      document.removeEventListener('mousedown', toggleRect)
+      console.log('right')
+      document.addEventListener('contextmenu', removeContextmenu)
+      return
     }
-    this.start = undefined
+    if (!status.leftClickLockFlag) {
+      if (status.start) {
+        // 如果有起点，则当前触发坐标为终点，移除监听事件并添加确认和取消按钮
+        document.removeEventListener('mousemove', drawRect)
+        const doneBtn = document.createElement('div')
+        doneBtn.innerHTML = `<div class="ql-screenshot-confirm"></div><div class="ql-screenshot-cancel"></div>`
+        doneBtn.className = 'ql-screenshot-done'
+        doneBtn.addEventListener('click', afterShotCtrl)
+        coordinate.remove()
+        cutter.appendChild(doneBtn)
+        status.leftClickLockFlag = true
+      }
+      else {
+        // 无起点则设置起点坐标，监听鼠标移动
+        status.start = { x: event.clientX, y: event.clientY }
+        document.addEventListener('mousemove', drawRect)
+      }
+    }
   }
-
-  renderImage(rect: HTML2CanvasOptions & {
-    x: number
-    y: number
-    width: number
-    height: number
-    scrollX: number
-    scrollY: number
-  }) {
-    this.options.Html2Canvas(document.body, {
-      allowTaint: rect.allowTaint,
-      foreignObjectRendering: rect.foreignObjectRendering,
-      logging: rect.logging,
-    }).then((canvas: CanvasImageSource) => {
-      // 当前canvas为body全局截图，从当前截图中截取想要的部分重新绘制转成base64插入富文本
-      const cropCanvas = document.createElement('canvas')
-      cropCanvas.width = this.width
-      cropCanvas.height = this.height
-      const cropCanvasCtx = cropCanvas.getContext('2d')
-      cropCanvasCtx.drawImage(
-        canvas,
-        rect.x + rect.scrollX,
-        rect.y + rect.scrollY,
-        rect.width,
-        rect.height,
-        0,
-        0,
-        rect.width,
-        rect.height,
-      )
-      this.insertEditor(cropCanvas)
-      cropCanvas.remove()
-    })
-  }
-
-  insertEditor(canvas: HTMLCanvasElement) {
-    const image = canvas.toDataURL()
-    const delta = new Delta()
-      .retain(this.range.index)
-      .delete(this.range.length)
-      .insert({ image })
-    this.quill.updateContents(delta, Quill.sources.USER)
-    this.quill.setSelection(this.range.index + 1, Quill.sources.SILENT)
-  }
+  document.addEventListener('mousedown', toggleRect)
 }
-
-export default Screenshot
+Screenshot.toolName = 'screenshot'

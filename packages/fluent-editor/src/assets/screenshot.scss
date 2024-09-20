@@ -1,37 +1,19 @@
 
 .ql-screenshot{
-  &-mask {
+  &-wrapper {
     --ql-screenshot-color-bg: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    inset: 0;
-    background-color: var(--ql-screenshot-color-bg);
-    z-index: 50;
-  }
-  &-cutter {
-    position: fixed;
-    border: 1px solid #fff;
-    z-index: 50;
-  }
-  &-coordinate,
-  &-done  {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    font-size: 14px;
-  }
-  &-done {
-    display: flex;
-    border-top: 1px solid #333;
-    border-left: 1px solid #333;
+    --ql-screenshot-color-confirm: #2196F3;
+    --ql-screenshot-color-cancel: #ef1749;
+
     .ql-screenshot-cancel,
-    .ql-screenshot-ok {
+    .ql-screenshot-confirm {
       position: relative;
       height: 16px;
       width: 16px;
       cursor: pointer;
     }
-    .ql-screenshot-ok {
-      background-color: #2196F3;
+    .ql-screenshot-confirm {
+      background-color: var(--ql-screenshot-color-confirm);
       &::after {
         content: '';
         position: absolute;
@@ -45,7 +27,7 @@
       }
     }
     .ql-screenshot-cancel {
-      background-color: #ef1749;
+      background-color: var(--ql-screenshot-color-cancel);
       &::after {
         content: '';
         position: absolute;
@@ -69,5 +51,30 @@
         transform: rotate(-45deg);
       }
     }
+  }
+  &-mask {
+    position: fixed;
+    inset: 0;
+    background-color: var(--ql-screenshot-color-bg);
+    z-index: 50;
+    
+  }
+  &-cutter {
+    position: fixed;
+    border: 1px solid #fff;
+    z-index: 50;
+  }
+  &-coordinate,
+  &-done  {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  &-done {
+    display: flex;
+    border-top: 1px solid #333;
+    border-left: 1px solid #333;
   }
 }
