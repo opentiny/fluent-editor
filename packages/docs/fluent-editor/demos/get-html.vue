@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import FluentEditor from '@opentiny/fluent-editor'
 import katex from 'katex'
 import 'katex/dist/katex.min.css'
 import hljs from 'highlight.js'
