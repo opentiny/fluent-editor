@@ -6,3 +6,12 @@
 
 :::demo src=demos/screenshot.vue
 :::
+
+
+## options
+
+| 名称               | 类型                                                         | 说明                                                                                                                                 | 默认值 |
+| ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------ |
+| Html2Canvas        | `'small' \| 'default' \| 'large' \| ''`                      | html2canvas 模块                                                                                                                     | -      |
+| beforeCreateCanvas | `() => void`                                                 | canvas 绘制前执行函数, 可在此阶段对页面 dom 进行处理                                                                                 | -      |
+| beforeCreateImage  | `(canvas: HTMLCanvasElement) => HTMLCanvasElement \| string` | canvas 绘制完成后执行函数, 可通过返回字符串作为最终生成图片的 url 路径, 否则默认生成 base64 作为图片 url. 也可对 canvas 绘制进行调整 | -      |
