@@ -9,6 +9,8 @@
 - `file` 文件上传，需要启用 `file` 模块
 - `emoji` 插入表情，需要启用 `emoji-toolbar` 模块
 - `better-table` 表格，需要启用 `better-table` 模块
+- `format-painter` 格式刷
+- `screenshot` 截屏
 
 Quill 支持的工具栏: [https://quilljs.com/docs/modules/toolbar](https://quilljs.com/docs/modules/toolbar)
 
