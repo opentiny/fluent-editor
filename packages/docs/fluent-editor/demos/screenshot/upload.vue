@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import FluentEditor from '@opentiny/fluent-editor'
 import Html2Canvas from 'html2canvas'
 
 let editor
-const toolbarRef = ref<HTMLElement>()
+const editorRef = ref<HTMLElement>()
 
 const TOOLBAR_CONFIG = [
   [{ header: [] }],
@@ -40,8 +39,8 @@ onMounted(() => {
   // ssr compat, reference: https://vitepress.dev/guide/ssr-compat#importing-in-mounted-hook
   import('@opentiny/fluent-editor').then((module) => {
     const FluentEditor = module.default
-    if (!toolbarRef.value) return
-    editor = new FluentEditor(toolbarRef.value, {
+    if (!editorRef.value) return
+    editor = new FluentEditor(editorRef.value, {
       theme: 'snow',
       modules: {
         toolbar: TOOLBAR_CONFIG,
@@ -50,9 +49,10 @@ onMounted(() => {
         Html2Canvas,
         onclone: async (doc: Document) => {
           const imgs = doc.querySelectorAll('img')
-          for (let i = 0; i < imgs.length; i++) {
-            imgs[i].src = await imgToBase64(imgs[i].src)
-          }
+          const promises = Array.from(imgs).map(async (img) => {
+            img.src = await imgToBase64(img.src)
+          })
+          await Promise.all(promises)
         },
         beforeCreateImage(canvas) {
           return new Promise((resolve) => {
@@ -78,5 +78,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="toolbarRef" />
+  <div ref="editorRef" />
 </template>
