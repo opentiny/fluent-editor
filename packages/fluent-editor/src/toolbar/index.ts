@@ -140,7 +140,7 @@ class BetterToolbar extends Toolbar {
         e.preventDefault()
       }
 
-      this.quill.focus()
+      this.quill.focus({ preventScroll: format === 'screenshot' })
       const [range] = this.quill.selection.getRange()
       if (this.handlers[format] != null) {
         // @ts-ignore

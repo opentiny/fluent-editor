@@ -91,7 +91,7 @@ export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
   if (!Html2Canvas) {
     throw new Error('ScreenShot module requires html2canvas. Please include the library on the page before FluentEditor.')
   }
-  const range = this.quill.getSelection(true)
+  const range = this.quill.getSelection()
   const { wrapper, mask, cutter, coordinate } = init()
   const status: {
     leftClickLockFlag: boolean
