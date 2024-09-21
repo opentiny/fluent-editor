@@ -3,6 +3,7 @@ import type Toolbar from 'quill/modules/toolbar'
 import type html2canvas from 'html2canvas'
 import type { Options as Html2CanvasOptions } from 'html2canvas'
 import { lockScroll } from '../utils/scroll-lock'
+import { imgToBase64 } from '../utils/image'
 
 const Delta = Quill.import('delta')
 
@@ -61,7 +62,17 @@ async function renderImage(
   if (options && options.beforeCreateCanvas) {
     await options.beforeCreateCanvas()
   }
-  const canvas: CanvasImageSource = await Html2Canvas(document.body, html2canvasOptions)
+  const canvas: CanvasImageSource = await Html2Canvas(document.body, {
+    ...html2canvasOptions,
+    onclone: async (doc: Document, el: HTMLElement) => {
+      const imgs = doc.querySelectorAll('img')
+      const promises = Array.from(imgs).map(async (img) => {
+        img.src = await imgToBase64(img.src)
+      })
+      await Promise.all(promises)
+      html2canvasOptions.onclone && await html2canvasOptions.onclone(doc, el)
+    },
+  })
   // 当前canvas为body全局截图，从当前截图中截取想要的部分重新绘制转成base64插入富文本
   let cropCanvas: HTMLCanvasElement | string = document.createElement('canvas')
   cropCanvas.width = rect.width * html2canvasOptions.scale
