@@ -1,6 +1,7 @@
 import type { QuillOptions } from 'quill'
 import { IEditorModules } from './editor-modules.interface'
 import { EditorFormat } from './type'
+import { ScreenShotOptions } from '../../screenshot'
 
 export interface IEditorConfig extends QuillOptions {
   format?: EditorFormat
@@ -17,4 +18,5 @@ export interface IEditorConfig extends QuillOptions {
     fileAccept?: Array<string>[] | string
     isVideoPlay?: boolean
   }
+  screenshot?: Partial<ScreenShotOptions>
 }
