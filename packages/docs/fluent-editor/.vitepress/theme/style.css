@@ -7,6 +7,8 @@
     #bd34fe 30%,
     #41d1ff
   );
+  --vp-dark-theme-color: #ffffff;
+  --vp-dark-theme-hover-color: #5e7ce0;
 }
 
 @media (min-width: 960px) {
@@ -29,4 +31,67 @@
 
 .ql-mention-list-container .ql-mention-list {
   margin: 0;
+}
+
+.dark .ql-toolbar span {
+  color: var(--vp-dark-theme-color);
+}
+
+.dark .ql-toolbar span button svg path,
+.dark .ql-toolbar span button svg polygon,
+.dark .ql-toolbar .ql-formula rect,
+.dark .ql-toolbar .ql-underline svg polygon {
+  fill: var(--vp-dark-theme-color);
+}
+
+.dark .ql-toolbar .ql-picker.ql-header .ql-picker-label svg,
+.dark .ql-toolbar .ql-size .ql-picker-label svg {
+  border-top: 3px solid var(--vp-dark-theme-color);
+}
+
+.dark .ql-toolbar .ql-color-picker .ql-color-inner svg path {
+  fill: var(--vp-dark-theme-color);
+}
+
+.dark .ql-toolbar .ql-color-picker .ql-color-inner .current-color-line {
+  border-color: var(--vp-dark-theme-color) !important;
+}
+
+.dark .ql-toolbar .ql-color-picker .ql-color-inner .icon-triangle-down {
+  border-top: 3px solid var(--vp-dark-theme-color);
+}
+
+.dark .ql-snow .ql-icon-picker .ql-picker-label svg path {
+  fill: var(--vp-dark-theme-color);
+}
+
+.dark .ql-toolbar .ql-video svg .ql-stroke {
+  stroke: var(--vp-dark-theme-color);
+}
+
+.dark .ql-toolbar .ql-video svg .ql-fill {
+  fill: var(--vp-dark-theme-color);
+}
+
+.dark .ql-container .ql-editor li.checked,
+.dark .ql-container .ql-editor li.unchecked,
+.dark .ql-editor .ql-ui {
+  color: var(--vp-dark-theme-color);
+}
+
+.dark .ql-toolbar .ql-header .ql-picker-options .ql-picker-item,
+.dark .ql-toolbar .ql-size .ql-picker-options .ql-picker-item {
+  color: black;
+}
+
+.dark .ql-toolbar button:hover path,
+.dark .ql-toolbar button:hover polygon,
+.dark .ql-toolbar .ql-color-picker .ql-color-inner:hover svg path,
+.dark .ql-snow .ql-icon-picker .ql-picker-label:hover svg path,
+.dark .ql-toolbar .ql-video:hover svg .ql-fill {
+  fill: var(--vp-dark-theme-hover-color);
+}
+
+.dark .ql-toolbar .ql-video:hover svg .ql-stroke {
+  stroke: var(--vp-dark-theme-hover-color);
 }

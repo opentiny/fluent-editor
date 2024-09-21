@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import FluentEditor from '@opentiny/fluent-editor'
-import MarkdownShortcuts from 'quill-markdown-shortcuts'
 
 let editor
 
