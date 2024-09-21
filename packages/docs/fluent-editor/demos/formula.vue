@@ -23,7 +23,6 @@ onMounted(() => {
       theme: 'snow',
       modules: {
         toolbar: TOOLBAR_CONFIG,
-        formula: true,
       },
     })
   })
