@@ -24,6 +24,7 @@ const resolveOptions = (options: Partial<ScreenShotOptions>) => {
     // @ts-ignore
     Html2Canvas: window.Html2Canvas,
     useCORS: true,
+    scale: window.devicePixelRatio,
     foreignObjectRendering: true,
     beforeCreateImage: undefined,
     beforeCreateCanvas: undefined,
@@ -63,19 +64,19 @@ async function renderImage(
   const canvas: CanvasImageSource = await Html2Canvas(document.body, html2canvasOptions)
   // 当前canvas为body全局截图，从当前截图中截取想要的部分重新绘制转成base64插入富文本
   let cropCanvas: HTMLCanvasElement | string = document.createElement('canvas')
-  cropCanvas.width = rect.width
-  cropCanvas.height = rect.height
+  cropCanvas.width = rect.width * html2canvasOptions.scale
+  cropCanvas.height = rect.height * html2canvasOptions.scale
   const cropCanvasCtx = cropCanvas.getContext('2d')
   cropCanvasCtx.drawImage(
     canvas,
-    rect.x + window.scrollX,
-    rect.y + window.scrollY,
-    rect.width,
-    rect.height,
+    (rect.x + window.scrollX) * html2canvasOptions.scale,
+    (rect.y + window.scrollY) * html2canvasOptions.scale,
+    rect.width * html2canvasOptions.scale,
+    rect.height * html2canvasOptions.scale,
     0,
     0,
-    rect.width,
-    rect.height,
+    rect.width * html2canvasOptions.scale,
+    rect.height * html2canvasOptions.scale,
   )
   if (options && options.beforeCreateImage) {
     cropCanvas = await options.beforeCreateImage(cropCanvas)
