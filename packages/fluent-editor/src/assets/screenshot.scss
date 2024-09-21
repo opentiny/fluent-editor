@@ -1,22 +1,80 @@
-:-webkit-full-screen {  
-  background-color: white !important;  
-}  
-:-moz-full-screen {  
-  background-color: white !important;  
-}  
-:-ms-fullscreen {  
-  background-color: white !important;  
-}  
-:fullscreen {  
-  background-color: white !important;  
-}
 
-.scroll {
-  &--lock {
-    overflow: hidden !important;
+.ql-screenshot{
+  &-wrapper {
+    --ql-screenshot-color-bg: rgba(0, 0, 0, 0.5);
+    --ql-screenshot-color-confirm: #2196F3;
+    --ql-screenshot-color-cancel: #ef1749;
+
+    .ql-screenshot-cancel,
+    .ql-screenshot-confirm {
+      position: relative;
+      height: 16px;
+      width: 16px;
+      cursor: pointer;
+    }
+    .ql-screenshot-confirm {
+      background-color: var(--ql-screenshot-color-confirm);
+      &::after {
+        content: '';
+        position: absolute;
+        left: 6px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid #fff;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+    }
+    .ql-screenshot-cancel {
+      background-color: var(--ql-screenshot-color-cancel);
+      &::after {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 2px;
+        width: 2px;
+        height: 12px;
+        border: solid #fff;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 2px;
+        width: 2px;
+        height: 12px;
+        border: solid #fff;
+        border-width: 0 3px 3px 0;
+        transform: rotate(-45deg);
+      }
+    }
   }
-  &__wrap {
-    height: 100%;
-    overflow: auto;
+  &-mask {
+    position: fixed;
+    inset: 0;
+    background-color: var(--ql-screenshot-color-bg);
+    z-index: 50;
+    
+  }
+  &-cutter {
+    position: fixed;
+    border: 1px solid #fff;
+    z-index: 50;
+  }
+  &-coordinate,
+  &-done  {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  &-done {
+    display: flex;
+    border-top: 1px solid #333;
+    border-left: 1px solid #333;
   }
 }
