@@ -1,26 +1,33 @@
 # 截屏
 
-截屏功能依赖 [`html2canvas`](https://github.com/niklasvh/html2canvas)，请自行导入
+## 基本用法
 
-初始化编辑器前请将变量 `Html2Canvas` 暴露在 `window` 上。模块化项目可将导入变量整体传入选项
+通过配置工具栏按钮 `screenshot`，可以开启截屏功能。
 
-## 基础使用
+由于截屏功能依赖 [`html2canvas`](https://github.com/niklasvh/html2canvas)，需要安装 `html2canvas` 依赖包，并在初始化编辑器前将 `Html2Canvas` 变量暴露在 `window` 上。
 
-:::demo src=demos/screenshot/base.vue
+```javascript
+import Html2Canvas from 'html2canvas'
+window.Html2Canvas = Html2Canvas
+```
+
+:::demo src=demos/screenshot.vue
 :::
 
 ## 上传截图
 
-可通过在 `beforeCreateImage` 中处理截屏图片，进行上传获取其他操作，最终返回显示的图片 url
+除了将 `Html2Canvas` 变量暴露在 `window` 上，还可以将 Html2Canvas 变量传入 screenshot 配置项中。
 
-:::demo src=demos/screenshot/upload.vue
+默认截图的格式是 Base64，你可以在 `screenshot.beforeCreateImage` 中处理截屏图片，将图片上传到服务器，再将服务器返回的图片 URL 显示到编辑器中。
+
+:::demo src=demos/screenshot-upload-to-server.vue
 :::
 
-## options
+## API
 
-可传递 html2canvas 支持的配置选项, 具体请查看[官方文档](https://html2canvas.hertzen.com/configuration)
+screenshot 配置项可传递 html2canvas 支持的配置选项, 具体请查看[官方文档](https://html2canvas.hertzen.com/configuration)。
 
-除 html2canvas 支持的配置选项外，还支持以下配置
+除 html2canvas 支持的配置选项外，还支持以下配置：
 
 | 名称                   | 类型                                                         | 说明                                                                                                                                 | 默认值 |
 | ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------ |
