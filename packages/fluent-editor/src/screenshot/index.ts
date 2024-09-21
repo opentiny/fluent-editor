@@ -2,6 +2,7 @@ import Quill from 'quill'
 import type Toolbar from 'quill/modules/toolbar'
 import type html2canvas from 'html2canvas'
 import type { Options as Html2CanvasOptions } from 'html2canvas'
+import { lockScroll } from '../utils/scroll-lock'
 
 const Delta = Quill.import('delta')
 
@@ -47,7 +48,6 @@ function init() {
   wrapper.appendChild(mask)
   wrapper.appendChild(cutter)
   document.body.appendChild(wrapper)
-  document.body.style.overflow = 'hidden'
   return { wrapper, mask, cutter, coordinate }
 }
 
@@ -103,18 +103,20 @@ export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
     leftClickLockFlag: false,
     start: undefined,
   }
+  const cleanLock = lockScroll()
 
   const removeContextmenu = (event: Event) => {
     event.preventDefault()
     wrapper.remove()
+    cleanLock()
     document.removeEventListener('contextmenu', removeContextmenu)
   }
   const afterShotCtrl = async (event: MouseEvent) => {
     document.removeEventListener('mousedown', toggleRect)
-    Object.assign(document.body.style, { overflow: null })
     const cutterRect = cutter.getBoundingClientRect()
     const target = event.target as HTMLElement
     wrapper.remove()
+    cleanLock()
     if (target && target.className === 'ql-screenshot-confirm') {
       const image = await renderImage(Html2Canvas, html2CanvasOptions, cutterRect, { beforeCreateCanvas, beforeCreateImage })
 
@@ -163,7 +165,6 @@ export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
     if (event.button === 2) {
       document.removeEventListener('mousemove', drawRect)
       document.removeEventListener('mousedown', toggleRect)
-      console.log('right')
       document.addEventListener('contextmenu', removeContextmenu)
       return
     }
