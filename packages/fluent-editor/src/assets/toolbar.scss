@@ -25,18 +25,20 @@ $arrowWidth: 5px; // 下拉框箭头宽度
     &.toolbar-bottom {
       border-top: 0;
     }
+    
+    &.ql-snow {
+      .ql-active,
+      .ql-picker-label.ql-active,
+      .ql-picker-label:hover,
+      .ql-picker-item.ql-selected,
+      .ql-picker-item:hover,
+      button.ql-active,
+      button:hover {
+        color: #5e7ce0;
 
-    .ql-active,
-    .ql-picker-label.ql-active,
-    .ql-picker-label:hover,
-    .ql-picker-item.ql-selected,
-    .ql-picker-item:hover,
-    button.ql-active,
-    button:hover {
-      color: #5e7ce0;
-
-      .icon-triangle-down {
-        border-top-color: #5e7ce0;
+        .icon-triangle-down {
+          border-top-color: #5e7ce0;
+        }
       }
     }
 
