@@ -4,9 +4,17 @@
 
 初始化编辑器前请将变量 `Html2Canvas` 暴露在 `window` 上。模块化项目可将导入变量整体传入选项
 
-:::demo src=demos/screenshot.vue
+## 基础使用
+
+:::demo src=demos/screenshot/base.vue
 :::
 
+## 上传截图
+
+可通过在 `beforeCreateImage` 中处理截屏图片，进行上传获取其他操作，最终返回显示的图片 url
+
+:::demo src=demos/screenshot/upload.vue
+:::
 
 ## options
 

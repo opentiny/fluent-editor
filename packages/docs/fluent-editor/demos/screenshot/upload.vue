@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import FluentEditor from '@opentiny/fluent-editor'
 import Html2Canvas from 'html2canvas'
 
 let editor
+const toolbarRef = ref<HTMLElement>()
 
 const TOOLBAR_CONFIG = [
   [{ header: [] }],
@@ -16,19 +17,19 @@ const TOOLBAR_CONFIG = [
 // to solve html2canvas get image empty
 const imgToBase64 = (imageUrl: string) => new Promise<string>((resolve, reject) => {
   let canvas = document.createElement('canvas')
-  const ctx = canvas.getContext('2d')
   let img = new Image()
   img.crossOrigin = 'Anonymous'
   img.src = imageUrl
   img.onload = function () {
-    canvas.height = img.height
-    canvas.width = img.width
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.drawImage(img, 0, 0)
-    const dataURL = canvas.toDataURL('image/png', 1)
-    resolve(dataURL)
-    canvas = null
-    img = null
+    const ctx = canvas.getContext('2d')
+    if (ctx) {
+      canvas.height = img.height
+      canvas.width = img.width
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.drawImage(img, 0, 0)
+      const dataURL = canvas.toDataURL('image/png', 1)
+      resolve(dataURL)
+    }
   }
   img.onerror = function () {
     reject(new Error('Could not load image at ' + imageUrl))
@@ -39,8 +40,8 @@ onMounted(() => {
   // ssr compat, reference: https://vitepress.dev/guide/ssr-compat#importing-in-mounted-hook
   import('@opentiny/fluent-editor').then((module) => {
     const FluentEditor = module.default
-
-    editor = new FluentEditor('#editor', {
+    if (!toolbarRef.value) return
+    editor = new FluentEditor(toolbarRef.value, {
       theme: 'snow',
       modules: {
         toolbar: TOOLBAR_CONFIG,
@@ -53,6 +54,23 @@ onMounted(() => {
             imgs[i].src = await imgToBase64(imgs[i].src)
           }
         },
+        beforeCreateImage(canvas) {
+          return new Promise((resolve) => {
+            canvas.toBlob(
+              (data: Blob | null) => {
+                if (!data) return
+                const file = new File([data], `screenshot.png`, { type: 'image/jpeg' })
+                // here can upload file to server. demo just use setTimeout to simulate
+                setTimeout(() => {
+                  // return the final image url
+                  resolve('https://res.hc-cdn.com/tiny-vue-web-doc/3.18.9.20240902190525/static/images/mountain.png')
+                }, 1000)
+              },
+              'image/png',
+              1,
+            )
+          })
+        },
       },
     })
   })
@@ -60,5 +78,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="editor" />
+  <div ref="toolbarRef" />
 </template>
