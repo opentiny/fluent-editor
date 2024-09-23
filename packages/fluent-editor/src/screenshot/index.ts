@@ -53,6 +53,11 @@ function init() {
   return { wrapper, mask, cutter, coordinate }
 }
 
+function findParentFixed(dom: HTMLElement) {
+  if (dom.tagName === 'BODY') return false
+  if (['fixed', 'sticky'].includes(dom.parentElement.style.position)) return true
+  return findParentFixed(dom.parentElement)
+}
 async function renderImage(
   Html2Canvas: typeof html2canvas,
   html2canvasOptions: Partial<Html2CanvasOptions>,
@@ -65,11 +70,35 @@ async function renderImage(
   const canvas: CanvasImageSource = await Html2Canvas(document.body, {
     ...html2canvasOptions,
     onclone: async (doc: Document, el: HTMLElement) => {
-      const imgs = doc.querySelectorAll('img')
-      const promises = Array.from(imgs).map(async (img) => {
-        img.src = await imgToBase64(img.src)
-      })
-      await Promise.all(promises)
+      const doms = Array.from(doc.querySelectorAll('*')) as HTMLElement[]
+      await Promise.all(doms.map(async (dom) => {
+        // turn image url to base64 to solve cross origin
+        if (dom.tagName === 'IMG') {
+          const img = dom as HTMLImageElement
+          img.src = await imgToBase64(img.src)
+        }
+
+        // find all fixed or sticky dom
+        if (['fixed', 'sticky'].includes(dom.style.position)) {
+          // if parent dom already has fixed or sticky style
+          // means that transform will be settle. skip
+          if (findParentFixed(dom)) return
+
+          // use transform move to correct position
+          let x = 0
+          let y = 0
+          if (dom.style.top !== 'auto') {
+            y = window.scrollY
+          }
+          if (dom.style.left !== 'auto') {
+            x = window.scrollX
+          }
+          if (x !== 0 || y !== 0) {
+            dom.style.transform = `translate(${x}px, ${y}px)`
+          }
+        }
+      }))
+
       html2canvasOptions.onclone && await html2canvasOptions.onclone(doc, el)
     },
   })
