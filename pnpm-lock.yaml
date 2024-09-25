@@ -106,9 +106,6 @@ importers:
       jest:
         specifier: ^26.6.3
         version: 26.6.3(ts-node@9.1.1(typescript@4.9.5))
-      prettier:
-        specifier: ^2.3.0
-        version: 2.8.8
       sass:
         specifier: ^1.47.0
         version: 1.77.8
@@ -2976,11 +2973,6 @@ packages:
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
-
-  prettier@2.8.8:
-    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
-    engines: {node: '>=10.13.0'}
-    hasBin: true
 
   pretty-format@26.6.2:
     resolution: {integrity: sha512-7AeGuCYNGmycyQbCqd/3PWH4eOoX/OiCa0uphp57NVTeAGdJGaAliecxwBDHYQCIvrW7aDBZCYeNTP/WX69mkg==}
@@ -7183,8 +7175,6 @@ snapshots:
   preact@10.23.2: {}
 
   prelude-ls@1.2.1: {}
-
-  prettier@2.8.8: {}
 
   pretty-format@26.6.2:
     dependencies:
