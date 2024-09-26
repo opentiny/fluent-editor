@@ -1,5 +1,6 @@
 {
   "npm.packageManager": "pnpm",
+  "prettier.enable": false,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
   "editor.tabSize": 2,
