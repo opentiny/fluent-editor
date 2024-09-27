@@ -1,0 +1,44 @@
+.ql-math-field {
+  // background: transparent;
+  border: none;
+
+  &::part(virtual-keyboard-toggle) {
+    height: unset;
+  }
+
+  &.view::part(menu-toggle) {
+    display: none;
+  }
+
+}
+
+.ql-tooltip.math-field-tooltip {
+  border: none !important;
+  z-index: 10 !important;
+  padding: 0 !important;
+
+  &::before {
+    display: none;
+  }
+
+  .ql-math-field {
+    // background: transparent;
+    border: none;
+    width: 400px;
+
+    &::part(virtual-keyboard-toggle) {
+      height: unset;
+    }
+
+    &::part(container) {}
+
+    &.view::part(menu-toggle) {
+      display: none;
+    }
+
+    &::part(container) {
+      font-size: 24px;
+    }
+  }
+
+}

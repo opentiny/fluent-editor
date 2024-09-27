@@ -40,7 +40,8 @@
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.27.0",
     "lint-staged": "^12.1.4",
-    "quill":"^2.0.0"
+    "quill": "^2.0.0",
+    "mathlive": "^0.101.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",

@@ -18,10 +18,12 @@ import Strike from './strike' // 删除线
 import BetterTable from './table/better-table' // 表格
 import CustomSyntax from './syntax' // 代码块高亮
 import Toolbar from './toolbar' // 工具栏
+import MathliveModule from './mathlive' // latex公式
 import Video from './video' // 视频
 import { FormatPainter } from './format-painter'
 import { IEditorConfig } from './config/types'
 import { LineHeightStyle, SizeStyle, FontStyle, TextIndentStyle } from './attributors'
+import MathliveBlot from './mathlive/formats'
 
 class FluentEditor extends Quill {
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
@@ -47,6 +49,15 @@ const registerModules = function () {
       'toolbar': {
         handlers: {
           ...(SnowTheme.DEFAULTS as Record<string, any>).modules.toolbar.handlers,
+          'formula': function () {
+            const mathlive = this.quill.getModule('mathlive')
+            if (!mathlive) {
+              this.quill.theme.tooltip.edit('formula')
+            }
+            else {
+              mathlive.createDialog()
+            }
+          },
           'undo': function () {
             this.quill.history.undo()
           },
@@ -145,6 +156,7 @@ const registerModules = function () {
       'modules/link': Link, // 报错
       // 'modules/quickmenu': QuickMenu,//暂未开发
       'modules/syntax': CustomSyntax,
+      'modules/mathlive': MathliveModule,
 
       'formats/strike': Strike,
       'formats/softBreak': SoftBreak,
@@ -154,6 +166,7 @@ const registerModules = function () {
       'formats/size': SizeStyle,
       'formats/line-height': LineHeightStyle,
       'formats/text-indent': TextIndentStyle,
+      [`formats/${MathliveBlot.blotName}`]: MathliveBlot,
     },
     true, // 覆盖内部模块
   )

@@ -39,7 +39,9 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "quill": "^2.0.0"
+    "quill": "^2.0.0",
+    "parchment": "^3.0.0",
+    "mathlive": "^0.101.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
