@@ -2,16 +2,17 @@ import Tooltip from 'quill/ui/tooltip'
 import type Quill from 'quill'
 import { Delta } from 'quill/core'
 import Emitter from 'quill/core/emitter'
+import { MathfieldElement } from 'mathlive'
 import type { Bounds } from 'quill/core/selection'
 export default class MathliveTooltip extends Tooltip {
   static TEMPLATE = ``
 
-  mathliveDom: HTMLElement | null
+  mathliveDom: MathfieldElement | null
   editValue?: string
 
   constructor(quill: Quill, boundsContainer?: HTMLElement) {
     super(quill, boundsContainer)
-    this.mathliveDom = document.createElement('math-field')
+    this.mathliveDom = document.createElement('math-field') as MathfieldElement
     this.mathliveDom.classList.add('ql-math-field')
     this.root.appendChild(this.mathliveDom)
     this.root.classList.add('math-field-tooltip')
@@ -40,10 +41,9 @@ export default class MathliveTooltip extends Tooltip {
   }
 
   edit(value?: string) {
+    this.editValue = value
     this.root.classList.remove('ql-hidden')
     this.root.classList.add('ql-editing')
-    this.editValue = value
-    // @ts-ignore
     this.mathliveDom.setValue(value || '')
     const bounds = this.quill.getBounds(this.quill.selection.savedRange)
     if (bounds != null) {
@@ -60,7 +60,6 @@ export default class MathliveTooltip extends Tooltip {
 
   save() {
     const range = this.quill.getSelection(true)
-    // @ts-ignore
     const inputValue = this.mathliveDom.value
     if (!inputValue) return
     const index = range ? range!.index : this.quill.getLength() - 1
@@ -74,7 +73,8 @@ export default class MathliveTooltip extends Tooltip {
   }
 
   position(reference: Bounds) {
-    reference.left = reference.left + this.root.offsetWidth / 2 - reference.width / 2
-    return super.position(reference)
+    const adjustedReference = { ...reference }
+    adjustedReference.left = reference.left + this.root.offsetWidth / 2 - reference.width / 2
+    return super.position(adjustedReference)
   }
 }

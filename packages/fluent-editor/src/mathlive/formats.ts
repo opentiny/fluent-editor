@@ -1,6 +1,7 @@
 import { EmbedBlot } from 'parchment'
 import type { Root } from 'parchment'
 import type Quill from 'quill'
+import { MathfieldElement } from 'mathlive'
 type MathliveBlotMode = 'dialog' | 'only-read'
 export default class MathliveBlot extends EmbedBlot {
   static blotName = 'mathlive'
@@ -18,26 +19,15 @@ export default class MathliveBlot extends EmbedBlot {
   }
 
   static create(obj: { value: string, mode: MathliveBlotMode }) {
-    const el = super.create() as HTMLElement
+    const el = super.create() as MathfieldElement
     el.setAttribute('mode', obj.mode)
     el.classList.add('view')
-    // @ts-ignore
     el.setValue(obj.value)
     return el
   }
 
-  focus() {
-    const dom = this.domNode as HTMLElement
-    this.quill!.enable(false)
-    dom.setAttribute('contenteditable', 'true')
-    dom.focus()
-    dom.classList.remove('view')
-    this.quill?.root.click()
-  }
-
-  static value(domNode: HTMLElement) {
+  static value(domNode: MathfieldElement) {
     return {
-      // @ts-ignore
       value: domNode.value,
       mode: domNode.getAttribute('mode'),
     }

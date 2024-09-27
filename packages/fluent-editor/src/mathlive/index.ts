@@ -3,7 +3,7 @@ import type Quill from 'quill'
 import 'mathlive'
 import 'mathlive/static.css'
 import 'mathlive/fonts.css'
-import MathliveTooltip from './tooltop'
+import MathliveTooltip from './tooltip'
 export default class MathliveModule extends Module<boolean> {
   tooltip: MathliveTooltip
   constructor(quill: Quill, options?: boolean) {
