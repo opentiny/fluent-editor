@@ -203,7 +203,6 @@ export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
     if (event.button === 2) {
       document.removeEventListener('mousemove', drawRect)
       document.removeEventListener('mousedown', toggleRect)
-      console.log('right')
       document.addEventListener('contextmenu', removeContextmenu)
       return
     }
