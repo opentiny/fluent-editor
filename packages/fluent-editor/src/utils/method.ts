@@ -18,7 +18,7 @@ const freeSelf
 
 /** Used as a reference to the global object. */
 export const root
-  = freeGlobalThis || freeGlobal || freeSelf || Function('return this')()
+  = freeGlobalThis || freeGlobal || freeSelf || new Function('return this')()
 
 export function isObject(value) {
   const type = typeof value
@@ -53,7 +53,7 @@ export function compare(value, other) {
   if (value === other) {
     return true
   }
-  if (value instanceof Array && other instanceof Array) {
+  if (Array.isArray(value) && Array.isArray(other)) {
     return compareArray(value, other)
   }
   if (value instanceof Function || other instanceof Function) {

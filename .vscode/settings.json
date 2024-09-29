@@ -9,12 +9,24 @@
     "source.organizeImports": "never"
   },
   "eslint.enable": true,
-  "eslint.runtime": "node",
   "eslint.format.enable": true,
-  "eslint.useFlatConfig": false,
   "eslint.validate": [
     "javascript",
+    "javascriptreact",
     "typescript",
+    "typescriptreact",
     "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml",
+    "toml",
+    "xml",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
   ]
 }

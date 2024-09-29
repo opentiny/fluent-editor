@@ -2,4 +2,5 @@
 // export * from './config/editor.config'
 // export * from './config'
 import FluentEditor from './fluent-editor'
+
 export default FluentEditor

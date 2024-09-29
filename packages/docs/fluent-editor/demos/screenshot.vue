@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
 import Html2Canvas from 'html2canvas'
+import { onMounted, ref } from 'vue'
+
 window.Html2Canvas = Html2Canvas
 
 let editor
@@ -15,26 +16,28 @@ const TOOLBAR_CONFIG = [
 ]
 
 // image url to base64
-const imgToBase64 = (imageUrl: string) => new Promise<string>((resolve, reject) => {
-  let canvas = document.createElement('canvas')
-  let img = new Image()
-  img.crossOrigin = 'Anonymous'
-  img.src = imageUrl
-  img.onload = function () {
-    const ctx = canvas.getContext('2d')
-    if (ctx) {
-      canvas.height = img.height
-      canvas.width = img.width
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.drawImage(img, 0, 0)
-      const dataURL = canvas.toDataURL('image/png', 1)
-      resolve(dataURL)
+function imgToBase64(imageUrl: string) {
+  return new Promise<string>((resolve, reject) => {
+    const canvas = document.createElement('canvas')
+    const img = new Image()
+    img.crossOrigin = 'Anonymous'
+    img.src = imageUrl
+    img.onload = function () {
+      const ctx = canvas.getContext('2d')
+      if (ctx) {
+        canvas.height = img.height
+        canvas.width = img.width
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.drawImage(img, 0, 0)
+        const dataURL = canvas.toDataURL('image/png', 1)
+        resolve(dataURL)
+      }
     }
-  }
-  img.onerror = function () {
-    reject(new Error('Could not load image at ' + imageUrl))
-  }
-})
+    img.onerror = function () {
+      reject(new Error(`Could not load image at ${imageUrl}`))
+    }
+  })
+}
 
 onMounted(() => {
   // ssr compat, reference: https://vitepress.dev/guide/ssr-compat#importing-in-mounted-hook

@@ -1,7 +1,7 @@
 name: ✨ Feature Request
 description: Propose new features to @opentiny/fluent-editor to improve it.
 title: '✨ [Feature]: '
-labels: ['✨ feature']
+labels: [✨ feature]
 body:
   - type: textarea
     id: feature-solve

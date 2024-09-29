@@ -1,6 +1,6 @@
 import Quill from 'quill'
 
-const Delta = Quill.imports['delta']
+const Delta = Quill.import('delta')
 
 // color hex to rgba
 export function hexToRgbA(hex: string) {
@@ -10,11 +10,11 @@ export function hexToRgbA(hex: string) {
     if (color.length === 3) {
       color = [color[0], color[0], color[1], color[1], color[2], color[2]]
     }
-    color = '0x' + color.join('')
+    color = `0x${color.join('')}`
     return (
-      'rgba('
-      + [(color >> 16) & 255, (color >> 8) & 255, color & 255].join(',')
-      + ',1)'
+      `rgba(${
+        [(color >> 16) & 255, (color >> 8) & 255, color & 255].join(',')
+      },1)`
     )
   }
 }
@@ -28,7 +28,7 @@ export function imageFileToUrl(imageFile) {
     const reader = new FileReader()
     reader.readAsDataURL(imageFile)
     reader.onload = function (e) {
-      resolve(e.target['result'])
+      resolve(e.target.result)
     }
     reader.onerror = reject
   }).catch((error) => {
@@ -41,14 +41,14 @@ export function imageFileToUrl(imageFile) {
  * @param imageUrl 图片的URL
  */
 export function imageUrlToFile(imageUrl, isErrorImage?: boolean) {
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     fetch(imageUrl, {
       method: 'get',
       mode: 'no-cors',
     })
       .then(res => res.blob())
       .then((blob) => {
-        if (blob.type.indexOf('image') === -1 || !blob.type) {
+        if (!blob.type.includes('image') || !blob.type) {
           return reject()
         }
         const fileType = blob.type.replace(/^.*\//, '')
@@ -168,14 +168,14 @@ export function getEventComposedPath(evt) {
   return path
 }
 
-export const sanitize = (url, protocols) => {
+export function sanitize(url, protocols) {
   const anchor = document.createElement('a')
   anchor.href = url
   const protocol = anchor.href.slice(0, anchor.href.indexOf(':'))
-  return protocols.indexOf(protocol) > -1
+  return protocols.includes(protocol)
 }
 
-export const isInside = (position, dom) => {
+export function isInside(position, dom) {
   const areaPosition = dom.getBoundingClientRect()
   const { pageX, pageY } = position
   // getBoundingClientRect是不考虑窗口滚动的
@@ -196,4 +196,4 @@ export const isInside = (position, dom) => {
 }
 
 // Internet Explorer 6-11
-export const isPureIE = !!document['documentMode']
+export const isPureIE = !!document.documentMode

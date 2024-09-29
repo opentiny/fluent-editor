@@ -2,7 +2,16 @@
   "name": "root",
   "private": true,
   "description": "A rich text editor based on Quill 2.0, which extends rich modules and formats on the basis of Quill. It is powerful and out-of-the-box.",
+  "author": "OpenTiny Team",
+  "license": "MIT",
   "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:opentiny/fluent-editor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/opentiny/fluent-editor/issues"
+  },
   "keywords": [
     "editor",
     "rich-text-editor",
@@ -13,34 +22,21 @@
     "opentiny",
     "fluent-editor"
   ],
-  "author": "OpenTiny Team",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:opentiny/fluent-editor.git"
-  },
-  "bugs": {
-    "url": "https://github.com/opentiny/fluent-editor/issues"
-  },
   "scripts": {
     "dev": "pnpm -F fluent-editor-docs dev",
     "build": "pnpm -F fluent-editor-docs build",
     "build:lib": "pnpm -F @opentiny/fluent-editor build",
-    "lint": "eslint \"packages/**/*.{js,ts,vue}\" --cache",
-    "lint:fix": "eslint \"packages/**/*.{js,ts,vue}\" --fix",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --fix",
     "install:browser": "pnpm -F fluent-editor-docs install:browser",
     "test": "pnpm -F fluent-editor-docs test",
     "report": "pnpm -F fluent-editor-docs report"
   },
   "devDependencies": {
-    "@types/node": "^15.0.2",
-    "@stylistic/eslint-plugin": "^2.7.2",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-vue": "^9.27.0",
-    "lint-staged": "^12.1.4",
-    "quill":"^2.0.0"
+    "@antfu/eslint-config": "^3.7.3",
+    "@types/node": "^22.7.0",
+    "eslint": "^9.0.0",
+    "lint-staged": "^12.1.4"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",

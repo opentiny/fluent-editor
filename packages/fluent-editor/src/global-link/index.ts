@@ -6,7 +6,7 @@ import WikiLink from './formats/wiki-link'
 import WorkItemLink from './formats/work-item-link'
 
 const Module = Quill.imports['core/module']
-const Delta = Quill.imports['delta']
+const Delta = Quill.imports.delta
 
 // @dynamic
 class GlobalLink extends Module {

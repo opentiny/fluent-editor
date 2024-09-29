@@ -1,4 +1,5 @@
 import { createEmoji } from '../utils'
+
 const peopleEmojiArr = [
   ['grinning', '1f600', ':grinning:', '&#128512;', 'p', '1'],
   ['grin', '1f601', ':grin:', '&#128513;', 'p', '2'],

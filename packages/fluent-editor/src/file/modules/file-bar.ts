@@ -1,10 +1,11 @@
 import Quill from 'quill'
 // devui-internal api: utils\public-api.ts
 
+import { Range } from 'quill/core/selection'
 import { unshiftString } from '../../utils/method'
 import File from '../formats/file'
-const Delta = Quill.imports['delta']
-import { Range } from 'quill/core/selection'
+
+const Delta = Quill.imports.delta
 
 export default class FileBar {
   quill: any
@@ -140,6 +141,6 @@ export default class FileBar {
     const day = unshiftString(`${date.getDate()}`, 2, '0')
     const hour = unshiftString(`${date.getHours()}`, 2, '0')
     const minute = unshiftString(`${date.getMinutes()}`, 2, '0')
-    return isNaN(year) ? '--' : `${year}/${month}/${day} ${hour}:${minute}`
+    return Number.isNaN(year) ? '--' : `${year}/${month}/${day} ${hour}:${minute}`
   }
 }

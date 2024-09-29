@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import katex from 'katex'
+import { onMounted } from 'vue'
 import 'katex/dist/katex.min.css'
+
 window.katex = katex
 
 let editor

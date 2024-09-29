@@ -1,3 +1,7 @@
+import { isNullOrUndefined } from './config/editor.utils'
+import { EN_US } from './config/i18n/en-us'
+
+import { ZH_CN } from './config/i18n/zh-cn'
 import {
   ALIGN_CENTER_ICON,
   ALIGN_LEFT_ICON,
@@ -11,6 +15,7 @@ import {
   COLOR_ICON,
   EMOJI_ICON,
   FILE_ICON,
+  FORMAT_PAINTER_ICON,
   FULLSCREEN_ICON,
   GLOBAL_LINK_ICON,
   HELP_ICON,
@@ -27,12 +32,8 @@ import {
   TRIANGLE_DOWN_ICON,
   UNDERLINE_ICON,
   UNDO_ICON,
-  FORMAT_PAINTER_ICON,
 } from './config/icons.config'
-import { isNullOrUndefined } from './config/editor.utils'
 
-import { EN_US } from './config/i18n/en-us'
-import { ZH_CN } from './config/i18n/zh-cn'
 const localLang = localStorage.getItem('lang') || 'zh-cn'
 export const LANG_CONF = localLang === 'en-us' ? EN_US : ZH_CN
 

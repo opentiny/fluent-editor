@@ -36,12 +36,12 @@ class EmojiBlot extends Embed {
     emojiSpan.classList.add(this.emojiClass)
     emojiSpan.classList.add(this.emojiPrefix + value.name)
     // unicode can be '1f1f5-1f1ea',see emoji-list.js.
-    emojiSpan.innerText = String.fromCodePoint(...EmojiBlot.parseUnicode(value.unicode))
+    emojiSpan.textContent = String.fromCodePoint(...EmojiBlot.parseUnicode(value.unicode))
     node.appendChild(emojiSpan)
   }
 
   static parseUnicode(string) {
-    return string.split('-').map(str => parseInt(str, 16))
+    return string.split('-').map(str => Number.parseInt(str, 16))
   }
 }
 

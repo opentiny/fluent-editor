@@ -2,7 +2,7 @@
 layout: home
 hero:
   name: Fluent Editor
-  text: 
+  text:
   tagline: 一个基于 Quill 2.0 的富文本编辑器，在 Quill 基础上扩展了丰富的模块和格式，功能强大、开箱即用。
   image:
     src: logo.png

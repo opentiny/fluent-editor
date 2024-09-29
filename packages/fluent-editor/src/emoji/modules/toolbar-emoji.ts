@@ -29,7 +29,7 @@ class ToolbarEmoji extends Module {
   checkPalatteExist() {
     const quill = this.quill
     fnCheckDialogOpen(quill)
-    this.quill.on('text-change', function (_delta, _oldDelta, source) {
+    this.quill.on('text-change', (_delta, _oldDelta, source) => {
       if (source === 'user') {
         fnClose()
         fnUpdateRange(quill)
@@ -70,12 +70,12 @@ function fnShowEmojiPalatte(quill) {
   const containerRect = quill.container.getBoundingClientRect()
   const paletteMaxPos = atSignBounds.left + 250 // palette max width is 250
   eleEmojiArea.id = 'emoji-palette'
-  eleEmojiArea.style.top = 10 + atSignBounds.top + atSignBounds.height + containerRect.top + 'px'
+  eleEmojiArea.style.top = `${10 + atSignBounds.top + atSignBounds.height + containerRect.top}px`
   if (paletteMaxPos > quill.container.offsetWidth) {
-    eleEmojiArea.style.left = (atSignBounds.left + containerRect.left - 250) + 'px'
+    eleEmojiArea.style.left = `${atSignBounds.left + containerRect.left - 250}px`
   }
   else {
-    eleEmojiArea.style.left = atSignBounds.left + containerRect.left + 'px'
+    eleEmojiArea.style.left = `${atSignBounds.left + containerRect.left}px`
   }
 
   const tabToolbar = document.createElement('div')
@@ -111,18 +111,18 @@ function fnShowEmojiPalatte(quill) {
     document.getElementById('emoji-close-div').style.display = 'block'
   }
 
-  emojiType.forEach(function (emojiTypeItem) {
+  emojiType.forEach((emojiTypeItem) => {
     // add tab bar
     const tabElement = document.createElement('li')
     tabElement.classList.add('emoji-tab')
-    tabElement.classList.add('filter-' + emojiTypeItem.name)
+    tabElement.classList.add(`filter-${emojiTypeItem.name}`)
     const tabValue = emojiTypeItem.content
     tabElement.innerHTML = tabValue
     tabElement.dataset.filter = emojiTypeItem.type
     tabElementHolder.appendChild(tabElement)
 
-    const emojiFilter = document.querySelector('.filter-' + emojiTypeItem.name)
-    emojiFilter.addEventListener('click', function () {
+    const emojiFilter = document.querySelector(`.filter-${emojiTypeItem.name}`)
+    emojiFilter.addEventListener('click', () => {
       const tab = document.querySelector('.emoji-tab.active')
       if (tab) {
         tab.classList.remove('active')
@@ -141,28 +141,28 @@ function fnEmojiPanelInit(panel, quill) {
 
 function fnEmojiElementsToPanel(_type, panel, quill) {
   const result = emojiList
-  result.sort(function (a: any, b: any) {
+  result.sort((a: any, b: any) => {
     return a.emoji_order - b.emoji_order
   })
 
   quill.focus()
   const range = fnUpdateRange(quill)
 
-  result.forEach(function (emoji: any) {
+  result.forEach((emoji: any) => {
     const span = document.createElement('span')
     const t = document.createTextNode(emoji.shortname)
     span.appendChild(t)
     span.classList.add('bem')
-    span.classList.add('bem-' + emoji.name)
+    span.classList.add(`bem-${emoji.name}`)
     span.classList.add('ap')
-    span.classList.add('ap-' + emoji.name)
+    span.classList.add(`ap-${emoji.name}`)
     const output = String(String(emoji.code_decimal))
-    span.innerHTML = output + ' '
+    span.innerHTML = `${output} `
     panel.appendChild(span)
 
-    const customButton = document.querySelector('.bem-' + emoji.name)
+    const customButton = document.querySelector(`.bem-${emoji.name}`)
     if (customButton) {
-      customButton.addEventListener('click', function () {
+      customButton.addEventListener('click', () => {
         quill.insertEmbed(range.index, 'emoji', emoji, Quill.sources.USER)
         setTimeout(() => quill.setSelection(range.index + 1), 0)
         fnClose()

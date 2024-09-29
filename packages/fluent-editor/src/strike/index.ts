@@ -1,4 +1,5 @@
 import Quill from 'quill'
+
 const Inline = Quill.imports['blots/inline']
 
 // @dynamic

@@ -29,7 +29,7 @@ onMounted(() => {
         mention: {
           itemKey: 'cn',
           searchKey,
-          search: function (term) {
+          search(term) {
             return mentionList.filter((item) => {
               return item[searchKey] && String(item[searchKey]).includes(term)
             })

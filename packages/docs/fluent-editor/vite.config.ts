@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
+import path from 'node:path'
 import { viteDemoPreviewPlugin } from '@vitepress-code-preview/plugin'
-import path from 'path'
+import { defineConfig } from 'vite'
 
 const fluentEditorRoot = path.resolve(__dirname, '../../fluent-editor')
 export default defineConfig({

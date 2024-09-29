@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
 test('has toolbar', async ({ page }) => {
   page.on('pageerror', exception => expect(exception).toBeNull())
