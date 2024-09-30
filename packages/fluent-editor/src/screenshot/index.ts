@@ -25,6 +25,7 @@ const resolveOptions = (options: Partial<ScreenShotOptions>) => {
     // @ts-ignore
     Html2Canvas: window.Html2Canvas,
     useCORS: true,
+    scale: 1,
     foreignObjectRendering: true,
     beforeCreateImage: undefined,
     beforeCreateCanvas: undefined,
