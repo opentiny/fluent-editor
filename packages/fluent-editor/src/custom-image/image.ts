@@ -1,5 +1,6 @@
 import Quill from 'quill'
 import { isNullOrUndefined, sanitize } from '../config/editor.utils'
+
 const Embed = Quill.imports['blots/embed']
 const Inline = Quill.imports['blots/inline']
 
@@ -24,7 +25,7 @@ class CustomImage extends Embed {
       }
       node.setAttribute('src', imgURL)
     }
-    node.setAttribute('data-image-id', 'img' + CustomImage.ID_SEED++)
+    node.setAttribute('data-image-id', `img${CustomImage.ID_SEED++}`)
     node.setAttribute('devui-editorx-image', true)
     node.style.verticalAlign = 'baseline'
     return node
@@ -66,7 +67,7 @@ class CustomImage extends Embed {
   }
 
   format(name, value) {
-    if (ATTRIBUTES.indexOf(name) > -1) {
+    if (ATTRIBUTES.includes(name)) {
       if (value) {
         this.domNode.setAttribute(name, value)
       }
@@ -89,7 +90,7 @@ class CustomImage extends Embed {
       this.parent.insertBefore(wrapper, this.next || undefined)
     }
     if (typeof wrapper.appendChild !== 'function') {
-      throw new Error(`Cannot wrap ${name}`)
+      throw new TypeError(`Cannot wrap ${name}`)
     }
     wrapper.appendChild(this)
     return wrapper
@@ -114,4 +115,4 @@ CustomImageContainer.className = 'ql-image-container'
 CustomImageContainer.tagName = 'DIV'
 
 CustomImageContainer.allowedChildren = [CustomImage]
-export { CustomImageContainer as ImageContainerBlot, CustomImage as default }
+export { CustomImage as default, CustomImageContainer as ImageContainerBlot }

@@ -101,13 +101,13 @@ class ShortNameEmoji extends Module {
 
     const paletteMaxPos = atSignBounds.left + 250
     if (paletteMaxPos > this.quill.container.offsetWidth) {
-      this.container.style.left = (atSignBounds.left - 250) + 'px'
+      this.container.style.left = `${atSignBounds.left - 250}px`
     }
     else {
-      this.container.style.left = atSignBounds.left + 'px'
+      this.container.style.left = `${atSignBounds.left}px`
     }
 
-    this.container.style.top = atSignBounds.top + atSignBounds.height + 'px'
+    this.container.style.top = `${atSignBounds.top + atSignBounds.height}px`
     this.open = true
 
     this.quill.on('text-change', this.onTextChange)
@@ -146,7 +146,7 @@ class ShortNameEmoji extends Module {
     this.query = this.query.trim()
 
     let emojis: any = this.emojiList
-    emojis.sort(function (a: any, b: any) {
+    emojis.sort((a: any, b: any) => {
       return a.emoji_order - b.emoji_order
     })
 
@@ -189,7 +189,7 @@ class ShortNameEmoji extends Module {
     while (this.container.firstChild) {
       this.container.removeChild(this.container.firstChild)
     }
-    const buttons = Array(emojis.length)
+    const buttons = Array.from({ length: emojis.length })
     this.buttons = buttons
 
     const handler = (i, emoji) => (event) => {
@@ -224,10 +224,12 @@ class ShortNameEmoji extends Module {
 
     emojis.forEach((emoji, i) => {
       const li = makeElement(
-        'li', {},
+        'li',
+        {},
         makeElement(
-          'button', { type: 'button' },
-          makeElement('span', { className: 'button-emoji ap ap-' + emoji.name, innerHTML: emoji.code_decimal }),
+          'button',
+          { type: 'button' },
+          makeElement('span', { className: `button-emoji ap ap-${emoji.name}`, innerHTML: emoji.code_decimal }),
           makeElement('span', { className: 'unmatched' }, emoji.shortname),
         ),
       )
@@ -256,7 +258,7 @@ class ShortNameEmoji extends Module {
       const windowHeight = window.innerHeight
       const editorPos = this.quill.container.getBoundingClientRect().top
       if (editorPos > windowHeight / 2 && this.container.offsetHeight > 0) {
-        this.container.style.top = '-' + this.container.offsetHeight + 'px'
+        this.container.style.top = `-${this.container.offsetHeight}px`
       }
     }
 
@@ -285,7 +287,7 @@ class ShortNameEmoji extends Module {
 }
 
 ShortNameEmoji.DEFAULTS = {
-  emojiList: emojiList,
+  emojiList,
   fuse: {
     shouldSort: true,
     threshold: 0.1,

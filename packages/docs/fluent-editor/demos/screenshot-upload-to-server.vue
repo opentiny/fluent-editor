@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
 import Html2Canvas from 'html2canvas'
+import { onMounted, ref } from 'vue'
 
 let editor
 const editorRef = ref<HTMLElement>()

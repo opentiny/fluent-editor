@@ -153,7 +153,7 @@ class ListItem extends Block {
   optimize(context) {
     // 判断前一个li是否包含软回车，如果包含则将当前li与之合并后移除
     const tail = this.prev && this.prev.domNode.lastChild
-    if (tail && tail.className && tail.className.indexOf('ql-soft-break') >= 0) {
+    if (tail && tail.className && tail.className.includes('ql-soft-break')) {
       // 合并dom
       this.domNode.childNodes.forEach((v, i) => {
         if (i > 0) {
@@ -189,7 +189,7 @@ class ListItem extends Block {
         (formats[key] || data[key]) && this.parent.domNode.setAttribute(`data-${key}`, formats[key] || data[key]))
       // 如果父容器不在表格内则用单元格包裹
       if (this.parent.parent.statics.blotName !== 'table') {
-        delete formats['list']
+        delete formats.list
         this.wrap('table', formats)
       }
     }
@@ -215,7 +215,7 @@ function getFormats(dom): any {
   const formats = {}
 
   if (dom.tagName === 'OL') {
-    formats['list'] = dom.classList.item(0)
+    formats.list = dom.classList.item(0)
   }
 
   return [...CELL_ATTRIBUTES, ...CELL_IDENTITY_KEYS].reduce((tableFormats, attribute) => {

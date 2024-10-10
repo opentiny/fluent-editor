@@ -1,5 +1,5 @@
 let scrollBarWidth: number
-export const getScrollBarWidth = ({ target = document.body } = {}): number => {
+export function getScrollBarWidth({ target = document.body } = {}): number {
   if (scrollBarWidth !== undefined) return scrollBarWidth
 
   const outer = document.createElement('div')
@@ -24,7 +24,7 @@ export const getScrollBarWidth = ({ target = document.body } = {}): number => {
   return scrollBarWidth
 }
 
-export const lockScroll = ({ target = document.body } = {}) => {
+export function lockScroll({ target = document.body } = {}) {
   let scrollBarWidth = 0
   let originWidth = '0'
 

@@ -1,6 +1,6 @@
 import Quill from 'quill'
-import { compare } from '../../utils/method'
 import { isNullOrUndefined } from '../../config/editor.utils'
+import { compare } from '../../utils/method'
 import {
   CELL_ATTRIBUTES,
   CELL_DEFAULT,
@@ -57,8 +57,8 @@ class TableCellLine extends Block {
 
   static formats(domNode) {
     const formats = {}
-    if (formats['list']) {
-      formats['list'] = domNode.classList.item(0)
+    if (formats.list) {
+      formats.list = domNode.classList.item(0)
     }
     return reduceFormats(domNode, formats)
   }
@@ -88,7 +88,7 @@ class TableCellLine extends Block {
   }
 
   format(name, value) {
-    if ([...CELL_ATTRIBUTES, ...CELL_IDENTITY_KEYS, 'parent-bg'].indexOf(name) > -1) {
+    if ([...CELL_ATTRIBUTES, ...CELL_IDENTITY_KEYS, 'parent-bg'].includes(name)) {
       if (value) {
         this.domNode.setAttribute(`data-${name}`, value)
       }
@@ -237,10 +237,10 @@ class TableCell extends Container {
     const formats = {}
 
     if (this.domNode.hasAttribute('data-row')) {
-      formats['row'] = this.domNode.getAttribute('data-row')
+      formats.row = this.domNode.getAttribute('data-row')
     }
     if (this.domNode.hasAttribute('data-cell')) {
-      formats['cell'] = this.domNode.getAttribute('data-cell')
+      formats.cell = this.domNode.getAttribute('data-cell')
     }
 
     return CELL_ATTRIBUTES.reduce((tableFormats, attribute) => {
@@ -267,7 +267,8 @@ class TableCell extends Container {
     })
   }
 
-  /** this method is for TableCellLine to change cell background color
+  /**
+   * this method is for TableCellLine to change cell background color
    *  if use `format('cell-bg', value)` will loop trigger
    *  TableCellLine.optimize -> TableCell.format -> TableCellLine.optimize ...
    */
@@ -283,10 +284,10 @@ class TableCell extends Container {
   format(name, value) {
     const quill = Quill.find(this.scroll.domNode.parentNode)
     switch (true) {
-      case CELL_ATTRIBUTES.indexOf(name) > -1:
+      case CELL_ATTRIBUTES.includes(name):
         this.toggleAttribute(name, value)
         break
-      case ['row', 'cell'].indexOf(name) > -1:
+      case ['row', 'cell'].includes(name):
         this.toggleAttribute(`data-${name}`, value)
         break
       case name === 'background': {
@@ -306,12 +307,14 @@ class TableCell extends Container {
         quill.format(name, value, Quill.sources.USER)
         // 设置选区后需清除选区，否则会固定处理选区内容
         quill.setSelection(start)
+        break
       }
       case name === 'cell-bg': {
         this.toggleAttribute('data-cell-bg', value)
         this.toggleAttribute('data-parent-bg', value)
         this.formatChildren(name, value)
         this.setCellBg(value)
+        break
       }
     }
   }
@@ -360,7 +363,7 @@ class TableCell extends Container {
     const formats = {}
     const firstChild = domNode.childNodes[0]
     if (firstChild && domNode.tagName === 'OL') {
-      formats['list'] = firstChild.classList.item(0)
+      formats.list = firstChild.classList.item(0)
     }
 
     return reduceFormats(domNode, formats)
@@ -509,7 +512,7 @@ class TableCol extends Block {
   }
 
   format(name, value) {
-    if (COL_ATTRIBUTES.indexOf(name) > -1) {
+    if (COL_ATTRIBUTES.includes(name)) {
       this.domNode.setAttribute(`${name}`, value || COL_DEFAULT[name])
     }
     else {
@@ -654,7 +657,7 @@ class TableContainer extends Container {
       const tableCol = col.formats()[TableCol.blotName]
       let tableColWidth = COL_DEFAULT.width
       if (tableCol && tableCol.width) {
-        tableColWidth = parseInt(tableCol.width, 10)
+        tableColWidth = Number.parseInt(tableCol.width, 10)
       }
       sumWidth = sumWidth + tableColWidth
       return sumWidth
@@ -678,8 +681,8 @@ class TableContainer extends Container {
         }
         colGroup.children.forEach((col) => {
           if (maxTds && col.domNode.width === 'auto') {
-            const width = getComputedStyle(maxTds[tdIndex])['width']
-            const num = parseInt(width, 10)
+            const width = getComputedStyle(maxTds[tdIndex]).width
+            const num = Number.parseInt(width, 10)
             col.domNode.width = (num < COL_DEFAULT.width && COL_DEFAULT.width) || num
           }
           tdIndex++
@@ -738,7 +741,7 @@ class TableContainer extends Container {
     })
 
     modifiedCells.forEach((cell) => {
-      const cellColspan = parseInt(cell.formats().colspan, 10)
+      const cellColspan = Number.parseInt(cell.formats().colspan, 10)
       // const cellWidth = parseInt(cell.formats().width, 10);
       cell.format('colspan', cellColspan - delIndexes.length)
     })
@@ -811,7 +814,7 @@ class TableContainer extends Container {
     })
 
     modifiedCells.forEach((cell) => {
-      const cellRowspan = parseInt(cell.formats().rowspan, 10)
+      const cellRowspan = Number.parseInt(cell.formats().rowspan, 10)
       const curRowspan = cellRowspan - removedRowsLength
       cell.domNode.removeAttribute('style')
       cell.format('rowspan', curRowspan)
@@ -913,8 +916,7 @@ class TableContainer extends Container {
       const cellFormats = cell.formats()
       const tableCell = this.scroll.create(
         TableCell.blotName,
-        { ...CELL_DEFAULT, row: rId,
-          rowspan: cellFormats.rowspan },
+        { ...CELL_DEFAULT, row: rId, rowspan: cellFormats.rowspan },
       )
       const cellLine = this.scroll.create(TableCellLine.blotName, {
         row: rId,
@@ -951,7 +953,7 @@ class TableContainer extends Container {
 
     modifiedCells.forEach((cell) => {
       const cellColspan = cell.formats().colspan
-      cell.format('colspan', parseInt(cellColspan, 10) + 1)
+      cell.format('colspan', Number.parseInt(cellColspan, 10) + 1)
       affectedCells.push(cell)
     })
 
@@ -1031,7 +1033,7 @@ class TableContainer extends Container {
     })
 
     modifiedCells.forEach((cell) => {
-      const cellRowspan = parseInt(cell.formats().rowspan, 10)
+      const cellRowspan = Number.parseInt(cell.formats().rowspan, 10)
       cell.format('rowspan', cellRowspan + 1)
       affectedCells.push(cell)
     })
@@ -1067,7 +1069,7 @@ class TableContainer extends Container {
         if (rowspan > 1) {
           // fix: 比较当前单元格高度样式与rowspan最小高度，小于则设置高度，不判断实际高度，因为合并时这一刻实际高度可能高于最小高度
           const minHeight = CELL_MIN_HEIGHT * rowspan + rowspan - 1
-          const cellHeight = parseInt(tableCell.domNode.style.height, 10) || 0
+          const cellHeight = Number.parseInt(tableCell.domNode.style.height, 10) || 0
           if (cellHeight < minHeight) {
             tableCell.domNode.style.height = `${minHeight}px`
           }
@@ -1081,11 +1083,11 @@ class TableContainer extends Container {
     const cId = mergedCell.children.head.domNode.getAttribute('data-cell')
     mergedCell.children.forEach((cellLine) => {
       cellLine.domNode.setAttribute('data-parent-bg', mergedCell.domNode.style.backgroundColor)
-      if (cellLine.children['head'].domNode.style) {
-        cellLine.children['head'].domNode.style.backgroundColor = mergedCell.domNode.style.backgroundColor
+      if (cellLine.children.head.domNode.style) {
+        cellLine.children.head.domNode.style.backgroundColor = mergedCell.domNode.style.backgroundColor
       }
 
-      if (!cellLine.prev || cellLine.domNode.innerText.trim()) {
+      if (!cellLine.prev || cellLine.domNode.textContent.trim()) {
         cellLine.format('cell', cId)
         cellLine.format('row', rId)
         cellLine.format('colspan', colspan)

@@ -1,12 +1,12 @@
-import Quill from 'quill'
+import type { Range } from 'quill/core/quill'
 
+import Quill from 'quill'
 import {
   FILE_UPLOADER_MIME_TYPES,
   IMAGE_UPLOADER_MIME_TYPES,
 } from './config/editor.config'
-import type { Range } from 'quill/core/quill'
 
-type InsertFileData = {
+interface InsertFileData {
   code: number
   message?: string
   data: {
@@ -17,7 +17,7 @@ type InsertFileData = {
 }
 
 const Uploader = Quill.imports['modules/uploader']
-const Delta = Quill.imports['delta']
+const Delta = Quill.import('delta')
 
 class CustomUploader extends Uploader {
   quill
@@ -68,10 +68,7 @@ class CustomUploader extends Uploader {
           return (
             file.name
               .toLowerCase()
-              .indexOf(
-                validType.toLowerCase(),
-                file.name.toLowerCase().length - validType.toLowerCase().length,
-              ) > -1
+              .includes(validType.toLowerCase(), file.name.toLowerCase().length - validType.toLowerCase().length)
           )
           // mime type like 'image/*'
         }
@@ -137,12 +134,12 @@ class CustomUploader extends Uploader {
   // 处理上传图片
   handleUploadImage(range, { file, files }, hasRejectedImage) {
     if (this.quill.options.uploadOption?.imageUpload) {
-      const imageEnableMultiUpload = this.enableMultiUpload === true || this.enableMultiUpload?.['image']
+      const imageEnableMultiUpload = this.enableMultiUpload === true || this.enableMultiUpload?.image
 
       const result = {
         file,
         data: { files: [file] },
-        hasRejectedImage: hasRejectedImage,
+        hasRejectedImage,
         callback: (res) => {
           if (!res) {
             return
@@ -156,7 +153,7 @@ class CustomUploader extends Uploader {
         },
       }
       if (imageEnableMultiUpload) {
-        result['data'] = { files }
+        result.data = { files }
       }
       this.quill.options.uploadOption?.imageUpload(result)
     }

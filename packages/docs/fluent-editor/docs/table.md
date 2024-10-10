@@ -13,46 +13,46 @@ interface IBetterTableOptions {
     items: {
       copyCells: boolean | {
         text: string
-      },
+      }
       copyTable: boolean | {
         text: string
-      },
+      }
       cutCells: boolean | {
         text: string
-      },
+      }
       emptyCells: boolean | {
         text: string
-      },
+      }
       insertRowUp: boolean | {
         text: string
-      },
+      }
       insertRowDown: boolean | {
         text: string
-      },
+      }
       insertColumnLeft: boolean | {
         text: string
-      },
+      }
       insertColumnRight: boolean | {
         text: string
-      },
+      }
       mergeCells: boolean | {
         text: string
-      },
+      }
       unmergeCells: boolean | {
         text: string
-      },
+      }
       deleteRow: boolean | {
         text: string
-      },
+      }
       deleteColumn: boolean | {
         text: string
-      },
+      }
       deleteTable: boolean | {
         text: string
       }
     }
     color: boolean | {
-      text: string,
+      text: string
       colors: string[]
     }
   }

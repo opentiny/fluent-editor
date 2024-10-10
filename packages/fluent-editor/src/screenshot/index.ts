@@ -1,7 +1,7 @@
-import Quill from 'quill'
-import type Toolbar from 'quill/modules/toolbar'
 import type html2canvas from 'html2canvas'
 import type { Options as Html2CanvasOptions } from 'html2canvas'
+import type Toolbar from 'quill/modules/toolbar'
+import Quill from 'quill'
 import { imgToBase64 } from '../utils/image'
 import { lockScroll } from '../utils/scroll-lock'
 
@@ -12,7 +12,7 @@ export type ScreenShotOptions = Partial<Html2CanvasOptions> & {
   beforeCreateCanvas: () => void | Promise<void>
   beforeCreateImage: (canvas: HTMLCanvasElement) => HTMLCanvasElement | string | Promise<HTMLCanvasElement | string>
 }
-type ScreenShotOptionsInQuill = {
+interface ScreenShotOptionsInQuill {
   quill: {
     options: {
       screenshot: Partial<ScreenShotOptions>
@@ -20,7 +20,7 @@ type ScreenShotOptionsInQuill = {
   }
 }
 
-const resolveOptions = (options: Partial<ScreenShotOptions>) => {
+function resolveOptions(options: Partial<ScreenShotOptions>) {
   return Object.assign({
     // @ts-ignore
     Html2Canvas: window.Html2Canvas,

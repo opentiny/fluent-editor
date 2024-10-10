@@ -16,7 +16,7 @@ import {
 } from './config/editor.utils'
 
 const Clipboard = Quill.imports['modules/clipboard']
-const Delta = Quill.imports['delta']
+const Delta = Quill.import('delta')
 
 class CustomClipboard extends Clipboard {
   quill
@@ -74,7 +74,7 @@ class CustomClipboard extends Clipboard {
       e.clipboardData = {
         types: 'text/plain',
         setData: (_type, value) => {
-          return window['clipboardData'].setData('Text', value)
+          return window.clipboardData.setData('Text', value)
         },
       }
     }
@@ -107,7 +107,7 @@ class CustomClipboard extends Clipboard {
       e.clipboardData = {
         types: 'text/plain',
         getData: () => {
-          return window['clipboardData'].getData('Text')
+          return window.clipboardData.getData('Text')
         },
       }
     }
@@ -138,7 +138,7 @@ class CustomClipboard extends Clipboard {
 
   onPaste(range, { html, text, files: clipboardFiles, rtf }) {
     const hexImages = this.extractImageDataFromRtf(rtf)
-    const rootBgColor = getComputedStyle(this.quill.root)['backgroundColor']
+    const rootBgColor = getComputedStyle(this.quill.root).backgroundColor
     const formats = this.quill.getFormat(range.index)
     let pastedDelta = this.convert({ text, html }, formats)
     pastedDelta = replaceDeltaWhiteSpace(pastedDelta, rootBgColor)
@@ -147,7 +147,7 @@ class CustomClipboard extends Clipboard {
     let loadingTipsContainer
     if (deltaLength > BIG_DELTA_LIMIT) {
       loadingTipsContainer = this.quill.addContainer('ql-loading-tips')
-      loadingTipsContainer.innerHTML = LANG_CONF['pasting']
+      loadingTipsContainer.innerHTML = LANG_CONF.pasting
     }
 
     const linePos = { index: range.index, length: range.length, fix: 0 }
@@ -160,7 +160,7 @@ class CustomClipboard extends Clipboard {
       const tableBreaker = pastedContent.ops.find((op) => {
         return (
           op.attributes
-          && (op.attributes['blockquote'] || op.attributes['code-block'])
+          && (op.attributes.blockquote || op.attributes['code-block'])
         )
       })
       if (isInsideTable) {
@@ -185,7 +185,7 @@ class CustomClipboard extends Clipboard {
           && anchorNode.classList.contains('quill-better-table-wrapper')
         ) {
           const list = pastedContent.filter(
-            op => op.attributes && op.attributes['list'],
+            op => op.attributes && op.attributes.list,
           )
           if (list && list.length) {
             return
@@ -212,7 +212,7 @@ class CustomClipboard extends Clipboard {
               const isLine = isString && regexp.test(op.insert)
               const isCellLine
                 = isLine && op.attributes && op.attributes['table-cell-line']
-              const isList = isLine && op.attributes && op.attributes['list']
+              const isList = isLine && op.attributes && op.attributes.list
               const isPureLine = isLine && !isCellLine && !isList
               const isTableCol
                 = isLine && op.attributes && op.attributes['table-col']
@@ -232,15 +232,15 @@ class CustomClipboard extends Clipboard {
       // TODO 这里的lastChild如果不存在，则可能报错
       const lastChild = pastedContent.ops[pastedContent.ops.length - 1]
       const hasList
-        = lastChild && lastChild.attributes && lastChild.attributes['list']
+        = lastChild && lastChild.attributes && lastChild.attributes.list
       if (
         hasList
         && offset === 0
         && line
         && line.cache.length === 1
         && (line.statics.blotName === 'block'
-        || line.statics.blotName === 'table-cell-line')
-        && (!line.next || line.next.statics.blotName !== 'table-view')
+          || line.statics.blotName === 'table-cell-line')
+          && (!line.next || line.next.statics.blotName !== 'table-view')
       ) {
         linePos.index = this.quill.getIndex(line)
         linePos.length = line.length()
@@ -280,7 +280,7 @@ class CustomClipboard extends Clipboard {
           if (this.quill.options.editorPaste && this.quill.options.editorPaste.observers.length !== 0) {
             // 设置editorPaste回调的情况
             this.quill.options.editorPaste.emit({
-              files: files,
+              files,
               callback: ({ code, message, data }) => {
                 if (code === 0) {
                   const { imageUrls } = data
@@ -326,7 +326,7 @@ class CustomClipboard extends Clipboard {
 
   files2urls(files, placeholders, originalUrls, pastedDelta, imageIndexs) {
     return Promise.all(
-      files.map((imageFile, index) => {
+      files.map(async (imageFile, index) => {
         const netImgExp = /^((http|https)\:)?\/\/([\s\S]+)$/
         if (
           !placeholders[index]
@@ -375,7 +375,7 @@ class CustomClipboard extends Clipboard {
       hexString
         .match(/\w{2}/g)
         .map((char) => {
-          return String.fromCharCode(parseInt(char, 16))
+          return String.fromCharCode(Number.parseInt(char, 16))
         })
         .join(''),
     )
@@ -390,7 +390,7 @@ class CustomClipboard extends Clipboard {
     const regexPictureHeader
       = /{\\pict[\s\S]+?\\bliptag-?\d+(\\blipupi-?\d+)?({\\\*\\blipuid\s?[\da-fA-F]+)?[\s}]*?/
     const regexPicture = new RegExp(
-      '(?:(' + regexPictureHeader.source + '))([\\da-fA-F\\s]+)\\}',
+      `(?:(${regexPictureHeader.source}))([\\da-fA-F\\s]+)\\}`,
       'g',
     )
     const images = rtfData.match(regexPicture)
@@ -535,7 +535,7 @@ function replaceStrWhiteSpace(str) {
   let beginHasChar = false
   for (const char of str) {
     if (isWhiteSpace(char) && !beginHasChar) {
-      textWithWhiteSpace += '\u00a0'
+      textWithWhiteSpace += '\u00A0'
     }
     else {
       textWithWhiteSpace += char
@@ -560,7 +560,7 @@ function replaceDeltaWhiteSpace(delta, rootBgColor?) {
       if (
         fontColor === rootBgColor
         || (fontColor === 'rgba(255,255,255,1)'
-        && rootBgColor === 'rgba(0, 0, 0, 0)')
+          && rootBgColor === 'rgba(0, 0, 0, 0)')
       ) {
         delete op.attributes.color
       }
@@ -605,7 +605,7 @@ function renderStyles(html) {
   let collection
   let pointer
   const rules
-    = iframeDoc.styleSheets[iframeDoc.styleSheets.length - 1]['cssRules']
+    = iframeDoc.styleSheets[iframeDoc.styleSheets.length - 1].cssRules
 
   // Convert internal styles to inline style of respective node.
   for (let idx = 0; idx < rules.length; idx++) {
@@ -623,7 +623,7 @@ function renderStyles(html) {
     }
   }
 
-  const convertedString = iframeDoc.firstChild['outerHTML']
+  const convertedString = iframeDoc.firstChild.outerHTML
   // Remove temporary iframe.
   iframe.parentNode.removeChild(iframe)
 

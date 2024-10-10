@@ -14,7 +14,6 @@ export default class TableColumnTool {
   oldRootScrollTop: any
   constructor(table, quill, dom) {
     if (!table) {
-      /* eslint-disable-next-line no-constructor-return */
       return null
     }
     this.table = table
@@ -111,7 +110,7 @@ export default class TableColumnTool {
         colWidth = col ? col.width : tableContainer.colGroup().domNode.children[index - 1].width
       }
       else {
-        colWidth = parseInt(col.formats()[col.statics.blotName].width, 10)
+        colWidth = Number.parseInt(col.formats()[col.statics.blotName].width, 10)
       }
       // if cell already exist
       let colToolCell = null
@@ -153,14 +152,14 @@ export default class TableColumnTool {
 
       // fix: 修复 IE11/Edge 下无法拿到 height 的问题
       // IE11/Edge 下 height 会变成 'auto'
-      let computedHeight = row && getComputedStyle(row)['height']
+      let computedHeight = row && getComputedStyle(row).height
       if (computedHeight === 'auto') {
         computedHeight = row.querySelector('td').style.height || '30px'
       }
 
-      let rowHeight = row && parseFloat(computedHeight)
+      let rowHeight = row && Number.parseFloat(computedHeight)
       if (rowHeight < CELL_MIN_HEIGHT) {
-        const rowChildHeight = row && row.childNodes[0] && parseFloat(getComputedStyle(row.childNodes[0])['height'])
+        const rowChildHeight = row && row.childNodes[0] && Number.parseFloat(getComputedStyle(row.childNodes[0]).height)
         rowHeight = rowChildHeight
       }
       // if cell already exist
@@ -257,14 +256,14 @@ export default class TableColumnTool {
       const rowIndex = existCells.indexOf(cell)
       const rows: any = Array.from(this.table.querySelectorAll('tr'))
       const tds = Array.from(rows[rowIndex].childNodes)
-      const hasContentTd: any = tds.find((td: any) => td.getAttribute('rowspan') === '1' && td.innerText !== '\n')
+      const hasContentTd: any = tds.find((td: any) => td.getAttribute('rowspan') === '1' && td.textContent !== '\n')
 
       if (dragging) {
         let tdHeight = `${height0 + delta}px`
         if (hasContentTd) {
           tds.forEach((td: any) => td.getAttribute('rowspan') === '1' && css(td, { height: tdHeight }))
-          const currentHeight = getComputedStyle(hasContentTd)['height']
-          tdHeight = (parseInt(currentHeight, 10) > height0 + delta && currentHeight) || tdHeight
+          const currentHeight = getComputedStyle(hasContentTd).height
+          tdHeight = (Number.parseInt(currentHeight, 10) > height0 + delta && currentHeight) || tdHeight
         }
         css(cell, { height: tdHeight })
         tds.forEach((td: any) => td.getAttribute('rowspan') === '1' && css(td, { height: tdHeight }))
@@ -407,7 +406,7 @@ export default class TableColumnTool {
       }
       if (dragging) {
         // fix: 防止 colWidth 是小数
-        const colWidth = parseInt(width0 + delta, 10)
+        const colWidth = Number.parseInt(width0 + delta, 10)
         if (colBlot.format) {
           colBlot.format('width', colWidth)
         }

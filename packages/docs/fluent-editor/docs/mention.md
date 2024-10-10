@@ -22,22 +22,22 @@
 
 ```typescript
 interface MentionOption {
-  containerClass?: string;
-  dataAttributes?: string[];
-  defaultLink?: string;
-  itemActiveClass?: string;
-  itemKey: string;
-  itemClass?: string;
-  listClass?: string;
-  listHideClass?: string;
-  maxHeight?: number;
-  mentionChar?: string;
-  remove?: (data: any) => void;
-  renderMentionItem?: (data: any) => string | HTMLElement;
-  renderMentionText?: (data: any) => string | HTMLElement;
-  search?: (term: string) => Promise<any[]>;
-  searchKey: string;
-  select?: (data: any) => void;
-  target?: string;
+  containerClass?: string
+  dataAttributes?: string[]
+  defaultLink?: string
+  itemActiveClass?: string
+  itemKey: string
+  itemClass?: string
+  listClass?: string
+  listHideClass?: string
+  maxHeight?: number
+  mentionChar?: string
+  remove?: (data: any) => void
+  renderMentionItem?: (data: any) => string | HTMLElement
+  renderMentionText?: (data: any) => string | HTMLElement
+  search?: (term: string) => Promise<any[]>
+  searchKey: string
+  select?: (data: any) => void
+  target?: string
 }
 ```
