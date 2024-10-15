@@ -36,6 +36,7 @@
     "@antfu/eslint-config": "^3.7.3",
     "@types/node": "^22.7.0",
     "eslint": "^9.0.0",
+    "eslint-plugin-format": "^0.1.2",
     "lint-staged": "^12.1.4"
   },
   "gitHooks": {

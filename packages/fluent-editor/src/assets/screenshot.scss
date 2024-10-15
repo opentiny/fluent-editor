@@ -1,8 +1,7 @@
-
-.ql-screenshot{
+.ql-screenshot {
   &-wrapper {
     --ql-screenshot-color-bg: rgba(0, 0, 0, 0.5);
-    --ql-screenshot-color-confirm: #2196F3;
+    --ql-screenshot-color-confirm: #2196f3;
     --ql-screenshot-color-cancel: #ef1749;
 
     .ql-screenshot-cancel,
@@ -57,7 +56,6 @@
     inset: 0;
     background-color: var(--ql-screenshot-color-bg);
     z-index: 50;
-    
   }
   &-cutter {
     position: fixed;
@@ -65,7 +63,7 @@
     z-index: 50;
   }
   &-coordinate,
-  &-done  {
+  &-done {
     position: absolute;
     bottom: 0;
     right: 0;
