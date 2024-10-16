@@ -1,34 +1,35 @@
+import type { TableUpOptions } from 'quill-table-up'
 import type { ToolbarOption } from './type'
 
 export interface IEditorModules {
   [key: string]: any
-  clipboard?:
+  'clipboard'?:
     | {
       matchers?: any[]
       matchVisual?: boolean
     }
     | boolean
-  history?:
+  'history'?:
     | {
       delay?: number
       maxStack?: number
       userOnly?: boolean
     }
     | boolean
-  keyboard?:
+  'keyboard'?:
     | {
       bindings?: any
     }
     | boolean
-  syntax?:
+  'syntax'?:
     | {
       interval?: number
       languages?: { key: string, label: string }[]
       hljs?: any
     }
     | boolean
-  toolbar?:
-    | (string | string[])[][]
+  'toolbar'?:
+    | (string | string[] | Record<string, any>)[][]
     | ToolbarOption
     | string
     | {
@@ -38,4 +39,5 @@ export interface IEditorModules {
       }
     }
     | boolean
+  'table-up'?: Partial<TableUpOptions>
 }

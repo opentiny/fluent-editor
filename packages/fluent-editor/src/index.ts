@@ -4,3 +4,4 @@
 import FluentEditor from './fluent-editor'
 
 export default FluentEditor
+export * from './table-up'

@@ -82,6 +82,16 @@ export const EN_US = {
   'delete-column': 'Delete Entire Column',
   'delete-table': 'Delete Table',
 
+  'set-background-color': 'Set background color',
+
+  'custom': 'Custom',
+  'confirm': 'Confirm',
+  'cancel': 'Cancel',
+  'clear': 'Clear',
+  'row-number': 'Row',
+  'cloumn-number': 'Column',
+  'input-positive-integer': 'Please enter a positive integer',
+
   'default-link-text': 'Link',
   'basicblock': 'Card',
   'linkplaceholder': 'Enter an address and press Enter.',

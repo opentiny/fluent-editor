@@ -1,0 +1,15 @@
+@import 'quill-table-up/index.css';
+@import 'quill-table-up/table-creator.css';
+
+.ql-toolbar {
+  .ql-picker:not(.ql-color-picker):not(.ql-icon-picker).ql-better-table {
+    width: 28px;
+    .ql-picker-label {
+      padding: 2px 4px;
+      svg {
+        position: static;
+        margin-top: 0;
+      }
+    }
+  }
+}

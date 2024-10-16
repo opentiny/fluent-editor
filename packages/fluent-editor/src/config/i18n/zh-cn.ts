@@ -82,6 +82,16 @@ export const ZH_CN = {
   'delete-column': '删除当前列',
   'delete-table': '删除表格',
 
+  'set-background-color': '设置背景颜色',
+
+  'custom': '自定义',
+  'confirm': '确认',
+  'cancel': '取消',
+  'clear': '清除',
+  'row-number': '行数',
+  'cloumn-number': '列数',
+  'input-positive-integer': '请输入正整数',
+
   'default-link-text': '链接',
   'basicblock': '卡片',
   'linkplaceholder': '请输入链接地址，按回车键确认',
