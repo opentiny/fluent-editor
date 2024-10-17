@@ -20,9 +20,9 @@ import SoftBreak from './soft-break' // 代码块高亮
 import Strike from './strike' // 工具栏
 import CustomSyntax from './syntax' // 视频
 import BetterTable from './table/better-table'
+import TableUp from './table-up'
 import Toolbar from './toolbar'
 import Video from './video'
-import TableUp from './table-up'
 
 class FluentEditor extends Quill {
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {

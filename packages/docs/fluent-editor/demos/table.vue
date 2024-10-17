@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
+// Deprecated
 let editor
 
 const TOOLBAR_CONFIG = [
