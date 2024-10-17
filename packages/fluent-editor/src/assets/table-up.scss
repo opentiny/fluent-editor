@@ -2,14 +2,11 @@
 @import 'quill-table-up/table-creator.css';
 
 .ql-toolbar {
-  .ql-picker:not(.ql-color-picker):not(.ql-icon-picker).ql-better-table {
-    width: 28px;
+  .ql-table-up.ql-picker {
     .ql-picker-label {
-      padding: 2px 4px;
-      svg {
-        position: static;
-        margin-top: 0;
-      }
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
