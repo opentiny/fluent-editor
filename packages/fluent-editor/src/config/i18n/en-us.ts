@@ -89,7 +89,7 @@ export const EN_US = {
   'cancel': 'Cancel',
   'clear': 'Clear',
   'row-number': 'Row',
-  'cloumn-number': 'Column',
+  'column-number': 'Column',
   'input-positive-integer': 'Please enter a positive integer',
 
   'default-link-text': 'Link',

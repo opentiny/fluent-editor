@@ -89,7 +89,7 @@ export const ZH_CN = {
   'cancel': '取消',
   'clear': '清除',
   'row-number': '行数',
-  'cloumn-number': '列数',
+  'column-number': '列数',
   'input-positive-integer': '请输入正整数',
 
   'default-link-text': '链接',

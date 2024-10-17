@@ -142,7 +142,7 @@ export const TABLEUP_RIGHT_MENU_TEXT_CONFIG = {
   DeleteTable: LANG_CONF['delete-table'],
   BackgroundColor: LANG_CONF['set-background-color'],
 }
-export const TABLE_MENUE_TEXT_CONFIG = {
+export const TABLE_MENU_TEXT_CONFIG = {
   custom: LANG_CONF.custom,
   clear: LANG_CONF.clear,
 }

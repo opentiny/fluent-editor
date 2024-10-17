@@ -2,7 +2,7 @@ import type { Module, Parchment as TypeParchment } from 'quill'
 import type { IEditorConfig } from './config/types'
 import Quill from 'quill'
 import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors' // 字符统计
-import { getListValue, ICONS_CONFIG, inputFile, TABLE_MENUE_TEXT_CONFIG, TABLE_RIGHT_MENU_CONFIG, TABLE_TEXT_CONFIG, TABLEUP_RIGHT_MENU_TEXT_CONFIG } from './config' // 粘贴板
+import { getListValue, ICONS_CONFIG, inputFile, TABLE_MENU_TEXT_CONFIG, TABLE_RIGHT_MENU_CONFIG, TABLE_TEXT_CONFIG, TABLEUP_RIGHT_MENU_TEXT_CONFIG } from './config' // 粘贴板
 import Counter from './counter' // 图片
 import CustomClipboard from './custom-clipboard' // 图片拉伸模块
 import CustomImage from './custom-image/BlotFormatter' // 上传
@@ -121,7 +121,7 @@ const registerModules = function () {
             tipText: true,
             contextmenu: true,
             tipTexts: TABLEUP_RIGHT_MENU_TEXT_CONFIG,
-            texts: TABLE_MENUE_TEXT_CONFIG,
+            texts: TABLE_MENU_TEXT_CONFIG,
           },
         },
         texts: TABLE_TEXT_CONFIG,
