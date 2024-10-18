@@ -1,27 +1,27 @@
 import type { Module, Parchment as TypeParchment } from 'quill'
 import type { IEditorConfig } from './config/types'
 import Quill from 'quill'
-import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors' // 字符统计
-import { getListValue, ICONS_CONFIG, inputFile, TABLE_RIGHT_MENU_CONFIG } from './config' // 粘贴板
-import Counter from './counter' // 图片
-import CustomClipboard from './custom-clipboard' // 图片拉伸模块
-import CustomImage from './custom-image/BlotFormatter' // 上传
-import { CustomImageSpec } from './custom-image/specs/CustomImageSpec' // 表情
-import CustomUploader from './custom-uploader' // 文件
-import Emoji from './emoji' // 超链接0
-import FileModule from './file' // @提醒
-import { FormatPainter } from './format-painter'// 截图
+import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
+import { getListValue, ICONS_CONFIG, inputFile, TABLE_RIGHT_MENU_CONFIG } from './config'
+import Counter from './counter' // 字符统计
+import CustomClipboard from './custom-clipboard' // 粘贴板
+import CustomImage from './custom-image/BlotFormatter' // 图片
+import { CustomImageSpec } from './custom-image/specs/CustomImageSpec' // 图片拉伸模块
+import CustomUploader from './custom-uploader' // 上传
+import Emoji from './emoji' // 表情
+import FileModule from './file' // 文件
+import { FormatPainter } from './format-painter'
+import Link from './link' // 超链接
+import Mention from './mention/Mention' // @提醒
+import { Screenshot } from './screenshot'// 截图
+import SoftBreak from './soft-break' // 软回车
+import Strike from './strike' // 删除线
+import CustomSyntax from './syntax' // 代码块高亮
+import BetterTable from './table/better-table' // 表格
+import Toolbar from './toolbar' // 工具栏
+import Video from './video' // 视频
 // import GlobalLink from './global-link' // 全局链接
-import Link from './link' // 软回车
-import Mention from './mention/Mention' // 删除线
 // import QuickMenu from './quick-menu' // 快捷菜单
-import { Screenshot } from './screenshot' // 表格
-import SoftBreak from './soft-break' // 代码块高亮
-import Strike from './strike' // 工具栏
-import CustomSyntax from './syntax' // 视频
-import BetterTable from './table/better-table'
-import Toolbar from './toolbar'
-import Video from './video'
 
 class FluentEditor extends Quill {
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -22,7 +22,7 @@
       const SizeStyle = FluentEditor.imports['formats/size'] // 文字大小
       const FontClass = FluentEditor.imports['formats/font'] // 文字字体
       const lineheight = FluentEditor.imports['formats/lineheight'] //  行高
-      const Range = FluentEditor.imports['core/selection/range'];
+      const Range = FluentEditor.imports['core/selection/range']
 
       // 工具栏显示的按钮总览
       const container = [
@@ -77,8 +77,7 @@
         counter: {
           format: 'html',
           count: 102400, // 默认500
-          errorTemplate:
-            '<span style="color:red">字数不能超过102400个字符</span>',
+          errorTemplate: '<span style="color:red">字数不能超过102400个字符</span>',
         },
         toolbar: {
           container,
@@ -113,46 +112,46 @@
               inputFile.call(this, 'image', accept)
             },
             link: function (value) {
-              const range = this.quill.getSelection();
-              const { tooltip } = this.quill.theme;
+              const range = this.quill.getSelection()
+              const { tooltip } = this.quill.theme
 
               const insertDefaultLink = () => {
-                const linkPlaceholder = '链接';
-                this.quill.insertText(range.index, linkPlaceholder, FluentEditor.sources.USER);
-                this.quill.setSelection(range.index, linkPlaceholder.length, FluentEditor.sources.USER);
+                const linkPlaceholder = '链接'
+                this.quill.insertText(range.index, linkPlaceholder, FluentEditor.sources.USER)
+                this.quill.setSelection(range.index, linkPlaceholder.length, FluentEditor.sources.USER)
 
-                const newRange = this.quill.getSelection();
+                const newRange = this.quill.getSelection()
                 if (newRange) {
                   // 初次生成blot时，如果值为空，不会走blot的create()方法
-                  this.quill.formatText(newRange, 'link', ' ', FluentEditor.sources.USER);
-                  this.quill.formatText(newRange, 'link', '', FluentEditor.sources.USER);
-                  tooltip.edit('link', '', newRange);
+                  this.quill.formatText(newRange, 'link', ' ', FluentEditor.sources.USER)
+                  this.quill.formatText(newRange, 'link', '', FluentEditor.sources.USER)
+                  tooltip.edit('link', '', newRange)
                 }
-              };
+              }
 
               if (value) {
                 if (isNullOrUndefined(range) || range.length === 0) {
                   // 直接插入超链接
-                  insertDefaultLink();
+                  insertDefaultLink()
                 } else {
                   // 选中文本插入超链接
-                  this.quill.formatText(range, 'link', ' ', Emitter.sources.USER);
-                  this.quill.formatText(range, 'link', '', Emitter.sources.USER);
-                  tooltip.edit('link', '', range);
+                  this.quill.formatText(range, 'link', ' ', Emitter.sources.USER)
+                  this.quill.formatText(range, 'link', '', Emitter.sources.USER)
+                  tooltip.edit('link', '', range)
                 }
               } else {
-                const [link, offset] = this.quill.scroll.descendant(LinkBlot, range.index);
+                const [link, offset] = this.quill.scroll.descendant(LinkBlot, range.index)
                 if (isNullOrUndefined(link)) {
                   // 在超链接后面插入超链接
-                  insertDefaultLink();
+                  insertDefaultLink()
                 } else {
                   // 取消超链接
-                  const fullRange = new Range(range.index - offset, link.length());
-                  this.quill.formatText(fullRange, 'link', false, FluentEditor.sources.USER);
-                  }
+                  const fullRange = new Range(range.index - offset, link.length())
+                  this.quill.formatText(fullRange, 'link', false, FluentEditor.sources.USER)
                 }
-              },
+              }
             },
+          },
         },
         'better-table': {
           operationMenu: {
@@ -198,10 +197,10 @@
           },
         },
         mention: {
-          search: async term => {
+          search: async (term) => {
             const { data, searchKey } = mentionObj
             try {
-              return data.filter(d => {
+              return data.filter((d) => {
                 return d[searchKey] && String(d[searchKey]).includes(term)
               })
             } catch (e) {
@@ -263,10 +262,7 @@
                   .retain(1, { list: { value: value } })
                 EDITOR.updateContents(delta, FluentEditor.sources.USER)
                 EDITOR.history.cutoff()
-                EDITOR.setSelection(
-                  range.index - length,
-                  FluentEditor.sources.SILENT,
-                )
+                EDITOR.setSelection(range.index - length, FluentEditor.sources.SILENT)
                 return false
               },
             },
@@ -278,10 +274,7 @@
               collapsed: true,
               offset: 0,
               handler(range) {
-                EDITOR.setSelection(
-                  range.index + 1,
-                  FluentEditor.sources.SILENT,
-                )
+                EDITOR.setSelection(range.index + 1, FluentEditor.sources.SILENT)
               },
             },
             'list ignoreLeft': {
@@ -291,10 +284,7 @@
               collapsed: true,
               offset: 0,
               handler(range) {
-                EDITOR.setSelection(
-                  range.index - 1,
-                  FluentEditor.sources.SILENT,
-                )
+                EDITOR.setSelection(range.index - 1, FluentEditor.sources.SILENT)
               },
             },
             'list softBreak': {
@@ -307,12 +297,7 @@
                 const length = line.length()
                 // li的末尾不能添加软回车
                 if (length > offset + 1) {
-                  EDITOR.insertEmbed(
-                    range.index,
-                    'soft-break',
-                    true,
-                    FluentEditor.sources.USER,
-                  )
+                  EDITOR.insertEmbed(range.index, 'soft-break', true, FluentEditor.sources.USER)
                 }
               },
             },
@@ -326,18 +311,12 @@
       UploaderDfls.handler = (range, files, fileFlags, rejectFlags) => {
         const fileArr = []
         const imgArr = []
-        files.forEach((file, index) =>
-          fileFlags[index] ? fileArr.push(file) : imgArr.push(file),
-        )
+        files.forEach((file, index) => (fileFlags[index] ? fileArr.push(file) : imgArr.push(file)))
         if (modules.file && (fileArr.length || rejectFlags.file)) {
           handleUploadFile(range, fileArr, rejectFlags.file)
         }
         if (imgArr.length || rejectFlags.image) {
-          handleUploadImage(
-            range,
-            { file: imgArr[0], files: imgArr },
-            rejectFlags.image,
-          )
+          handleUploadImage(range, { file: imgArr[0], files: imgArr }, rejectFlags.image)
         }
       }
 
@@ -357,10 +336,7 @@
       // 点击工具栏插入表格 ql-better-table
       var insertButton = document.querySelector('.ql-better-table')
       const tableModule = EDITOR.getModule('better-table')
-      EDITOR.emitter.on(
-      'file-change',
-      fileOperationToSev
-    );
+      EDITOR.emitter.on('file-change', fileOperationToSev)
       var insertTableHandler = function (event, row = 3, col = 3) {
         tableModule.insertTable(row, col)
       }
@@ -371,14 +347,12 @@
       function inputFile(type, accept) {
         const defaultMIMETypes = EDITOR.uploader.options[type].join(', ')
         const mimeTypes = accept || defaultMIMETypes
-        let fileInput = this.container.querySelector(
-          `input.ql-${type}[type=file]`,
-        )
+        let fileInput = this.container.querySelector(`input.ql-${type}[type=file]`)
         if (isNullOrUndefined(fileInput)) {
           fileInput = document.createElement('input')
           fileInput.classList.add(`ql-${type}`)
           fileInput.setAttribute('type', 'file')
-          fileInput.setAttribute('style','display:none');
+          fileInput.setAttribute('style', 'display:none')
           fileInput.setAttribute('accept', mimeTypes)
           if (
             UploaderDfls.enableMultiUpload === true ||
@@ -406,11 +380,9 @@
 
       // 处理上传图片
       function handleUploadImage(range, { file, files }, hasRejectedImage) {
-
         if (EDITOR.options.uploadOption.imageUploadToServer) {
           const imageEnableMultiUpload =
-            UploaderDfls.enableMultiUpload === true ||
-            UploaderDfls.enableMultiUpload['image']
+            UploaderDfls.enableMultiUpload === true || UploaderDfls.enableMultiUpload['image']
           const target = document.querySelector('.ql-image')
           if (files.length) {
             // showUploadingTips('image', target)
@@ -420,14 +392,14 @@
             file,
             data: { files: [file] },
             hasRejectedImage: hasRejectedImage,
-            callback: res => {
+            callback: (res) => {
               // closeUploadingTips('image')
               console.log('closeUploadingTips')
               if (!res) {
                 return
               }
               if (imageEnableMultiUpload && Array.isArray(res)) {
-                res.forEach(value => insertImageToEditor(range, value))
+                res.forEach((value) => insertImageToEditor(range, value))
               } else {
                 insertImageToEditor(range, res)
               }
@@ -438,34 +410,29 @@
           }
           uploadImageToSev(result)
         } else {
-          const promises = files.map(fileItem => {
-            return new Promise(resolve => {
+          const promises = files.map((fileItem) => {
+            return new Promise((resolve) => {
               const reader = new FileReader()
-              reader.onload = e => {
+              reader.onload = (e) => {
                 resolve(e.target.result)
               }
               reader.readAsDataURL(fileItem)
             })
           })
-          Promise.all(promises).then(images => {
+          Promise.all(promises).then((images) => {
             const update = images.reduce((delta, image) => {
               return delta.insert({ image })
             }, new Delta().retain(range.index).delete(range.length))
 
             EDITOR.updateContents(update, FluentEditor.sources.USER)
-            EDITOR.setSelection(
-              range.index + images.length,
-              FluentEditor.sources.SILENT,
-            )
+            EDITOR.setSelection(range.index + images.length, FluentEditor.sources.SILENT)
           })
         }
       }
 
       // 处理上传文件
       function handleUploadFile(range, files, hasRejectedFile) {
-        const fileEnableMultiUpload =
-          UploaderDfls.enableMultiUpload === true ||
-          UploaderDfls.enableMultiUpload['file']
+        const fileEnableMultiUpload = UploaderDfls.enableMultiUpload === true || UploaderDfls.enableMultiUpload['file']
         const target = document.querySelector('.ql-file')
         if (files.length) {
           // showUploadingTips('files', target)
@@ -475,7 +442,7 @@
           operation: 'upload',
           data: fileEnableMultiUpload ? { files } : { file: files[0] },
           hasRejectedFile: hasRejectedFile,
-          callback: res => {
+          callback: (res) => {
             // this.closeUploadingTips('file')
             console.log('closeUploadingTips')
             if (!res) {
@@ -484,9 +451,7 @@
             console.log('fileEnableMultiUpload')
             console.log(fileEnableMultiUpload)
             if (fileEnableMultiUpload && Array.isArray(res)) {
-              res.forEach((value, index) =>
-                insertFileToEditor(range, files[index], value),
-              )
+              res.forEach((value, index) => insertFileToEditor(range, files[index], value))
             } else {
               insertFileToEditor(range, files[0], res)
             }
@@ -499,7 +464,7 @@
         const {
           file,
           hasRejectedImage,
-          data: { files},
+          data: { files },
           callback,
         } = event
         if (hasRejectedImage) {
@@ -520,7 +485,7 @@
           let res
           const imageUrl = './src/assets/image1.png' /* 后台返回的图片URL */
           if (UploaderDfls.enableMultiUpload.image) {
-            res = files.map(fileItem => {
+            res = files.map((fileItem) => {
               return {
                 code: 0,
                 message: 'Upload image successfully!',
@@ -567,7 +532,7 @@
             .subscribe(res => { */
               let res
               if (UploaderDfls.enableMultiUpload.file) {
-                res = files.map(fileItem => {
+                res = files.map((fileItem) => {
                   return {
                     code: 0,
                     message: 'Upload file successfully!',
@@ -611,9 +576,7 @@
         if (code === 0) {
           const { imageId, imageUrl } = data
           // 粘贴截图或者从外源直接拷贝的单图时，需要将编辑器中已选中的内容删除
-          const oldContent = new Delta()
-            .retain(range.index)
-            .delete(range.length)
+          const oldContent = new Delta().retain(range.index).delete(range.length)
           const currentContent = new Delta([
             {
               insert: { image: imageUrl },
@@ -630,13 +593,9 @@
       // 将文件插入编辑器
       function insertFileToEditor(range, file, { code, message, data }) {
         if (code === 0) {
-          const oldContent = new Delta()
-            .retain(range.index)
-            .delete(range.length)
+          const oldContent = new Delta().retain(range.index).delete(range.length)
           const videoFlag =
-            EDITOR.options.uploadOption &&
-            EDITOR.options.uploadOption.isVideoPlay &&
-            /^video\/[-\w.]+$/.test(file.type)
+            EDITOR.options.uploadOption && EDITOR.options.uploadOption.isVideoPlay && /^video\/[-\w.]+$/.test(file.type)
           const insertObj = videoFlag ? { video: data } : { file: data }
           const currentContent = new Delta([{ insert: insertObj }])
           const newContent = oldContent.concat(currentContent)
@@ -680,7 +639,7 @@
           return new Promise((resolve, reject) => {
             const formData = new FormData()
             formData.append('file', file)
-            _this.http.post('url/to/your/api', formData).subscribe(res => {
+            _this.http.post('url/to/your/api', formData).subscribe((res) => {
               const imageUrl = 'url/image.png' /* 后台返回的图片URL */
               resolve(imageUrl)
             })
