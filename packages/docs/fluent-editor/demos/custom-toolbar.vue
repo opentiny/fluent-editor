@@ -20,7 +20,7 @@ let editor
 
 const TOOLBAR_CONFIG = [
   ['undo', 'redo', 'clean', 'format-painter'],
-  [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }, { size: ['12px', '14px', '16px', '18px', '20px', '24px', '32px', '36px', '48px', '72px'] }],
+  [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: ['songti', 'yahei', 'kaiti', 'heiti', 'lishu', 'mono', 'arial', 'arialblack', 'comic', 'impact', 'times'] }, { size: ['12px', '14px', '16px', '18px', '20px', '24px', '32px', '36px', '48px', '72px'] }],
   ['bold', 'italic', 'strike', 'underline'],
   [{ color: [] }, { background: [] }],
   [{ align: [] }, { list: 'ordered' }, { list: 'bullet' }, { list: 'check' }],
