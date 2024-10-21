@@ -1,20 +1,19 @@
 import Quill from 'quill'
 import { LANG_CONF } from '../../config/editor.config'
-import { elementRemove, arrayFrom, css, getRelativeRect } from '../utils'
-import {
-  OPERATE_MENU_ITEM_CLASS,
-  OPERATE_MENU_COLORPICKER_ITEM_CLASS,
-  OPERATE_MENU_DIVIDING_CLASS,
-  OPERATE_MENU_SUBTITLE_CLASS,
-  OPERATE_MENU_COLORPICKER_CLASS,
-} from '../table-config'
-
 import {
   ERROR_LIMIT,
   MENU_ITEM_HEIGHT,
   MENU_MIN_HEIGHT,
   MENU_WIDTH,
+  OPERATE_MENU_COLORPICKER_CLASS,
+
+  OPERATE_MENU_COLORPICKER_ITEM_CLASS,
+  OPERATE_MENU_DIVIDING_CLASS,
+  OPERATE_MENU_ITEM_CLASS,
+  OPERATE_MENU_SUBTITLE_CLASS,
 } from '../table-config'
+
+import { arrayFrom, css, elementRemove, getRelativeRect } from '../utils'
 
 const MENU_ITEMS_DEFAULT = {
   copyCells: {
@@ -268,9 +267,7 @@ const MENU_ITEMS_DEFAULT = {
 }
 const DEFAULT_CELL_COLORS = ['white', 'red', 'yellow', 'blue']
 const NODE_EVENT_MAP = new WeakMap()
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const MENU_MIN_HEIHGT = 150
-const DEFAULT_COLOR_SUBTITLE = LANG_CONF['subTitleBgColor']
+const DEFAULT_COLOR_SUBTITLE = LANG_CONF.subTitleBgColor
 export default class TableOperationMenu {
   tableSelection: any
   table: any
@@ -321,10 +318,10 @@ export default class TableOperationMenu {
 
   destroy() {
     const menuItems = arrayFrom(
-      this.domNode.querySelectorAll('.' + OPERATE_MENU_ITEM_CLASS),
+      this.domNode.querySelectorAll(`.${OPERATE_MENU_ITEM_CLASS}`),
     )
     const colorPickerItems = arrayFrom(
-      this.domNode.querySelectorAll('.' + OPERATE_MENU_COLORPICKER_ITEM_CLASS),
+      this.domNode.querySelectorAll(`.${OPERATE_MENU_COLORPICKER_ITEM_CLASS}`),
     )
     const nodes = menuItems.concat(colorPickerItems)
 
@@ -362,7 +359,7 @@ export default class TableOperationMenu {
 
     if (menuHeight + top > winHeight && menuHeight < winHeight) {
       delete cssContent.top
-      cssContent['bottom'] = '10px'
+      cssContent.bottom = '10px'
     }
 
     this.domNode = document.createElement('div')
@@ -404,7 +401,7 @@ export default class TableOperationMenu {
     function subTitleCreator(title) {
       const subTitle = document.createElement('div')
       subTitle.classList.add(OPERATE_MENU_SUBTITLE_CLASS)
-      subTitle.innerText = title
+      subTitle.textContent = title
       return subTitle
     }
   }
@@ -450,7 +447,7 @@ export default class TableOperationMenu {
   menuItemCreator({ text }) {
     const node = document.createElement('div')
     node.classList.add('qlbt-operation-menu-item')
-    node.innerText = text
+    node.textContent = text
     // node.addEventListener('click', handler.bind(this), false)
     return node
   }

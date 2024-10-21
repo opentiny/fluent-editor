@@ -9,7 +9,7 @@
   [{ header: [] }],
   ['bold', 'italic', 'underline', 'link'],
   [{ list: 'ordered' }, { list: 'bullet' }],
-  ['clean']
+  ['clean'],
 ]
 ```
 

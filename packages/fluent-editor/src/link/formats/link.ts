@@ -1,5 +1,6 @@
 import Quill from 'quill'
 import { sanitize } from '../../config/editor.utils'
+
 const Inline = Quill.imports['blots/inline']
 
 // @dynamic
@@ -28,7 +29,7 @@ export default class Link extends Inline {
   }
 
   format(name, value) {
-    if (name !== this.statics.blotName || [false, null].indexOf(value) !== -1) {
+    if (name !== this.statics.blotName || [false, null].includes(value)) {
       super.format(name, value)
     }
     else {

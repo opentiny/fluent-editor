@@ -1,7 +1,7 @@
 import type { QuillOptions } from 'quill'
-import { IEditorModules } from './editor-modules.interface'
-import { EditorFormat } from './type'
-import { ScreenShotOptions } from '../../screenshot'
+import type { ScreenShotOptions } from '../../screenshot'
+import type { IEditorModules } from './editor-modules.interface'
+import type { EditorFormat } from './type'
 
 export interface IEditorConfig extends QuillOptions {
   format?: EditorFormat

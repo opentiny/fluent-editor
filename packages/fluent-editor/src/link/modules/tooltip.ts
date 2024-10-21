@@ -1,11 +1,11 @@
 import Quill from 'quill'
+import Emitter from 'quill/core/emitter'
+import { Range } from 'quill/core/selection'
+import { BaseTooltip } from 'quill/themes/base'
 import { debounce } from '../../../src/utils/debounce'
 import { LANG_CONF } from '../../config/editor.config'
 import { isNullOrUndefined } from '../../config/editor.utils'
 import LinkBlot from '../formats/link'
-import { BaseTooltip } from 'quill/themes/base'
-import { Range } from 'quill/core/selection'
-import Emitter from 'quill/core/emitter'
 
 // const Emitter = Quill.imports['core/emitter'];
 // const BaseTooltip = Quill.imports['themes/BaseTooltip'];
@@ -101,8 +101,8 @@ export default class Tooltip extends BaseTooltip {
       (event) => {
         if (
           (event.target.tagName.toUpperCase() !== 'A'
-          || !event.target.classList.contains(LinkBlot.className))
-          && !event.target.closest(`a.${LinkBlot.className}`)
+            || !event.target.classList.contains(LinkBlot.className))
+            && !event.target.closest(`a.${LinkBlot.className}`)
         ) {
           return
         }

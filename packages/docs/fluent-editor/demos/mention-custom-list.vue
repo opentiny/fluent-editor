@@ -38,12 +38,12 @@ onMounted(() => {
           containerClass: 'ql-mention-list-container__custom-list',
           itemKey: 'cn',
           searchKey,
-          search: function (term) {
+          search(term) {
             return mentionList.filter((item) => {
               return item[searchKey] && String(item[searchKey]).includes(term)
             })
           },
-          renderMentionItem: function (item) {
+          renderMentionItem(item) {
             return `
               <div class="item-avatar">
                 <img src="${item.avatar}">

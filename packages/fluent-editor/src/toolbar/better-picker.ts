@@ -1,5 +1,6 @@
 import Quill from 'quill'
 import { isNullOrUndefined } from '../config/editor.utils'
+
 const SnowTheme = Quill.imports['themes/snow']
 
 let optionsCounter = 0

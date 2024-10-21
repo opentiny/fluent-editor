@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import hljs from 'highlight.js'
+import { onMounted } from 'vue'
 // import the highlight.js theme you want
 import 'highlight.js/styles/atom-one-dark.css'
 // config extra languages
 import go from 'highlight.js/lib/languages/go'
+
 hljs.registerLanguage('go', go)
 
 let editor

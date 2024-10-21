@@ -1,6 +1,6 @@
-const path = require('path')
-const shelljs = require('shelljs')
+const path = require('node:path')
 const program = require('commander')
+const shelljs = require('shelljs')
 
 shelljs.cp('-rf', 'package.json', 'dist')
 const targetFile = path.resolve(__dirname, '../dist/package.json')

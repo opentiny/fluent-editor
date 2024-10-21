@@ -1,4 +1,4 @@
-import Quill from 'quill'
+import type Quill from 'quill'
 
 interface QuickMenuOptions {
   container: string
@@ -23,7 +23,7 @@ class QuickMenu {
     quill.keyboard.addBinding({ key: 'ArrowUp' }, this.handleArrowUpKey)
     quill.keyboard.addBinding({ key: 'ArrowDown' }, this.handleArrowDownKey)
     quill.keyboard.addBinding({ key: 'Enter' }, this.handleEnterKey)
-    quill.keyboard.bindings['Enter'].unshift(quill.keyboard.bindings['Enter'].pop())
+    quill.keyboard.bindings.Enter.unshift(quill.keyboard.bindings.Enter.pop())
     document.body.addEventListener('click', this.hideQuickMenu.bind(this))
   }
 
