@@ -39,6 +39,8 @@
     "test": "jest"
   },
   "peerDependencies": {
+    "mathlive": "^0.101.0",
+    "parchment": "^3.0.0",
     "quill": "^2.0.0"
   },
   "dependencies": {
