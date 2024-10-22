@@ -1,7 +1,5 @@
-import { isNullOrUndefined } from './config/editor.utils'
-import { EN_US } from './config/i18n/en-us'
-
-import { ZH_CN } from './config/i18n/zh-cn'
+import { isNullOrUndefined } from './editor.utils'
+import { LANG_CONF } from './editor.config'
 import {
   ALIGN_CENTER_ICON,
   ALIGN_LEFT_ICON,
@@ -32,10 +30,9 @@ import {
   TRIANGLE_DOWN_ICON,
   UNDERLINE_ICON,
   UNDO_ICON,
-} from './config/icons.config'
+} from './icons.config'
 
-const localLang = localStorage.getItem('lang') || 'zh-cn'
-export const LANG_CONF = localLang === 'en-us' ? EN_US : ZH_CN
+export * from './editor.config'
 
 export const ICONS_CONFIG: { [key: string]: any } = {
   'undo': UNDO_ICON,
