@@ -10,7 +10,7 @@ export default defineConfig({
       treeshake: false,
       preserveEntrySignatures: 'strict',
       output: {
-        dir: resolve(__dirname, 'dist/theme'),
+        dir: resolve(__dirname, 'dist'),
         assetFileNames: 'style.css',
         preserveModules: true,
         preserveModulesRoot: resolve(__dirname, 'src/assets'),
