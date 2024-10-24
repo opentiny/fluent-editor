@@ -11,7 +11,7 @@ export interface IEditorConfig extends QuillOptions {
   // Custom Config to track all changes or only changes by 'user'
   trackChanges?: 'user' | 'all'
   // Auto protocol for link
-  autoProtocol?: boolean
+  autoProtocol?: boolean | string
   editorPaste?: any
   uploadOption?: {
     imageUploadToServer?: boolean

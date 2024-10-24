@@ -23,14 +23,31 @@ export default class Tooltip extends BaseTooltip {
   restoreFocus: any
   textbox: any
   boundsContainer: any
+  options: { autoProtocol: string } = {
+    autoProtocol: 'https',
+  }
 
   constructor(quill, bounds) {
     super(quill, bounds)
     this.isInputFocus = false
     this.isHover = false
 
+    this.resolveOptions()
     this.debouncedHideToolTip = debounce(this.hideToolTip, 300)
     this.debouncedShowToolTip = debounce(this.showToolTip, 300)
+  }
+
+  resolveOptions() {
+    this.options = {
+      autoProtocol: 'https',
+    }
+    const value = this.quill.options.autoProtocol
+    if (value && typeof value === 'string') {
+      this.options.autoProtocol = value
+    }
+    else if (typeof value === 'boolean' && !value) {
+      this.options.autoProtocol = ''
+    }
   }
 
   shouldHide() {
@@ -191,8 +208,7 @@ export default class Tooltip extends BaseTooltip {
     switch (this.root.getAttribute('data-mode')) {
       case 'link': {
         const { scrollTop } = this.quill.root
-        const { autoProtocol = true } = this.quill.options
-        if (autoProtocol) {
+        if (this.options.autoProtocol) {
           value = this.addHttpProtocol(value)
         }
 
@@ -303,7 +319,7 @@ export default class Tooltip extends BaseTooltip {
       return ''
     }
     if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
-      result = `http://${url}`
+      result = `${this.options.autoProtocol}://${url}`
     }
     return result
   }
