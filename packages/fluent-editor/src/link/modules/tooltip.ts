@@ -1,6 +1,5 @@
-import Quill from 'quill'
+import Quill, { Range } from 'quill'
 import Emitter from 'quill/core/emitter'
-import { Range } from 'quill/core/selection'
 import { BaseTooltip } from 'quill/themes/base'
 import { debounce } from '../../../src/utils/debounce'
 import { LANG_CONF } from '../../config/editor.config'
@@ -9,7 +8,6 @@ import LinkBlot from '../formats/link'
 
 // const Emitter = Quill.imports['core/emitter'];
 // const BaseTooltip = Quill.imports['themes/BaseTooltip'];
-// const Range = Quill.imports['core/selection/range'];
 
 // @dynamic
 export default class Tooltip extends BaseTooltip {
@@ -193,7 +191,7 @@ export default class Tooltip extends BaseTooltip {
     switch (this.root.getAttribute('data-mode')) {
       case 'link': {
         const { scrollTop } = this.quill.root
-        const { autoProtocol } = this.quill.options
+        const { autoProtocol = true } = this.quill.options
         if (autoProtocol) {
           value = this.addHttpProtocol(value)
         }
@@ -272,7 +270,8 @@ export default class Tooltip extends BaseTooltip {
     return shift
   }
 
-  edit(mode = 'link', preview = null, range) {
+  // @ts-expect-error
+  edit(mode: string = 'link', preview = null, range) {
     this.linkRange = range || this.quill.selection.savedRange
     this.root.classList.remove('ql-hidden')
     this.root.classList.add('ql-editing')
@@ -298,7 +297,7 @@ export default class Tooltip extends BaseTooltip {
     this.root.removeAttribute('data-mode')
   }
 
-  addHttpProtocol(url) {
+  addHttpProtocol(url: string) {
     let result = url
     if (!url) {
       return ''
