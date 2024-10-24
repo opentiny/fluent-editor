@@ -1,6 +1,5 @@
-import Quill from 'quill'
+import Quill, { Range } from 'quill'
 import Emitter from 'quill/core/emitter'
-import { Range } from 'quill/core/selection'
 import { BaseTooltip } from 'quill/themes/base'
 import { debounce } from '../../../src/utils/debounce'
 import { LANG_CONF } from '../../config/editor.config'
@@ -9,7 +8,6 @@ import LinkBlot from '../formats/link'
 
 // const Emitter = Quill.imports['core/emitter'];
 // const BaseTooltip = Quill.imports['themes/BaseTooltip'];
-// const Range = Quill.imports['core/selection/range'];
 
 // @dynamic
 export default class Tooltip extends BaseTooltip {
@@ -25,14 +23,31 @@ export default class Tooltip extends BaseTooltip {
   restoreFocus: any
   textbox: any
   boundsContainer: any
+  options: { autoProtocol: string } = {
+    autoProtocol: 'https',
+  }
 
   constructor(quill, bounds) {
     super(quill, bounds)
     this.isInputFocus = false
     this.isHover = false
 
+    this.resolveOptions()
     this.debouncedHideToolTip = debounce(this.hideToolTip, 300)
     this.debouncedShowToolTip = debounce(this.showToolTip, 300)
+  }
+
+  resolveOptions() {
+    this.options = {
+      autoProtocol: 'https',
+    }
+    const value = this.quill.options.autoProtocol
+    if (value && typeof value === 'string') {
+      this.options.autoProtocol = value
+    }
+    else if (typeof value === 'boolean' && !value) {
+      this.options.autoProtocol = ''
+    }
   }
 
   shouldHide() {
@@ -193,8 +208,7 @@ export default class Tooltip extends BaseTooltip {
     switch (this.root.getAttribute('data-mode')) {
       case 'link': {
         const { scrollTop } = this.quill.root
-        const { autoProtocol } = this.quill.options
-        if (autoProtocol) {
+        if (this.options.autoProtocol) {
           value = this.addHttpProtocol(value)
         }
 
@@ -272,7 +286,8 @@ export default class Tooltip extends BaseTooltip {
     return shift
   }
 
-  edit(mode = 'link', preview = null, range) {
+  // @ts-expect-error
+  edit(mode: string = 'link', preview = null, range) {
     this.linkRange = range || this.quill.selection.savedRange
     this.root.classList.remove('ql-hidden')
     this.root.classList.add('ql-editing')
@@ -298,13 +313,13 @@ export default class Tooltip extends BaseTooltip {
     this.root.removeAttribute('data-mode')
   }
 
-  addHttpProtocol(url) {
+  addHttpProtocol(url: string) {
     let result = url
     if (!url) {
       return ''
     }
     if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
-      result = `http://${url}`
+      result = `${this.options.autoProtocol}://${url}`
     }
     return result
   }
