@@ -1,8 +1,11 @@
 import type { FluentEditorToolbar } from '../config/types'
 import { namespace } from '../config'
+import { lockScroll } from '../utils/scroll-lock'
 
 let exitEscHandlerBindToolbar: (e: KeyboardEvent) => void
 let resizeHandlerBindToolbar: () => void
+let cleanLock: ReturnType<typeof lockScroll>
+let originScrollTop = 0
 function exitEscHandler(toolbar: FluentEditorToolbar, e: KeyboardEvent) {
   if (e.code === 'Escape') {
     exitFullscreen(toolbar)
@@ -14,9 +17,10 @@ function updateToolbarHeight(toolbar: FluentEditorToolbar) {
 }
 function intoFullscreen(toolbar: FluentEditorToolbar) {
   toolbar.quill.isFullscreen = true
+  originScrollTop = document.documentElement.scrollTop
   toolbar.container.classList.add('fullscreen')
   toolbar.quill.container.classList.add('fullscreen')
-  document.documentElement.classList.add('scroll--lock')
+  cleanLock = lockScroll()
   resizeHandlerBindToolbar()
   window.addEventListener('resize', resizeHandlerBindToolbar)
   document.addEventListener('keydown', exitEscHandlerBindToolbar)
@@ -25,7 +29,8 @@ function exitFullscreen(toolbar: FluentEditorToolbar) {
   toolbar.quill.isFullscreen = false
   toolbar.container.classList.remove('fullscreen')
   toolbar.quill.container.classList.remove('fullscreen')
-  document.documentElement.classList.remove('scroll--lock')
+  cleanLock()
+  document.documentElement.scrollTop = originScrollTop
   window.removeEventListener('resize', resizeHandlerBindToolbar)
   document.removeEventListener('keydown', exitEscHandlerBindToolbar)
 }
