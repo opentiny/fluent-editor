@@ -12,8 +12,8 @@ function exitEscHandler(toolbar: FluentEditorToolbar, e: KeyboardEvent) {
   }
 }
 function updateToolbarHeight(toolbar: FluentEditorToolbar) {
-  const toolbatRect = toolbar.container.getBoundingClientRect()
-  toolbar.quill.container.style.setProperty(`--${namespace}-top`, `${toolbatRect.height}px`)
+  const toolbarRect = toolbar.container.getBoundingClientRect()
+  toolbar.quill.container.style.setProperty(`--${namespace}-top`, `${toolbarRect.height}px`)
 }
 function intoFullscreen(toolbar: FluentEditorToolbar) {
   toolbar.quill.isFullscreen = true
