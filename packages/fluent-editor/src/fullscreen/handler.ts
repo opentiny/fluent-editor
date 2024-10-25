@@ -1,4 +1,4 @@
-import type { FluentEditorToolbar } from '../config/types/editor-toolbat.interface'
+import type { FluentEditorToolbar } from '../config/types'
 
 let exitEscHandlerBindToolbar: (e: KeyboardEvent) => void
 function exitEscHandler(toolbar: FluentEditorToolbar, e: KeyboardEvent) {
