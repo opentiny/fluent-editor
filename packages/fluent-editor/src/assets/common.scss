@@ -277,3 +277,11 @@ $defaultFontSize: 14px;
     @content;
   }
 }
+
+@function getCssVar($name) {
+  @return var(--#{$name});
+}
+
+@mixin setCssVar($name, $value) {
+  --#{$name}: #{$value};
+}

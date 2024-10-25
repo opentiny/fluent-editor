@@ -19,3 +19,24 @@
     height: 100%;
   }
 }
+.fullscreen {
+  &.ql {
+    &-toolbar,
+    &-container {
+      position: fixed;
+      width: 100%;
+      left: 0;
+      background-color: getCssVar(editor-bg-color);
+    }
+    &-toolbar {
+      top: 0;
+      z-index: 51;
+    }
+    &-container {
+      @include setCssVar(top, 0px);
+      top: getCssVar(top);
+      height: calc(100% - getCssVar(top));
+      z-index: 50;
+    }
+  }
+}
