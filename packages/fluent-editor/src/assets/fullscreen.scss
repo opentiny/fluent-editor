@@ -23,20 +23,25 @@
   &.ql {
     &-toolbar,
     &-container {
+      @include setCssVar(fullscreen-z-index, 50);
+
       position: fixed;
       width: 100%;
       left: 0;
       background-color: getCssVar(editor-bg-color);
+      z-index: getCssVar(fullscreen-z-index);
     }
     &-toolbar {
+      @include setCssVar(fullscreen-container-z-index, calc(getCssVar(fullscreen-z-index) + 1));
+
       top: 0;
-      z-index: 51;
+      z-index: getCssVar(fullscreen-container-z-index);
     }
     &-container {
       @include setCssVar(top, 0px);
+
       top: getCssVar(top);
       height: calc(100% - getCssVar(top));
-      z-index: 50;
     }
   }
 }

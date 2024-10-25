@@ -1,4 +1,5 @@
 import type { FluentEditorToolbar } from '../config/types'
+import { namespace } from '../config'
 
 let exitEscHandlerBindToolbar: (e: KeyboardEvent) => void
 function exitEscHandler(toolbar: FluentEditorToolbar, e: KeyboardEvent) {
@@ -11,7 +12,7 @@ function intoFullscreen(toolbar: FluentEditorToolbar) {
   toolbar.container.classList.add('fullscreen')
   toolbar.quill.container.classList.add('fullscreen')
   const toolbatRect = toolbar.container.getBoundingClientRect()
-  toolbar.quill.container.style.setProperty('--top', `${toolbatRect.height}px`)
+  toolbar.quill.container.style.setProperty(`--${namespace}-top`, `${toolbatRect.height}px`)
   document.documentElement.classList.add('scroll--lock')
   document.addEventListener('keydown', exitEscHandlerBindToolbar)
 }
