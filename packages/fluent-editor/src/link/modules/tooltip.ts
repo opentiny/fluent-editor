@@ -3,7 +3,7 @@ import Emitter from 'quill/core/emitter'
 import { BaseTooltip } from 'quill/themes/base'
 import { debounce } from '../../../src/utils/debounce'
 import { LANG_CONF } from '../../config/editor.config'
-import { isNullOrUndefined } from '../../config/editor.utils'
+import { hadProtocol, isNullOrUndefined } from '../../config/editor.utils'
 import LinkBlot from '../formats/link'
 
 // const Emitter = Quill.imports['core/emitter'];
@@ -33,6 +33,7 @@ export default class Tooltip extends BaseTooltip {
     this.isHover = false
 
     this.resolveOptions()
+    LinkBlot.autoProtocol = this.options.autoProtocol
     this.debouncedHideToolTip = debounce(this.hideToolTip, 300)
     this.debouncedShowToolTip = debounce(this.showToolTip, 300)
   }
@@ -318,7 +319,7 @@ export default class Tooltip extends BaseTooltip {
     if (!url) {
       return ''
     }
-    if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
+    if (!hadProtocol(url)) {
       result = `${this.options.autoProtocol}://${url}`
     }
     return result
