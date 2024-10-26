@@ -27,6 +27,7 @@ $arrowWidth: 5px; // 下拉框箭头宽度
     }
 
     &.ql-snow {
+      background-color: getCssVar(editor-bg-color);
       button {
         display: inline-flex;
         align-items: center;

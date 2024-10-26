@@ -1,5 +1,5 @@
-import { isNullOrUndefined } from './editor.utils'
 import { LANG_CONF } from './editor.config'
+import { isNullOrUndefined } from './editor.utils'
 import {
   ALIGN_CENTER_ICON,
   ALIGN_LEFT_ICON,
@@ -169,3 +169,5 @@ export function getListValue(value, preListValue) {
   }
   return curListValue
 }
+/** css namespace */
+export const namespace = 'fe'

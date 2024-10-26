@@ -29,7 +29,7 @@ const TOOLBAR_CONFIG = [
   [{ direction: 'rtl' }],
   ['link', 'blockquote', 'code', 'code-block'],
   ['image', 'file', 'better-table'],
-  ['emoji', 'video', 'formula', 'screenshot'],
+  ['emoji', 'video', 'formula', 'screenshot', 'fullscreen'],
 ]
 
 onMounted(() => {
