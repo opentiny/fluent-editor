@@ -22,5 +22,6 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true // 不允许把null、undefined赋值给其他类型的变量
-  }
+  },
+  "include": ["src/*", "src/**/*"]
 }

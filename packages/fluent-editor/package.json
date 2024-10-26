@@ -24,6 +24,7 @@
   ],
   "main": "src/index.ts",
   "module": "src/index.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "start": "vite build && vite",
     "dev": "vite",
@@ -47,6 +48,7 @@
     "ts-jest": "^26.5.6",
     "ts-node": "^9.1.1",
     "typescript": "^4.9.5",
-    "vite": "^5.0.0"
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^4.3.0"
   }
 }
