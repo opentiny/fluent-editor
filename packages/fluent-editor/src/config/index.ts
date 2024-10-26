@@ -1,5 +1,5 @@
-import { isNullOrUndefined } from './editor.utils'
 import { LANG_CONF } from './editor.config'
+import { isNullOrUndefined } from './editor.utils'
 import {
   ALIGN_CENTER_ICON,
   ALIGN_LEFT_ICON,
@@ -14,6 +14,7 @@ import {
   EMOJI_ICON,
   FILE_ICON,
   FORMAT_PAINTER_ICON,
+  FULLSCREEN_EXIT_ICON,
   FULLSCREEN_ICON,
   GLOBAL_LINK_ICON,
   HELP_ICON,
@@ -79,6 +80,7 @@ export const ICONS_CONFIG: { [key: string]: any } = {
   'link': LINK_ICON,
   'global-link': GLOBAL_LINK_ICON,
   'fullscreen': FULLSCREEN_ICON,
+  'fullscreen-exit': FULLSCREEN_EXIT_ICON,
   'emoji': EMOJI_ICON,
   'help': HELP_ICON,
   'screenshot': SCREENSHOT_ICON,
@@ -169,3 +171,5 @@ export function getListValue(value, preListValue) {
   }
   return curListValue
 }
+/** css namespace */
+export const namespace = 'fe'

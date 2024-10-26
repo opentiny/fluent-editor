@@ -277,3 +277,12 @@ $defaultFontSize: 14px;
     @content;
   }
 }
+
+$namespace: fe;
+@function getCssVar($name) {
+  @return var(--#{$namespace}-#{$name});
+}
+
+@mixin setCssVar($name, $value) {
+  --#{$namespace}-#{$name}: #{$value};
+}

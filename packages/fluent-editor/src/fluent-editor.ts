@@ -11,6 +11,7 @@ import CustomUploader from './custom-uploader' // 上传
 import Emoji from './emoji' // 表情
 import FileModule from './file' // 文件
 import { FormatPainter } from './format-painter'
+import { fullscreenHandler } from './fullscreen/handler'
 import Link from './link' // 超链接
 import Mention from './mention/Mention' // @提醒
 import { Screenshot } from './screenshot'// 截图
@@ -23,17 +24,17 @@ import Video from './video' // 视频
 // import GlobalLink from './global-link' // 全局链接
 // import QuickMenu from './quick-menu' // 快捷菜单
 
-class FluentEditor extends Quill {
+export class FluentEditor extends Quill {
+  isFullscreen: boolean = false
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
     super(container, options)
   }
 }
 
 const registerModules = function () {
-  const Icons = Quill.imports['ui/icons']
-  const iconKeys = Object.keys(ICONS_CONFIG)
-  iconKeys.forEach((iconKey) => {
-    Icons[iconKey] = ICONS_CONFIG[iconKey]
+  const Icons = Quill.import('ui/icons')
+  Object.entries(ICONS_CONFIG).forEach(([key, icon]) => {
+    Icons[key] = icon
   })
 
   const SnowTheme = Quill.imports['themes/snow'] as typeof Module
@@ -65,7 +66,7 @@ const registerModules = function () {
             inputFile.call(this, 'image', accept)
           },
           'emoji': function () {},
-          'fullscreen': function () {},
+          'fullscreen': fullscreenHandler,
           'list': function (value) {
             const range = this.quill.getSelection()
             const formats = this.quill.getFormat(range)
