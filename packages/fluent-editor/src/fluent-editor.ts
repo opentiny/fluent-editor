@@ -32,10 +32,9 @@ export class FluentEditor extends Quill {
 }
 
 const registerModules = function () {
-  const Icons = Quill.imports['ui/icons']
-  const iconKeys = Object.keys(ICONS_CONFIG)
-  iconKeys.forEach((iconKey) => {
-    Icons[iconKey] = ICONS_CONFIG[iconKey]
+  const Icons = Quill.import('ui/icons')
+  Object.entries(ICONS_CONFIG).forEach(([key, icon]) => {
+    Icons[key] = icon
   })
 
   const SnowTheme = Quill.imports['themes/snow'] as typeof Module

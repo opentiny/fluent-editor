@@ -1,5 +1,5 @@
 import type { FluentEditorToolbar } from '../config/types'
-import { namespace } from '../config'
+import { ICONS_CONFIG, namespace } from '../config'
 import { lockScroll } from '../utils/scroll-lock'
 
 let exitEscHandlerBindToolbar: (e: KeyboardEvent) => void
@@ -22,6 +22,8 @@ function intoFullscreen(toolbar: FluentEditorToolbar) {
   toolbar.quill.container.classList.add('fullscreen')
   cleanLock = lockScroll()
   resizeHandlerBindToolbar()
+  const [, btn] = toolbar.controls.find(item => item[0] === 'fullscreen')
+  btn.innerHTML = ICONS_CONFIG['fullscreen-exit']
   window.addEventListener('resize', resizeHandlerBindToolbar)
   document.addEventListener('keydown', exitEscHandlerBindToolbar)
 }
@@ -31,6 +33,8 @@ function exitFullscreen(toolbar: FluentEditorToolbar) {
   toolbar.quill.container.classList.remove('fullscreen')
   cleanLock()
   document.documentElement.scrollTop = originScrollTop
+  const [, btn] = toolbar.controls.find(item => item[0] === 'fullscreen')
+  btn.innerHTML = ICONS_CONFIG.fullscreen
   window.removeEventListener('resize', resizeHandlerBindToolbar)
   document.removeEventListener('keydown', exitEscHandlerBindToolbar)
 }
