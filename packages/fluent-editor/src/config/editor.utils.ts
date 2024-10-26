@@ -175,6 +175,13 @@ export function sanitize(url, protocols) {
   return protocols.includes(protocol)
 }
 
+export function hadProtocol(url: string) {
+  if (!url || !/^(?:f|ht)tps?\:\/\//.test(url)) {
+    return false
+  }
+  return true
+}
+
 export function isInside(position, dom) {
   const areaPosition = dom.getBoundingClientRect()
   const { pageX, pageY } = position
