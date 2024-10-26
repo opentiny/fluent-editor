@@ -1,7 +1,8 @@
+import type { Parchment as TypeParchment } from 'quill'
 import Quill from 'quill'
 import { sanitize } from '../../config/editor.utils'
 
-const Inline = Quill.imports['blots/inline']
+const Inline = Quill.import('blots/inline') as typeof TypeParchment.InlineBlot
 
 // @dynamic
 export default class Link extends Inline {
@@ -10,8 +11,6 @@ export default class Link extends Inline {
   static SANITIZED_URL: string
   static PROTOCOL_WHITELIST: string[]
   static className: string
-  statics: any
-  domNode: any
   static create(value) {
     const node = super.create(value)
     const href = this.sanitize(value)
