@@ -1,7 +1,8 @@
+import type TypeInline from 'quill/blots/inline'
 import Quill from 'quill'
-import { sanitize } from '../../config/editor.utils'
+import { hadProtocol, sanitize } from '../../config/editor.utils'
 
-const Inline = Quill.imports['blots/inline']
+const Inline = Quill.import('blots/inline') as typeof TypeInline
 
 // @dynamic
 export default class Link extends Inline {
@@ -10,11 +11,14 @@ export default class Link extends Inline {
   static SANITIZED_URL: string
   static PROTOCOL_WHITELIST: string[]
   static className: string
-  statics: any
-  domNode: any
+  static autoProtocol: string = ''
   static create(value) {
     const node = super.create(value)
-    const href = this.sanitize(value)
+    let href = value
+    if (!hadProtocol(href) && this.autoProtocol) {
+      href = `${this.autoProtocol}://${value}`
+    }
+    href = this.sanitize(href)
     node.setAttribute('href', href)
     node.setAttribute('target', '_blank')
     return node

@@ -38,7 +38,6 @@ export default class BlotFormatter {
 
     // disable native image resizing on firefox
     document.execCommand('enableObjectResizing', false, 'false') // eslint-disable-next-line-line no-undef
-    this.quill.root.parentNode.style.position = this.quill.root.parentNode.style.position || 'relative'
     this.quill.root.addEventListener('click', this.onClick)
     this.specs = this.options.specs.map((SpecClass: any) => new SpecClass(this))
     this.specs.forEach(spec => spec.init())

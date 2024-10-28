@@ -1,6 +1,6 @@
 {
   "name": "@opentiny/fluent-editor",
-  "version": "3.20.0",
+  "version": "3.21.0",
   "description": "A rich text editor based on Quill 2.0, which extends rich modules and formats on the basis of Quill. It's powerful and out-of-the-box.",
   "author": "OpenTiny Team",
   "license": "MIT",
@@ -22,30 +22,24 @@
     "opentiny",
     "fluent-editor"
   ],
-  "exports": {
-    ".": {
-      "import": "./src/index.ts",
-      "require": "./src/index.ts"
-    },
-    "./style.scss": "./src/assets/style.scss"
-  },
   "main": "src/index.ts",
   "module": "src/index.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "start": "vite build && vite",
     "dev": "vite",
-    "build": "vite build && pnpm build:theme && node scripts/pre-release.js",
+    "build": "pnpm build:theme && vite build && node scripts/pre-release.js",
     "build:theme": "vite build --config vite.config.theme.ts",
     "test": "jest"
   },
-  "peerDependencies": {
+  "dependencies": {
     "mathlive": "^0.101.0",
     "parchment": "^3.0.0",
+    "lodash-es": "^4.17.15",
     "quill": "^2.0.0"
   },
-  "dependencies": {
-    "lodash-es": "^4.17.15"
-  },
+    "lodash-es": "^4.17.15",
+    "quill": "^2.0.0"
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "commander": "^6.2.0",
@@ -58,6 +52,7 @@
     "ts-jest": "^26.5.6",
     "ts-node": "^9.1.1",
     "typescript": "^4.9.5",
-    "vite": "^5.0.0"
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^4.3.0"
   }
 }

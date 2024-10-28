@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import * as glob from 'glob'
 import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 
 interface Manifest {
   version: string
@@ -39,6 +40,7 @@ const input = glob.sync('./src/**/*.ts', {
 })
 
 export default defineConfig({
+  plugins: [dts({ outDir: './dist/types' })],
   build: {
     sourcemap: true,
     minify: false,
@@ -52,10 +54,5 @@ export default defineConfig({
         rollupOutput('cjs', 'lib'),
       ],
     },
-  },
-  server: {
-    host: 'localhost', // ip地址
-    port: 8080, // 端口号
-    open: true, // 启动后是否自动打开浏览器
-  },
+  }
 })
