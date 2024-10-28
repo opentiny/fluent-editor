@@ -16,7 +16,6 @@
     "highlight.js": "^10.2.0",
     "html2canvas": "^1.4.1",
     "katex": "^0.16.11",
-    "mathlive": "^0.101.1",
     "quill": "^2.0.0",
     "quill-markdown-shortcuts": "^0.0.10",
     "vue": "^3.4.38"

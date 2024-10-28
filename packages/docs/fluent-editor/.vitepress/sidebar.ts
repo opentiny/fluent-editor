@@ -15,7 +15,6 @@ export function sidebar() {
         { text: '插入表情', link: '/docs/emoji' },
         { text: '格式刷', link: '/docs/format-painter' },
         { text: '公式', link: '/docs/formula' },
-        { text: 'mathlive公式', link: '/docs/mathlive' },
         { text: 'Markdown', link: '/docs/markdown' },
         { text: '字符统计', link: '/docs/counter' },
         { text: '视频', link: '/docs/video' },

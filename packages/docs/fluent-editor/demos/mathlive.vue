@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
-let editor
+let mathliveEditor
 
 const TOOLBAR_CONFIG = [
+  [{ header: [] }],
+  ['bold', 'italic', 'underline', 'link'],
+  [{ list: 'ordered' }, { list: 'bullet' }],
+  ['clean'],
   ['formula'],
 ]
 
@@ -12,7 +16,7 @@ onMounted(() => {
   import('@opentiny/fluent-editor').then((module) => {
     const FluentEditor = module.default
 
-    editor = new FluentEditor('#editor', {
+    mathliveEditor = new FluentEditor('#mathliveEditor', {
       theme: 'snow',
       modules: {
         toolbar: {
@@ -32,5 +36,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="editor" />
+  <div id="mathliveEditor" />
 </template>

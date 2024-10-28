@@ -33,13 +33,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "lodash-es": "^4.17.15",
     "mathlive": "^0.101.0",
     "parchment": "^3.0.0",
-    "lodash-es": "^4.17.15",
     "quill": "^2.0.0"
   },
-    "lodash-es": "^4.17.15",
-    "quill": "^2.0.0"
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "commander": "^6.2.0",
