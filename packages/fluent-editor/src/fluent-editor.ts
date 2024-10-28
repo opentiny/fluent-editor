@@ -1,6 +1,8 @@
-import Quill from 'quill'
 import type { Module, Parchment as TypeParchment } from 'quill'
-import { ICONS_CONFIG, TABLE_RIGHT_MENU_CONFIG, inputFile, getListValue } from './config'
+import type { IEditorConfig } from './config/types'
+import Quill from 'quill'
+import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
+import { getListValue, ICONS_CONFIG, inputFile, TABLE_RIGHT_MENU_CONFIG } from './config'
 import Counter from './counter' // 字符统计
 import CustomClipboard from './custom-clipboard' // 粘贴板
 import CustomImage from './custom-image/BlotFormatter' // 图片
@@ -8,32 +10,31 @@ import { CustomImageSpec } from './custom-image/specs/CustomImageSpec' // 图片
 import CustomUploader from './custom-uploader' // 上传
 import Emoji from './emoji' // 表情
 import FileModule from './file' // 文件
-// import GlobalLink from './global-link' // 全局链接
-import Link from './link' // 超链接0
+import { FormatPainter } from './format-painter'
+import { fullscreenHandler } from './fullscreen/handler'
+import Link from './link' // 超链接
 import Mention from './mention/Mention' // @提醒
-// import QuickMenu from './quick-menu' // 快捷菜单
 import { Screenshot } from './screenshot'// 截图
 import SoftBreak from './soft-break' // 软回车
 import Strike from './strike' // 删除线
-import BetterTable from './table/better-table' // 表格
 import CustomSyntax from './syntax' // 代码块高亮
+import BetterTable from './table/better-table' // 表格
 import Toolbar from './toolbar' // 工具栏
 import Video from './video' // 视频
-import { FormatPainter } from './format-painter'
-import { IEditorConfig } from './config/types'
-import { LineHeightStyle, SizeStyle, FontStyle, TextIndentStyle } from './attributors'
+// import GlobalLink from './global-link' // 全局链接
+// import QuickMenu from './quick-menu' // 快捷菜单
 
-class FluentEditor extends Quill {
+export class FluentEditor extends Quill {
+  isFullscreen: boolean = false
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
     super(container, options)
   }
 }
 
 const registerModules = function () {
-  const Icons = Quill.imports['ui/icons']
-  const iconKeys = Object.keys(ICONS_CONFIG)
-  iconKeys.forEach((iconKey) => {
-    Icons[iconKey] = ICONS_CONFIG[iconKey]
+  const Icons = Quill.import('ui/icons')
+  Object.entries(ICONS_CONFIG).forEach(([key, icon]) => {
+    Icons[key] = icon
   })
 
   const SnowTheme = Quill.imports['themes/snow'] as typeof Module
@@ -65,7 +66,7 @@ const registerModules = function () {
             inputFile.call(this, 'image', accept)
           },
           'emoji': function () {},
-          'fullscreen': function () {},
+          'fullscreen': fullscreenHandler,
           'list': function (value) {
             const range = this.quill.getSelection()
             const formats = this.quill.getFormat(range)

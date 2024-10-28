@@ -1,11 +1,13 @@
 @font-face {
-    font-family: "iconfont"; /* Project id 3231649 */
-    src: url('./iconfont/iconfont.woff2') format('woff2'),
-         url('./iconfont/iconfont.woff') format('woff'),
-         url('./iconfont/iconfont.ttf') format('truetype');
+  font-family: 'iconfont'; /* Project id 3231649 */
+  src:
+    url('./iconfont/iconfont.woff2') format('woff2'),
+    url('./iconfont/iconfont.woff') format('woff'),
+    url('./iconfont/iconfont.ttf') format('truetype');
 }
 @import 'quill/dist/quill.snow';
 
+@import './variable.scss';
 @import './common';
 @import './mention';
 @import './toolbar';

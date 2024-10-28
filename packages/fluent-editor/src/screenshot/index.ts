@@ -1,7 +1,8 @@
-import Quill from 'quill'
-import type Toolbar from 'quill/modules/toolbar'
 import type html2canvas from 'html2canvas'
 import type { Options as Html2CanvasOptions } from 'html2canvas'
+import type Toolbar from 'quill/modules/toolbar'
+import Quill from 'quill'
+import { imgToBase64 } from '../utils/image'
 import { lockScroll } from '../utils/scroll-lock'
 
 const Delta = Quill.import('delta')
@@ -11,7 +12,7 @@ export type ScreenShotOptions = Partial<Html2CanvasOptions> & {
   beforeCreateCanvas: () => void | Promise<void>
   beforeCreateImage: (canvas: HTMLCanvasElement) => HTMLCanvasElement | string | Promise<HTMLCanvasElement | string>
 }
-type ScreenShotOptionsInQuill = {
+interface ScreenShotOptionsInQuill {
   quill: {
     options: {
       screenshot: Partial<ScreenShotOptions>
@@ -19,11 +20,12 @@ type ScreenShotOptionsInQuill = {
   }
 }
 
-const resolveOptions = (options: Partial<ScreenShotOptions>) => {
+function resolveOptions(options: Partial<ScreenShotOptions>) {
   return Object.assign({
     // @ts-ignore
     Html2Canvas: window.Html2Canvas,
     useCORS: true,
+    scale: 1,
     foreignObjectRendering: true,
     beforeCreateImage: undefined,
     beforeCreateCanvas: undefined,
@@ -51,6 +53,11 @@ function init() {
   return { wrapper, mask, cutter, coordinate }
 }
 
+function findParentFixed(dom: HTMLElement) {
+  if (dom.tagName === 'BODY') return false
+  if (['fixed', 'sticky'].includes(dom.parentElement.style.position)) return true
+  return findParentFixed(dom.parentElement)
+}
 async function renderImage(
   Html2Canvas: typeof html2canvas,
   html2canvasOptions: Partial<Html2CanvasOptions>,
@@ -60,7 +67,39 @@ async function renderImage(
   if (options && options.beforeCreateCanvas) {
     await options.beforeCreateCanvas()
   }
-  const canvas: CanvasImageSource = await Html2Canvas(document.body, html2canvasOptions)
+  const canvas: CanvasImageSource = await Html2Canvas(document.body, {
+    ...html2canvasOptions,
+    onclone: async (doc: Document, el: HTMLElement) => {
+      // find all fixed or sticky dom
+      const fixedDom = Array.from(doc.querySelectorAll('*[style*="position: fixed"]')) as HTMLElement[]
+      const stickyDom = Array.from(doc.querySelectorAll('*[style*="position: sticky"]')) as HTMLElement[]
+      const fixedDomList = new Set([...fixedDom, ...stickyDom])
+      for (const dom of fixedDomList) {
+        // if parent dom already has fixed or sticky style
+        // means that transform will be settle. skip
+        if (findParentFixed(dom)) continue
+        // use transform move to correct position
+        let x = 0
+        let y = 0
+        if (dom.style.top !== 'auto') {
+          y = window.scrollY
+        }
+        if (dom.style.left !== 'auto') {
+          x = window.scrollX
+        }
+        if (x !== 0 || y !== 0) {
+          dom.style.transform = `translate(${x}px, ${y}px)`
+        }
+      }
+
+      const imgs = doc.querySelectorAll('img')
+      const promises = Array.from(imgs).map(async (img) => {
+        img.src = await imgToBase64(img.src)
+      })
+      await Promise.all(promises)
+      html2canvasOptions.onclone && await html2canvasOptions.onclone(doc, el)
+    },
+  })
   // 当前canvas为body全局截图，从当前截图中截取想要的部分重新绘制转成base64插入富文本
   let cropCanvas: HTMLCanvasElement | string = document.createElement('canvas')
   cropCanvas.width = rect.width
@@ -165,7 +204,6 @@ export function Screenshot(this: Toolbar & ScreenShotOptionsInQuill) {
     if (event.button === 2) {
       document.removeEventListener('mousemove', drawRect)
       document.removeEventListener('mousedown', toggleRect)
-      console.log('right')
       document.addEventListener('contextmenu', removeContextmenu)
       return
     }

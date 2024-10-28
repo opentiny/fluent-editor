@@ -97,7 +97,7 @@ export default class TableScrollBar {
 
   setScrollBarMove(pos, isMouse) {
     // 获取当前滑块左边距和鼠标两次事件节点之间的位移差，计算当前滑块位置及是否显示左右遮罩层，通过比例计算表格位移并赋值
-    const currentBarLeft = parseInt(getComputedStyle(this.scrollBar)['left'], 10)
+    const currentBarLeft = Number.parseInt(getComputedStyle(this.scrollBar).left, 10)
     let left = isMouse ? pos - this.prev + currentBarLeft : currentBarLeft + pos
     this.showMask(left)
     left = this.getLimitedDistance(left)

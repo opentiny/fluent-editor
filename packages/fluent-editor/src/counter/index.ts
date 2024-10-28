@@ -1,6 +1,6 @@
+import type { ICounterOption } from '../config/types'
 import Quill from 'quill'
 import { LANG_CONF } from '../config'
-import { ICounterOption } from '../config/types'
 
 export default class Counter {
   container: HTMLDivElement

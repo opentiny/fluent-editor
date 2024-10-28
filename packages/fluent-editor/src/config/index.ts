@@ -1,3 +1,5 @@
+import { LANG_CONF } from './editor.config'
+import { isNullOrUndefined } from './editor.utils'
 import {
   ALIGN_CENTER_ICON,
   ALIGN_LEFT_ICON,
@@ -11,6 +13,8 @@ import {
   COLOR_ICON,
   EMOJI_ICON,
   FILE_ICON,
+  FORMAT_PAINTER_ICON,
+  FULLSCREEN_EXIT_ICON,
   FULLSCREEN_ICON,
   GLOBAL_LINK_ICON,
   HELP_ICON,
@@ -27,14 +31,9 @@ import {
   TRIANGLE_DOWN_ICON,
   UNDERLINE_ICON,
   UNDO_ICON,
-  FORMAT_PAINTER_ICON,
-} from './config/icons.config'
-import { isNullOrUndefined } from './config/editor.utils'
+} from './icons.config'
 
-import { EN_US } from './config/i18n/en-us'
-import { ZH_CN } from './config/i18n/zh-cn'
-const localLang = localStorage.getItem('lang') || 'zh-cn'
-export const LANG_CONF = localLang === 'en-us' ? EN_US : ZH_CN
+export * from './editor.config'
 
 export const ICONS_CONFIG: { [key: string]: any } = {
   'undo': UNDO_ICON,
@@ -81,6 +80,7 @@ export const ICONS_CONFIG: { [key: string]: any } = {
   'link': LINK_ICON,
   'global-link': GLOBAL_LINK_ICON,
   'fullscreen': FULLSCREEN_ICON,
+  'fullscreen-exit': FULLSCREEN_EXIT_ICON,
   'emoji': EMOJI_ICON,
   'help': HELP_ICON,
   'screenshot': SCREENSHOT_ICON,
@@ -171,3 +171,5 @@ export function getListValue(value, preListValue) {
   }
   return curListValue
 }
+/** css namespace */
+export const namespace = 'fe'

@@ -1,9 +1,10 @@
 import Quill from 'quill'
 import LinkBlot from './formats/link'
 import Tooltip from './modules/tooltip'
-const icons = Quill.imports['ui/icons']
-const SnowTheme = Quill.imports['themes/snow']
-const Module = Quill.imports['core/module']
+
+const icons = Quill.import('ui/icons')
+const SnowTheme = Quill.import('themes/snow')
+const Module = Quill.import('core/module')
 
 // @dynamic
 class Link extends Module {
@@ -16,6 +17,7 @@ class Link extends Module {
   }
 }
 
+// @ts-expect-error
 SnowTheme.prototype.extendToolbar = function (toolbar) {
   toolbar.container.classList.add('ql-snow')
   this.buildButtons(toolbar.container.querySelectorAll('button'), icons)

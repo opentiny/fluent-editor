@@ -3,8 +3,8 @@ import { isNullOrUndefined } from '../config/editor.utils'
 import { DEFAULT_MENTION_CHAR, ON_MENTION_LINK_REMOVE } from './constants'
 import MentionLink from './MentionLink'
 
-const { Scope } = Quill.imports['parchment']
-const Delta = Quill.imports['delta']
+const { Scope } = Quill.imports.parchment
+const Delta = Quill.imports.delta
 
 interface MentionOption {
   containerClass?: string
@@ -98,9 +98,9 @@ class Mention {
     quill.keyboard.addBinding({ key: 'Enter' }, this.handleEnterKey)
     quill.keyboard.addBinding({ key: 'Tab' }, this.handleEnterKey)
     quill.keyboard.addBinding({ key: 'Escape' }, this.handleEscapeKey)
-    quill.keyboard.bindings['Enter'].unshift(quill.keyboard.bindings['Enter'].pop())
-    quill.keyboard.bindings['Tab'].unshift(quill.keyboard.bindings['Tab'].pop())
-    quill.keyboard.bindings['Escape'].unshift(quill.keyboard.bindings['Escape'].pop())
+    quill.keyboard.bindings.Enter.unshift(quill.keyboard.bindings.Enter.pop())
+    quill.keyboard.bindings.Tab.unshift(quill.keyboard.bindings.Tab.pop())
+    quill.keyboard.bindings.Escape.unshift(quill.keyboard.bindings.Escape.pop())
 
     const customKeyboardEnter = {
       key: 'Enter',
@@ -145,7 +145,7 @@ class Mention {
     }
 
     // 用自定义的Enter替换内置的Enter
-    quill.keyboard.bindings['Enter'] = quill.keyboard.bindings['Enter'].map((item) => {
+    quill.keyboard.bindings.Enter = quill.keyboard.bindings.Enter.map((item) => {
       const buildinKeyboardEnter = item.format === undefined && item.shiftKey === null
       if (buildinKeyboardEnter) {
         return customKeyboardEnter
@@ -185,8 +185,7 @@ class Mention {
   }
 
   getMentionItemIndex(itemEl: Element) {
-    return [].reduce.call(this.mentionListEL.children,
-      (index, item, idx) => item === itemEl ? idx : index, -1)
+    return [].reduce.call(this.mentionListEL.children, (index, item, idx) => item === itemEl ? idx : index, -1)
   }
 
   handleTextChange = (_delta, _oldDelta, source) => {
@@ -203,11 +202,9 @@ class Mention {
         const content = this.quill.getContents()
         const beforeCaretText = content.reduce((newText, op) => {
           if (typeof op.insert === 'string') {
-            // eslint-disable-next-line no-return-assign
             return (newText += op.insert)
           }
           else {
-            // eslint-disable-next-line no-return-assign
             return (newText += ' ') // 将图片内容和@提醒内容的非字符内容置为' '，算一个位置
           }
         }, '')
@@ -371,7 +368,6 @@ class Mention {
     }
     if (node.scrollIntoView) {
       node.scrollIntoView(false)
-      return
     }
   }
 

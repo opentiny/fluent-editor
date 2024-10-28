@@ -1,7 +1,8 @@
-export const BIG_DELTA_LIMIT = 2000 // Delta数据行太多超出该限制时，加载会比较慢，需要提示用户
-
 import { EN_US } from './i18n/en-us'
 import { ZH_CN } from './i18n/zh-cn'
+
+// Delta数据行太多超出该限制时，加载会比较慢，需要提示用户
+export const BIG_DELTA_LIMIT = 2000
 const localLang = localStorage.getItem('lang') || 'zh-cn'
 export const LANG_CONF = localLang === 'en-us' ? EN_US : ZH_CN
 

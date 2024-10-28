@@ -1,9 +1,9 @@
 # 快速开始
 
-安装 Fluent Editor 和 Quill：
+安装 Fluent Editor：
 
 ```shell
-npm i @opentiny/fluent-editor quill
+npm i @opentiny/fluent-editor
 ```
 
 编写 html：
@@ -46,10 +46,7 @@ const editor = new FluentEditor('#editor', {
     }
   </script>
   <!-- 引入 @opentiny/fluent-editor 样式 -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/@opentiny/fluent-editor@3.18.3/style.css"
-  />
+  <link rel="stylesheet" href="https://unpkg.com/@opentiny/fluent-editor@3.18.3/style.css" />
 </head>
 ```
 

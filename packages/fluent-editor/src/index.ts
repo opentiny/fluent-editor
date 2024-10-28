@@ -1,5 +1,5 @@
-// 后面合并两个配置
-// export * from './config/editor.config'
-// export * from './config'
 import FluentEditor from './fluent-editor'
+
+export * from './config'
+
 export default FluentEditor

@@ -25,8 +25,14 @@ $arrowWidth: 5px; // 下拉框箭头宽度
     &.toolbar-bottom {
       border-top: 0;
     }
-    
+
     &.ql-snow {
+      background-color: getCssVar(editor-bg-color);
+      button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
       .ql-active,
       .ql-picker-label.ql-active,
       .ql-picker-label:hover,
@@ -137,9 +143,9 @@ $arrowWidth: 5px; // 下拉框箭头宽度
     }
   }
 
-  $colorGroup: #000000, #ffffff, #f3f6f8, #e3e5e9, #cacfd8, #959eb2, #5e6678, #f95f5b, #fce5e4, #ffc9c7, #ff8f8a, #fb564e, #cb160e, #900701,
-    #fecc55, #fff1d0, #fadf9e, #f2cd72, #edb83a, #be8c11, #7c5905, #3dcca6, #ccf7ec, #abf3e0, #46e3b9, #12c898, #0c9f78, #06664d, #5090ff,
-    #c7d9fa, #9cbffb, #659cfc, #387df4, #1457cd, #072c6e;
+  $colorGroup: #000000, #ffffff, #f3f6f8, #e3e5e9, #cacfd8, #959eb2, #5e6678, #f95f5b, #fce5e4, #ffc9c7, #ff8f8a,
+    #fb564e, #cb160e, #900701, #fecc55, #fff1d0, #fadf9e, #f2cd72, #edb83a, #be8c11, #7c5905, #3dcca6, #ccf7ec, #abf3e0,
+    #46e3b9, #12c898, #0c9f78, #06664d, #5090ff, #c7d9fa, #9cbffb, #659cfc, #387df4, #1457cd, #072c6e;
 
   .ql-toolbar {
     .ql-picker.ql-expanded {
@@ -184,16 +190,39 @@ $arrowWidth: 5px; // 下拉框箭头宽度
         }
 
         // 根据选中的选项，勾选相应的项
-        $pickerGroup: 'undefined', '1', '2', '3',
+        $pickerGroup:
+          'undefined',
+          '1',
+          '2',
+          '3',
           // 标题下拉框
           'songti',
-          'yahei', 'kaiti', 'heiti', 'lishu', 'mono', 'arial', 'arialblack', 'comic', 'impact', 'times',
+          'yahei',
+          'kaiti',
+          'heiti',
+          'lishu',
+          'mono',
+          'arial',
+          'arialblack',
+          'comic',
+          'impact',
+          'times',
           // 字体下拉框
           '12px',
-          '13px', '14px', '16px', '19px', '22px', '24px', '29px', '32px', '40px', '48px',
+          '13px',
+          '14px',
+          '16px',
+          '19px',
+          '22px',
+          '24px',
+          '29px',
+          '32px',
+          '40px',
+          '48px',
           // 字号下拉框
           '2.5',
-          '4', '5'; // 行距下拉框
+          '4',
+          '5'; // 行距下拉框
         @include pickerLabel($pickerGroup, length($pickerGroup));
       }
 
@@ -279,7 +308,7 @@ $arrowWidth: 5px; // 下拉框箭头宽度
 
         &.ql-picker.ql-expanded {
           .ql-picker-label {
-            color: #5e7ce0
+            color: #5e7ce0;
           }
         }
       }

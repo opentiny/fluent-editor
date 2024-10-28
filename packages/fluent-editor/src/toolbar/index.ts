@@ -1,7 +1,7 @@
+import type TypeToolbar from 'quill/modules/toolbar'
 import Quill from 'quill'
 import { isNullOrUndefined } from '../config/editor.utils'
 import './better-picker'
-import type TypeToolbar from 'quill/modules/toolbar'
 
 const Delta = Quill.import('delta')
 const Parchment = Quill.import('parchment')
@@ -68,9 +68,9 @@ class BetterToolbar extends Toolbar {
         let isActive
           = formats[format] === input.getAttribute('value')
           || (!isNullOrUndefined(formats[format])
-          && (formats[format].value === input.getAttribute('value')
-          || formats[format].toString() === input.getAttribute('value')))
-          || (isNullOrUndefined(formats[format]) && !input.getAttribute('value'))
+            && (formats[format].value === input.getAttribute('value')
+              || formats[format].toString() === input.getAttribute('value')))
+              || (isNullOrUndefined(formats[format]) && !input.getAttribute('value'))
 
         if (!isActive) {
           const checkFormat = formats[format]

@@ -1,5 +1,5 @@
+import type TypeSyntax from 'quill/modules/syntax'
 import Quill from 'quill'
-import TypeSyntax from 'quill/modules/syntax'
 
 const Syntax = Quill.import('modules/syntax') as typeof TypeSyntax
 

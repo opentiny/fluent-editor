@@ -1,7 +1,7 @@
 import type { QuillOptions } from 'quill'
-import { IEditorModules } from './editor-modules.interface'
-import { EditorFormat } from './type'
-import { ScreenShotOptions } from '../../screenshot'
+import type { ScreenShotOptions } from '../../screenshot'
+import type { IEditorModules } from './editor-modules.interface'
+import type { EditorFormat } from './type'
 
 export interface IEditorConfig extends QuillOptions {
   format?: EditorFormat
@@ -10,7 +10,8 @@ export interface IEditorConfig extends QuillOptions {
   scrollingContainer?: HTMLElement | string | null
   // Custom Config to track all changes or only changes by 'user'
   trackChanges?: 'user' | 'all'
-  autoProtocol?: boolean
+  // Auto protocol for link
+  autoProtocol?: boolean | string
   editorPaste?: any
   uploadOption?: {
     imageUploadToServer?: boolean

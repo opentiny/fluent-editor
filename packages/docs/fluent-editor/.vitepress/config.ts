@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vitepress'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
+import { defineConfig } from 'vitepress'
 import { sidebar } from './sidebar'
 
 export default defineConfig({
@@ -10,7 +10,7 @@ export default defineConfig({
   base: '/fluent-editor/',
   cleanUrls: true,
   head: [
-    ['link', { rel: 'icon', href: 'favicon.ico' }]
+    ['link', { rel: 'icon', href: 'favicon.ico' }],
   ],
   themeConfig: {
     logo: '/logo.svg',
@@ -19,28 +19,28 @@ export default defineConfig({
       {
         text: '生态',
         items: [
-          { text: 'TinyVue', link: 'https://opentiny.design/tiny-vue/' }
-        ]
-      }
+          { text: 'TinyVue', link: 'https://opentiny.design/tiny-vue/' },
+        ],
+      },
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/opentiny/fluent-editor/' }
+      { icon: 'github', link: 'https://github.com/opentiny/fluent-editor/' },
     ],
     sidebar: {
       '/docs/': sidebar(),
     },
     footer: {
       message: 'Made with ❤ by',
-      copyright: '<a href="https://opentiny.design/" target="_blank">OpenTiny</a> and his friends'
+      copyright: '<a href="https://opentiny.design/" target="_blank">OpenTiny</a> and his friends',
     },
     outline: {
-      label: '本页目录'
+      label: '本页目录',
     },
     sidebarMenuLabel: '菜单',
     returnToTopLabel: '返回顶部',
     docFooter: {
       prev: '上一篇',
-      next: '下一篇'
+      next: '下一篇',
     },
     search: {
       provider: 'local',
@@ -48,7 +48,7 @@ export default defineConfig({
         translations: {
           button: {
             buttonText: '搜索',
-            buttonAriaLabel: '搜索'
+            buttonAriaLabel: '搜索',
           },
           modal: {
             displayDetails: '显示详情',
@@ -62,12 +62,12 @@ export default defineConfig({
               navigateUpKeyAriaLabel: '向上箭头',
               navigateDownKeyAriaLabel: '向下箭头',
               closeText: '关闭',
-              closeKeyAriaLabel: 'ESC'
-            }
-          }
-        }
-      }
-    }
+              closeKeyAriaLabel: 'ESC',
+            },
+          },
+        },
+      },
+    },
   },
   markdown: {
     config(md) {

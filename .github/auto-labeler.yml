@@ -1,27 +1,27 @@
 version: v1
 
 labels:
-  - label: 'enhancement'
+  - label: enhancement
     sync: true
     matcher:
       title: '^feat:.*'
-  - label: 'documentation'
+  - label: documentation
     sync: true
     matcher:
       title: '^docs:.*'
-  - label: 'documentation'
+  - label: documentation
     sync: true
     matcher:
       title: '^chore:.*'
-  - label: 'bug'
+  - label: bug
     sync: true
     matcher:
       title: '^fix:.*'
-  - label: 'ci'
+  - label: ci
     sync: true
     matcher:
       title: '^ci:.*'
-  - label: 'e2e-test'
+  - label: e2e-test
     sync: true
     matcher:
       title: '^test:.*'

@@ -1,4 +1,4 @@
-import { IRange } from './range.interface'
+import type { IRange } from './range.interface'
 
 export interface ISelectionChange {
   editor: any

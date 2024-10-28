@@ -292,6 +292,12 @@ export const FULLSCREEN_ICON = `<svg xmlns="http://www.w3.org/2000/svg" class="i
     <path fill="#333333" d="M64 384h96V160h224.2V64H64zM639.8 64v96H864v224h96V64zM864 864H639.8v96H960V639.61h-96zM160 639.61H64V960h320.2v-96H160z"/>
 </svg>`
 
+export const FULLSCREEN_EXIT_ICON = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M6 21v-3H3v-2h5v5zm10 0v-5h5v2h-3v3zM3 8V6h3V3h2v5zm13 0V3h2v3h3v2z"/>
+  </svg>
+`
+
 export const TRIANGLE_DOWN_ICON = `<i class="icon-triangle-down"></i>`
 
 export const FORMAT_PAINTER_ICON = `<svg viewBox="0 0 32 32"><path fill="currentColor" d="M28.83 23.17L23 17.33V13a1 1 0 0 0-.29-.71l-10-10a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42l10 10A1 1 0 0 0 13 23h4.34l5.83 5.84a4 4 0 0 0 5.66-5.66ZM6 10.41l2.29 2.3l1.42-1.42L7.41 9L9 7.41l4.29 4.3l1.42-1.42L10.41 6L12 4.41L18.59 11L11 18.59L4.41 12Zm21.41 17a2 2 0 0 1-2.82 0l-6.13-6.12a1.8 1.8 0 0 0-.71-.29h-4.34l-1-1L20 12.41l1 1v4.34a1 1 0 0 0 .29.7l6.12 6.14a2 2 0 0 1 0 2.82"/></svg>`

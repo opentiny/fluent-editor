@@ -2,11 +2,7 @@
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #bd34fe 30%,
-    #41d1ff
-  );
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
   --vp-dark-theme-color: #ffffff;
   --vp-dark-theme-hover-color: #5e7ce0;
 }
@@ -20,7 +16,8 @@
 }
 
 /* 隐藏 Playground 和全屏按钮 */
-.example-actions-playground, .example-actions-fullscreen {
+.example-actions-playground,
+.example-actions-fullscreen {
   display: none;
 }
 

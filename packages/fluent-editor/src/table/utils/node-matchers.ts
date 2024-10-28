@@ -3,7 +3,7 @@ import { omit, splitWithBreak } from '../../config/editor.utils'
 import { cellId as tableCellId, rowId as tableRowId, TableViewWrapper } from '../formats/table'
 import { CELL_MIN_WIDTH } from '../table-config'
 
-const Delta = Quill.imports['delta']
+const Delta = Quill.imports.delta
 const InlineBlot = Quill.imports.parchment.InlineBlot
 
 // rebuild delta
@@ -47,22 +47,22 @@ export function matchTableCell(node, delta) {
             rowspan,
             colspan,
           }
-          if (op.attributes['table']) {
+          if (op.attributes.table) {
             delete op.attributes.table
           }
           switch (true) {
-            case !!op.attributes['header']:
-              attributes = Object.assign(op.attributes['header'], cellAttributes)
+            case !!op.attributes.header:
+              attributes = Object.assign(op.attributes.header, cellAttributes)
               break
-            case !!op.attributes['list']:
-              attributes = { list: Object.assign(op.attributes['list'], cellAttributes) }
+            case !!op.attributes.list:
+              attributes = { list: Object.assign(op.attributes.list, cellAttributes) }
               break
             default:
               attributes = { 'table-cell-line': cellAttributes }
           }
           // fix: when td has background-color, quill can't set it to table-cell bolt
-          if (op.attributes['background'] && attributes['table-cell-line']) {
-            attributes['table-cell-line']['tdBgColor'] = op.attributes['background']
+          if (op.attributes.background && attributes['table-cell-line']) {
+            attributes['table-cell-line'].tdBgColor = op.attributes.background
           }
           newDelta.insert('\n', Object.assign(op.attributes, attributes))
         }
@@ -181,7 +181,7 @@ export function matchTable(node, delta, scroll) {
     }
     else {
       // 大于默认值取实际指定值
-      return { 'table-col': { width: width } }
+      return { 'table-col': { width } }
     }
   }
 
@@ -215,12 +215,13 @@ export function matchTable(node, delta, scroll) {
       // index为差值列索引，通过遍历差值得到mexCells行中对应索引的单元格宽度
       for (let i = 0; i < fillNumber; i++) {
         const index = outset + i
-        const colWidth = parseInt(
+        const colWidth = Number.parseInt(
           index < maxCells.length
             ? maxCells[index].width
           // maxCells[index].style && maxCells[index].style.width ? maxCells[index].style.width :
             : maxCells[maxCells.length - 1].width,
-          10)
+          10,
+        )
         newDelta.insert('\n', checkMinWidth(colWidth))
         colCount++
       }
@@ -232,12 +233,12 @@ export function matchTable(node, delta, scroll) {
         if (colCount < maxCellsNumber) {
         // 当table-col宽度一致时会合并为单一insert，insert长度大于1，截取符合实际总列数的长度来插入
           const insert = op.insert.slice(0, maxCellsNumber)
-          const colWidth = parseInt(attr['table-col']['width'], 10)
+          const colWidth = Number.parseInt(attr['table-col'].width, 10)
           newDelta.insert(insert, checkMinWidth(colWidth))
           colCount += insert.length
         }
         break
-      case !!attr['notFilled']:
+      case !!attr.notFilled:
       { // 将标记的空tr填充对应列数的单元格
         const rowId = tableRowId()
         for (let x = 0; x < maxCellsNumber; x++) {
@@ -298,8 +299,8 @@ export function matchList(node, delta) {
     if (typeof op.attributes.list === 'string') {
       delete op.attributes.list
     }
-    else if (typeof op.attributes.list === 'object' && !op.attributes.list['value']) {
-      op.attributes.list['value'] = value
+    else if (typeof op.attributes.list === 'object' && !op.attributes.list.value) {
+      op.attributes.list.value = value
     }
   })
   return delta
@@ -317,7 +318,7 @@ export function matchInline(node, delta, scroll) {
     // 插入节点是否存在下一个兄弟元素
     const match = scroll.query(node)
     const nodeHtml = node.nextElementSibling.innerHTML
-    const nodeText = node.nextElementSibling.innerText
+    const nodeText = node.nextElementSibling.textContent
     if (
       (match && match.prototype instanceof InlineBlot) // 判断当前节点是否为内联
       || (node.tagName === 'P' && nodeHtml !== nodeText)

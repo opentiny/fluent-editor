@@ -1,4 +1,4 @@
-import { IHelpPanelItem } from './help-panel-item.interface'
+import type { IHelpPanelItem } from './help-panel-item.interface'
 
 export interface IHelpPanelOption {
   id: string

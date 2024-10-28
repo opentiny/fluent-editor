@@ -4,7 +4,7 @@ name: Auto Deploy
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: [main]
     paths:
       - 'packages/docs/**'
       - '!packages/docs/**/*.spec.ts'
@@ -20,7 +20,7 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:

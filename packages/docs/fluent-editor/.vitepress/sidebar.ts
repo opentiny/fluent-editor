@@ -1,6 +1,7 @@
 export function sidebar() {
   return [
     { text: '快速开始', link: '/docs/quick-start' },
+    { text: '在前端框架中使用', link: '/docs/used-in-framework' },
     {
       text: '使用示例',
       items: [

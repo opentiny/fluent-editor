@@ -1,8 +1,8 @@
-import Quill from 'quill'
 import type { Range } from 'quill'
 import type Toolbar from 'quill/modules/toolbar'
+import Quill from 'quill'
 
-type FormatData = {
+interface FormatData {
   formatPainter: {
     rangeFormat: Record<string, any>
     isFormatterLock: boolean

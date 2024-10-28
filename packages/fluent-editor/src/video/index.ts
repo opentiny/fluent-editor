@@ -1,5 +1,5 @@
-import Quill from 'quill'
 import type { Parchment as TypeParchment } from 'quill'
+import Quill from 'quill'
 import { sanitize } from '../config/editor.utils'
 
 const BlockEmbed = Quill.imports['blots/block/embed'] as TypeParchment.BlotConstructor
@@ -25,15 +25,17 @@ class Video extends BlockEmbed {
     VIDEO_ATTRIBUTES.forEach((key) => {
       if (value[key]) {
         switch (key) {
-          case 'src':
-            const src = Video.sanitize(value[key])
+          case 'src':{ const src = Video.sanitize(value[key])
             node.setAttribute(key, src)
             break
-          case 'title':
+          }
+          case 'title': {
             node.setAttribute(key, value[key])
             break
-          default:
+          }
+          default: {
             node.dataset[key] = value[key]
+          }
         }
       }
     })

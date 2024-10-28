@@ -1,6 +1,7 @@
 import Quill from 'quill'
 import { ON_WORK_ITEM_LINK_REMOVE } from '../constants'
 import { createTable } from '../utils/createTable'
+
 const BlockEmbed = Quill.imports['blots/block/embed']
 
 // @dynamic

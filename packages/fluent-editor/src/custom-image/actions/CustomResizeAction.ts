@@ -1,9 +1,12 @@
 import Action from './Action'
+
 const MIN_WIDTH = 40
 
-const getElementStyle = element => element.currentStyle
-  ? element.currentStyle
-  : window.getComputedStyle(element, null)
+function getElementStyle(element) {
+  return element.currentStyle
+    ? element.currentStyle
+    : window.getComputedStyle(element, null)
+}
 export default class CustomResizeAction extends Action {
   topLeftHandle: HTMLElement
   topRightHandle: HTMLElement
@@ -67,10 +70,10 @@ export default class CustomResizeAction extends Action {
     let handleYOffset = '0px'
     if (handleStyle) {
       if (handleStyle.width) {
-        handleXOffset = `${-parseFloat(handleStyle.width) / 2}px`
+        handleXOffset = `${-Number.parseFloat(handleStyle.width) / 2}px`
       }
       if (handleStyle.height) {
-        handleYOffset = `${-parseFloat(handleStyle.height) / 2}px`
+        handleYOffset = `${-Number.parseFloat(handleStyle.height) / 2}px`
       }
     }
 
@@ -128,8 +131,8 @@ export default class CustomResizeAction extends Action {
       rootStyle = getElementStyle(root)
     }
     this.maxWidth = root.clientWidth
-    - parseFloat(rootStyle.paddingRight)
-    - parseFloat(rootStyle.paddingLeft)
+    - Number.parseFloat(rootStyle.paddingRight)
+    - Number.parseFloat(rootStyle.paddingLeft)
 
     document.addEventListener('mousemove', this.onDrag)
     document.addEventListener('mouseup', this.onMouseUp)
@@ -147,7 +150,6 @@ export default class CustomResizeAction extends Action {
     else {
       const parentNode = node.parentElement
       if (parentNode) {
-        // eslint-disable-next-line no-return-assign
         return (this.findTd(parentNode, level += 1))
       }
       else {

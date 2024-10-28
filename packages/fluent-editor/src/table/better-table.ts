@@ -37,7 +37,7 @@ import {
 } from './utils/node-matchers'
 
 const Block = Quill.imports['blots/block']
-const Delta = Quill.imports['delta']
+const Delta = Quill.imports.delta
 const Module = Quill.imports['core/module']
 
 // @dynamic
@@ -161,8 +161,8 @@ class BetterTable extends Module {
     // since only one matched bindings callback will execute.
     // expected my binding callback execute first
     // I changed the order of binding callbacks
-    const thisBinding = quill.keyboard.bindings['Backspace'].pop()
-    quill.keyboard.bindings['Backspace'].splice(1, 0, thisBinding)
+    const thisBinding = quill.keyboard.bindings.Backspace.pop()
+    quill.keyboard.bindings.Backspace.splice(1, 0, thisBinding)
 
     // add Matchers to match and render quill-better-table for initialization
     // or pasting
@@ -209,7 +209,7 @@ class BetterTable extends Module {
                 // @ts-ignore
                 table.parentNode.classList.add('quill-better-table-selected')
               }
-              else if (classes.indexOf('quill-better-table-selected') >= 0) {
+              else if (classes.includes('quill-better-table-selected')) {
                 // @ts-ignore
                 table.parentNode.classList.remove('quill-better-table-selected')
               }
@@ -478,7 +478,6 @@ BetterTable.keyboardBindings = {
     format: ['table-col'],
     collapsed: true,
     offset: 0,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     handler() { },
   },
   'table-cell-line backspace': {
@@ -505,7 +504,7 @@ BetterTable.keyboardBindings = {
       const length = line.length()
       if (!line.next // 当无下一个元素且满足以下情况阻止删除操作
         && ((!line.prev && length === 1) // 单元格内只有一个table-cell-line且无内容
-        || (range.index !== index && range.index + 1 >= index + length))) { // 光标在有内容的table-cell-line最后
+          || (range.index !== index && range.index + 1 >= index + length))) { // 光标在有内容的table-cell-line最后
         return false
       }
       return true

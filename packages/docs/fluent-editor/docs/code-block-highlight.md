@@ -8,5 +8,3 @@
 
 :::demo src=demos/code-block-highlight.vue
 :::
-
-

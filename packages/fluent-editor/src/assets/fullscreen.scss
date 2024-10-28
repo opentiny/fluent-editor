@@ -1,14 +1,14 @@
-:-webkit-full-screen {  
-  background-color: white !important;  
-}  
-:-moz-full-screen {  
-  background-color: white !important;  
-}  
-:-ms-fullscreen {  
-  background-color: white !important;  
-}  
-:fullscreen {  
-  background-color: white !important;  
+:-webkit-full-screen {
+  background-color: white !important;
+}
+:-moz-full-screen {
+  background-color: white !important;
+}
+:-ms-fullscreen {
+  background-color: white !important;
+}
+:fullscreen {
+  background-color: white !important;
 }
 .scroll {
   &--lock {
@@ -17,5 +17,31 @@
   &__wrap {
     overflow: auto;
     height: 100%;
+  }
+}
+.fullscreen {
+  &.ql {
+    &-toolbar,
+    &-container {
+      @include setCssVar(fullscreen-z-index, 50);
+
+      position: fixed;
+      width: 100%;
+      left: 0;
+      background-color: getCssVar(editor-bg-color);
+      z-index: getCssVar(fullscreen-z-index);
+    }
+    &-toolbar {
+      @include setCssVar(fullscreen-container-z-index, calc(getCssVar(fullscreen-z-index) + 1));
+
+      top: 0;
+      z-index: getCssVar(fullscreen-container-z-index);
+    }
+    &-container {
+      @include setCssVar(top, 0px);
+
+      top: getCssVar(top);
+      height: calc(100% - getCssVar(top));
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { ToolbarOption } from './type'
+import type { ToolbarOption } from './type'
 
 export interface IEditorModules {
   [key: string]: any

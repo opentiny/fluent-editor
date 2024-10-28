@@ -25,7 +25,7 @@ export default class TableSelection {
   bottom: any
   top: any
   right: any
-  /* eslint-disable-next-line no-constructor-return */
+
   constructor(table, quill, dom) {
     if (!table) {
       return null
@@ -234,9 +234,9 @@ export default class TableSelection {
       const { x, y, width, height } = getRelativeRect(tableCell.domNode.getBoundingClientRect(), this.quill.root.parentNode)
       const isCellIntersected
         = ((x + ERROR_LIMIT >= this.boundary.x && x + ERROR_LIMIT <= this.boundary.x1)
-        || (x - ERROR_LIMIT + width >= this.boundary.x && x - ERROR_LIMIT + width <= this.boundary.x1))
-        && ((y + ERROR_LIMIT >= this.boundary.y && y + ERROR_LIMIT <= this.boundary.y1)
-        || (y - ERROR_LIMIT + height >= this.boundary.y && y - ERROR_LIMIT + height <= this.boundary.y1))
+          || (x - ERROR_LIMIT + width >= this.boundary.x && x - ERROR_LIMIT + width <= this.boundary.x1))
+          && ((y + ERROR_LIMIT >= this.boundary.y && y + ERROR_LIMIT <= this.boundary.y1)
+            || (y - ERROR_LIMIT + height >= this.boundary.y && y - ERROR_LIMIT + height <= this.boundary.y1))
       if (isCellIntersected) {
         this.boundary = computeBoundaryFromRects(this.boundary, { x, y, width, height })
       }

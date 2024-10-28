@@ -1,10 +1,11 @@
-import Quill from 'quill'
-import Action from './actions/Action'
-import ImageBlot, { ImageContainerBlot } from './image'
-import DefaultOptions, { Options } from './Options'
-import BlotSpec from './specs/BlotSpec'
-import { CustomImageSpec } from './specs/CustomImageSpec'
+import type Action from './actions/Action'
+import type { Options } from './Options'
+import type BlotSpec from './specs/BlotSpec'
 import { merge as deepmerge } from 'lodash-es'
+import Quill from 'quill'
+import ImageBlot, { ImageContainerBlot } from './image'
+import DefaultOptions from './Options'
+import { CustomImageSpec } from './specs/CustomImageSpec'
 
 const dontMerge = (_destination: Array<any>, source: Array<any>) => source
 
@@ -37,7 +38,6 @@ export default class BlotFormatter {
 
     // disable native image resizing on firefox
     document.execCommand('enableObjectResizing', false, 'false') // eslint-disable-next-line-line no-undef
-    this.quill.root.parentNode.style.position = this.quill.root.parentNode.style.position || 'relative'
     this.quill.root.addEventListener('click', this.onClick)
     this.specs = this.options.specs.map((SpecClass: any) => new SpecClass(this))
     this.specs.forEach(spec => spec.init())

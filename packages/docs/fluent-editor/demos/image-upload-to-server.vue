@@ -40,7 +40,7 @@ function imageHandler(image, callback) {
       }
       else {
         // 图片上传失败了，就转成 Base64 格式
-        var reader = new FileReader()
+        const reader = new FileReader()
         reader.onload = function (e) {
           callback(e.target.result)
         }
@@ -78,7 +78,6 @@ onMounted(() => {
     })
   })
 })
-
 </script>
 
 <template>
