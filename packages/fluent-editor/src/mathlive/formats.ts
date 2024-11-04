@@ -1,10 +1,10 @@
 import type { MathfieldElement } from 'mathlive'
 import type { Root } from 'parchment'
-import { EmbedBlot } from 'parchment'
 import Quill from 'quill'
 
+const Parchment = Quill.import('parchment')
 type MathliveBlotMode = 'dialog' | 'only-read'
-export default class MathliveBlot extends EmbedBlot {
+export default class MathliveBlot extends Parchment.EmbedBlot {
   static blotName = 'mathlive'
   static tagName = 'math-field'
   static className = 'ql-math-field'
