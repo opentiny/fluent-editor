@@ -16,6 +16,15 @@
 :::demo src=demos/mention-custom-list.vue
 :::
 
+## 跳转链接
+
+在数据中配置`link`与`target`属性，可设置提醒跳转的链接，对应`a`标签的`href`与`target`属性。
+
+当编辑器处于可编辑状态时，链接跳转不可以，注意切换为只读状态。
+
+:::demo src=demos/mention-link.vue
+:::
+
 ## API
 
 `mention` 模块配置项：
@@ -23,7 +32,6 @@
 ```typescript
 interface MentionOption {
   containerClass?: string
-  dataAttributes?: string[]
   defaultLink?: string
   itemActiveClass?: string
   itemKey: string
