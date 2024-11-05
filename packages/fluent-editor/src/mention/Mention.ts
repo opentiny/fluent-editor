@@ -3,12 +3,13 @@ import { isNullOrUndefined } from '../config/editor.utils'
 import { DEFAULT_MENTION_CHAR, ON_MENTION_LINK_REMOVE } from './constants'
 import MentionLink from './MentionLink'
 
-const { Scope } = Quill.imports.parchment
-const Delta = Quill.imports.delta
+const Delta = Quill.import('delta')
+const Parchment = Quill.import('parchment')
+const { Scope } = Parchment
 
 interface MentionOption {
   containerClass?: string
-  dataAttributes?: string[]
+  // dataAttributes?: string[]
   defaultLink?: string
   itemActiveClass?: string
   itemKey: string
@@ -64,7 +65,7 @@ class Mention {
     itemActiveClass: 'ql-mention-item--active',
     itemKey: 'name',
     searchKey: 'name',
-    dataAttributes: ['id'],
+    // dataAttributes: ['id'],
     select(_data: any) {},
     remove(_data: any) {},
   }
@@ -388,8 +389,8 @@ class Mention {
           char: this.options.mentionChar,
           text: mention,
           mention: activeMentionItem,
-          link: this.options.defaultLink,
-          target: this.options.target,
+          link: activeMentionItem.link || this.options.defaultLink,
+          target: activeMentionItem.target || this.options.target,
           searchKey: this.options.searchKey,
         },
       })
