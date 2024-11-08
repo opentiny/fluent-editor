@@ -5,7 +5,6 @@
 
 @mixin editor {
   .ql-container.ql-snow {
-    border-top: 0;
     background-color: getCssVar(editor-bg-color);
   }
 
