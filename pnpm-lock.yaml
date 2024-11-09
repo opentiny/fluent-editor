@@ -38,6 +38,9 @@ importers:
       katex:
         specifier: ^0.16.11
         version: 0.16.11
+      mathlive:
+        specifier: ^0.101.0
+        version: 0.101.1
       quill:
         specifier: ^2.0.0
         version: 2.0.2
@@ -72,9 +75,6 @@ importers:
       lodash-es:
         specifier: ^4.17.15
         version: 4.17.21
-      mathlive:
-        specifier: ^0.101.0
-        version: 0.101.1
       quill:
         specifier: ^2.0.0
         version: 2.0.2
@@ -97,6 +97,9 @@ importers:
       jest:
         specifier: ^26.6.3
         version: 26.6.3(ts-node@9.1.1(typescript@4.9.5))
+      mathlive:
+        specifier: ^0.101.0
+        version: 0.101.1
       parchment:
         specifier: ^3.0.0
         version: 3.0.0

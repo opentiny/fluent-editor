@@ -1,9 +1,6 @@
 import type Quill from 'quill'
 import { Module } from 'quill'
 import MathliveTooltip from './tooltip'
-import 'mathlive'
-import 'mathlive/static.css'
-import 'mathlive/fonts.css'
 
 export default class MathliveModule extends Module<boolean> {
   tooltip: MathliveTooltip

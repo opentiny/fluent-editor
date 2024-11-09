@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
+import 'mathlive'
+import 'mathlive/static.css'
+import 'mathlive/fonts.css'
+
 let mathliveEditor
 
 const TOOLBAR_CONFIG = [
