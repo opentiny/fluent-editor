@@ -13,6 +13,8 @@ import FileModule from './file' // 文件
 import { FormatPainter } from './format-painter'
 import { fullscreenHandler } from './fullscreen/handler'
 import Link from './link' // 超链接
+import MathliveModule from './mathlive' // latex公式
+import MathliveBlot from './mathlive/formats'
 import Mention from './mention/Mention' // @提醒
 import { Screenshot } from './screenshot'// 截图
 import SoftBreak from './soft-break' // 软回车
@@ -48,6 +50,15 @@ const registerModules = function () {
       'toolbar': {
         handlers: {
           ...(SnowTheme.DEFAULTS as Record<string, any>).modules.toolbar.handlers,
+          'formula': function () {
+            const mathlive = this.quill.getModule('mathlive')
+            if (!mathlive) {
+              this.quill.theme.tooltip.edit('formula')
+            }
+            else {
+              mathlive.createDialog()
+            }
+          },
           'undo': function () {
             this.quill.history.undo()
           },
@@ -146,6 +157,7 @@ const registerModules = function () {
       'modules/link': Link, // 报错
       // 'modules/quickmenu': QuickMenu,//暂未开发
       'modules/syntax': CustomSyntax,
+      'modules/mathlive': MathliveModule,
 
       'formats/strike': Strike,
       'formats/softBreak': SoftBreak,
@@ -155,6 +167,7 @@ const registerModules = function () {
       'formats/size': SizeStyle,
       'formats/line-height': LineHeightStyle,
       'formats/text-indent': TextIndentStyle,
+      [`formats/${MathliveBlot.blotName}`]: MathliveBlot,
     },
     true, // 覆盖内部模块
   )
