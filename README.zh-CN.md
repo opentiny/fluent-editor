@@ -1,7 +1,7 @@
 # FluentEditor 富文本编辑器
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 FluentEditor 是一个基于 Quill 2.0 的富文本编辑器，在 Quill 基础上扩展了表格、图片、超链接、复制粘贴、插入表情、文件上传、@提醒、斜杆菜单等丰富的模块和格式，框架无关、兼容 Quill API、兼容 Quill 模块生态。
@@ -75,6 +75,7 @@ pnpm dev
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/zzxming"><img src="https://avatars.githubusercontent.com/u/74341337?v=4?s=100" width="100px;" alt="zzxming"/><br /><sub><b>zzxming</b></sub></a><br /><a href="https://github.com/opentiny/fluent-editor/commits?author=zzxming" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Janson1012"><img src="https://avatars.githubusercontent.com/u/60996238?v=4?s=100" width="100px;" alt="Janson1012"/><br /><sub><b>Janson1012</b></sub></a><br /><a href="https://github.com/opentiny/fluent-editor/commits?author=Janson1012" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://kagol.github.io/blogs"><img src="https://avatars.githubusercontent.com/u/9566362?v=4?s=100" width="100px;" alt="Kagol"/><br /><sub><b>Kagol</b></sub></a><br /><a href="https://github.com/opentiny/fluent-editor/commits?author=kagol" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kiss-keray"><img src="https://avatars.githubusercontent.com/u/24504763?v=4?s=100" width="100px;" alt="keray"/><br /><sub><b>keray</b></sub></a><br /><a href="https://github.com/opentiny/fluent-editor/commits?author=kiss-keray" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
