@@ -14,18 +14,19 @@ npm i @opentiny/fluent-editor
 
 ```vue
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import FluentEditor from '@opentiny/fluent-editor'
+import { onMounted } from 'vue'
 
 onMounted(() => {
+  // eslint-disable-next-line no-new
   new FluentEditor('#editor', {
-    theme: 'snow'
+    theme: 'snow',
   })
 })
 </script>
 
 <template>
-  <div id="editor"></div>
+  <div id="editor" />
 </template>
 ```
 
@@ -46,8 +47,8 @@ npm i @opentiny/fluent-editor
 在 `src/App.tsx` 文件中写入以下代码：
 
 ```tsx
-import { useEffect, useRef } from 'react'
 import FluentEditor from '@opentiny/fluent-editor'
+import { useEffect, useRef } from 'react'
 import '@opentiny/fluent-editor/style.css'
 
 function App() {
@@ -67,7 +68,6 @@ function App() {
 }
 
 export default App
-
 ```
 
 ## Angular
@@ -91,24 +91,25 @@ npm i @opentiny/fluent-editor
 在 `src/app/app.component.ts` 文件中写入以下代码：
 
 ```ts
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import FluentEditor from '@opentiny/fluent-editor';
+import { Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import FluentEditor from '@opentiny/fluent-editor'
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'my-app';
+  title = 'my-app'
 
   ngAfterViewInit() {
+    // eslint-disable-next-line no-new
     new FluentEditor('#editor', {
-      theme: 'snow'
-    });
+      theme: 'snow',
+    })
   }
 }
 ```
