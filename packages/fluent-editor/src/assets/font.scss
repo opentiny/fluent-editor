@@ -6,26 +6,59 @@
     width: 108px;
 
     $font-map: (
-      'arial': ('arial', (arial, helvetica, sans-serif)),
-      'songti': ('宋体', ('宋体', 'SimSun')),
-      'yahei': ('微软雅黑', ('微软雅黑', 'Microsoft YaHei')),
-      'kaiti': ('楷体', ('楷体', '楷体_GB2312', 'SimKai')),
-      'heiti': ('黑体', ('黑体', 'SimHei')),
-      'lishu': ('隶书', ('隶书', 'SimLi')),
-      'mono': ('andale mono', 'andale mono'),
-      'arialblack': ('arial black', ('arial black', 'avant garde')),
-      'comic': ('comic sans ms', 'comic sans ms'),
-      'impact': ('impact', ('impact', 'chicago')),
-      'times': ('times new roman', 'times new roman'),
+      'arial': (
+        'arial',
+        (arial, helvetica, sans-serif),
+      ),
+      'songti': (
+        '宋体',
+        ('宋体', 'SimSun'),
+      ),
+      'yahei': (
+        '微软雅黑',
+        ('微软雅黑', 'Microsoft YaHei'),
+      ),
+      'kaiti': (
+        '楷体',
+        ('楷体', '楷体_GB2312', 'SimKai'),
+      ),
+      'heiti': (
+        '黑体',
+        ('黑体', 'SimHei'),
+      ),
+      'lishu': (
+        '隶书',
+        ('隶书', 'SimLi'),
+      ),
+      'mono': (
+        'andale mono',
+        'andale mono',
+      ),
+      'arialblack': (
+        'arial black',
+        ('arial black', 'avant garde'),
+      ),
+      'comic': (
+        'comic sans ms',
+        'comic sans ms',
+      ),
+      'impact': (
+        'impact',
+        ('impact', 'chicago'),
+      ),
+      'times': (
+        'times new roman',
+        'times new roman',
+      ),
     );
 
     @each $font, $font-value in $font-map {
-      span[data-value=#{$font}]::before {
+      span[data-value='#{$font}']::before {
         content: nth($font-value, 1);
         font-family: nth($font-value, 2);
       }
 
-      span[data-value=#{$font}].ql-picker-label::before {
+      span[data-value='#{$font}'].ql-picker-label::before {
         width: 60px;
         overflow: hidden;
         text-overflow: ellipsis;
