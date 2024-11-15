@@ -99,8 +99,8 @@ export const EN_US = {
   'img-error-info':
     'Failed to copy the image. Save it to your local computer and then upload it by clicking Image on the toolbar.',
 
-  'lastModified': 'Last Modified Date:',
+  'last-modified': 'Last Modified Date:',
   'screenshot': 'Screenshot',
   'uploading': 'Uploading...',
-  'subTitleBgColor': 'BackgroundColor',
+  'sub-title-bg-color': 'BackgroundColor',
 }

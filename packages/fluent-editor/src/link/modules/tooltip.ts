@@ -2,16 +2,19 @@ import Quill, { Range } from 'quill'
 import Emitter from 'quill/core/emitter'
 import { BaseTooltip } from 'quill/themes/base'
 import { debounce } from '../../../src/utils/debounce'
-import { LANG_CONF } from '../../config/editor.config'
+import { LANG_CONF } from '../../config'
 import { hadProtocol, isNullOrUndefined } from '../../config/editor.utils'
 import LinkBlot from '../formats/link'
 
-// const Emitter = Quill.imports['core/emitter'];
-// const BaseTooltip = Quill.imports['themes/BaseTooltip'];
-
 // @dynamic
 export default class Tooltip extends BaseTooltip {
-  static TEMPLATE: string
+  static TEMPLATE: string = [
+    `<input type="text" data-formula="e=mc^2" data-link="${LANG_CONF['en-US'].linkplaceholder}" data-video="Embed URL" style="width: 225px;">`,
+    '<span class="ql-split"></span>',
+    '<a class="ql-preview"><i class="icon-share"></i></a>',
+    '<a class="ql-remove"><i class="icon-delete"></i></a>',
+  ].join('')
+
   isInputFocus: boolean
   isHover: boolean
   debouncedHideToolTip: any
@@ -29,6 +32,7 @@ export default class Tooltip extends BaseTooltip {
 
   constructor(quill, bounds) {
     super(quill, bounds)
+    this.setTemplate()
     this.isInputFocus = false
     this.isHover = false
 
@@ -36,6 +40,15 @@ export default class Tooltip extends BaseTooltip {
     LinkBlot.autoProtocol = this.options.autoProtocol
     this.debouncedHideToolTip = debounce(this.hideToolTip, 300)
     this.debouncedShowToolTip = debounce(this.showToolTip, 300)
+  }
+
+  setTemplate() {
+    this.root.innerHTML = [
+      `<input type="text" data-formula="e=mc^2" data-link="${this.quill.langText.linkplaceholder}" data-video="Embed URL" style="width: 225px;">`,
+      '<span class="ql-split"></span>',
+      '<a class="ql-preview"><i class="icon-share"></i></a>',
+      '<a class="ql-remove"><i class="icon-delete"></i></a>',
+    ].join('')
   }
 
   resolveOptions() {
@@ -325,10 +338,3 @@ export default class Tooltip extends BaseTooltip {
     return result
   }
 }
-
-Tooltip.TEMPLATE = [
-  `<input type="text" data-formula="e=mc^2" data-link="${LANG_CONF.linkplaceholder}" data-video="Embed URL" style="width: 225px;">`,
-  '<span class="ql-split"></span>',
-  '<a class="ql-preview"><i class="icon-share"></i></a>',
-  '<a class="ql-remove"><i class="icon-delete"></i></a>',
-].join('')

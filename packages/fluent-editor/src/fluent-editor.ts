@@ -1,8 +1,8 @@
-import type { Module, Parchment as TypeParchment } from 'quill'
+import type { ExpandedQuillOptions, Module, Parchment as TypeParchment } from 'quill'
 import type { IEditorConfig } from './config/types'
 import Quill from 'quill'
 import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
-import { getListValue, ICONS_CONFIG, inputFile, TABLE_RIGHT_MENU_CONFIG } from './config'
+import { getListValue, ICONS_CONFIG, inputFile } from './config'
 import Counter from './counter' // 字符统计
 import CustomClipboard from './custom-clipboard' // 粘贴板
 import CustomImage from './custom-image/BlotFormatter' // 图片
@@ -12,6 +12,7 @@ import Emoji from './emoji' // 表情
 import FileModule from './file' // 文件
 import { FormatPainter } from './format-painter'
 import { fullscreenHandler } from './fullscreen/handler'
+import { I18N } from './i18n'
 import Link from './link' // 超链接
 import MathliveModule from './mathlive' // latex公式
 import MathliveBlot from './mathlive/formats'
@@ -28,7 +29,14 @@ import Video from './video' // 视频
 
 export class FluentEditor extends Quill {
   isFullscreen: boolean = false
+  options: IEditorConfig & ExpandedQuillOptions
+  langText: Record<string, string>
+  lang: string
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
+    // Not allowed to disable i18n
+    if (!options.modules.i18n) {
+      options.modules.i18n = true
+    }
     super(container, options)
   }
 }
@@ -40,6 +48,16 @@ const registerModules = function () {
   })
 
   const SnowTheme = Quill.imports['themes/snow'] as typeof Module
+  Quill.DEFAULTS = {
+    ...Quill.DEFAULTS,
+    modules: {
+      ...Quill.DEFAULTS.modules,
+      // @ts-ignore
+      i18n: {
+        lang: 'en-US',
+      },
+    },
+  }
   SnowTheme.DEFAULTS = {
     modules: {
       'keyboard': {
@@ -119,7 +137,6 @@ const registerModules = function () {
       },
       'better-table': {
         operationMenu: {
-          items: TABLE_RIGHT_MENU_CONFIG,
           color: true,
         },
       },
@@ -143,6 +160,7 @@ const registerModules = function () {
 
   FluentEditor.register(
     {
+      'modules/i18n': I18N,
       'modules/toolbar': Toolbar,
       'modules/mention': Mention,
       'modules/better-table': BetterTable,

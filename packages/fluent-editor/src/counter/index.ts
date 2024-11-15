@@ -1,20 +1,18 @@
+import type { FluentEditor } from 'src/fluent-editor'
 import type { ICounterOption } from '../config/types'
 import Quill from 'quill'
-import { LANG_CONF } from '../config'
 
 export default class Counter {
   container: HTMLDivElement
   options: ICounterOption
-  defaultOptions: ICounterOption = {
-    format: 'text',
-    unit: 'char',
-    template: LANG_CONF['counter-template'],
-    count: 500,
-  }
 
-  // @ts-ignore
-  constructor(private quill: Quill, options: ICounterOption) {
-    this.options = { ...this.defaultOptions, ...options }
+  constructor(public quill: FluentEditor, options: ICounterOption) {
+    this.options = Object.assign({
+      format: 'text',
+      unit: 'char',
+      template: this.quill.langText['counter-template'],
+      count: 500,
+    }, options)
     this.container = quill.addContainer('ql-counter')
     quill.on(Quill.events.TEXT_CHANGE, this.renderCount)
     this.renderCount()
@@ -26,7 +24,7 @@ export default class Counter {
       const { format, count: totalCount, unit, template: counterTemplate, errorTemplate } = this.options
       const count = this.getContentLength(format)
       const restCount = totalCount - count
-      const countUnit = unit === 'char' ? LANG_CONF.char : LANG_CONF.word
+      const countUnit = unit === 'char' ? this.quill.langText.char : this.quill.langText.word
       let template: any = counterTemplate
       if (typeof template === 'function') {
         template = template(count, restCount)
@@ -36,7 +34,7 @@ export default class Counter {
         .replace('{{restCount}}', String(restCount))
         .replace(/{{countUnit}}/g, countUnit)
 
-      let limitTemplate: any = errorTemplate || LANG_CONF['counter-limit-tips']
+      let limitTemplate: any = errorTemplate || this.quill.langText['counter-limit-tips']
       if (typeof limitTemplate === 'function') {
         limitTemplate = limitTemplate(count, restCount)
       }

@@ -1,9 +1,13 @@
+import type { Parchment as TypeParchment } from 'quill'
+import type TypeBlock from 'quill/blots/block'
+import type TypeClipboard from 'quill/modules/clipboard'
+import type { FluentEditor } from './fluent-editor'
 import Quill from 'quill'
 import {
   ERROR_IMAGE_PLACEHOLDER_CN,
   ERROR_IMAGE_PLACEHOLDER_EN,
 } from './config/base64-image'
-import { BIG_DELTA_LIMIT, LANG_CONF } from './config/editor.config'
+import { BIG_DELTA_LIMIT } from './config/editor.config'
 import {
   hexToRgbA,
   imageFileToUrl,
@@ -15,11 +19,11 @@ import {
   splitWithBreak,
 } from './config/editor.utils'
 
-const Clipboard = Quill.imports['modules/clipboard']
+const Clipboard = Quill.import('modules/clipboard') as typeof TypeClipboard
 const Delta = Quill.import('delta')
 
 class CustomClipboard extends Clipboard {
-  quill
+  quill: FluentEditor
   convert
   onCopy
   matchers
@@ -74,6 +78,7 @@ class CustomClipboard extends Clipboard {
       e.clipboardData = {
         types: 'text/plain',
         setData: (_type, value) => {
+          // @ts-ignore
           return window.clipboardData.setData('Text', value)
         },
       }
@@ -92,7 +97,7 @@ class CustomClipboard extends Clipboard {
     }
   }
 
-  onCapturePaste(e) {
+  onCapturePaste(e: ClipboardEvent) {
     if (e.defaultPrevented || !this.quill.isEnabled()) {
       return
     }
@@ -104,9 +109,11 @@ class CustomClipboard extends Clipboard {
 
     // 兼容IE11浏览器
     if (!e.clipboardData) {
+      // @ts-ignore
       e.clipboardData = {
         types: 'text/plain',
         getData: () => {
+          // @ts-ignore
           return window.clipboardData.getData('Text')
         },
       }
@@ -147,7 +154,7 @@ class CustomClipboard extends Clipboard {
     let loadingTipsContainer
     if (deltaLength > BIG_DELTA_LIMIT) {
       loadingTipsContainer = this.quill.addContainer('ql-loading-tips')
-      loadingTipsContainer.innerHTML = LANG_CONF.pasting
+      loadingTipsContainer.innerHTML = this.quill.langText.pasting
     }
 
     const linePos = { index: range.index, length: range.length, fix: 0 }
@@ -166,7 +173,7 @@ class CustomClipboard extends Clipboard {
       if (isInsideTable) {
         // fix: 阻止带有表格内容粘贴在表格里
         const table = line.domNode.closest('table.quill-better-table')
-        const tableBlot = Quill.find(table)
+        const tableBlot = Quill.find(table) as TypeParchment.Blot
         const tableIndex = this.quill.getIndex(tableBlot)
         const tableLength = tableBlot.length()
         const tableEndPos = tableIndex + tableLength
@@ -237,7 +244,7 @@ class CustomClipboard extends Clipboard {
         hasList
         && offset === 0
         && line
-        && line.cache.length === 1
+        && (line as TypeBlock).cache.length === 1
         && (line.statics.blotName === 'block'
           || line.statics.blotName === 'table-cell-line')
         && (!line.next || line.next.statics.blotName !== 'table-view')
@@ -464,7 +471,7 @@ class CustomClipboard extends Clipboard {
           else {
             // 剪切板中无图片，用失败占位图替换
             const errorImagePlaceholderJpg
-              = LANG_CONF['img-error'] === 'Image Copy Error'
+              = this.quill.langText['img-error'] === 'Image Copy Error'
                 ? ERROR_IMAGE_PLACEHOLDER_EN
                 : ERROR_IMAGE_PLACEHOLDER_CN
             file = await imageUrlToFile(errorImagePlaceholderJpg, true)
@@ -623,6 +630,7 @@ function renderStyles(html) {
     }
   }
 
+  // @ts-ignore
   const convertedString = iframeDoc.firstChild.outerHTML
   // Remove temporary iframe.
   iframe.parentNode.removeChild(iframe)
