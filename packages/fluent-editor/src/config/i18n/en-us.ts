@@ -102,5 +102,5 @@ export const EN_US = {
   'last-modified': 'Last Modified Date:',
   'screenshot': 'Screenshot',
   'uploading': 'Uploading...',
-  'sub-title-bg-color': 'BackgroundColor',
+  'sub-title-bg-color': 'Background Color',
 }
