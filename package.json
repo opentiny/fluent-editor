@@ -1,6 +1,7 @@
 {
   "name": "root",
   "private": true,
+  "packageManager": "pnpm@9.13.0",
   "description": "A rich text editor based on Quill 2.0, which extends rich modules and formats on the basis of Quill. It is powerful and out-of-the-box.",
   "author": "OpenTiny Team",
   "license": "MIT",
@@ -33,7 +34,7 @@
     "report": "pnpm -F fluent-editor-docs report"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.7.3",
+    "@antfu/eslint-config": "^3.9.1",
     "@types/node": "^22.7.0",
     "eslint": "^9.0.0",
     "eslint-plugin-format": "^0.1.2",

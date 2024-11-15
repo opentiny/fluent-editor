@@ -240,7 +240,7 @@ class CustomClipboard extends Clipboard {
         && line.cache.length === 1
         && (line.statics.blotName === 'block'
           || line.statics.blotName === 'table-cell-line')
-          && (!line.next || line.next.statics.blotName !== 'table-view')
+        && (!line.next || line.next.statics.blotName !== 'table-view')
       ) {
         linePos.index = this.quill.getIndex(line)
         linePos.length = line.length()

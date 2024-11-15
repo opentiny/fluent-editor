@@ -54,5 +54,5 @@ export default defineConfig({
         rollupOutput('cjs', 'lib'),
       ],
     },
-  }
+  },
 })

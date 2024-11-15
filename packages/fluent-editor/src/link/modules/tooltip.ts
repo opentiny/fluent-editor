@@ -118,7 +118,7 @@ export default class Tooltip extends BaseTooltip {
         if (
           (event.target.tagName.toUpperCase() !== 'A'
             || !event.target.classList.contains(LinkBlot.className))
-            && !event.target.closest(`a.${LinkBlot.className}`)
+          && !event.target.closest(`a.${LinkBlot.className}`)
         ) {
           return
         }
