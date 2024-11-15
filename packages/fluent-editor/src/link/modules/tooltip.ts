@@ -44,7 +44,7 @@ export default class Tooltip extends BaseTooltip {
 
   setTemplate() {
     this.root.innerHTML = [
-      `<input type="text" data-formula="e=mc^2" data-link="${this.quill.langText.linkplaceholder}" data-video="Embed URL" style="width: 225px;">`,
+      `<input type="text" data-formula="e=mc^2" data-link="${this.quill?.langText?.linkplaceholder || LANG_CONF['en-US'].linkplaceholder}" data-video="Embed URL" style="width: 225px;">`,
       '<span class="ql-split"></span>',
       '<a class="ql-preview"><i class="icon-share"></i></a>',
       '<a class="ql-remove"><i class="icon-delete"></i></a>',
