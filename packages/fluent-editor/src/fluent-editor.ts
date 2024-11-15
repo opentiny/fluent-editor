@@ -34,7 +34,10 @@ export class FluentEditor extends Quill {
   lang: string
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
     // Not allowed to disable i18n
-    if (!options.modules.i18n) {
+    if (!options.modules) {
+      options.modules = {}
+    }
+    if (!options.modules?.i18n) {
       options.modules.i18n = true
     }
     super(container, options)
