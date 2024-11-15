@@ -1,6 +1,7 @@
 {
   "name": "root",
   "private": true,
+  "packageManager": "pnpm@9.13.0",
   "description": "A rich text editor based on Quill 2.0, which extends rich modules and formats on the basis of Quill. It is powerful and out-of-the-box.",
   "author": "OpenTiny Team",
   "license": "MIT",
