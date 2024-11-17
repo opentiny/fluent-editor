@@ -1,6 +1,4 @@
-// @import './style/theme/color';
-
-$defaultFontSize: 14px;
+@use './common/config.scss' as *;
 
 @mixin ellipsis($width) {
   width: $width;
@@ -278,7 +276,6 @@ $defaultFontSize: 14px;
   }
 }
 
-$namespace: fe;
 @function getCssVar($name) {
   @return var(--#{$namespace}-#{$name});
 }
