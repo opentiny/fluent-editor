@@ -79,8 +79,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.2
       quill-toolbar-tip:
-        specifier: ^0.0.3
-        version: 0.0.3(quill@2.0.2)
+        specifier: ^0.0.4
+        version: 0.0.4(quill@2.0.2)
     devDependencies:
       '@types/jest':
         specifier: ^26.0.23
@@ -3679,8 +3679,8 @@ packages:
   quill-markdown-shortcuts@0.0.10:
     resolution: {integrity: sha512-2FFFqqo65JgDgAGSer7cFQTCeiSjJF4N8lRGXGv/xjppCxSwj42OnNdGPZ/zeeCxdUY/j1LW4AiSvPQaTIkY2A==}
 
-  quill-toolbar-tip@0.0.3:
-    resolution: {integrity: sha512-8iIFWV+SQ+2QmeeoIh40+71WN6YjfpGdDj3xwV0ZdW028xxczfwcOYJzdJBayujPnzx6cBQRhNYRGgAbjdikhw==}
+  quill-toolbar-tip@0.0.4:
+    resolution: {integrity: sha512-p6pT/ERgrwnc1FtTV2IySiUX0FFVKBfhCIaLqiIOB/mHFsU4vVZYnLymjA7rbD7IzG/9E3eAr6iyjgqdlQL6ng==}
     peerDependencies:
       quill: ^2.0.0
 
@@ -8835,7 +8835,7 @@ snapshots:
     dependencies:
       quill: 1.3.7
 
-  quill-toolbar-tip@0.0.3(quill@2.0.2):
+  quill-toolbar-tip@0.0.4(quill@2.0.2):
     dependencies:
       '@popperjs/core': 2.11.8
       quill: 2.0.2

@@ -14,7 +14,8 @@ export class ToolbarTip extends QuillToolbarTip {
 
   resolveOptions(options: Partial<QuillToolbarTipOptions>): QuillToolbarTipOptions {
     const result = super.resolveOptions(options)
-    const langText = this.quill.langText
+    // const langText = this.quill.langText
+    const langText = ZH_CN
     const btnTips = [
       'bold',
       'italic',
@@ -31,7 +32,6 @@ export class ToolbarTip extends QuillToolbarTip {
       'emoji',
       'video',
       'screenshot',
-      'fullscreen',
       'better-table',
       'code-block',
       'formula',
@@ -79,10 +79,15 @@ export class ToolbarTip extends QuillToolbarTip {
       }
       return map
     }, {})
-    const textMap: Record<string, QuillToolbarTipOptions['tipTextMap']> = {
+    const textMap: QuillToolbarTipOptions['tipTextMap'] = {
       ...btnTips,
       ...valueControlTips,
       ...selectTips,
+      fullscreen: {
+        onShow: () => {
+          return langText[this.quill.isFullscreen ? 'exit-fullscreen' : 'fullscreen']
+        },
+      },
     }
     return {
       ...result,
