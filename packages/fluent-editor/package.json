@@ -35,7 +35,7 @@
   "dependencies": {
     "lodash-es": "^4.17.15",
     "quill": "^2.0.0",
-    "quill-toolbar-tip": "^0.0.1"
+    "quill-toolbar-tip": "^0.0.3"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
