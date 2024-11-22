@@ -7,6 +7,7 @@ export const LANG_CONF = {
   'en-US': EN_US,
   'zh-CN': ZH_CN,
 }
+export const CHANGE_LANGUAGE_EVENT = 'change-anguage'
 
 // Image
 export const IMAGE_UPLOADER_MIME_TYPES = [

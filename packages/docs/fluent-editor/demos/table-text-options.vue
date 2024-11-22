@@ -20,13 +20,11 @@ onMounted(() => {
 
     editor = new FluentEditor(editorRef.value, {
       theme: 'snow',
+      langText: {
+        'sub-title-bg-color': '主题色1',
+      },
       modules: {
         'toolbar': TOOLBAR_CONFIG,
-        'i18n': {
-          text: {
-            'sub-title-bg-color': '主题色1',
-          },
-        },
         'better-table': {
           operationMenu: {
             items: {

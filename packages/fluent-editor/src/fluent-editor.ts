@@ -2,7 +2,7 @@ import type { ExpandedQuillOptions, Module, Parchment as TypeParchment } from 'q
 import type { IEditorConfig } from './config/types'
 import Quill from 'quill'
 import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
-import { getListValue, ICONS_CONFIG, inputFile } from './config'
+import { CHANGE_LANGUAGE_EVENT, getListValue, ICONS_CONFIG, inputFile, LANG_CONF } from './config'
 import Counter from './counter' // 字符统计
 import CustomClipboard from './custom-clipboard' // 粘贴板
 import CustomImage from './custom-image/BlotFormatter' // 图片
@@ -12,7 +12,6 @@ import Emoji from './emoji' // 表情
 import FileModule from './file' // 文件
 import { FormatPainter } from './format-painter'
 import { fullscreenHandler } from './fullscreen/handler'
-import { I18N } from './i18n'
 import Link from './link' // 超链接
 import MathliveModule from './mathlive' // latex公式
 import MathliveBlot from './mathlive/formats'
@@ -26,21 +25,34 @@ import Toolbar from './toolbar' // 工具栏
 import Video from './video' // 视频
 // import GlobalLink from './global-link' // 全局链接
 // import QuickMenu from './quick-menu' // 快捷菜单
-
+export interface I18NOptions {
+  lang: string
+  langText: Record<string, string>
+}
+function resolveLanguageOption(options: Partial<I18NOptions>): I18NOptions {
+  if (!(options.lang in LANG_CONF)) {
+    console.warn(`The language ${options.lang} is not supported. Use the default language: en-US`)
+    options.lang = 'en-US'
+  }
+  return {
+    lang: options.lang,
+    langText: Object.assign({}, LANG_CONF[options.lang], options.langText || {}),
+  }
+}
 export class FluentEditor extends Quill {
   isFullscreen: boolean = false
   options: IEditorConfig & ExpandedQuillOptions
-  langText: Record<string, string>
-  lang: string
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
-    // Not allowed to disable i18n
-    if (!options.modules) {
-      options.modules = {}
-    }
-    if (!options.modules?.i18n) {
-      options.modules.i18n = true
-    }
+    options = Object.assign(options, resolveLanguageOption(options || {}))
     super(container, options)
+  }
+
+  changeLanguage(options: Partial<I18NOptions>) {
+    const langOps = resolveLanguageOption(options)
+    if (langOps.lang === this.options.lang) return
+    this.options.lang = langOps.lang
+    this.options.langText = langOps.langText
+    this.emitter.emit(CHANGE_LANGUAGE_EVENT, this.options.lang, this.options.langText)
   }
 }
 
@@ -51,16 +63,6 @@ const registerModules = function () {
   })
 
   const SnowTheme = Quill.imports['themes/snow'] as typeof Module
-  Quill.DEFAULTS = {
-    ...Quill.DEFAULTS,
-    modules: {
-      ...Quill.DEFAULTS.modules,
-      // @ts-ignore
-      i18n: {
-        lang: 'en-US',
-      },
-    },
-  }
   SnowTheme.DEFAULTS = {
     modules: {
       'keyboard': {
@@ -163,7 +165,6 @@ const registerModules = function () {
 
   FluentEditor.register(
     {
-      'modules/i18n': I18N,
       'modules/toolbar': Toolbar,
       'modules/mention': Mention,
       'modules/better-table': BetterTable,

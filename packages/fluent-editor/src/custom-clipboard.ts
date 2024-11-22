@@ -154,7 +154,7 @@ class CustomClipboard extends Clipboard {
     let loadingTipsContainer
     if (deltaLength > BIG_DELTA_LIMIT) {
       loadingTipsContainer = this.quill.addContainer('ql-loading-tips')
-      loadingTipsContainer.innerHTML = this.quill.langText.pasting
+      loadingTipsContainer.innerHTML = this.quill.options.langText.pasting
     }
 
     const linePos = { index: range.index, length: range.length, fix: 0 }
@@ -471,7 +471,7 @@ class CustomClipboard extends Clipboard {
           else {
             // 剪切板中无图片，用失败占位图替换
             const errorImagePlaceholderJpg
-              = this.quill.langText['img-error'] === 'Image Copy Error'
+              = this.quill.options.langText['img-error'] === 'Image Copy Error'
                 ? ERROR_IMAGE_PLACEHOLDER_EN
                 : ERROR_IMAGE_PLACEHOLDER_CN
             file = await imageUrlToFile(errorImagePlaceholderJpg, true)

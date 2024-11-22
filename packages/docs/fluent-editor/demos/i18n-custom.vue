@@ -14,20 +14,19 @@ onMounted(() => {
       modules: {
         'toolbar': [
           ['bold', 'italic', 'strike', 'underline'],
+          ['link', 'image'],
           [{ color: [] }, { background: [] }],
           ['better-table'],
         ],
         'counter': true,
         'better-table': true,
-        'i18n': {
-          lang: 'zh-CN',
-          text: {
-            'copy-cells': '复制单元格',
-            'copy-table': '复制表格',
-            'cut-cells': '剪切单元格',
-            'empty-cells': '清空单元格',
-          },
-        },
+      },
+      lang: 'zh-CN',
+      langText: {
+        'copy-cells': '复制单元格',
+        'copy-table': '复制表格',
+        'cut-cells': '剪切单元格',
+        'empty-cells': '清空单元格',
       },
     })
   })
