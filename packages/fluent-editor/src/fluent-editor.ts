@@ -35,7 +35,7 @@ function resolveLanguageOption(options: Partial<I18NOptions>): I18NOptions {
     options.lang = defaultLanguage
   }
   if (!(options.lang in LANG_CONF)) {
-    console.warn(`The language ${options.lang} is not supported. Use the default language: en-US`)
+    console.warn(`The language ${options.lang} is not supported. Use the default language: ${defaultLanguage}`)
     options.lang = defaultLanguage
   }
   return {
