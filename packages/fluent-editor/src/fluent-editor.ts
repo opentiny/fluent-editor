@@ -2,7 +2,7 @@ import type { ExpandedQuillOptions, Module, Parchment as TypeParchment } from 'q
 import type { IEditorConfig } from './config/types'
 import Quill from 'quill'
 import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
-import { CHANGE_LANGUAGE_EVENT, getListValue, ICONS_CONFIG, inputFile, LANG_CONF } from './config'
+import { CHANGE_LANGUAGE_EVENT, defaultLanguage, getListValue, ICONS_CONFIG, inputFile, LANG_CONF } from './config'
 import Counter from './counter' // 字符统计
 import CustomClipboard from './custom-clipboard' // 粘贴板
 import CustomImage from './custom-image/BlotFormatter' // 图片
@@ -22,6 +22,7 @@ import Strike from './strike' // 删除线
 import CustomSyntax from './syntax' // 代码块高亮
 import BetterTable from './table/better-table' // 表格
 import Toolbar from './toolbar' // 工具栏
+import { isUndefined } from './utils/is'
 import Video from './video' // 视频
 // import GlobalLink from './global-link' // 全局链接
 // import QuickMenu from './quick-menu' // 快捷菜单
@@ -30,9 +31,12 @@ export interface I18NOptions {
   langText: Record<string, string>
 }
 function resolveLanguageOption(options: Partial<I18NOptions>): I18NOptions {
+  if (isUndefined(options.lang)) {
+    options.lang = defaultLanguage
+  }
   if (!(options.lang in LANG_CONF)) {
-    console.warn(`The language ${options.lang} is not supported. Use the default language: en-US`)
-    options.lang = 'en-US'
+    console.warn(`The language ${options.lang} is not supported. Use the default language: ${defaultLanguage}`)
+    options.lang = defaultLanguage
   }
   return {
     lang: options.lang,

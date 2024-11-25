@@ -8,6 +8,7 @@ export const LANG_CONF = {
   'zh-CN': ZH_CN,
 }
 export const CHANGE_LANGUAGE_EVENT = 'change-language'
+export const defaultLanguage = 'en-US'
 
 // Image
 export const IMAGE_UPLOADER_MIME_TYPES = [

@@ -20,11 +20,6 @@ const freeSelf
 export const root
   = freeGlobalThis || freeGlobal || freeSelf || new Function('return this')()
 
-export function isObject(value) {
-  const type = typeof value
-  return value != null && (type === 'object' || type === 'function')
-}
-
 export function compareArray(arr1, arr2) {
   if (arr1.length !== arr2.length) {
     return false
