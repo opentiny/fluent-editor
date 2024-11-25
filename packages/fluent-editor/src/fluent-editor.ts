@@ -1,8 +1,8 @@
-import type { Module, Parchment as TypeParchment } from 'quill'
+import type { ExpandedQuillOptions, Module, Parchment as TypeParchment } from 'quill'
 import type { IEditorConfig } from './config/types'
 import Quill from 'quill'
 import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
-import { getListValue, ICONS_CONFIG, inputFile, TABLE_RIGHT_MENU_CONFIG } from './config'
+import { CHANGE_LANGUAGE_EVENT, getListValue, ICONS_CONFIG, inputFile, LANG_CONF } from './config'
 import Counter from './counter' // 字符统计
 import CustomClipboard from './custom-clipboard' // 粘贴板
 import CustomImage from './custom-image/BlotFormatter' // 图片
@@ -25,11 +25,34 @@ import Toolbar from './toolbar' // 工具栏
 import Video from './video' // 视频
 // import GlobalLink from './global-link' // 全局链接
 // import QuickMenu from './quick-menu' // 快捷菜单
-
+export interface I18NOptions {
+  lang: string
+  langText: Record<string, string>
+}
+function resolveLanguageOption(options: Partial<I18NOptions>): I18NOptions {
+  if (!(options.lang in LANG_CONF)) {
+    console.warn(`The language ${options.lang} is not supported. Use the default language: en-US`)
+    options.lang = 'en-US'
+  }
+  return {
+    lang: options.lang,
+    langText: Object.assign({}, LANG_CONF[options.lang], options.langText || {}),
+  }
+}
 export class FluentEditor extends Quill {
   isFullscreen: boolean = false
+  options: IEditorConfig & ExpandedQuillOptions
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
+    options = Object.assign(options, resolveLanguageOption(options || {}))
     super(container, options)
+  }
+
+  changeLanguage(options: Partial<I18NOptions>) {
+    const langOps = resolveLanguageOption(options)
+    if (langOps.lang === this.options.lang) return
+    this.options.lang = langOps.lang
+    this.options.langText = langOps.langText
+    this.emitter.emit(CHANGE_LANGUAGE_EVENT, this.options.lang, this.options.langText)
   }
 }
 
@@ -119,7 +142,6 @@ const registerModules = function () {
       },
       'better-table': {
         operationMenu: {
-          items: TABLE_RIGHT_MENU_CONFIG,
           color: true,
         },
       },

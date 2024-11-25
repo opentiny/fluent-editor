@@ -22,13 +22,7 @@ onMounted(() => {
         'toolbar': TOOLBAR_CONFIG,
         'better-table': {
           operationMenu: {
-            items: {
-              copyCells: {
-                text: '复制单元格',
-              },
-            },
             color: {
-              text: '主题色',
               colors: [
                 '#ffffff',
                 '#f2f2f2',

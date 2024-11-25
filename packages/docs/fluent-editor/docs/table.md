@@ -5,6 +5,15 @@
 :::demo src=demos/table.vue
 :::
 
+## 文本配置
+
+可以通过`better-table`的 options 对显示文字进行修改，或者通过`i18n`的 options 进行修改（[i18n相关文本配置](https://opentiny.github.io/fluent-editor/docs/i18n)）。
+
+`better-table`的 options 文本配置优先级更高，下面示例表格菜单子标题将会显示`'主题色2'`而非`'主题色1'`。
+
+:::demo src=demos/table-text-options.vue
+:::
+
 `better-table` 模块配置项：
 
 ```typescript
