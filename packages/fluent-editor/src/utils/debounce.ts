@@ -1,4 +1,5 @@
-import { isObject, root } from './method'
+import { isObject } from './is'
+import { root } from './method'
 
 export function debounce(func, wait, options = undefined) {
   let lastArgs,

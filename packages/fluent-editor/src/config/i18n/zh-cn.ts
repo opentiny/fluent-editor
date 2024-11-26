@@ -69,10 +69,10 @@ export const ZH_CN = {
   'img-error-info':
     '此图片不支持复制，请将原图下载至本地后点击工具栏【插入图片】，重新上传。',
 
-  'lastModified': '最后修改时间：',
+  'last-modified': '最后修改时间：',
   'screenshot': '截图',
   'uploading': '上传中...',
-  'subTitleBgColor': '背景颜色',
+  'sub-title-bg-color': '背景颜色',
 
   // blot tip name
   'emoji': '表情',

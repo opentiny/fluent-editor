@@ -20,4 +20,6 @@ export interface IEditorConfig extends QuillOptions {
     isVideoPlay?: boolean
   }
   screenshot?: Partial<ScreenShotOptions>
+  lang?: string
+  langText?: Record<string, string>
 }

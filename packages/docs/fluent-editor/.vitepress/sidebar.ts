@@ -20,6 +20,7 @@ export function sidebar() {
         { text: '视频', link: '/docs/video' },
         { text: '获取 HTML', link: '/docs/get-html' },
         { text: '截屏', link: '/docs/screenshot' },
+        { text: '国际化', link: '/docs/i18n' },
       ],
     },
   ]

@@ -1,273 +1,20 @@
 import Quill from 'quill'
-import { LANG_CONF } from '../../config/editor.config'
+import { CHANGE_LANGUAGE_EVENT } from '../../config'
 import {
   ERROR_LIMIT,
   MENU_ITEM_HEIGHT,
   MENU_MIN_HEIGHT,
   MENU_WIDTH,
   OPERATE_MENU_COLORPICKER_CLASS,
-
   OPERATE_MENU_COLORPICKER_ITEM_CLASS,
   OPERATE_MENU_DIVIDING_CLASS,
   OPERATE_MENU_ITEM_CLASS,
   OPERATE_MENU_SUBTITLE_CLASS,
 } from '../table-config'
-
 import { arrayFrom, css, elementRemove, getRelativeRect } from '../utils'
 
-const MENU_ITEMS_DEFAULT = {
-  copyCells: {
-    text: 'Copy Cells',
-    handler() {
-      this.onCopy('copy')
-    },
-  },
-  copyTable: {
-    text: 'Copy Table',
-    handler() {
-      this.tableColumnTool.destroy()
-      this.tableScrollBar.destroy()
-      this.tableSelection.clearSelection()
-      const dom = this.table.cloneNode(true)
-      const trArr = dom.querySelectorAll('tr[data-row]')
-      trArr.forEach(tr => tr.removeAttribute('data-row'))
-      dom.style.position = 'fixed'
-      dom.style.top = 0
-      dom.style.left = 0
-      dom.style.clip = 'rect(0,0,0,0)'
-      document.body.appendChild(dom)
-      this.setCopyRange(dom)
-      document.execCommand('copy')
-      dom.remove()
-    },
-  },
-  cutCells: {
-    text: 'Cut Cells',
-    handler() {
-      this.onCopy('cut')
-    },
-  },
-  emptyCells: {
-    text: 'Empty Cells',
-    handler() {
-      const tableContainer = Quill.find(this.table)
-      const { selectedTds } = this.tableSelection
-      tableContainer.emptyCells(selectedTds)
-    },
-  },
-  insertColumnRight: {
-    text: 'Insert Column After',
-    handler() {
-      const tableContainer = Quill.find(this.table)
-      const colIndex = getColToolCellIndexByBoundary(
-        this.columnToolCells,
-        this.boundary,
-        (cellRect, boundary) => {
-          return Math.abs(cellRect.x + cellRect.width - boundary.x1) <= ERROR_LIMIT
-        },
-        this.quill.root.parentNode,
-      )
-
-      const newColumn = tableContainer.insertColumn(this.boundary, colIndex, true, this.quill.root.parentNode)
-
-      this.tableColumnTool.updateColToolCells()
-      this.quill.update(Quill.sources.USER)
-      // fix: the scroll bar will go to the top when insert row/column to the table
-      // this.quill.setSelection(
-      //   this.quill.getIndex(newColumn[0]),
-      //   0,
-      //   Quill.sources.SILENT
-      // )
-      this.tableSelection.setSelection(
-        newColumn[0].domNode.getBoundingClientRect(),
-        newColumn[0].domNode.getBoundingClientRect(),
-      )
-
-      setTimeout(() => this.tableScrollBar.updateScrollBar())
-    },
-  },
-
-  insertColumnLeft: {
-    text: 'Insert Column Before',
-    handler() {
-      const tableContainer = Quill.find(this.table)
-      const colIndex = getColToolCellIndexByBoundary(
-        this.columnToolCells,
-        this.boundary,
-        (cellRect, boundary) => {
-          return Math.abs(cellRect.x - boundary.x) <= ERROR_LIMIT
-        },
-        this.quill.root.parentNode,
-      )
-
-      const newColumn = tableContainer.insertColumn(this.boundary, colIndex, false, this.quill.root.parentNode)
-
-      this.tableColumnTool.updateColToolCells()
-      this.quill.update(Quill.sources.USER)
-      // this.quill.setSelection(
-      //   this.quill.getIndex(newColumn[0]),
-      //   0,
-      //   Quill.sources.SILENT
-      // )
-      this.tableSelection.setSelection(
-        newColumn[0].domNode.getBoundingClientRect(),
-        newColumn[0].domNode.getBoundingClientRect(),
-      )
-
-      setTimeout(() => this.tableScrollBar.updateScrollBar())
-    },
-  },
-
-  insertRowUp: {
-    text: 'Insert Row Above',
-    handler() {
-      const tableContainer = Quill.find(this.table)
-      const affectedCells = tableContainer.insertRow(this.boundary, false, this.quill.root.parentNode)
-
-      this.tableColumnTool.updateRowToolCells()
-      this.quill.update(Quill.sources.USER)
-      // this.quill.setSelection(
-      //   this.quill.getIndex(affectedCells[0]),
-      //   0,
-      //   Quill.sources.SILENT
-      // )
-      this.tableSelection.setSelection(
-        affectedCells[0].domNode.getBoundingClientRect(),
-        affectedCells[0].domNode.getBoundingClientRect(),
-      )
-
-      setTimeout(() => this.tableScrollBar.resetTableHeight(this.table))
-    },
-  },
-
-  insertRowDown: {
-    text: 'Insert Row Below',
-    handler() {
-      const tableContainer = Quill.find(this.table)
-      const affectedCells = tableContainer.insertRow(this.boundary, true, this.quill.root.parentNode)
-
-      this.tableColumnTool.updateRowToolCells()
-      this.quill.update(Quill.sources.USER)
-      // this.quill.setSelection(
-      //   this.quill.getIndex(affectedCells[0]),
-      //   0,
-      //   Quill.sources.SILENT
-      // )
-      this.tableSelection.setSelection(
-        affectedCells[0].domNode.getBoundingClientRect(),
-        affectedCells[0].domNode.getBoundingClientRect(),
-      )
-
-      setTimeout(() => this.tableScrollBar.resetTableHeight(this.table))
-    },
-  },
-
-  mergeCells: {
-    text: 'Merge Cells',
-    handler() {
-      const tableContainer = Quill.find(this.table)
-      // compute merged Cell rowspan, equal to length of selected rows
-      const rowspan = tableContainer.rows().reduce((sum, row) => {
-        const rowRect = getRelativeRect(row.domNode.getBoundingClientRect(), this.quill.root.parentNode)
-        if (
-          rowRect.y > this.boundary.y - ERROR_LIMIT
-          && rowRect.y + rowRect.height < this.boundary.y + this.boundary.height + ERROR_LIMIT
-        ) {
-          sum += 1
-        }
-        return sum
-      }, 0)
-
-      // compute merged cell colspan, equal to length of selected cols
-      const colspan = this.columnToolCells.reduce((sum, cell) => {
-        const cellRect = getRelativeRect(cell.getBoundingClientRect(), this.quill.root.parentNode)
-        if (
-          cellRect.x > this.boundary.x - ERROR_LIMIT
-          && cellRect.x + cellRect.width < this.boundary.x + this.boundary.width + ERROR_LIMIT
-        ) {
-          sum += 1
-        }
-        return sum
-      }, 0)
-
-      const mergedCell = tableContainer.mergeCells(
-        this.boundary,
-        this.selectedTds,
-        rowspan,
-        colspan,
-        this.quill.root.parentNode,
-      )
-      this.quill.update(Quill.sources.USER)
-      this.tableSelection.setSelection(
-        mergedCell.domNode.getBoundingClientRect(),
-        mergedCell.domNode.getBoundingClientRect(),
-      )
-    },
-  },
-
-  unmergeCells: {
-    text: 'Split Cells',
-    handler() {
-      const tableContainer = Quill.find(this.table)
-      tableContainer.unmergeCells(this.selectedTds, this.quill.root.parentNode)
-      this.quill.update(Quill.sources.USER)
-      this.tableSelection.clearSelection()
-    },
-  },
-
-  deleteColumn: {
-    text: 'Delete Columns',
-    handler() {
-      const tableContainer = Quill.find(this.table)
-      const colIndexes = getColToolCellIndexesByBoundary(
-        this.columnToolCells,
-        this.boundary,
-        (cellRect, boundary) => {
-          return cellRect.x + ERROR_LIMIT > boundary.x && cellRect.x + cellRect.width - ERROR_LIMIT < boundary.x1
-        },
-        this.quill.root.parentNode,
-      )
-
-      const isDeleteTable = tableContainer.deleteColumns(this.boundary, colIndexes, this.quill.root.parentNode)
-      if (!isDeleteTable) {
-        this.tableColumnTool.updateColToolCells()
-        this.quill.update(Quill.sources.USER)
-        this.tableSelection.clearSelection()
-      }
-
-      setTimeout(() => this.tableScrollBar.updateScrollBar())
-    },
-  },
-
-  deleteRow: {
-    text: 'Delete Rows',
-    handler() {
-      const tableContainer = Quill.find(this.table)
-      const isDeleteTable = tableContainer.deleteRow(this.boundary, this.quill.root.parentNode)
-      if (!isDeleteTable) {
-        this.tableColumnTool.updateRowToolCells()
-        this.quill.update(Quill.sources.USER)
-        this.tableSelection.clearSelection()
-      }
-    },
-  },
-
-  deleteTable: {
-    text: 'Remove Table',
-    handler() {
-      const betterTableModule = this.quill.getModule('better-table')
-      const tableContainer = Quill.find(this.table)
-      betterTableModule.hideTableTools()
-      tableContainer.remove()
-      this.quill.update(Quill.sources.USER)
-      // fix: 右键菜单删除表格后编辑器失焦
-      this.quill.focus()
-    },
-  },
-}
 const DEFAULT_CELL_COLORS = ['white', 'red', 'yellow', 'blue']
 const NODE_EVENT_MAP = new WeakMap()
-const DEFAULT_COLOR_SUBTITLE = LANG_CONF.subTitleBgColor
 export default class TableOperationMenu {
   tableSelection: any
   table: any
@@ -283,6 +30,11 @@ export default class TableOperationMenu {
   colorSubTitle: any
   cellColors: any
   domNode: any
+  DEFAULT_COLOR_SUBTITLE: string
+  DEFAULT_MENU: Record<string, {
+    text: string
+    handler: () => void
+  }>
 
   constructor(params, quill, options) {
     const betterTableModule = quill.getModule('better-table')
@@ -290,7 +42,8 @@ export default class TableOperationMenu {
     this.table = params.table
     this.quill = quill
     this.options = options
-    this.menuItems = { ...MENU_ITEMS_DEFAULT, ...options.items }
+    this.setDefaultMenu()
+    this.menuItems = { ...this.DEFAULT_MENU, ...options.items }
     this.tableColumnTool = betterTableModule.columnTool
     // this.tableRowTool = betterTableModule.rowTool
     this.tableScrollBar = betterTableModule.tableScrollBar
@@ -298,10 +51,11 @@ export default class TableOperationMenu {
     this.selectedTds = this.tableSelection.selectedTds
     this.destroyHandler = this.destroy.bind(this)
     this.columnToolCells = this.tableColumnTool.colToolCells()
+    this.DEFAULT_COLOR_SUBTITLE = this.quill.options.langText['sub-title-bg-color']
     this.colorSubTitle
       = options.color && options.color.text
         ? options.color.text
-        : DEFAULT_COLOR_SUBTITLE
+        : this.DEFAULT_COLOR_SUBTITLE
     this.cellColors
       = options.color && options.color.colors
         ? options.color.colors
@@ -310,6 +64,257 @@ export default class TableOperationMenu {
     this.menuInitial(params)
     this.mount()
     document.addEventListener('click', this.destroyHandler, false)
+    this.quill.on(CHANGE_LANGUAGE_EVENT, () => {
+      this.destroy()
+      this.DEFAULT_COLOR_SUBTITLE = this.quill.options.langText['sub-title-bg-color']
+      this.setDefaultMenu()
+    })
+  }
+
+  setDefaultMenu() {
+    const langText = this.quill.options.langText
+    this.DEFAULT_MENU = {
+      copyCells: {
+        text: langText['copy-cells'],
+        handler() {
+          this.onCopy('copy')
+        },
+      },
+      copyTable: {
+        text: langText['copy-table'],
+        handler() {
+          this.tableColumnTool.destroy()
+          this.tableScrollBar.destroy()
+          this.tableSelection.clearSelection()
+          const dom = this.table.cloneNode(true)
+          const trArr = dom.querySelectorAll('tr[data-row]')
+          trArr.forEach(tr => tr.removeAttribute('data-row'))
+          dom.style.position = 'fixed'
+          dom.style.top = 0
+          dom.style.left = 0
+          dom.style.clip = 'rect(0,0,0,0)'
+          document.body.appendChild(dom)
+          this.setCopyRange(dom)
+          document.execCommand('copy')
+          dom.remove()
+        },
+      },
+      cutCells: {
+        text: langText['cut-cells'],
+        handler() {
+          this.onCopy('cut')
+        },
+      },
+      emptyCells: {
+        text: langText['empty-cells'],
+        handler() {
+          const tableContainer = Quill.find(this.table)
+          const { selectedTds } = this.tableSelection
+          tableContainer.emptyCells(selectedTds)
+        },
+      },
+      insertColumnRight: {
+        text: langText['insert-column-right'],
+        handler() {
+          const tableContainer = Quill.find(this.table)
+          const colIndex = getColToolCellIndexByBoundary(
+            this.columnToolCells,
+            this.boundary,
+            (cellRect, boundary) => {
+              return Math.abs(cellRect.x + cellRect.width - boundary.x1) <= ERROR_LIMIT
+            },
+            this.quill.root.parentNode,
+          )
+
+          const newColumn = tableContainer.insertColumn(this.boundary, colIndex, true, this.quill.root.parentNode)
+
+          this.tableColumnTool.updateColToolCells()
+          this.quill.update(Quill.sources.USER)
+          // fix: the scroll bar will go to the top when insert row/column to the table
+          // this.quill.setSelection(
+          //   this.quill.getIndex(newColumn[0]),
+          //   0,
+          //   Quill.sources.SILENT
+          // )
+          this.tableSelection.setSelection(
+            newColumn[0].domNode.getBoundingClientRect(),
+            newColumn[0].domNode.getBoundingClientRect(),
+          )
+
+          setTimeout(() => this.tableScrollBar.updateScrollBar())
+        },
+      },
+      insertColumnLeft: {
+        text: langText['insert-column-left'],
+        handler() {
+          const tableContainer = Quill.find(this.table)
+          const colIndex = getColToolCellIndexByBoundary(
+            this.columnToolCells,
+            this.boundary,
+            (cellRect, boundary) => {
+              return Math.abs(cellRect.x - boundary.x) <= ERROR_LIMIT
+            },
+            this.quill.root.parentNode,
+          )
+
+          const newColumn = tableContainer.insertColumn(this.boundary, colIndex, false, this.quill.root.parentNode)
+
+          this.tableColumnTool.updateColToolCells()
+          this.quill.update(Quill.sources.USER)
+          // this.quill.setSelection(
+          //   this.quill.getIndex(newColumn[0]),
+          //   0,
+          //   Quill.sources.SILENT
+          // )
+          this.tableSelection.setSelection(
+            newColumn[0].domNode.getBoundingClientRect(),
+            newColumn[0].domNode.getBoundingClientRect(),
+          )
+
+          setTimeout(() => this.tableScrollBar.updateScrollBar())
+        },
+      },
+      insertRowUp: {
+        text: langText['insert-row-up'],
+        handler() {
+          const tableContainer = Quill.find(this.table)
+          const affectedCells = tableContainer.insertRow(this.boundary, false, this.quill.root.parentNode)
+
+          this.tableColumnTool.updateRowToolCells()
+          this.quill.update(Quill.sources.USER)
+          // this.quill.setSelection(
+          //   this.quill.getIndex(affectedCells[0]),
+          //   0,
+          //   Quill.sources.SILENT
+          // )
+          this.tableSelection.setSelection(
+            affectedCells[0].domNode.getBoundingClientRect(),
+            affectedCells[0].domNode.getBoundingClientRect(),
+          )
+
+          setTimeout(() => this.tableScrollBar.resetTableHeight(this.table))
+        },
+      },
+      insertRowDown: {
+        text: langText['insert-row-down'],
+        handler() {
+          const tableContainer = Quill.find(this.table)
+          const affectedCells = tableContainer.insertRow(this.boundary, true, this.quill.root.parentNode)
+
+          this.tableColumnTool.updateRowToolCells()
+          this.quill.update(Quill.sources.USER)
+          // this.quill.setSelection(
+          //   this.quill.getIndex(affectedCells[0]),
+          //   0,
+          //   Quill.sources.SILENT
+          // )
+          this.tableSelection.setSelection(
+            affectedCells[0].domNode.getBoundingClientRect(),
+            affectedCells[0].domNode.getBoundingClientRect(),
+          )
+
+          setTimeout(() => this.tableScrollBar.resetTableHeight(this.table))
+        },
+      },
+      mergeCells: {
+        text: langText['merge-cells'],
+        handler() {
+          const tableContainer = Quill.find(this.table)
+          // compute merged Cell rowspan, equal to length of selected rows
+          const rowspan = tableContainer.rows().reduce((sum, row) => {
+            const rowRect = getRelativeRect(row.domNode.getBoundingClientRect(), this.quill.root.parentNode)
+            if (
+              rowRect.y > this.boundary.y - ERROR_LIMIT
+              && rowRect.y + rowRect.height < this.boundary.y + this.boundary.height + ERROR_LIMIT
+            ) {
+              sum += 1
+            }
+            return sum
+          }, 0)
+
+          // compute merged cell colspan, equal to length of selected cols
+          const colspan = this.columnToolCells.reduce((sum, cell) => {
+            const cellRect = getRelativeRect(cell.getBoundingClientRect(), this.quill.root.parentNode)
+            if (
+              cellRect.x > this.boundary.x - ERROR_LIMIT
+              && cellRect.x + cellRect.width < this.boundary.x + this.boundary.width + ERROR_LIMIT
+            ) {
+              sum += 1
+            }
+            return sum
+          }, 0)
+
+          const mergedCell = tableContainer.mergeCells(
+            this.boundary,
+            this.selectedTds,
+            rowspan,
+            colspan,
+            this.quill.root.parentNode,
+          )
+          this.quill.update(Quill.sources.USER)
+          this.tableSelection.setSelection(
+            mergedCell.domNode.getBoundingClientRect(),
+            mergedCell.domNode.getBoundingClientRect(),
+          )
+        },
+      },
+      unmergeCells: {
+        text: langText['unmerge-cells'],
+        handler() {
+          const tableContainer = Quill.find(this.table)
+          tableContainer.unmergeCells(this.selectedTds, this.quill.root.parentNode)
+          this.quill.update(Quill.sources.USER)
+          this.tableSelection.clearSelection()
+        },
+      },
+      deleteColumn: {
+        text: langText['delete-column'],
+        handler() {
+          const tableContainer = Quill.find(this.table)
+          const colIndexes = getColToolCellIndexesByBoundary(
+            this.columnToolCells,
+            this.boundary,
+            (cellRect, boundary) => {
+              return cellRect.x + ERROR_LIMIT > boundary.x && cellRect.x + cellRect.width - ERROR_LIMIT < boundary.x1
+            },
+            this.quill.root.parentNode,
+          )
+
+          const isDeleteTable = tableContainer.deleteColumns(this.boundary, colIndexes, this.quill.root.parentNode)
+          if (!isDeleteTable) {
+            this.tableColumnTool.updateColToolCells()
+            this.quill.update(Quill.sources.USER)
+            this.tableSelection.clearSelection()
+          }
+
+          setTimeout(() => this.tableScrollBar.updateScrollBar())
+        },
+      },
+      deleteRow: {
+        text: langText['delete-row'],
+        handler() {
+          const tableContainer = Quill.find(this.table)
+          const isDeleteTable = tableContainer.deleteRow(this.boundary, this.quill.root.parentNode)
+          if (!isDeleteTable) {
+            this.tableColumnTool.updateRowToolCells()
+            this.quill.update(Quill.sources.USER)
+            this.tableSelection.clearSelection()
+          }
+        },
+      },
+      deleteTable: {
+        text: langText['delete-table'],
+        handler() {
+          const betterTableModule = this.quill.getModule('better-table')
+          const tableContainer = Quill.find(this.table)
+          betterTableModule.hideTableTools()
+          tableContainer.remove()
+          this.quill.update(Quill.sources.USER)
+          // fix: 右键菜单删除表格后编辑器失焦
+          this.quill.focus()
+        },
+      },
+    }
   }
 
   mount() {
@@ -368,7 +373,7 @@ export default class TableOperationMenu {
 
     for (const name in this.menuItems) {
       if (this.menuItems[name]) {
-        const item = { ...MENU_ITEMS_DEFAULT[name], ...this.menuItems[name] }
+        const item = { ...this.DEFAULT_MENU[name], ...this.menuItems[name] }
         const dom = this.menuItemCreator(item)
         if (
           (name === 'mergeCells' && this.tableSelection.selectedTds.length === 1)
