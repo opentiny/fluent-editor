@@ -1,7 +1,7 @@
-import type { QuillToolbarTipOptions, TooltipItem } from 'quill-toolbar-tip'
-import type { FluentEditor } from 'src/fluent-editor'
+import type { QuillToolbarTipOptions } from 'quill-toolbar-tip'
+import type { FluentEditor } from '../fluent-editor'
 import QuillToolbarTip from 'quill-toolbar-tip'
-import { ZH_CN } from '../config/i18n/zh-cn'
+import { CHANGE_LANGUAGE_EVENT } from '../config'
 
 export class ToolbarTip extends QuillToolbarTip {
   static moduleName: string = 'toolbar-tip'
@@ -10,12 +10,17 @@ export class ToolbarTip extends QuillToolbarTip {
       options.tipTextMap = {}
     }
     super(quill, options)
+
+    this.quill.on(CHANGE_LANGUAGE_EVENT, () => {
+      this.destroyAllTips()
+      this.options = this.resolveOptions(options)
+      this.createToolbarTip()
+    })
   }
 
   resolveOptions(options: Partial<QuillToolbarTipOptions>): QuillToolbarTipOptions {
     const result = super.resolveOptions(options)
-    // const langText = this.quill.langText
-    const langText = ZH_CN
+    const langText = this.quill.options.langText
     const btnTips = [
       'bold',
       'italic',
