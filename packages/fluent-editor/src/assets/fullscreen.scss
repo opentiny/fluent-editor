@@ -1,3 +1,5 @@
+@use './common/config.scss' as *;
+
 :-webkit-full-screen {
   background-color: white !important;
 }
@@ -23,7 +25,7 @@
   &.ql {
     &-toolbar,
     &-container {
-      @include setCssVar(fullscreen-z-index, 50);
+      @include setCssVar(fullscreen-z-index, $fullscreenZIndex-normal);
 
       position: fixed;
       width: 100%;
@@ -32,7 +34,7 @@
       z-index: getCssVar(fullscreen-z-index);
     }
     &-toolbar {
-      @include setCssVar(fullscreen-container-z-index, calc(getCssVar(fullscreen-z-index) + 1));
+      @include setCssVar(fullscreen-container-z-index, $fullscreenZIndex-full);
 
       top: 0;
       z-index: getCssVar(fullscreen-container-z-index);

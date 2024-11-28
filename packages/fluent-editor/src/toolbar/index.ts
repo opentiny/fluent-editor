@@ -178,3 +178,4 @@ class BetterToolbar extends Toolbar {
 }
 
 export default BetterToolbar
+export * from './toolbar-tip'
