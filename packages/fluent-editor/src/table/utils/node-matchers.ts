@@ -285,7 +285,7 @@ export function matchHeader(node, delta) {
   delta.forEach((op) => {
     newDelta.insert(
       op.insert,
-      Object.assign(op.attributes, {
+      Object.assign({}, op.attributes, {
         size: fontSize,
       }),
     )
