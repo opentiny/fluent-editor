@@ -362,9 +362,13 @@ export default class TableOperationMenu {
       'width': `${MENU_WIDTH}px`,
     }
 
-    if (menuHeight + top > winHeight && menuHeight < winHeight) {
+    if (menuHeight + top > winHeight) {
       delete cssContent.top
       cssContent.bottom = '10px'
+      if (menuHeight >= winHeight) {
+        cssContent['max-height'] = `${winHeight - 20}px`
+        cssContent['overflow-y'] = 'auto'
+      }
     }
 
     this.domNode = document.createElement('div')
