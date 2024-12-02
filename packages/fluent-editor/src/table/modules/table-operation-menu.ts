@@ -82,21 +82,22 @@ export default class TableOperationMenu {
       },
       copyTable: {
         text: langText['copy-table'],
-        handler() {
+        async handler() {
           this.tableColumnTool.destroy()
           this.tableScrollBar.destroy()
           this.tableSelection.clearSelection()
           const dom = this.table.cloneNode(true)
           const trArr = dom.querySelectorAll('tr[data-row]')
           trArr.forEach(tr => tr.removeAttribute('data-row'))
-          dom.style.position = 'fixed'
-          dom.style.top = 0
-          dom.style.left = 0
-          dom.style.clip = 'rect(0,0,0,0)'
-          document.body.appendChild(dom)
           this.setCopyRange(dom)
-          document.execCommand('copy')
-          dom.remove()
+          const blob = new Blob([dom.outerHTML], { type: 'text/html' })
+          const clipboardItem = new ClipboardItem({ 'text/html': blob })
+          try {
+            await navigator.clipboard.write([clipboardItem])
+          }
+          catch (_e) {
+            throw new Error('Failed to write to clipboard.')
+          }
         },
       },
       cutCells: {
@@ -457,15 +458,20 @@ export default class TableOperationMenu {
     return node
   }
 
-  onCopy(operation) {
+  async onCopy(operation) {
     const { selectedTds } = this.tableSelection
     const virtualTable = this.createVirtualTable(selectedTds, operation)
-    document.body.appendChild(virtualTable)
     this.setCopyRange(virtualTable)
     this.tableSelection.preSelectedTable = virtualTable
     this.tableSelection.preSelectedTds = selectedTds
-    document.execCommand('copy')
-    virtualTable.remove()
+    const blob = new Blob([this.tableSelection.preSelectedTable.outerHTML], { type: 'text/html' })
+    const clipboardItem = new ClipboardItem({ 'text/html': blob })
+    try {
+      await navigator.clipboard.write([clipboardItem])
+    }
+    catch (_e) {
+      throw new Error('Failed to write to clipboard.')
+    }
     if (operation === 'cut') {
       const tableContainer = Quill.find(this.table)
       tableContainer.emptyCells(selectedTds)
