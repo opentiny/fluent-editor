@@ -6,6 +6,8 @@ export function sidebar() {
       text: '使用示例',
       items: [
         { text: '基本用法', link: '/docs/basic-usage' },
+        { text: '内容初始化', link: '/docs/set-content' },
+        { text: '获取内容', link: '/docs/get-content' },
         { text: '自定义工具栏', link: '/docs/custom-toolbar' },
         { text: '图片上传', link: '/docs/image-upload' },
         { text: '文件上传', link: '/docs/file-upload' },
@@ -18,7 +20,6 @@ export function sidebar() {
         { text: 'Markdown', link: '/docs/markdown' },
         { text: '字符统计', link: '/docs/counter' },
         { text: '视频', link: '/docs/video' },
-        { text: '获取 HTML', link: '/docs/get-html' },
         { text: '截屏', link: '/docs/screenshot' },
         { text: '国际化', link: '/docs/i18n' },
       ],
