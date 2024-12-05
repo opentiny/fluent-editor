@@ -44,15 +44,6 @@ class CustomImage extends Embed {
     return /\.(jpe?g|gif|png)$/.test(url) || /^data:image\/.+;base64/.test(url)
   }
 
-  static register() {
-    if (/Firefox/i.test(navigator.userAgent)) {
-      setTimeout(() => {
-        // Disable image resizing in Firefox
-        document.execCommand('enableObjectResizing', false, null)
-      }, 1)
-    }
-  }
-
   static sanitize(url) {
     return sanitize(url, ['http', 'https', 'data']) ? url : '//:0'
   }
