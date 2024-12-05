@@ -48,7 +48,7 @@ class CustomImage extends Embed {
     if (/Firefox/i.test(navigator.userAgent)) {
       setTimeout(() => {
         // Disable image resizing in Firefox
-        document.execCommand('enableObjectResizing', false, null)
+        document.execCommand('enableObjectResizing', null, false)
       }, 1)
     }
   }
