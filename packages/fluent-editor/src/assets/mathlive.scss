@@ -12,9 +12,9 @@
 }
 
 .ql-tooltip.math-field-tooltip {
-  border: none !important;
-  z-index: 10 !important;
-  padding: 0 !important;
+  border: none;
+  z-index: 10;
+  padding: 0;
 
   &::before {
     display: none;

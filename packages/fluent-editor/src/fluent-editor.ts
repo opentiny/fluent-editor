@@ -78,6 +78,7 @@ const registerModules = function () {
         handlers: {
           ...(SnowTheme.DEFAULTS as Record<string, any>).modules.toolbar.handlers,
           'formula': function () {
+            if (!this.quill.isEnabled()) return
             const mathlive = this.quill.getModule('mathlive')
             if (!mathlive) {
               this.quill.theme.tooltip.edit('formula')

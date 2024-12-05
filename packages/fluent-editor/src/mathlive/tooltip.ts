@@ -1,10 +1,10 @@
 import type { MathfieldElement } from 'mathlive'
-import type Quill from 'quill'
 import type { Bounds } from 'quill/core/selection'
-import { Delta } from 'quill/core'
-import Emitter from 'quill/core/emitter'
-import Tooltip from 'quill/ui/tooltip'
+import type TypeTooltip from 'quill/ui/tooltip'
+import Quill from 'quill'
 
+const Delta = Quill.import('delta')
+const Tooltip = Quill.import('ui/tooltip') as typeof TypeTooltip
 export default class MathliveTooltip extends Tooltip {
   static TEMPLATE = ``
 
@@ -69,8 +69,8 @@ export default class MathliveTooltip extends Tooltip {
       .retain(index)
       .delete(this.editValue ? 1 : range?.length || 0)
       .insert({ mathlive: { value: inputValue, mode: 'dialog' } })
-    this.quill.updateContents(delta, Emitter.sources.USER)
-    this.quill.setSelection(index + 1, Emitter.sources.USER)
+    this.quill.updateContents(delta, Quill.sources.USER)
+    this.quill.setSelection(index + 1, Quill.sources.SILENT)
     this.hide()
   }
 
