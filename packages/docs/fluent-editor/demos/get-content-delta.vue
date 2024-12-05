@@ -48,9 +48,9 @@ const TOOLBAR_CONFIG = [
 ]
 
 const articleRef = ref<HTMLElement>()
-function updateHTML(html: string) {
+function updateDeltaStr(deltaStr: string) {
   if (articleRef.value) {
-    articleRef.value.innerHTML = html
+    articleRef.value.innerHTML = deltaStr
   }
 }
 
@@ -59,7 +59,7 @@ onMounted(() => {
   import('@opentiny/fluent-editor').then((module) => {
     const FluentEditor = module.default
 
-    editor = new FluentEditor('#editor', {
+    editor = new FluentEditor('#editor-get-content-delta', {
       theme: 'snow',
       modules: {
         'toolbar': TOOLBAR_CONFIG,
@@ -111,21 +111,21 @@ onMounted(() => {
       },
     })
 
-    updateHTML(editor.root.innerHTML)
+    updateDeltaStr(JSON.stringify(editor.getContents()))
 
     editor.on('text-change', () => {
-      updateHTML(editor.root.innerHTML)
+      updateDeltaStr(JSON.stringify(editor.getContents()))
     })
   })
 })
 </script>
 
 <template>
-  <div id="editor">
+  <div id="editor-get-content-delta">
     <p>Hello <strong>Fluent Editor</strong>!</p>
   </div>
   <br>
-  预览效果：
+  Delta 内容：
   <div
     ref="articleRef"
     class="article ql-editor"
