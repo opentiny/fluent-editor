@@ -20,5 +20,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="editor-set-content-html"></div>
+  <div id="editor-set-content-html" />
 </template>

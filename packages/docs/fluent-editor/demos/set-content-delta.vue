@@ -12,7 +12,7 @@ onMounted(() => {
       theme: 'snow',
     })
 
-    const delta = {"ops":[{"insert":"Hello "},{"attributes":{"bold":true},"insert":"Fluent Editor"},{"insert":"!\n"}]}
+    const delta = { ops: [{ insert: 'Hello ' }, { attributes: { bold: true }, insert: 'Fluent Editor' }, { insert: '!\n' }] }
 
     editor.setContents(delta)
   })
@@ -20,5 +20,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="editor-set-content-delta"></div>
+  <div id="editor-set-content-delta" />
 </template>

@@ -15,4 +15,3 @@
 
 :::demo src=demos/get-content-delta.vue
 :::
-
