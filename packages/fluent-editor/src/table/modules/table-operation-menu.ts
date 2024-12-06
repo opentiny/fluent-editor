@@ -356,21 +356,26 @@ export default class TableOperationMenu {
     const transformOffset = checkAndGetViewPointChange(this.quill.root.parentNode, left, top)
     const leftPos = left - transformOffset.offsetX
     const topPos = top - transformOffset.offsetY
+
     const cssContent = {
       'left': `${leftPos}px`,
       'top': `${topPos}px`,
       'min-height': `${MENU_MIN_HEIGHT}px`,
+      'max-height': `${winHeight - topPos}px`,
       'width': `${MENU_WIDTH}px`,
+      'overflow-y': 'auto',
     }
-
-    if (menuHeight + top > winHeight && menuHeight < winHeight) {
+    // fix: 处理菜单超出屏幕
+    if (menuHeight + top > winHeight || topPos > winHeight / 2) {
       delete cssContent.top
+      cssContent['max-height'] = `${winHeight - 20}px`
       cssContent.bottom = '10px'
     }
 
     this.domNode = document.createElement('div')
     this.domNode.classList.add('qlbt-operation-menu')
     css(this.domNode, cssContent)
+    const fragment = document.createDocumentFragment()
 
     for (const name in this.menuItems) {
       if (this.menuItems[name]) {
@@ -385,9 +390,10 @@ export default class TableOperationMenu {
         else {
           dom.addEventListener('mouseup', item.handler.bind(this), false)
         }
-        this.domNode.appendChild(dom)
+        fragment.appendChild(dom)
       }
     }
+    this.domNode.appendChild(fragment)
 
     // if colors option is false, disabled bg color
     if (this.options.color && this.options.color !== false) {
@@ -453,6 +459,7 @@ export default class TableOperationMenu {
   menuItemCreator({ text }) {
     const node = document.createElement('div')
     node.classList.add('qlbt-operation-menu-item')
+    node.style.height = `${MENU_ITEM_HEIGHT}px`
     node.textContent = text
     // node.addEventListener('click', handler.bind(this), false)
     return node
