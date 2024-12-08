@@ -1,6 +1,6 @@
 import Quill from 'quill'
 import { namespace } from '../config'
-import { isFunction, isString } from '../utils/is'
+import { isElementInViewport, isFunction, isString } from '../utils/is'
 import { HeaderWithID } from './header'
 
 export interface HeaderListOptions {
@@ -26,10 +26,12 @@ export class HeaderList {
     }, true)
   }
 
-  private previousHeaders: HTMLElement[] = []
-  root: HTMLDivElement
+  private previousHeaders: { el: HTMLElement, text: string }[] = []
+  root: HTMLElement
   options: HeaderListOptions
   isHidden: boolean = false
+  observer: IntersectionObserver
+  highlightedItem: HTMLElement
   constructor(public quill: Quill, options: InputHeaderListOptions) {
     this.options = this.resolveOptions(options)
     if (this.options.container) {
@@ -55,6 +57,12 @@ export class HeaderList {
         this.updateList(newHeaders, removedHeaders, modifiedHeaders)
 
         this.previousHeaders = currentHeaders.map(el => ({ el, text: el.textContent }))
+      })
+
+      this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
+        root: this.quill.root,
+        threshold: 0.25,
+        rootMargin: '100% 0px -90% 0px',
       })
     }
     else {
@@ -132,6 +140,36 @@ export class HeaderList {
       if (listItem) {
         listItem.textContent = header.textContent
       }
+    }
+  }
+
+  handleIntersection(entries: IntersectionObserverEntry[]) {
+    const headers: IntersectionObserverEntry[] = []
+    for (const entry of entries) {
+      if (isElementInViewport(this.quill.root, entry.target as HTMLElement)) {
+        headers.push(entry)
+      }
+    }
+    console.log(headers)
+
+    const entry = headers.reduce((entry, current) => {
+      if (!entry || entry.boundingClientRect.y > current.boundingClientRect.y) {
+        return current
+      }
+      return entry
+    }, null)
+    console.log(entry)
+    if (!entry) return
+    const header = entry.target as HTMLElement
+    const headerId = header.id
+    const listItem = this.root.querySelector(`[data-id="${headerId}"]`) as HTMLElement
+
+    if (listItem) {
+      if (this.highlightedItem) {
+        this.highlightedItem.classList.remove('highlight')
+      }
+      listItem.classList.add('highlight')
+      this.highlightedItem = listItem
     }
   }
 }
