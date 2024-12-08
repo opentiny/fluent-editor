@@ -1,6 +1,6 @@
 import Quill from 'quill'
 import { namespace } from '../config'
-import { isFunction } from '../utils/is'
+import { isFunction, isString } from '../utils/is'
 import { HeaderWithID } from './header'
 
 export interface HeaderListOptions {
@@ -8,7 +8,9 @@ export interface HeaderListOptions {
   displayStyle: string
   onItemClick: (id: string) => void
 }
-export type InputHeaderListOptions = Partial<Pick<HeaderListOptions, 'container'>> & Pick<HeaderListOptions, 'container'>
+export type InputHeaderListOptions = Partial<Pick<HeaderListOptions, 'container'>> & {
+  container: HTMLElement | string
+}
 export class HeaderList {
   static moduleName = 'header-list'
   static toolName = 'header-list'
@@ -61,9 +63,11 @@ export class HeaderList {
   }
 
   resolveOptions(options: InputHeaderListOptions): HeaderListOptions {
+    const container = isString(options.container) ? document.getElementById(options.container) : options.container
     return Object.assign({
       displayStyle: 'block',
-      onItemClick: () => {},
+      onItemClick: () => { },
+      container,
     }, options)
   }
 
