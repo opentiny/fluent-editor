@@ -40,21 +40,21 @@ export class HeaderList {
       this.quill.on(Quill.events.TEXT_CHANGE, () => {
         const currentHeaders = Array.from(this.quill.root.querySelectorAll<HTMLElement>(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6'))
 
-        const removedHeaders = this.previousHeaders.filter(previousHeader => !currentHeaders.includes(previousHeader))
-        const newHeaders: HTMLElement[] = []
+        const removedHeaders = this.previousHeaders.map(item => item.el).filter(previousHeader => !currentHeaders.includes(previousHeader))
+        const newHeaders: { el: HTMLElement, index: number }[] = []
         const modifiedHeaders: HTMLElement[] = []
-        for (const header of currentHeaders) {
-          if (!this.previousHeaders.includes(header)) {
-            newHeaders.push(header)
+        for (const [index, header] of currentHeaders.entries()) {
+          if (!this.previousHeaders.find(item => item.el === header)) {
+            newHeaders.push({ el: header, index })
           }
-          else if (this.previousHeaders.some(previousHeader => previousHeader === header && previousHeader.textContent !== header.textContent)) {
+          else if (this.previousHeaders.some(({ el, text }) => el === header && text !== header.textContent)) {
             modifiedHeaders.push(header)
           }
         }
 
         this.updateList(newHeaders, removedHeaders, modifiedHeaders)
 
-        this.previousHeaders = currentHeaders
+        this.previousHeaders = currentHeaders.map(el => ({ el, text: el.textContent }))
       })
     }
     else {
@@ -115,14 +115,16 @@ export class HeaderList {
     }
   }
 
-  updateList(addHeaders: HTMLElement[], removeHeaders: HTMLElement[], modifiedHeaders: HTMLElement[]) {
+  updateList(addHeaders: { el: HTMLElement, index: number }[], removeHeaders: HTMLElement[], modifiedHeaders: HTMLElement[]) {
     for (const header of removeHeaders) {
       const item = this.root.querySelector(`[data-id="${header.id}"]`)
       item.remove()
+      this.observer.unobserve(header)
     }
 
-    for (const header of addHeaders) {
-      this.root.appendChild(this.createListItem(header.id, header.textContent, Number(header.tagName.slice(1))))
+    for (const { index, el } of addHeaders) {
+      this.root.insertBefore(this.createListItem(el.id, el.textContent, Number(el.tagName.slice(1))), this.root.children[index])
+      this.observer.observe(el)
     }
 
     for (const header of modifiedHeaders) {
