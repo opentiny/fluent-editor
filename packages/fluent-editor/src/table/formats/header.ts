@@ -1,11 +1,9 @@
-import Quill from 'quill'
+import { HeaderWithID } from 'quill-header-list'
 import { isNullOrUndefined } from '../../config/editor.utils'
 import { CELL_ATTRIBUTES, CELL_IDENTITY_KEYS } from '../table-config'
 
-const Block = Quill.imports['blots/block']
-
 // @dynamic
-class Header extends Block {
+class Header extends HeaderWithID {
   static tagName: any
   static blotName: string
   domNode: any
