@@ -12,6 +12,7 @@ import Emoji from './emoji' // 表情
 import FileModule from './file' // 文件
 import { FormatPainter } from './format-painter'
 import { fullscreenHandler } from './fullscreen/handler'
+import { HeaderList } from './header-list'
 import Link from './link' // 超链接
 import MathliveModule from './mathlive' // latex公式
 import MathliveBlot from './mathlive/formats'
@@ -143,6 +144,7 @@ const registerModules = function () {
           },
           [FormatPainter.toolName]: FormatPainter,
           [Screenshot.toolName]: Screenshot,
+          [HeaderList.toolName]: HeaderList.toolbarHandle,
         },
       },
       'better-table': {
@@ -187,6 +189,7 @@ const registerModules = function () {
       'modules/syntax': CustomSyntax,
       'modules/mathlive': MathliveModule,
       [`modules/${ToolbarTip.moduleName}`]: ToolbarTip,
+      [`modules/${HeaderList.moduleName}`]: HeaderList,
 
       'formats/strike': Strike,
       'formats/softBreak': SoftBreak,
