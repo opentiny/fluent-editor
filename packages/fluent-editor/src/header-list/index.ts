@@ -5,7 +5,9 @@ import { HeaderWithID } from './header'
 
 export interface HeaderListOptions {
   container: HTMLElement
-  displayStyle: string
+  hideClass: string
+  onBeforeShow: () => boolean | Promise<boolean>
+  onBeforeHide: () => boolean | Promise<boolean>
   onItemClick: (id: string) => void
 }
 export type InputHeaderListOptions = Partial<Pick<HeaderListOptions, 'container'>> & {
@@ -65,7 +67,9 @@ export class HeaderList {
   resolveOptions(options: InputHeaderListOptions): HeaderListOptions {
     const container = isString(options.container) ? document.getElementById(options.container) : options.container
     return Object.assign({
-      displayStyle: 'block',
+      hideClass: `${namespace}-hidden`,
+      onBeforeShow: () => false,
+      onBeforeHide: () => false,
       onItemClick: () => { },
       container,
     }, options)
@@ -96,13 +100,15 @@ export class HeaderList {
     return item
   }
 
-  hideList() {
-    this.options.container.style.display = 'none'
+  async hideList() {
+    if (await this.options.onBeforeHide()) return
+    this.options.container.classList.add(this.options.hideClass)
     this.isHidden = true
   }
 
-  showList() {
-    this.options.container.style.display = this.options.displayStyle
+  async showList() {
+    if (await this.options.onBeforeShow()) return
+    this.options.container.classList.remove(this.options.hideClass)
     this.isHidden = false
   }
 
