@@ -1,3 +1,4 @@
+import type TypeToolbar from 'quill/modules/toolbar'
 import Quill from 'quill'
 import { namespace } from '../config'
 import { isElementInViewport, isFunction, isString } from '../utils/is'
@@ -19,7 +20,7 @@ export type InputHeaderListOptions = Partial<Omit<HeaderListOptions, 'container'
 export class HeaderList {
   static moduleName = 'header-list'
   static toolName = 'header-list'
-  static toolbarHandle = function () {
+  static toolbarHandle = async function () {
     const headerListModule = this.quill.getModule(HeaderList.moduleName) as HeaderList
     if (!headerListModule) return
     headerListModule.toggleDisplay()
@@ -134,20 +135,36 @@ export class HeaderList {
     if (await this.options.onBeforeHide()) return
     this.options.container.classList.add(this.options.hideClass)
     this.isHidden = true
+    this.activeToolbarControl()
   }
 
   async showList() {
     if (await this.options.onBeforeShow()) return
     this.options.container.classList.remove(this.options.hideClass)
     this.isHidden = false
+    this.activeToolbarControl()
+  }
+
+  activeToolbarControl() {
+    const toolbarModule = this.quill.getModule('toolbar') as TypeToolbar
+    if (!toolbarModule) return
+
+    const control = toolbarModule.controls.find(([n]) => n === HeaderList.toolName)
+    if (!control) return
+    if (this.isHidden) {
+      control[1].classList.remove('ql-active')
+    }
+    else {
+      control[1].classList.add('ql-active')
+    }
   }
 
   toggleDisplay() {
     if (this.isHidden) {
-      this.showList()
+      return this.showList()
     }
     else {
-      this.hideList()
+      return this.hideList()
     }
   }
 
