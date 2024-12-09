@@ -69,6 +69,13 @@ export class HeaderList {
         root: this.options.scrollContainer,
         rootMargin: `0px 0px -90% 0px`,
       })
+
+      this.quill.on(Quill.events.EDITOR_CHANGE, () => {
+        const [range] = this.quill.selection.getRange()
+        if (range === null) {
+          this.activeToolbarControl()
+        }
+      })
     }
     else {
       console.warn('header-list: options.container is required')
