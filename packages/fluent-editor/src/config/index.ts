@@ -1,3 +1,4 @@
+import { HeaderList } from '../header-list'
 import { isNullOrUndefined } from './editor.utils'
 import {
   ALIGN_CENTER_ICON,
@@ -16,6 +17,7 @@ import {
   FULLSCREEN_EXIT_ICON,
   FULLSCREEN_ICON,
   GLOBAL_LINK_ICON,
+  HEADER_LIST_ICON,
   HELP_ICON,
   IMAGE_ICON,
   ITALIC_ICON,
@@ -84,6 +86,7 @@ export const ICONS_CONFIG: { [key: string]: any } = {
   'help': HELP_ICON,
   'screenshot': SCREENSHOT_ICON,
   'format-painter': FORMAT_PAINTER_ICON,
+  [HeaderList.toolName]: HEADER_LIST_ICON,
 }
 
 // 触发上传
