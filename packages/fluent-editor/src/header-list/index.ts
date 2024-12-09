@@ -1,17 +1,20 @@
 import Quill from 'quill'
 import { namespace } from '../config'
-import { isFunction, isString } from '../utils/is'
+import { isElementInViewport, isFunction, isString } from '../utils/is'
 import { HeaderWithID } from './header'
 
 export interface HeaderListOptions {
   container: HTMLElement
+  scrollContainer: HTMLElement | undefined
   hideClass: string
+  topOffset: number
   onBeforeShow: () => boolean | Promise<boolean>
   onBeforeHide: () => boolean | Promise<boolean>
   onItemClick: (id: string) => void
 }
-export type InputHeaderListOptions = Partial<Pick<HeaderListOptions, 'container'>> & {
+export type InputHeaderListOptions = Partial<Omit<HeaderListOptions, 'container' | 'scrollContainer'>> & {
   container: HTMLElement | string
+  scrollContainer: HTMLElement | string
 }
 export class HeaderList {
   static moduleName = 'header-list'
@@ -28,12 +31,14 @@ export class HeaderList {
     }, true)
   }
 
-  private previousHeaders: HTMLElement[] = []
-  root: HTMLDivElement
-  options: HeaderListOptions
+  previousHeaders: { el: HTMLElement, text: string }[] = []
   isHidden: boolean = false
+  root: HTMLElement
+  options: HeaderListOptions
+  observer: IntersectionObserver
+  highlightedItem: Element
   constructor(public quill: Quill, options: InputHeaderListOptions) {
-    this.options = this.resolveOptions(options)
+    this.options = this.resolveOptions({ ...options })
     if (this.options.container) {
       this.hideList()
       this.root = this.buildList()
@@ -58,6 +63,11 @@ export class HeaderList {
 
         this.previousHeaders = currentHeaders.map(el => ({ el, text: el.textContent }))
       })
+
+      this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
+        root: this.options.scrollContainer,
+        rootMargin: `0px 0px -90% 0px`,
+      })
     }
     else {
       console.warn('header-list: options.container is required')
@@ -66,8 +76,17 @@ export class HeaderList {
 
   resolveOptions(options: InputHeaderListOptions): HeaderListOptions {
     const container = isString(options.container) ? document.getElementById(options.container) : options.container
+    let scrollContainer = options.scrollContainer ? isString(options.scrollContainer) ? document.getElementById(options.scrollContainer) : options.scrollContainer : this.quill.root
+    // @ts-ignore
+    if (scrollContainer === window || scrollContainer === document.documentElement) scrollContainer = undefined
+    options.scrollContainer = scrollContainer
+
+    if (Number.isNaN(options.topOffset)) options.topOffset = 0
+
     return Object.assign({
       hideClass: `${namespace}-hidden`,
+      topOffset: 0,
+      scrollContainer,
       onBeforeShow: () => false,
       onBeforeHide: () => false,
       onItemClick: () => { },
@@ -89,9 +108,19 @@ export class HeaderList {
     item.addEventListener('click', () => {
       const headerTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
       const selector = headerTags.map(tag => `:scope > ${tag}[id="${id}"]`).join(', ')
-      const targetHeader = this.quill.root.querySelector(selector)
+      const targetHeader = this.quill.root.querySelector(selector) as HTMLElement
       if (targetHeader) {
-        targetHeader.scrollIntoView()
+        const container = this.options.scrollContainer || document.documentElement
+        // if container is window. then need add editor root offsetTop to scrollTo
+        let offsetTop = 0
+        if (container === document.documentElement) {
+          const rect = this.quill.root.getBoundingClientRect()
+          offsetTop = rect.top + window.scrollY
+        }
+        const offsetPosition = offsetTop + targetHeader.offsetTop - this.options.topOffset
+        container.scrollTo({
+          top: offsetPosition,
+        })
       }
       if (isFunction(this.options.onItemClick)) {
         this.options.onItemClick(id)
@@ -138,6 +167,59 @@ export class HeaderList {
       if (listItem) {
         listItem.textContent = header.textContent
       }
+    }
+  }
+
+  setHighlight(item: Element) {
+    if (this.highlightedItem) {
+      this.highlightedItem.classList.remove('highlight')
+    }
+    item.classList.add('highlight')
+    this.highlightedItem = item
+  }
+
+  handleIntersection(entries: IntersectionObserverEntry[]) {
+    const headers: IntersectionObserverEntry[] = []
+    // find the headers in the scrllContainer viewport
+    for (const entry of entries) {
+      if (isElementInViewport(entry.target, this.options.scrollContainer)) {
+        headers.push(entry)
+      }
+    }
+    // find the header at the top
+    const entry = headers.reduce((entry, current) => {
+      if (!entry || entry.boundingClientRect.y > current.boundingClientRect.y) {
+        return current
+      }
+      return entry
+    }, null)
+    let header
+    if (!entry || entry.isIntersecting === false) {
+      // if header doesn't found or header doesn't in the viewport intersection. find the bottommost header above the viewport intersection
+      let offset = 0
+      for (const [i, { el }] of this.previousHeaders.entries()) {
+        const elOffset = el.offsetTop
+        if (!isElementInViewport(el, this.options.scrollContainer)) {
+          if (offset < elOffset) {
+            header = el
+            offset = elOffset
+          }
+        }
+        else {
+          if (!header) {
+            header = el
+          }
+          break
+        }
+      }
+    }
+    else {
+      header = entry.target
+    }
+    const headerId = header.id
+    const listItem = this.root.querySelector(`:scope > [data-id="${headerId}"]`)
+    if (listItem) {
+      this.setHighlight(listItem)
     }
   }
 }
