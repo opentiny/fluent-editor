@@ -7,7 +7,7 @@ export interface HeaderListOptions {
   container: HTMLElement
   scrollContainer: HTMLElement | undefined
   hideClass: string
-  topOffset: number
+  topOffset: number | (() => number | Promise<number>)
   onBeforeShow: () => boolean | Promise<boolean>
   onBeforeHide: () => boolean | Promise<boolean>
   onItemClick: (id: string) => void
@@ -81,7 +81,7 @@ export class HeaderList {
     if (scrollContainer === window || scrollContainer === document.documentElement) scrollContainer = undefined
     options.scrollContainer = scrollContainer
 
-    if (Number.isNaN(options.topOffset)) options.topOffset = 0
+    if (!isFunction(options.topOffset) && Number.isNaN(options.topOffset)) options.topOffset = 0
 
     return Object.assign({
       hideClass: `${namespace}-hidden`,
@@ -105,19 +105,20 @@ export class HeaderList {
     item.classList.add(`${namespace}-header-list__item`, `level-${level}`)
     item.dataset.id = id
     item.textContent = text
-    item.addEventListener('click', () => {
+    item.addEventListener('click', async () => {
       const headerTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
       const selector = headerTags.map(tag => `:scope > ${tag}[id="${id}"]`).join(', ')
       const targetHeader = this.quill.root.querySelector(selector) as HTMLElement
       if (targetHeader) {
         const container = this.options.scrollContainer || document.documentElement
         // if container is window. then need add editor root offsetTop to scrollTo
-        let offsetTop = 0
+        let containerOffsetTop = 0
         if (container === document.documentElement) {
           const rect = this.quill.root.getBoundingClientRect()
-          offsetTop = rect.top + window.scrollY
+          containerOffsetTop = rect.top + window.scrollY
         }
-        const offsetPosition = offsetTop + targetHeader.offsetTop - this.options.topOffset
+        const topOffset = isFunction(this.options.topOffset) ? await this.options.topOffset() : this.options.topOffset
+        const offsetPosition = containerOffsetTop + targetHeader.offsetTop - topOffset
         container.scrollTo({
           top: offsetPosition,
         })
