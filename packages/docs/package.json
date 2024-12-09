@@ -17,16 +17,16 @@
     "html2canvas": "^1.4.1",
     "katex": "^0.16.11",
     "mathlive": "^0.101.0",
-    "quill": "^2.0.0",
+    "quill": "^2.0.3",
     "quill-markdown-shortcuts": "^0.0.10",
-    "vue": "^3.4.38"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@playwright/test": "^1.46.1",
     "@vitepress-code-preview/container": "^1.0.8",
     "@vitepress-code-preview/plugin": "^1.0.4",
     "less": "^4.2.0",
-    "vite": "^2.3.0",
-    "vitepress": "^1.3.2"
+    "vite": "^6.0.3",
+    "vitepress": "^1.5.0"
   }
 }
