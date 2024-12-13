@@ -5,6 +5,9 @@ import {
   FILE_UPLOADER_MIME_TYPES,
   IMAGE_UPLOADER_MIME_TYPES,
 } from './config/editor.config'
+import {
+  isNullOrUndefined,
+} from './config/editor.utils'
 
 interface InsertFileData {
   code: number
@@ -45,16 +48,26 @@ class CustomUploader extends Uploader {
             : !/^image\/[-\w.]+$/.test(file.type)
         const fileType = fileFlag ? 'file' : 'image'
         const accept = acceptObj[fileType] || this.options[fileType]
-        if (this.isAllowedFileType(accept, file)) {
+        if (this.isAllowedFileType(accept, file) && this.isAllowedFileSize(uploadOption?.maxSize, file)) {
           uploads.push(file)
           fileFlags.push(fileFlag)
+          uploadOption?.success?.(file)
         }
         else {
           rejectFlags[fileType] = true
+          uploadOption?.fail?.(file)
         }
       }
     })
     this.options.handler.call(this, range, uploads, fileFlags, rejectFlags)
+  }
+
+  isAllowedFileSize = (maxSize: number, file: File) => {
+    if (isNullOrUndefined(maxSize)) {
+      return true
+    }
+
+    return file.size <= maxSize
   }
 
   isAllowedFileType = (accept: Array<string> | string, file: File) => {
@@ -151,6 +164,7 @@ class CustomUploader extends Uploader {
             this.insertImageToEditor(range, res)
           }
         },
+        editor: this.quill,
       }
       if (imageEnableMultiUpload) {
         result.data = { files }

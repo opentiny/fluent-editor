@@ -13,3 +13,35 @@
 
 :::demo src=demos/image-upload-to-server.vue
 :::
+
+## 上传选项
+
+通过 `uploadOption` 属性可以配置文件格式、文件大小、上传成功和失败的回调等选项。
+
+以下示例配置了仅允许上传 `image/png` 和 `image/gif` 两种格式的图片，并且图片大小不能超过 1MB。按 F12 打开控制台可以查看上传结果信息。
+
+:::demo src=demos/image-upload-option.vue
+:::
+
+## 上传前钩子函数
+
+`uploadOption.imageUpload` 除了配置图片上传到服务器，还可以做一些图片上传前的校验，给用户提供了更大的灵活性。
+
+以下示例配置了不允许上传 `image/gif` 格式的图片，并且图片大小不能超过 1MB。按 F12 打开控制台可以查看上传结果信息。
+
+:::demo src=demos/image-upload-before-upload.vue
+:::
+
+## API
+
+`uploadOption` 类型：
+
+```typescript
+interface uploadOption {
+  imageUpload?: ({ file: File, callback, editor }) => void
+  imageAccept?: string[] | string
+  maxSize?: number
+  success?: (file: File) => void
+  fail?: (file: File) => void
+}
+```
