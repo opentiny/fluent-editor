@@ -33,6 +33,7 @@ import {
 } from './icons.config'
 
 export * from './editor.config'
+export * from './editor.utils'
 
 export const ICONS_CONFIG: { [key: string]: any } = {
   'undo': UNDO_ICON,
