@@ -1,6 +1,6 @@
 {
   "name": "@opentiny/fluent-editor",
-  "version": "3.23.2",
+  "version": "3.23.3",
   "description": "A rich text editor based on Quill 2.0, which extends rich modules and formats on the basis of Quill. It's powerful and out-of-the-box.",
   "author": "OpenTiny Team",
   "license": "MIT",
