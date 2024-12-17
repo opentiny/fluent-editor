@@ -143,6 +143,9 @@ const registerModules = function () {
           },
           [FormatPainter.toolName]: FormatPainter,
           [Screenshot.toolName]: Screenshot,
+          'lineheight': function (value) {
+            this.quill.format('line-height', value)
+          },
         },
       },
       'better-table': {
