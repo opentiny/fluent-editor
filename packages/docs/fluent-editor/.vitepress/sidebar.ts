@@ -9,6 +9,7 @@ export function sidebar() {
         { text: '内容初始化', link: '/docs/set-content' },
         { text: '获取内容', link: '/docs/get-content' },
         { text: '自定义工具栏', link: '/docs/custom-toolbar' },
+        { text: '增加工具栏', link: '/docs/add-toolbar-item' },
         { text: '图片上传', link: '/docs/image-upload' },
         { text: '文件上传', link: '/docs/file-upload' },
         { text: '代码块高亮', link: '/docs/code-block-highlight' },
