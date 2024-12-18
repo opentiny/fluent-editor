@@ -23,6 +23,8 @@ import TableColumnTool from './modules/table-column-tool'
 import TableOperationMenu from './modules/table-operation-menu'
 import TableScrollBar from './modules/table-scroll-bar'
 import TableSelection from './modules/table-selection'
+import TableSelector from './modules/table-selector'
+import { css } from './utils'
 // import table node matchers
 import {
   matchHeader,
@@ -52,6 +54,9 @@ class BetterTable extends Module {
   tableOperationMenu: any
   columnTool: TableColumnTool
   tableScrollBar: TableScrollBar
+  tableSelector: TableSelector
+  isTableSelectorVisible: boolean
+  tableSelectorWrapper: HTMLDivElement
 
   static register() {
     Quill.register(TableCol, true)
@@ -73,6 +78,7 @@ class BetterTable extends Module {
 
     // handle click on quill-better-table
     this.isComposition = false
+    this.isTableSelectorVisible = false
     this.quill.root.addEventListener('mousedown', event => this.handleMouseDown(event, quill), false)
     this.quill.root.addEventListener('compositionend', () => this.handleCompositionend(quill), false)
     this.quill.root.addEventListener('compositionstart', () => this.handleCompositionstart(quill), false)
@@ -183,7 +189,7 @@ class BetterTable extends Module {
     // fix: 处理空<tr>标签被忽略的情况
     quill.clipboard.addMatcher('tr', matchTableRow)
 
-    this.quill.on('editor-change', () => {
+    this.quill.on(Quill.events.EDITOR_CHANGE, () => {
       const tableContainer = Quill.find(this.table)
       if (!tableContainer) {
         this.hideTableTools()
@@ -218,6 +224,35 @@ class BetterTable extends Module {
         }
       }
     })
+    this.initTableSelector()
+  }
+
+  initTableSelector() {
+    // feat table selector ,在better-table按钮上套一层容器，往容器添加table selector
+    const toolbar = this.quill.getModule('toolbar')
+    if (!toolbar) return
+    const tableButton = toolbar.container.querySelector('.ql-better-table')
+    if (!tableButton) return
+    const tableSelectorWrapper = this.tableSelectorWrapperCreator()
+    tableButton.parentNode.insertBefore(tableSelectorWrapper, tableButton)
+    tableSelectorWrapper.appendChild(tableButton)
+    this.tableSelectorWrapper = tableSelectorWrapper
+    tableSelectorWrapper.addEventListener('mouseenter', this.handleTableSelectorHover.bind(this), false)
+    tableSelectorWrapper.addEventListener('mouseleave', this.handleTableSelectorMouseOut.bind(this), false)
+  }
+
+  tableSelectorWrapperCreator() {
+    const wrapper = document.createElement('div')
+    wrapper.className = 'ql-better-table-wrapper'
+    const cssContent = {
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
+    }
+    css(wrapper, cssContent)
+    return wrapper
   }
 
   handleMouseDown(evt, quill) {
@@ -302,6 +337,31 @@ class BetterTable extends Module {
     }
 
     this.isComposition = false
+  }
+
+  // 触发table selector
+  handleTableSelectorHover() {
+    if (this.isTableSelectorVisible) return
+    if (!this.tableSelectorWrapper) return
+    this.isTableSelectorVisible = true
+    this.tableSelector = new TableSelector({
+      onSelect: (rows, cols) => this.insertTable(rows, cols),
+    })
+    this.tableSelectorWrapper.appendChild(this.tableSelector.container)
+    const buttonRect = this.tableSelectorWrapper.getBoundingClientRect()
+    this.tableSelector.show(
+      0,
+      buttonRect.height,
+    )
+  }
+
+  // table selector 鼠标离开
+  handleTableSelectorMouseOut() {
+    if (this.tableSelector) {
+      this.tableSelector.destroy()
+    }
+    this.tableSelector = null
+    this.isTableSelectorVisible = false
   }
 
   getTable(range = this.quill.getSelection()) {
