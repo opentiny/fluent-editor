@@ -17,6 +17,7 @@ export interface IEditorConfig extends QuillOptions {
     imageUpload?: ({ file: File, callback, editor }) => void
     imageAccept?: Array<string>[] | string
     fileAccept?: Array<string>[] | string
+    fileUpload: ({ file: File, callback, editor }) => void
     isVideoPlay?: boolean
     maxSize?: number
     success?: (file: File) => void
