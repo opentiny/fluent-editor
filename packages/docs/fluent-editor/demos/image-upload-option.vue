@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Modal from '@opentiny/vue-modal'
 import { onMounted } from 'vue'
 
 let editor
@@ -25,12 +26,12 @@ onMounted(() => {
         imageAccept: ['image/png', 'image/gif'],
         maxSize: 1024 * 1024, // 1MB
         success: (file) => {
-          console.log('upload successfully!');
+          Modal.message({ status: 'info', message: 'Upload successfully!' })
         },
         fail: (file) => {
-          console.log('upload failed!');
-        }
-      }
+          Modal.message({ status: 'error', message: 'Upload failed!' })
+        },
+      },
     })
   })
 })
@@ -38,5 +39,5 @@ onMounted(() => {
 
 <template>
   <div id="editor-image-upload-option" />
-  <div></div>
+  <div />
 </template>
