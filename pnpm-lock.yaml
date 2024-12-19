@@ -29,9 +29,6 @@ importers:
       '@opentiny/fluent-editor':
         specifier: workspace:^
         version: link:../fluent-editor
-      '@opentiny/vue-modal':
-        specifier: ^3.20.0
-        version: 3.20.0
       highlight.js:
         specifier: ^10.2.0
         version: 10.7.3
@@ -53,6 +50,9 @@ importers:
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.4.2)
+      vue-toastification:
+        specifier: 2.0.0-rc.5
+        version: 2.0.0-rc.5(vue@3.5.13(typescript@5.4.2))
     devDependencies:
       '@playwright/test':
         specifier: ^1.46.1
@@ -948,51 +948,6 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
-
-  '@opentiny/vue-button@3.20.0':
-    resolution: {integrity: sha512-3PhQa7VQOE6yuQrfydkGAQsAu2Z3WwhGiCq1F1LP3ZkWkN5Xl/RAH+f6LMeTeVyjCCTGod1VqOkIc8RTTKtdgQ==}
-
-  '@opentiny/vue-checkbox-button@3.20.0':
-    resolution: {integrity: sha512-5Bn1Kcx21IlpawUd3h4c8b60bHz4puRCKjoGgeGSPXXRPJ9Gdt7XliF/pAONcGhQ4/wPrFdR0QyZq4Xn+uskoA==}
-
-  '@opentiny/vue-checkbox-group@3.20.0':
-    resolution: {integrity: sha512-WFv6Iaqm/FYEBv+NsVdPl2epNTY6VR73EPdRrLaBpeo8MWJ2gCS+ucS7G4wBBFQhdDVjqTEkP/BY9lFoEWohXg==}
-
-  '@opentiny/vue-checkbox@3.20.0':
-    resolution: {integrity: sha512-2NNZCyKnfXQ0Ajd/m+f/V+GhCXGsfvNICr1M1F+fQ2Y61jq/QVVDdeLVJWDrLWOLUpnvcI+JNnjcX+Y6bu3Vew==}
-
-  '@opentiny/vue-common@3.20.1':
-    resolution: {integrity: sha512-FSAPN4k7WOYGKDmLetNVHZk55QmVCanrLJvv+nnvcA3lbgxt+p/zzQrNCgXKn0scD9X/hv7emksy133ru1SPug==}
-
-  '@opentiny/vue-directive@3.20.0':
-    resolution: {integrity: sha512-NUFEdkgxITnWiW/S17lVvQKeuHLcOOEgvkhW9SKrKwpJMSS4rfWdYj9ZYJo2Wnq/HTTjUjSVO2Hs8i5a89iB0w==}
-
-  '@opentiny/vue-icon@3.20.0':
-    resolution: {integrity: sha512-fdKM+hfGTHqi6K2KuFnuFYpYCWUULoOwsn+OPH+ATk6lou0JAe/Mn1A6Gv5mbLcQ2N2hewEwjSURGiLFIlenzw==}
-
-  '@opentiny/vue-locale@3.20.0':
-    resolution: {integrity: sha512-JVJwPeptabY1w25rZpJOc1NlMKY7hqhHOyoJaHiK16VRPyJBBE9Gd52ECaJiDj2JJIxbaBoxOri6j0xXjkvFIA==}
-
-  '@opentiny/vue-modal@3.20.0':
-    resolution: {integrity: sha512-v8fYvu/+gjyp50ekWVNk2Z5PMRXPW2t/XbAhikiLSw1dvtDqnB1Wf86cV8l9IvdhG65/+PyXvtjdL71YsrcNrw==}
-
-  '@opentiny/vue-popconfirm@3.20.0':
-    resolution: {integrity: sha512-xABtyH006Y5RZdlUjX9FG2kp2luGxRvL5dQ5yz3FRgwu1pPejG4NxbudEtdXCFP1jfyuer+rL1q76CWssYLxEQ==}
-
-  '@opentiny/vue-popover@3.20.0':
-    resolution: {integrity: sha512-MLZ2bjeBdViNa4y+mnxtYoZsfrBYE6DgjCHJwf+LdOYdmVzsS5TPOxqxO3/rpanlcTtG+YklVOTE4BGKHVMaPw==}
-
-  '@opentiny/vue-renderless@3.20.3':
-    resolution: {integrity: sha512-NJz1f1/0G4Nk+Zq9ftC6Yg9Nrg7IsFC/07Xc1BdTHofUPuUm63dbnY50b9JQkF6KAQztU+N7/m4p4dk9vh8AzQ==}
-
-  '@opentiny/vue-theme-mobile@3.20.0':
-    resolution: {integrity: sha512-dc6/KP05ZgM+BiL43NcCMHpnPCRpO+MuCNilVTOzsfx1iR0Mt3ecHd8UyI1B2AF7WqifKRRyWCEpSkEm0l7ICA==}
-
-  '@opentiny/vue-theme@3.20.1':
-    resolution: {integrity: sha512-1GawSkwy0GUt0bHJG7ed6a3rLNIc/4PZMVTRiW6HlDUb/KXI2QwTNmCJ7IXe1TlNZGgpYgvBpvJ1HhZK8KdpiQ==}
-
-  '@opentiny/vue-tooltip@3.20.0':
-    resolution: {integrity: sha512-RFM8iW2v3giXdEWN862qwvmfnRPKojMI1MyQZRsqRiPpndTgzht06O31CjKhzIDVliL7ChOmUB6+aZV12IcuTA==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -1931,13 +1886,6 @@ packages:
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
 
-  color-string@1.9.1:
-    resolution: {integrity: sha512-shrVawQFojnZv6xM40anx4CkoDP+fZsw/ZerEMsW/pyzsRbElpsL/DBVW7q3ExxwusdNXI3lXpuhEZkzs8p5Eg==}
-
-  color@4.2.3:
-    resolution: {integrity: sha512-1rXeuUUiGGrykh+CeBdu5Ie7OJwinCgQY0bc7GCRxy5xVHy+moaqkpL/jqQq0MtQOeYcrqEz4abc5f0KtU7W4A==}
-    engines: {node: '>=12.5.0'}
-
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
 
@@ -1947,9 +1895,6 @@ packages:
 
   comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
-
-  commander@2.20.3:
-    resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
 
   commander@6.2.1:
     resolution: {integrity: sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==}
@@ -2023,9 +1968,6 @@ packages:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
     hasBin: true
-
-  cssfilter@0.0.10:
-    resolution: {integrity: sha512-FAaLDaplstoRsDR8XGYH51znUN0UY7nMc6Z9/fvE8EXGwvJE9hu7W2vHwx1+bd6gCYnln9nLbzxFTrcO9YQDZw==}
 
   cssom@0.3.8:
     resolution: {integrity: sha512-b0tGHbfegbhPJpxpiBPU2sCkigAqtM9O121le6bbOlgyV+NyGyCmVfJ6QW9eRjz8CpNfWEOYBIMIGRYkLwsIYg==}
@@ -2852,9 +2794,6 @@ packages:
 
   is-arrayish@0.2.1:
     resolution: {integrity: sha512-zz06S8t0ozoDXMG+ube26zeCTNXcKIPJZJi8hBrF4idCLms4CG9QtK7qBl1boi5ODzFpjswb5JPmHCbMpjaYzg==}
-
-  is-arrayish@0.3.2:
-    resolution: {integrity: sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==}
 
   is-binary-path@2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
@@ -4153,9 +4092,6 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  simple-swizzle@0.2.2:
-    resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
-
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
@@ -4345,9 +4281,6 @@ packages:
 
   tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
-
-  tailwind-merge@1.14.0:
-    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
 
   tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
@@ -4708,6 +4641,11 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
+  vue-toastification@2.0.0-rc.5:
+    resolution: {integrity: sha512-q73e5jy6gucEO/U+P48hqX+/qyXDozAGmaGgLFm5tXX4wJBcVsnGp4e/iJqlm9xzHETYOilUuwOUje2Qg1JdwA==}
+    peerDependencies:
+      vue: ^3.0.2
+
   vue@3.5.13:
     resolution: {integrity: sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==}
     peerDependencies:
@@ -4800,11 +4738,6 @@ packages:
 
   xmlchars@2.2.0:
     resolution: {integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==}
-
-  xss@1.0.11:
-    resolution: {integrity: sha512-EimjrjThZeK2MO7WKR9mN5ZC1CSqivSl55wvUK5EtU6acf0rzEE1pN+9ZDrFXJ82BRp3JL38pPE6S4o/rpp1zQ==}
-    engines: {node: '>= 0.10.0'}
-    hasBin: true
 
   y18n@4.0.3:
     resolution: {integrity: sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==}
@@ -5762,105 +5695,6 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
-
-  '@opentiny/vue-button@3.20.0':
-    dependencies:
-      '@opentiny/vue-common': 3.20.1
-      '@opentiny/vue-icon': 3.20.0
-      '@opentiny/vue-renderless': 3.20.3
-      '@opentiny/vue-theme': 3.20.1
-      '@opentiny/vue-theme-mobile': 3.20.0
-
-  '@opentiny/vue-checkbox-button@3.20.0':
-    dependencies:
-      '@opentiny/vue-common': 3.20.1
-      '@opentiny/vue-renderless': 3.20.3
-      '@opentiny/vue-theme': 3.20.1
-
-  '@opentiny/vue-checkbox-group@3.20.0':
-    dependencies:
-      '@opentiny/vue-checkbox': 3.20.0
-      '@opentiny/vue-checkbox-button': 3.20.0
-      '@opentiny/vue-common': 3.20.1
-      '@opentiny/vue-renderless': 3.20.3
-      '@opentiny/vue-theme': 3.20.1
-      '@opentiny/vue-theme-mobile': 3.20.0
-
-  '@opentiny/vue-checkbox@3.20.0':
-    dependencies:
-      '@opentiny/vue-common': 3.20.1
-      '@opentiny/vue-directive': 3.20.0
-      '@opentiny/vue-icon': 3.20.0
-      '@opentiny/vue-renderless': 3.20.3
-      '@opentiny/vue-theme': 3.20.1
-      '@opentiny/vue-theme-mobile': 3.20.0
-
-  '@opentiny/vue-common@3.20.1':
-    dependencies:
-      '@opentiny/vue-locale': 3.20.0
-      '@opentiny/vue-renderless': 3.20.3
-      '@opentiny/vue-theme': 3.20.1
-      tailwind-merge: 1.14.0
-
-  '@opentiny/vue-directive@3.20.0':
-    dependencies:
-      '@opentiny/vue-common': 3.20.1
-      '@opentiny/vue-tooltip': 3.20.0
-
-  '@opentiny/vue-icon@3.20.0':
-    dependencies:
-      '@opentiny/vue-common': 3.20.1
-      '@opentiny/vue-theme': 3.20.1
-
-  '@opentiny/vue-locale@3.20.0':
-    dependencies:
-      '@opentiny/vue-renderless': 3.20.3
-      '@opentiny/vue-theme': 3.20.1
-      '@opentiny/vue-theme-mobile': 3.20.0
-
-  '@opentiny/vue-modal@3.20.0':
-    dependencies:
-      '@opentiny/vue-button': 3.20.0
-      '@opentiny/vue-checkbox': 3.20.0
-      '@opentiny/vue-checkbox-group': 3.20.0
-      '@opentiny/vue-common': 3.20.1
-      '@opentiny/vue-icon': 3.20.0
-      '@opentiny/vue-popconfirm': 3.20.0
-      '@opentiny/vue-renderless': 3.20.3
-      '@opentiny/vue-theme': 3.20.1
-      '@opentiny/vue-theme-mobile': 3.20.0
-
-  '@opentiny/vue-popconfirm@3.20.0':
-    dependencies:
-      '@opentiny/vue-button': 3.20.0
-      '@opentiny/vue-common': 3.20.1
-      '@opentiny/vue-icon': 3.20.0
-      '@opentiny/vue-popover': 3.20.0
-      '@opentiny/vue-renderless': 3.20.3
-      '@opentiny/vue-theme': 3.20.1
-
-  '@opentiny/vue-popover@3.20.0':
-    dependencies:
-      '@opentiny/vue-common': 3.20.1
-      '@opentiny/vue-icon': 3.20.0
-      '@opentiny/vue-renderless': 3.20.3
-      '@opentiny/vue-theme': 3.20.1
-      '@opentiny/vue-theme-mobile': 3.20.0
-
-  '@opentiny/vue-renderless@3.20.3':
-    dependencies:
-      color: 4.2.3
-      xss: 1.0.11
-
-  '@opentiny/vue-theme-mobile@3.20.0': {}
-
-  '@opentiny/vue-theme@3.20.1': {}
-
-  '@opentiny/vue-tooltip@3.20.0':
-    dependencies:
-      '@opentiny/vue-common': 3.20.1
-      '@opentiny/vue-renderless': 3.20.3
-      '@opentiny/vue-theme': 3.20.1
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -6843,16 +6677,6 @@ snapshots:
 
   color-name@1.1.4: {}
 
-  color-string@1.9.1:
-    dependencies:
-      color-name: 1.1.4
-      simple-swizzle: 0.2.2
-
-  color@4.2.3:
-    dependencies:
-      color-convert: 2.0.1
-      color-string: 1.9.1
-
   colorette@2.0.20: {}
 
   combined-stream@1.0.8:
@@ -6860,8 +6684,6 @@ snapshots:
       delayed-stream: 1.0.0
 
   comma-separated-tokens@2.0.3: {}
-
-  commander@2.20.3: {}
 
   commander@6.2.1: {}
 
@@ -6922,8 +6744,6 @@ snapshots:
       utrie: 1.0.2
 
   cssesc@3.0.0: {}
-
-  cssfilter@0.0.10: {}
 
   cssom@0.3.8: {}
 
@@ -7874,8 +7694,6 @@ snapshots:
       has-tostringtag: 1.0.2
 
   is-arrayish@0.2.1: {}
-
-  is-arrayish@0.3.2: {}
 
   is-binary-path@2.1.0:
     dependencies:
@@ -9650,10 +9468,6 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  simple-swizzle@0.2.2:
-    dependencies:
-      is-arrayish: 0.3.2
-
   sisteransi@1.0.5: {}
 
   slash@3.0.0: {}
@@ -9844,8 +9658,6 @@ snapshots:
       tslib: 2.7.0
 
   tabbable@6.2.0: {}
-
-  tailwind-merge@1.14.0: {}
 
   tapable@2.2.1: {}
 
@@ -10194,6 +10006,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  vue-toastification@2.0.0-rc.5(vue@3.5.13(typescript@5.4.2)):
+    dependencies:
+      vue: 3.5.13(typescript@5.4.2)
+
   vue@3.5.13(typescript@5.4.2):
     dependencies:
       '@vue/compiler-dom': 3.5.13
@@ -10278,11 +10094,6 @@ snapshots:
   xml-name-validator@4.0.0: {}
 
   xmlchars@2.2.0: {}
-
-  xss@1.0.11:
-    dependencies:
-      commander: 2.20.3
-      cssfilter: 0.0.10
 
   y18n@4.0.3: {}
 

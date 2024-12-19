@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import Modal from '@opentiny/vue-modal'
 import { onMounted } from 'vue'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 let editor
 
@@ -26,10 +28,10 @@ onMounted(() => {
         imageAccept: ['image/png', 'image/gif'],
         maxSize: 1024 * 1024, // 1MB
         success: (file) => {
-          Modal.message({ status: 'info', message: 'Upload successfully!' })
+          toast.success('Upload successfully!')
         },
         fail: (file) => {
-          Modal.message({ status: 'error', message: 'Upload failed!' })
+          toast.error('Upload failed!')
         },
       },
     })
