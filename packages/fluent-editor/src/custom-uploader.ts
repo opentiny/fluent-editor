@@ -97,14 +97,37 @@ class CustomUploader extends Uploader {
 
   // 处理上传文件
   handleUploadFile(range, files, _hasRejectedFile) {
-    this.insertFileToEditor(range, files[0], {
-      code: 0,
-      data: {
-        title: files[0].name,
-        size: files[0].size,
-        src: files[0].src,
-      },
-    })
+    if (this.quill.options.uploadOption?.fileUpload) {
+      const file = files[0]
+      const result = {
+        file,
+        callback: (res) => {
+          if (!res) {
+            return
+          }
+          this.insertFileToEditor(range, file, {
+            code: 0,
+            data: {
+              title: file.name,
+              size: file.size,
+              src: res.fileUrl,
+            },
+          })
+        },
+        editor: this.quill,
+      }
+      this.quill.options.uploadOption?.fileUpload(result)
+    }
+    else {
+      this.insertFileToEditor(range, files[0], {
+        code: 0,
+        data: {
+          title: files[0].name,
+          size: files[0].size,
+          src: files[0].src,
+        },
+      })
+    }
   }
 
   // 将文件插入编辑器
