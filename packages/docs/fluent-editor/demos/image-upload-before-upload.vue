@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import Modal from '@opentiny/vue-modal'
 import { onMounted } from 'vue'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 let editor
 
@@ -26,12 +28,12 @@ onMounted(() => {
       uploadOption: {
         imageUpload: ({ file, editor }) => {
           if (file.type === 'image/gif') {
-            Modal.message({ status: 'warning', message: 'Do not support uploading images in GIF format.' })
+            toast.warning('Do not support uploading images in GIF format.')
             return
           }
 
           if (file.size > 1024 * 1024) {
-            Modal.message({ status: 'warning', message: 'The image size must not exceed 1MB.' })
+            toast.warning('The image size must not exceed 1MB.')
             return
           }
 
@@ -44,7 +46,7 @@ onMounted(() => {
                 imageUrl,
               },
             })
-            Modal.message({ status: 'info', message: 'Upload successfully!' })
+            toast.success('Upload successfully!')
           })
         },
       },
