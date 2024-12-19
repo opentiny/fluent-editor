@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useToast } from 'vue-toastification'
+import * as Toast from 'vue-toastification'
 
+const { useToast } = Toast
 const toast = useToast()
 
 let editor
