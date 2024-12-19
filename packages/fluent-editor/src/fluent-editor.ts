@@ -1,6 +1,7 @@
 import type { ExpandedQuillOptions, Module, Parchment as TypeParchment } from 'quill'
 import type { IEditorConfig } from './config/types'
 import Quill from 'quill'
+import HeaderList from 'quill-header-list'
 import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
 import { CHANGE_LANGUAGE_EVENT, defaultLanguage, getListValue, ICONS_CONFIG, inputFile, LANG_CONF } from './config'
 import Counter from './counter' // 字符统计
@@ -146,6 +147,7 @@ const registerModules = function () {
           'lineheight': function (value) {
             this.quill.format('line-height', value)
           },
+          [HeaderList.toolName]: HeaderList.toolbarHandle,
         },
       },
       'better-table': {
@@ -176,7 +178,6 @@ const registerModules = function () {
     {
       'modules/toolbar': Toolbar,
       'modules/mention': Mention,
-      'modules/better-table': BetterTable,
       'modules/clipboard': CustomClipboard,
       'modules/uploader': CustomUploader, // 三者关联性最强
       'modules/image': CustomImage, // 三者关联性最强
@@ -190,6 +191,9 @@ const registerModules = function () {
       'modules/syntax': CustomSyntax,
       'modules/mathlive': MathliveModule,
       [`modules/${ToolbarTip.moduleName}`]: ToolbarTip,
+      [`modules/${HeaderList.moduleName}`]: HeaderList,
+      // make sure register after `HeaderList`
+      'modules/better-table': BetterTable,
 
       'formats/strike': Strike,
       'formats/softBreak': SoftBreak,
