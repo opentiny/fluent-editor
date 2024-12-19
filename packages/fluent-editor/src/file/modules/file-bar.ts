@@ -82,7 +82,8 @@ export default class FileBar {
   operateFile(event, operate) {
     event.preventDefault()
     const fileId = this.file.dataset.id || ''
-    const fileDownloadUrl = this.file.href
+    const fileName = this.file.dataset.title || ''
+    const fileDownloadUrl = this.file.href || ''
     if (fileId) {
       this.quill.emitter.emit('file-change', {
         operation: operate,
@@ -94,6 +95,7 @@ export default class FileBar {
       a.href = fileDownloadUrl
       a.target = '_blank'
       a.id = 'exppub'
+      a.download = fileName
       document.body.appendChild(a)
       const alink = document.getElementById('exppub')
       alink.click()

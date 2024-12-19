@@ -119,12 +119,13 @@ class CustomUploader extends Uploader {
       this.quill.options.uploadOption?.fileUpload(result)
     }
     else {
+      const fileUrl = URL.createObjectURL(files[0])
       this.insertFileToEditor(range, files[0], {
         code: 0,
         data: {
           title: files[0].name,
           size: files[0].size,
-          src: files[0].src,
+          src: files[0].src ?? fileUrl,
         },
       })
     }

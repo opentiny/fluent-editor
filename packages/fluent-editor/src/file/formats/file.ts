@@ -62,6 +62,6 @@ class File extends Embed {
 File.blotName = 'file'
 File.tagName = 'A'
 File.className = 'ql-file-item'
-File.PROTOCOL_WHITELIST = ['http', 'https']
+File.PROTOCOL_WHITELIST = ['http', 'https', 'blob']
 
 export default File
