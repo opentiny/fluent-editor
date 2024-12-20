@@ -1,6 +1,7 @@
 import { isNullOrUndefined } from './editor.utils'
 import {
   ALIGN_CENTER_ICON,
+  ALIGN_JUSTIFY_ICON,
   ALIGN_LEFT_ICON,
   ALIGN_RIGHT_ICON,
   BACKGROUND_COLOR_ICON,
@@ -63,6 +64,7 @@ export const ICONS_CONFIG: { [key: string]: any } = {
     '': ALIGN_LEFT_ICON,
     'center': ALIGN_CENTER_ICON,
     'right': ALIGN_RIGHT_ICON,
+    'justify': ALIGN_JUSTIFY_ICON,
   },
   'list': {
     bullet: LIST_UNORDERED_ICON,

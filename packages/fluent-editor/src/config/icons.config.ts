@@ -107,6 +107,8 @@ export const ALIGN_CENTER_ICON = `<svg width="16px" height="16px" viewBox="0 0 1
 </g>
 </svg>`
 
+export const ALIGN_JUSTIFY_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 15 15"><path fill="none" stroke="currentColor" d="M0 3.5h15m-15 8h15m-15-4h15"/></svg>`
+
 export const ALIGN_RIGHT_ICON = `<svg width="16px" height="16px" viewBox="0 0 16 16">
 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <path d="M14.5,0 L16,0 L16,16 L14.5,16 L14.5,0 Z M3,3 L12,3 L12,7 L3,7 L3,3 Z M4,4 L4,6 L11,6 L11,4 L4,4 Z
