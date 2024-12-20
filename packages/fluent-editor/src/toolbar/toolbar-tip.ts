@@ -41,6 +41,7 @@ export class ToolbarTip extends QuillToolbarTip {
       'code-block',
       'formula',
       'format-painter',
+      'header-list',
     ].reduce((map, name) => {
       map[name] = langText[name]
       return map
