@@ -38,19 +38,27 @@ onMounted(() => {
 
     editor = new FluentEditor('#editor-add-toolbar-item', {
       theme: 'snow',
+      lang: 'zh-CN',
       modules: {
-        toolbar: TOOLBAR_CONFIG,
+        'toolbar': {
+          container: TOOLBAR_CONFIG,
+          handlers: {
+            good(value) {
+              // 给选中的内容设置格式
+              this.quill.format('good', value ? '#5cb300' : '')
+            },
+            bad(value) {
+              this.quill.format('bad', value ? '#f23030' : '')
+            },
+          },
+        },
+        'toolbar-tip': {
+          tipTextMap: {
+            good: '点赞',
+            bad: '点踩',
+          },
+        },
       },
-    })
-
-    // 给工具栏图标绑定事件
-    const toolbar = editor.getModule('toolbar')
-    toolbar.addHandler('good', function (value) {
-      // 给选中的内容设置格式
-      this.quill.format('good', value ? '#5cb300' : '')
-    })
-    toolbar.addHandler('bad', function (value) {
-      this.quill.format('bad', value ? '#f23030' : '')
     })
   })
 })
