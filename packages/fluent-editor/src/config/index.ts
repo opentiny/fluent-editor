@@ -10,6 +10,7 @@ import {
   CODE_BLOCK_ICON,
   CODE_ICON,
   COLOR_ICON,
+  DIVIDER_ICON,
   EMOJI_ICON,
   FILE_ICON,
   FORMAT_PAINTER_ICON,
@@ -85,6 +86,7 @@ export const ICONS_CONFIG: { [key: string]: any } = {
   'help': HELP_ICON,
   'screenshot': SCREENSHOT_ICON,
   'format-painter': FORMAT_PAINTER_ICON,
+  'divider': DIVIDER_ICON,
 }
 
 // 触发上传

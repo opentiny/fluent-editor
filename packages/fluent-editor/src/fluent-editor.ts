@@ -8,6 +8,7 @@ import CustomClipboard from './custom-clipboard' // 粘贴板
 import CustomImage from './custom-image/BlotFormatter' // 图片
 import { CustomImageSpec } from './custom-image/specs/CustomImageSpec' // 图片拉伸模块
 import CustomUploader from './custom-uploader' // 上传
+import DividerBlot from './divider' // 分割线
 import Emoji from './emoji' // 表情
 import FileModule from './file' // 文件
 import { FormatPainter } from './format-painter'
@@ -146,6 +147,12 @@ const registerModules = function () {
           'lineheight': function (value) {
             this.quill.format('line-height', value)
           },
+          'divider': function () {
+            const range = this.quill.getSelection(true)
+            this.quill.insertText(range.index, '\n', Quill.sources.USER)
+            this.quill.insertEmbed(range.index + 1, 'divider', true, Quill.sources.USER)
+            this.quill.setSelection(range.index + 2, Quill.sources.SILENT)
+          },
         },
       },
       'better-table': {
@@ -189,6 +196,7 @@ const registerModules = function () {
       // 'modules/quickmenu': QuickMenu,//暂未开发
       'modules/syntax': CustomSyntax,
       'modules/mathlive': MathliveModule,
+      'modules/divider': DividerBlot,
       [`modules/${ToolbarTip.moduleName}`]: ToolbarTip,
 
       'formats/strike': Strike,
