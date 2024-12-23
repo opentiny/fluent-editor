@@ -22,6 +22,7 @@ export interface IEditorConfig extends QuillOptions {
     maxSize?: number
     success?: (file: File) => void
     fail?: (file: File) => void
+    multiple?: boolean
   }
   screenshot?: Partial<ScreenShotOptions>
   lang?: string
