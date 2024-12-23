@@ -9,7 +9,7 @@
 
 ## 多图片上传
 
-配置 `uploadOption.multi` 可以开启多图片上传功能。
+配置 `uploadOption.multiple` 可以开启多图片上传功能。
 
 :::demo src=demos/image-upload-multi.vue
 :::
