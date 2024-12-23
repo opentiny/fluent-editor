@@ -98,15 +98,15 @@ class CustomUploader extends Uploader {
   // 处理上传文件
   handleUploadFile(range, files, _hasRejectedFile) {
     if (this.quill.options.uploadOption?.fileUpload) {
+      const initialRange = range
       files.forEach((file) => {
-        const curRange = this.quill.getSelection(true)
         const result = {
           file,
           callback: (res) => {
             if (!res) {
               return
             }
-            this.insertFileToEditor(curRange, file, {
+            this.insertFileToEditor(initialRange, file, {
               code: 0,
               data: {
                 title: file.name,
@@ -114,6 +114,7 @@ class CustomUploader extends Uploader {
                 src: res.fileUrl,
               },
             })
+            initialRange.index += 1
           },
           editor: this.quill,
         }
@@ -123,8 +124,8 @@ class CustomUploader extends Uploader {
     else {
       files.forEach((file) => {
         const fileUrl = URL.createObjectURL(file)
-        const curRange = this.quill.getSelection(true)
-        this.insertFileToEditor(curRange, file, {
+        const initialRange = range
+        this.insertFileToEditor(initialRange, file, {
           code: 0,
           data: {
             title: file.name,
@@ -132,6 +133,7 @@ class CustomUploader extends Uploader {
             src: file.src ?? fileUrl,
           },
         })
+        initialRange.index += 1
       })
     }
   }
@@ -180,7 +182,7 @@ class CustomUploader extends Uploader {
       // 此处this获取不到enableMultiUpload
       const imageEnableMultiUpload = this.quill.uploader.options.enableMultiUpload === true || this.quill.uploader.options.enableMultiUpload?.image
       files.forEach((file) => {
-        const curRange = this.quill.getSelection(true)
+        const initialRange = range
         const result = {
           file,
           data: { files: [file] },
@@ -190,10 +192,14 @@ class CustomUploader extends Uploader {
               return
             }
             if (imageEnableMultiUpload && Array.isArray(res)) {
-              res.forEach(value => this.insertImageToEditor(curRange, value))
+              res.forEach((value) => {
+                this.insertImageToEditor(initialRange, value)
+                initialRange.index += 1
+              })
             }
             else {
-              this.insertImageToEditor(curRange, res)
+              this.insertImageToEditor(initialRange, res)
+              initialRange.index += 1
             }
           },
           editor: this.quill,
