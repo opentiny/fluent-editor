@@ -120,4 +120,5 @@ export const ZH_CN = {
   'header-4': '标题4',
   'header-5': '标题5',
   'header-6': '标题6',
+  'header-list': '标题列表',
 }

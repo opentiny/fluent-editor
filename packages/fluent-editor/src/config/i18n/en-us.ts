@@ -122,4 +122,5 @@ export const EN_US = {
   'header-4': 'Heading 4',
   'header-5': 'Heading 5',
   'header-6': 'Heading 6',
+  'header-list': 'Heading List',
 }
