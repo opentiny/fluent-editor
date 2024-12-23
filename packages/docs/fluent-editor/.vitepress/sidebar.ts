@@ -23,6 +23,7 @@ export function sidebar() {
         { text: '视频', link: '/docs/video' },
         { text: '截屏', link: '/docs/screenshot' },
         { text: '国际化', link: '/docs/i18n' },
+        { text: '标题列表', link: '/docs/header-list' },
       ],
     },
   ]
