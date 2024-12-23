@@ -96,6 +96,7 @@ export const EN_US = {
   'code-block': 'Code Block',
   'formula': 'Formula',
   'format-painter': 'Format Painter',
+  'divider': 'Divider',
   'video': 'Video',
   'color': 'Font Color',
   'background': 'Background Color',

@@ -89,6 +89,7 @@ export const ZH_CN = {
   'file': '文件',
   'table': '表格',
   'link': '超链接',
+  'divider': '分割线',
   'code': '行内代码',
   'better-table': '表格',
   'code-block': '代码块',

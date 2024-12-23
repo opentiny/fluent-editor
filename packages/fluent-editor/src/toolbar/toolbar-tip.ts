@@ -30,6 +30,7 @@ export class ToolbarTip extends QuillToolbarTip {
       'redo',
       'clean',
       'link',
+      'divider',
       'blockquote',
       'code',
       'image',
