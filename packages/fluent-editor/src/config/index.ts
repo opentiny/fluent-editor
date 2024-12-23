@@ -96,6 +96,7 @@ export function inputFile(type, accept) {
   const defaultMIMETypes = this.quill.uploader.options[type].join(', ')
   const mimeTypes = accept || defaultMIMETypes
   let fileInput = this.container.querySelector(`input.ql-${type}[type=file]`)
+  this.quill.uploader.options.enableMultiUpload = this.quill.options.uploadOption?.multiple
   if (isNullOrUndefined(fileInput)) {
     fileInput = document.createElement('input')
     fileInput.classList.add(`ql-${type}`)
@@ -103,8 +104,8 @@ export function inputFile(type, accept) {
     fileInput.setAttribute('accept', mimeTypes)
     if (
       this.quill.uploader.options.enableMultiUpload === true
-      || (this.quill.uploader.options.enableMultiUpload.file && type === 'file')
-      || (this.quill.uploader.options.enableMultiUpload.image && type === 'image')
+      || (this.quill.uploader.options.enableMultiUpload?.file && type === 'file')
+      || (this.quill.uploader.options.enableMultiUpload?.image && type === 'image')
     ) {
       fileInput.setAttribute('multiple', '')
     }

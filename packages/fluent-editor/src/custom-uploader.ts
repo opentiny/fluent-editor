@@ -98,35 +98,40 @@ class CustomUploader extends Uploader {
   // 处理上传文件
   handleUploadFile(range, files, _hasRejectedFile) {
     if (this.quill.options.uploadOption?.fileUpload) {
-      const file = files[0]
-      const result = {
-        file,
-        callback: (res) => {
-          if (!res) {
-            return
-          }
-          this.insertFileToEditor(range, file, {
-            code: 0,
-            data: {
-              title: file.name,
-              size: file.size,
-              src: res.fileUrl,
-            },
-          })
-        },
-        editor: this.quill,
-      }
-      this.quill.options.uploadOption?.fileUpload(result)
+      files.forEach((file) => {
+        const curRange = this.quill.getSelection(true)
+        const result = {
+          file,
+          callback: (res) => {
+            if (!res) {
+              return
+            }
+            this.insertFileToEditor(curRange, file, {
+              code: 0,
+              data: {
+                title: file.name,
+                size: file.size,
+                src: res.fileUrl,
+              },
+            })
+          },
+          editor: this.quill,
+        }
+        this.quill.options.uploadOption?.fileUpload(result)
+      })
     }
     else {
-      const fileUrl = URL.createObjectURL(files[0])
-      this.insertFileToEditor(range, files[0], {
-        code: 0,
-        data: {
-          title: files[0].name,
-          size: files[0].size,
-          src: files[0].src ?? fileUrl,
-        },
+      files.forEach((file) => {
+        const fileUrl = URL.createObjectURL(file)
+        const curRange = this.quill.getSelection(true)
+        this.insertFileToEditor(curRange, file, {
+          code: 0,
+          data: {
+            title: file.name,
+            size: file.size,
+            src: file.src ?? fileUrl,
+          },
+        })
       })
     }
   }
@@ -171,29 +176,33 @@ class CustomUploader extends Uploader {
   // 处理上传图片
   handleUploadImage(range, { file, files }, hasRejectedImage) {
     if (this.quill.options.uploadOption?.imageUpload) {
-      const imageEnableMultiUpload = this.enableMultiUpload === true || this.enableMultiUpload?.image
-
-      const result = {
-        file,
-        data: { files: [file] },
-        hasRejectedImage,
-        callback: (res) => {
-          if (!res) {
-            return
-          }
-          if (imageEnableMultiUpload && Array.isArray(res)) {
-            res.forEach(value => this.insertImageToEditor(range, value))
-          }
-          else {
-            this.insertImageToEditor(range, res)
-          }
-        },
-        editor: this.quill,
-      }
-      if (imageEnableMultiUpload) {
-        result.data = { files }
-      }
-      this.quill.options.uploadOption?.imageUpload(result)
+      // const imageEnableMultiUpload = this.enableMultiUpload === true || this.enableMultiUpload?.image
+      // 此处this获取不到enableMultiUpload
+      const imageEnableMultiUpload = this.quill.uploader.options.enableMultiUpload === true || this.quill.uploader.options.enableMultiUpload?.image
+      files.forEach((file) => {
+        const curRange = this.quill.getSelection(true)
+        const result = {
+          file,
+          data: { files: [file] },
+          hasRejectedImage,
+          callback: (res) => {
+            if (!res) {
+              return
+            }
+            if (imageEnableMultiUpload && Array.isArray(res)) {
+              res.forEach(value => this.insertImageToEditor(curRange, value))
+            }
+            else {
+              this.insertImageToEditor(curRange, res)
+            }
+          },
+          editor: this.quill,
+        }
+        if (imageEnableMultiUpload) {
+          result.data = { files }
+        }
+        this.quill.options.uploadOption?.imageUpload(result)
+      })
     }
     else {
       const promises = files.map((fileItem) => {
@@ -209,7 +218,6 @@ class CustomUploader extends Uploader {
         const update = images.reduce((delta: any, image) => {
           return delta.insert({ image })
         }, new Delta().retain(range.index).delete(range.length))
-
         this.quill.updateContents(update, Quill.sources.USER)
         this.quill.setSelection(range.index + images.length, Quill.sources.SILENT)
       })

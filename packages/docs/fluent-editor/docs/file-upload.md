@@ -7,6 +7,13 @@
 :::demo src=demos/file-upload.vue
 :::
 
+## 多文件上传
+
+配置 `uploadOption.multi` 可以开启多文件上传功能。
+
+:::demo src=demos/file-upload-multi.vue
+:::
+
 ## 上传到服务器
 
 配置 `uploadOption.fileUpload` 可以将文件上传到服务器。
