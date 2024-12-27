@@ -52,6 +52,7 @@ export class ToolbarTip extends QuillToolbarTip {
       'background',
       'font',
       'size',
+      'lineheight',
     ].reduce((map, name) => {
       map[name] = {
         onShow() {
