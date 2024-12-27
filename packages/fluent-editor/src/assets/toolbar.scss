@@ -255,7 +255,22 @@ $arrowWidth: 5px; // 下拉框箭头宽度
 
       &.ql-color,
       &.ql-background {
-        @include pickerValue($colorGroup, length($colorGroup));
+        .ql-picker-options {
+          .ql-picker-item {
+            &.ql-selected {
+              &::after {
+                margin-left: 5px;
+                margin-top: -3px;
+                content: 'L';
+                font-size: initial;
+                font-family: arial;
+                -ms-transform: scaleX(-1) rotate(-45deg);
+                -webkit-transform: scaleX(-1) rotate(-45deg);
+                transform: scaleX(-1) rotate(-45deg);
+              }
+            }
+          }
+        }
       }
 
       .ql-picker-item:hover {
