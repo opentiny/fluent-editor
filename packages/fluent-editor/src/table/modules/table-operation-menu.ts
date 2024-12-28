@@ -51,7 +51,7 @@ export default class TableOperationMenu {
     this.selectedTds = this.tableSelection.selectedTds
     this.destroyHandler = this.destroy.bind(this)
     this.columnToolCells = this.tableColumnTool.colToolCells()
-    this.DEFAULT_COLOR_SUBTITLE = this.quill.options.langText['sub-title-bg-color']
+    this.DEFAULT_COLOR_SUBTITLE = this.quill.langText['sub-title-bg-color']
     this.colorSubTitle
       = options.color && options.color.text
         ? options.color.text
@@ -66,13 +66,13 @@ export default class TableOperationMenu {
     document.addEventListener('click', this.destroyHandler, false)
     this.quill.on(CHANGE_LANGUAGE_EVENT, () => {
       this.destroy()
-      this.DEFAULT_COLOR_SUBTITLE = this.quill.options.langText['sub-title-bg-color']
+      this.DEFAULT_COLOR_SUBTITLE = this.quill.langText['sub-title-bg-color']
       this.setDefaultMenu()
     })
   }
 
   setDefaultMenu() {
-    const langText = this.quill.options.langText
+    const langText = this.quill.langText
     this.DEFAULT_MENU = {
       copyCells: {
         text: langText['copy-cells'],

@@ -21,14 +21,16 @@ onMounted(() => {
         ],
         'counter': true,
         'better-table': true,
+        'i18n': {
+          lang: lang.value,
+        },
       },
-      lang: lang.value,
     })
   })
 })
 function switchLanguage() {
   lang.value = lang.value === 'zh-CN' ? 'en-US' : 'zh-CN'
-  editor.changeLanguage({ lang: lang.value })
+  editor.getModule('i18n').changeLanguage({ lang: lang.value })
 }
 </script>
 

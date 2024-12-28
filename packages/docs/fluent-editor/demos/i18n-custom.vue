@@ -20,14 +20,17 @@ onMounted(() => {
         ],
         'counter': true,
         'better-table': true,
+        'i18n': {
+          lang: 'zh-CN',
+          langText: {
+            'copy-cells': '复制单元格',
+            'copy-table': '复制表格',
+            'cut-cells': '剪切单元格',
+            'empty-cells': '清空单元格',
+          },
+        },
       },
-      lang: 'zh-CN',
-      langText: {
-        'copy-cells': '复制单元格',
-        'copy-table': '复制表格',
-        'cut-cells': '剪切单元格',
-        'empty-cells': '清空单元格',
-      },
+
     })
   })
 })
