@@ -40,14 +40,14 @@ export default class Tooltip extends BaseTooltip {
     LinkBlot.autoProtocol = this.options.autoProtocol
     this.debouncedHideToolTip = debounce(this.hideToolTip, 300)
     this.debouncedShowToolTip = debounce(this.showToolTip, 300)
-    this.quill.on(CHANGE_LANGUAGE_EVENT, () => {
+    this.quill.emitter.on(CHANGE_LANGUAGE_EVENT, () => {
       this.setTemplate()
     })
   }
 
   setTemplate() {
     this.root.innerHTML = [
-      `<input type="text" data-formula="e=mc^2" data-link="${this.quill.options.langText?.linkplaceholder}" data-video="Embed URL" style="width: 225px;">`,
+      `<input type="text" data-formula="e=mc^2" data-link="${this.quill.langText?.linkplaceholder}" data-video="Embed URL" style="width: 225px;">`,
       '<span class="ql-split"></span>',
       '<a class="ql-preview"><i class="icon-share"></i></a>',
       '<a class="ql-remove"><i class="icon-delete"></i></a>',

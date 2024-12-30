@@ -11,7 +11,7 @@ export class ToolbarTip extends QuillToolbarTip {
     }
     super(quill, options)
 
-    this.quill.on(CHANGE_LANGUAGE_EVENT, () => {
+    this.quill.emitter.on(CHANGE_LANGUAGE_EVENT, () => {
       this.destroyAllTips()
       this.options = this.resolveOptions(options)
       this.createToolbarTip()
@@ -20,7 +20,8 @@ export class ToolbarTip extends QuillToolbarTip {
 
   resolveOptions(options: Partial<QuillToolbarTipOptions>): QuillToolbarTipOptions {
     const result = super.resolveOptions(options)
-    const langText = this.quill.options.langText
+    if (!this.quill.lang) return result
+    const langText = this.quill.langText
     const btnTips = [
       'bold',
       'italic',
