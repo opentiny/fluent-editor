@@ -4,6 +4,7 @@ import DefaultTheme from 'vitepress/theme'
 import * as Toast from 'vue-toastification'
 import { insertBaiduScript } from './insert-baidu-script'
 import { inertDepsVersion } from './insert-deps-version'
+import { insertPeterCatAssistant } from './insert-petercat-assistant'
 import '@vitepress-code-preview/container/dist/style.css'
 import './style.css'
 import 'vue-toastification/dist/index.css'
@@ -20,5 +21,8 @@ export default define<Theme>({
     useComponents(app, DemoPreview)
     insertBaiduScript()
     inertDepsVersion()
+    setTimeout(() => {
+      insertPeterCatAssistant()
+    }, 300)
   },
 })
