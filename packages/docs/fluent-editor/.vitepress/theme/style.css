@@ -92,3 +92,9 @@
 .dark .ql-toolbar .ql-video:hover svg .ql-stroke {
   stroke: var(--vp-dark-theme-hover-color);
 }
+
+/* PeterCat AI助手 */
+#petercat-lui-tip {
+  padding-top: 0;
+  line-height: 22px;
+}
