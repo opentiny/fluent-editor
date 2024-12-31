@@ -158,9 +158,10 @@ $arrowWidth: 5px; // 下拉框箭头宽度
     }
   }
 
-  $colorGroup: #000000, #ffffff, #f3f6f8, #e3e5e9, #cacfd8, #959eb2, #5e6678, #f95f5b, #fce5e4, #ffc9c7, #ff8f8a,
-    #fb564e, #cb160e, #900701, #fecc55, #fff1d0, #fadf9e, #f2cd72, #edb83a, #be8c11, #7c5905, #3dcca6, #ccf7ec, #abf3e0,
-    #46e3b9, #12c898, #0c9f78, #06664d, #5090ff, #c7d9fa, #9cbffb, #659cfc, #387df4, #1457cd, #072c6e;
+  $colorGroup: '#000000', '#e60000', '#ff9900', '#ffff00', '#008a00', '#0066cc', '#9933ff', '#ffffff', '#facccc',
+    '#ffebcc', '#ffffcc', '#cce8cc', '#cce0f5', '#ebd6ff', '#bbbbbb', '#f06666', '#ffc266', '#ffff66', '#66b966',
+    '#66a3e0', '#c285ff', '#888888', '#a10000', '#b26b00', '#b2b200', '#006100', '#0047b2', '#6b24b2', '#444444',
+    '#5c0000', '#663d00', '#666600', '#003700', '#002966', '#3d1466';
 
   .ql-toolbar {
     .ql-picker.ql-expanded {
@@ -210,6 +211,9 @@ $arrowWidth: 5px; // 下拉框箭头宽度
           '1',
           '2',
           '3',
+          '4',
+          '5',
+          '6',
           // 标题下拉框
           'songti',
           'yahei',
@@ -227,13 +231,17 @@ $arrowWidth: 5px; // 下拉框箭头宽度
           '13px',
           '14px',
           '16px',
+          '18px',
           '19px',
+          '20px',
           '22px',
           '24px',
           '29px',
           '32px',
+          '36px',
           '40px',
           '48px',
+          '72px',
           // 字号下拉框
           '2.5',
           '4',
