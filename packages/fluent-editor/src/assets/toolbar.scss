@@ -1,18 +1,19 @@
 @use './common/config.scss' as *;
 @import './common';
-@import 'quill-toolbar-tip/dist/index.css';
 
-.toolbar-tip__tooltip {
-  @include setCssVar(text-color, #ffffff);
-  @include setCssVar(bg-color, #303133);
+html {
+  .toolbar-tip__tooltip {
+    @include setCssVar(text-color, #ffffff);
+    @include setCssVar(bg-color, #303133);
 
-  z-index: $fullscreenZIndex-full;
-  color: getCssVar(text-color);
-  background-color: getCssVar(bg-color);
-}
-.dark .toolbar-tip__tooltip {
-  @include setCssVar(text-color, #141414);
-  @include setCssVar(bg-color, #f5f5f5);
+    z-index: $fullscreenZIndex-full;
+    color: getCssVar(text-color);
+    background-color: getCssVar(bg-color);
+  }
+  &.dark .toolbar-tip__tooltip {
+    @include setCssVar(text-color, #141414);
+    @include setCssVar(bg-color, #f5f5f5);
+  }
 }
 
 $iconHeight: 18px; // 工具栏按钮高度

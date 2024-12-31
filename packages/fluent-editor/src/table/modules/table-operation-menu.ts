@@ -64,7 +64,7 @@ export default class TableOperationMenu {
     this.menuInitial(params)
     this.mount()
     document.addEventListener('click', this.destroyHandler, false)
-    this.quill.on(CHANGE_LANGUAGE_EVENT, () => {
+    this.quill.emitter.on(CHANGE_LANGUAGE_EVENT, () => {
       this.destroy()
       this.DEFAULT_COLOR_SUBTITLE = this.quill.langText['sub-title-bg-color']
       this.setDefaultMenu()

@@ -1,9 +1,11 @@
-import { HeaderWithID } from 'quill-header-list'
+import type TypeHeader from 'quill/formats/header'
+import Quill from 'quill'
 import { isNullOrUndefined } from '../../config/editor.utils'
 import { CELL_ATTRIBUTES, CELL_IDENTITY_KEYS } from '../table-config'
 
+const OriginHeader = Quill.import('formats/header') as typeof TypeHeader
 // @dynamic
-class Header extends HeaderWithID {
+class Header extends OriginHeader {
   static tagName: any
   static blotName: string
   domNode: any
@@ -13,7 +15,6 @@ class Header extends HeaderWithID {
   enforceAllowedChildren: any
   uiNode: any
   children: any
-  statics: any
   appendChild: any
   remove: any
   cache: Record<string, any>

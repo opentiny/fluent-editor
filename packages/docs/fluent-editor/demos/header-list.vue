@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import HeaderList from 'quill-header-list'
 import { onMounted, ref } from 'vue'
+import 'quill-header-list/dist/index.css'
 
 let editor
 const editorRef = ref()
@@ -7,18 +9,24 @@ const headerListRef = ref()
 
 onMounted(() => {
   // ssr compat, reference: https://vitepress.dev/guide/ssr-compat#importing-in-mounted-hook
-  import('@opentiny/fluent-editor').then((module) => {
-    const FluentEditor = module.default
+  import('@opentiny/fluent-editor').then(({ default: FluentEditor }) => {
+    FluentEditor.register({ 'modules/header-list': HeaderList }, true)
 
     editor = new FluentEditor(editorRef.value, {
       theme: 'snow',
       modules: {
-        'toolbar': [
-          [{ header: [null, 1, 2, 3, 4, 5, 6] }, 'header-list'],
-        ],
+        'toolbar': {
+          container: [
+            [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'header-list', 'better-table'],
+          ],
+          handlers: {
+            'header-list': HeaderList.toolbarHandle,
+          },
+        },
         'header-list': {
           container: headerListRef.value,
         },
+        'better-table': {},
       },
     })
 

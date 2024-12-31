@@ -1,6 +1,5 @@
 import type { FluentEditorToolbar } from '../config/types'
 import { ICONS_CONFIG, namespace } from '../config'
-import { ToolbarTip } from '../toolbar'
 import { lockScroll } from '../utils/scroll-lock'
 
 let exitEscHandlerBindToolbar: (e: KeyboardEvent) => void
@@ -27,7 +26,8 @@ function intoFullscreen(toolbar: FluentEditorToolbar) {
   btn.innerHTML = ICONS_CONFIG['fullscreen-exit']
   window.addEventListener('resize', resizeHandlerBindToolbar)
   document.addEventListener('keydown', exitEscHandlerBindToolbar)
-  const toolbarTipModule = toolbar.quill.getModule(ToolbarTip.moduleName) as ToolbarTip
+  // TODO: clear hard code
+  const toolbarTipModule = toolbar.quill.getModule('toolbar-tip') as any
   if (toolbarTipModule) {
     toolbarTipModule.hideAllTips()
   }
@@ -42,7 +42,8 @@ function exitFullscreen(toolbar: FluentEditorToolbar) {
   btn.innerHTML = ICONS_CONFIG.fullscreen
   window.removeEventListener('resize', resizeHandlerBindToolbar)
   document.removeEventListener('keydown', exitEscHandlerBindToolbar)
-  const toolbarTipModule = toolbar.quill.getModule(ToolbarTip.moduleName) as ToolbarTip
+  // TODO: clear hard code
+  const toolbarTipModule = toolbar.quill.getModule('toolbar-tip') as any
   if (toolbarTipModule) {
     toolbarTipModule.hideAllTips()
   }
