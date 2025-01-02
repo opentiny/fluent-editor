@@ -54,7 +54,7 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
         'lineheight',
       ].reduce((map, name) => {
         map[name] = {
-          onShow() {
+          onShow: () => {
             return this.quill.getLangText(name)
           },
         }
@@ -69,7 +69,7 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
         'direction',
       ].reduce((map, name) => {
         map[name] = {
-          onShow(target: HTMLElement, value: string) {
+          onShow: (target: HTMLElement, value: string) => {
             if (name === 'direction') {
               value = target.classList.contains('ql-active') ? 'rtl' : 'ltr'
             }
