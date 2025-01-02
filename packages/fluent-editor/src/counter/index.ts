@@ -22,7 +22,7 @@ export default class Counter {
     return Object.assign({
       format: 'text',
       unit: 'char',
-      template: this.quill.langText['counter-template'],
+      template: this.quill.getLangText('counter-template'),
       count: 500,
     }, options)
   }
@@ -33,7 +33,7 @@ export default class Counter {
       const { format, count: totalCount, unit, template: counterTemplate, errorTemplate } = this.options
       const count = this.getContentLength(format)
       const restCount = totalCount - count
-      const countUnit = unit === 'char' ? this.quill.langText.char : this.quill.langText.word
+      const countUnit = unit === 'char' ? this.quill.getLangText('char') : this.quill.getLangText('word')
       let template: any = counterTemplate
       if (typeof template === 'function') {
         template = template(count, restCount)
@@ -43,7 +43,7 @@ export default class Counter {
         .replace('{{restCount}}', String(restCount))
         .replace(/{{countUnit}}/g, countUnit)
 
-      let limitTemplate: any = errorTemplate || this.quill.langText['counter-limit-tips']
+      let limitTemplate: any = errorTemplate || this.quill.getLangText('counter-limit-tips')
       if (typeof limitTemplate === 'function') {
         limitTemplate = limitTemplate(count, restCount)
       }

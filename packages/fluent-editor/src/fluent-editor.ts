@@ -2,7 +2,7 @@ import type { ExpandedQuillOptions, Module, Parchment as TypeParchment } from 'q
 import type { IEditorConfig } from './config/types'
 import Quill from 'quill'
 import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
-import { getListValue, ICONS_CONFIG, inputFile } from './config'
+import { defaultLanguage, getListValue, ICONS_CONFIG, inputFile, LANG_CONF } from './config'
 import Counter from './counter' // 字符统计
 import CustomClipboard from './custom-clipboard' // 粘贴板
 import CustomImage from './custom-image/BlotFormatter' // 图片
@@ -31,10 +31,20 @@ import Video from './video' // 视频
 export class FluentEditor extends Quill {
   isFullscreen: boolean = false
   options: IEditorConfig & ExpandedQuillOptions
-  lang: string
-  langText: Record<string, string>
+
+  get lang() {
+    const i18nModule = this.getModule('i18n') as I18N
+    return i18nModule ? i18nModule.options.lang : defaultLanguage
+  }
+
   constructor(container: HTMLElement | string, options: IEditorConfig = {}) {
     super(container, options)
+  }
+
+  getLangText(name: string) {
+    const i18nModule = this.getModule('i18n') as I18N
+    if (!i18nModule) return LANG_CONF[defaultLanguage][name]
+    return i18nModule.options.langText[name]
   }
 }
 
