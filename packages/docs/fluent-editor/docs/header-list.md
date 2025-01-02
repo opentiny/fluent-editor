@@ -1,5 +1,13 @@
 # 标题列表
 
+## 安装
+
+此功能为外部插件, 使用前请安装[`quill-header-list`](https://www.npmjs.com/package/quill-header-list)插件，完整文档请查看[插件文档](https://github.com/opentiny/quill-header-list#quill-header-list)。
+
+```bash
+npm install quill-header-list
+```
+
 ## 基本用法
 
 创建一个元素用于存放标题列表，并将其传入`header-list`的`container`属性。

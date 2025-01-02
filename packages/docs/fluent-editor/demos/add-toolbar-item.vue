@@ -40,7 +40,7 @@ onMounted(() => {
       theme: 'snow',
       lang: 'zh-CN',
       modules: {
-        'toolbar': {
+        toolbar: {
           container: TOOLBAR_CONFIG,
           handlers: {
             good(value) {
@@ -50,12 +50,6 @@ onMounted(() => {
             bad(value) {
               this.quill.format('bad', value ? '#f23030' : '')
             },
-          },
-        },
-        'toolbar-tip': {
-          tipTextMap: {
-            good: '点赞',
-            bad: '点踩',
           },
         },
       },

@@ -24,6 +24,7 @@ export function sidebar() {
         { text: '截屏', link: '/docs/screenshot' },
         { text: '国际化', link: '/docs/i18n' },
         { text: '标题列表', link: '/docs/header-list' },
+        { text: '工具栏提示', link: '/docs/toolbar-tip' },
       ],
     },
   ]

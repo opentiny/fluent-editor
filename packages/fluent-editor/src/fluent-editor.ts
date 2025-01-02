@@ -1,7 +1,6 @@
 import type { ExpandedQuillOptions, Module, Parchment as TypeParchment } from 'quill'
 import type { IEditorConfig } from './config/types'
 import Quill from 'quill'
-import HeaderList from 'quill-header-list'
 import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
 import { getListValue, ICONS_CONFIG, inputFile } from './config'
 import Counter from './counter' // 字符统计
@@ -24,7 +23,7 @@ import SoftBreak from './soft-break' // 软回车
 import Strike from './strike' // 删除线
 import CustomSyntax from './syntax' // 代码块高亮
 import BetterTable from './table/better-table' // 表格
-import Toolbar, { ToolbarTip } from './toolbar' // 工具栏
+import Toolbar from './toolbar' // 工具栏
 import Video from './video' // 视频
 // import GlobalLink from './global-link' // 全局链接
 // import QuickMenu from './quick-menu' // 快捷菜单
@@ -126,7 +125,6 @@ const registerModules = function () {
           'lineheight': function (value) {
             this.quill.format('line-height', value)
           },
-          [HeaderList.toolName]: HeaderList.toolbarHandle,
           'divider': function () {
             const range = this.quill.getSelection(true)
             this.quill.insertText(range.index, '\n', Quill.sources.USER)
@@ -155,7 +153,6 @@ const registerModules = function () {
           },
         },
       },
-      [ToolbarTip.moduleName]: true,
     },
   }
 
@@ -177,8 +174,6 @@ const registerModules = function () {
       'modules/syntax': CustomSyntax,
       'modules/mathlive': MathliveModule,
       'modules/divider': DividerBlot,
-      [`modules/${ToolbarTip.moduleName}`]: ToolbarTip,
-      [`modules/${HeaderList.moduleName}`]: HeaderList,
       // make sure register after `HeaderList`
       'modules/better-table': BetterTable,
 

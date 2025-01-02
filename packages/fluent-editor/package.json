@@ -34,9 +34,7 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.15",
-    "quill": "^2.0.0",
-    "quill-header-list": "^0.0.1",
-    "quill-toolbar-tip": "^0.0.4"
+    "quill": "^2.0.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
