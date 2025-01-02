@@ -5,7 +5,7 @@
 此功能为外部插件，使用前请安装[`quill-toolbar-tip`](https://www.npmjs.com/package/quill-toolbar-tip)插件，完整文档请查看[插件文档](https://github.com/opentiny/quill-toolbar-tip#quilltoolbartip)。
 
 ```bash
-npm install quill-header-list
+npm install quill-toolbar-tip
 ```
 
 ## 基础使用
