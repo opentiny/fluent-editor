@@ -33,17 +33,11 @@ export class I18N {
     }
   }
 
-  setLangTextToInstance() {
-    this.quill.langText = this.options.langText
-    this.quill.lang = this.options.lang
-  }
-
   changeLanguage(options: Partial<I18NOptions>) {
     const langOps = this.resolveLanguageOption(options)
     if (langOps.lang === this.quill.lang) return
     this.options.lang = langOps.lang
     this.options.langText = langOps.langText
-    this.setLangTextToInstance()
     this.quill.emitter.emit(CHANGE_LANGUAGE_EVENT, this.options.lang, this.options.langText)
   }
 }

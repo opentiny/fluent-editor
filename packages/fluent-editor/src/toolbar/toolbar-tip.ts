@@ -19,8 +19,7 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
 
     resolveOptions(options: Partial<Record<string, any>>): Record<string, any> {
       const result = super.resolveOptions(options)
-      if (!this.quill.langText) return result
-      const langText = this.quill.langText
+      if (!this.quill.lang) return result
       const btnTips = [
         'bold',
         'italic',
@@ -44,7 +43,7 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
         'format-painter',
         'header-list',
       ].reduce((map, name) => {
-        map[name] = langText[name]
+        map[name] = this.quill.getLangText(name)
         return map
       }, {} as Record<string, string>)
       const selectTips = [
@@ -56,7 +55,7 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
       ].reduce((map, name) => {
         map[name] = {
           onShow() {
-            return langText[name]
+            return this.quill.getLangText(name)
           },
         }
         return map
@@ -82,7 +81,7 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
                 value = 'normal'
               }
             }
-            return langText[`${name}-${value}`]
+            return this.quill.getLangText(`${name}-${value}`)
           },
         }
         return map
@@ -93,7 +92,7 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
         ...selectTips,
         fullscreen: {
           onShow: () => {
-            return langText[this.quill.isFullscreen ? 'exit-fullscreen' : 'fullscreen']
+            return this.quill.getLangText(this.quill.isFullscreen ? 'exit-fullscreen' : 'fullscreen')
           },
         },
       }

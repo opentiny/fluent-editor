@@ -51,7 +51,7 @@ export default class TableOperationMenu {
     this.selectedTds = this.tableSelection.selectedTds
     this.destroyHandler = this.destroy.bind(this)
     this.columnToolCells = this.tableColumnTool.colToolCells()
-    this.DEFAULT_COLOR_SUBTITLE = this.quill.langText['sub-title-bg-color']
+    this.DEFAULT_COLOR_SUBTITLE = this.quill.getLangText('sub-title-bg-color')
     this.colorSubTitle
       = options.color && options.color.text
         ? options.color.text
@@ -66,22 +66,21 @@ export default class TableOperationMenu {
     document.addEventListener('click', this.destroyHandler, false)
     this.quill.emitter.on(CHANGE_LANGUAGE_EVENT, () => {
       this.destroy()
-      this.DEFAULT_COLOR_SUBTITLE = this.quill.langText['sub-title-bg-color']
+      this.DEFAULT_COLOR_SUBTITLE = this.quill.getLangText('sub-title-bg-color')
       this.setDefaultMenu()
     })
   }
 
   setDefaultMenu() {
-    const langText = this.quill.langText
     this.DEFAULT_MENU = {
       copyCells: {
-        text: langText['copy-cells'],
+        text: this.quill.getLangText('copy-cells'),
         handler() {
           this.onCopy('copy')
         },
       },
       copyTable: {
-        text: langText['copy-table'],
+        text: this.quill.getLangText('copy-table'),
         async handler() {
           this.tableColumnTool.destroy()
           this.tableScrollBar.destroy()
@@ -101,13 +100,13 @@ export default class TableOperationMenu {
         },
       },
       cutCells: {
-        text: langText['cut-cells'],
+        text: this.quill.getLangText('cut-cells'),
         handler() {
           this.onCopy('cut')
         },
       },
       emptyCells: {
-        text: langText['empty-cells'],
+        text: this.quill.getLangText('empty-cells'),
         handler() {
           const tableContainer = Quill.find(this.table)
           const { selectedTds } = this.tableSelection
@@ -115,7 +114,7 @@ export default class TableOperationMenu {
         },
       },
       insertColumnRight: {
-        text: langText['insert-column-right'],
+        text: this.quill.getLangText('insert-column-right'),
         handler() {
           const tableContainer = Quill.find(this.table)
           const colIndex = getColToolCellIndexByBoundary(
@@ -146,7 +145,7 @@ export default class TableOperationMenu {
         },
       },
       insertColumnLeft: {
-        text: langText['insert-column-left'],
+        text: this.quill.getLangText('insert-column-left'),
         handler() {
           const tableContainer = Quill.find(this.table)
           const colIndex = getColToolCellIndexByBoundary(
@@ -176,7 +175,7 @@ export default class TableOperationMenu {
         },
       },
       insertRowUp: {
-        text: langText['insert-row-up'],
+        text: this.quill.getLangText('insert-row-up'),
         handler() {
           const tableContainer = Quill.find(this.table)
           const affectedCells = tableContainer.insertRow(this.boundary, false, this.quill.root.parentNode)
@@ -197,7 +196,7 @@ export default class TableOperationMenu {
         },
       },
       insertRowDown: {
-        text: langText['insert-row-down'],
+        text: this.quill.getLangText('insert-row-down'),
         handler() {
           const tableContainer = Quill.find(this.table)
           const affectedCells = tableContainer.insertRow(this.boundary, true, this.quill.root.parentNode)
@@ -218,7 +217,7 @@ export default class TableOperationMenu {
         },
       },
       mergeCells: {
-        text: langText['merge-cells'],
+        text: this.quill.getLangText('merge-cells'),
         handler() {
           const tableContainer = Quill.find(this.table)
           // compute merged Cell rowspan, equal to length of selected rows
@@ -260,7 +259,7 @@ export default class TableOperationMenu {
         },
       },
       unmergeCells: {
-        text: langText['unmerge-cells'],
+        text: this.quill.getLangText('unmerge-cells'),
         handler() {
           const tableContainer = Quill.find(this.table)
           tableContainer.unmergeCells(this.selectedTds, this.quill.root.parentNode)
@@ -269,7 +268,7 @@ export default class TableOperationMenu {
         },
       },
       deleteColumn: {
-        text: langText['delete-column'],
+        text: this.quill.getLangText('delete-column'),
         handler() {
           const tableContainer = Quill.find(this.table)
           const colIndexes = getColToolCellIndexesByBoundary(
@@ -292,7 +291,7 @@ export default class TableOperationMenu {
         },
       },
       deleteRow: {
-        text: langText['delete-row'],
+        text: this.quill.getLangText('delete-row'),
         handler() {
           const tableContainer = Quill.find(this.table)
           const isDeleteTable = tableContainer.deleteRow(this.boundary, this.quill.root.parentNode)
@@ -304,7 +303,7 @@ export default class TableOperationMenu {
         },
       },
       deleteTable: {
-        text: langText['delete-table'],
+        text: this.quill.getLangText('delete-table'),
         handler() {
           const betterTableModule = this.quill.getModule('better-table')
           const tableContainer = Quill.find(this.table)
