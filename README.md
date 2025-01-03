@@ -6,7 +6,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Fluent Editor is a rich text editor based on Quill 2.0, which extends Quill with rich modules and formats such as tables, images, hyperlinks, copy and paste, inserting emoticons, file uploads, @ reminders, and diagonal menu. It is framework-independent, compatible with Quill API, and compatible with Quill module ecosystem.
+Fluent Editor is a rich text editor based on Quill 2.0, which extends Quill with rich modules and formats such as table, image, link, clipboard, emoji, file, mention, and quick menu. It is framework-independent, compatible with Quill API, and compatible with Quill module ecosystem.
 
 English | [简体中文](README.zh-CN.md)
 
@@ -14,10 +14,12 @@ English | [简体中文](README.zh-CN.md)
 
 Fluent Editor has the following features and advantages:
 
-- Contains more than 30 rich modules and formats, in addition to the 21 built-in formats in Quill, it also extends and enhances 15 modules and formats such as tables, images, hyperlinks, word counts, emoticons, file uploads, copy and paste, @ reminders, slash shortcut menus, screenshots, etc
-- Powerful table function, supports inserting tables with specified rows and columns in the toolbar, table row height/column width dragging, inserting rows/columns, deleting rows/columns, merging/splitting cells, and other rich table operations
-- It is not related to frameworks and can be used in multiple frameworks such as Vue, React, Angular, etc
-- Compatible with all Quill APIs, Quill ecosystem modules and formats
+- Contains more than 30 modules and formats, in addition to the 21 built-in formats in Quill, it also extends and enhances 15 modules and formats such as table, image, link, counter, emoji, file, clipboard, mention, quick menu, screenshot, etc.
+- Powerful table function, supports inserting table with specified rows and columns in the toolbar, table row height/column width dragging, inserting rows/columns, deleting rows/columns, merging/splitting cells, and other rich table operations.
+- It is not related to frameworks and can be used in multiple frameworks such as Vue, React, Angular, etc.
+- Compatible with all Quill APIs, Quill ecosystem modules and formats.
+
+![Fluent Editor](fluent-editor.png)
 
 ## Quick Start
 
