@@ -35,7 +35,6 @@ npm i @opentiny/fluent-editor
 <div id="editor">
   <p>Hello Fluent Editor!</p>
 </div>
-
 ```
 
 引入样式：

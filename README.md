@@ -35,7 +35,6 @@ Write html：
 <div id="editor">
   <p>Hello Fluent Editor!</p>
 </div>
-
 ```
 
 Import style:
