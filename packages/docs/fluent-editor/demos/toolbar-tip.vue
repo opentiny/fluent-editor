@@ -52,7 +52,11 @@ onMounted(() => {
         'file': true,
         'emoji-toolbar': true,
         'syntax': true,
-        'toolbar-tip': true,
+        'toolbar-tip': {
+          defaultTooltipOptions: {
+            tipHoverable: false,
+          },
+        },
       },
     })
   })

@@ -48,8 +48,8 @@ importers:
         specifier: ^0.0.10
         version: 0.0.10
       quill-toolbar-tip:
-        specifier: ^0.0.6
-        version: 0.0.6(quill@2.0.3)
+        specifier: ^0.0.7
+        version: 0.0.7(quill@2.0.3)
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.4.2)
@@ -3735,8 +3735,8 @@ packages:
   quill-markdown-shortcuts@0.0.10:
     resolution: {integrity: sha512-2FFFqqo65JgDgAGSer7cFQTCeiSjJF4N8lRGXGv/xjppCxSwj42OnNdGPZ/zeeCxdUY/j1LW4AiSvPQaTIkY2A==}
 
-  quill-toolbar-tip@0.0.6:
-    resolution: {integrity: sha512-rFdqiU57oqA+McLCvbTjHxxW0FlyUJPJu2kFPE/DX35gXchV2JM/IHO+QKJJ7yHjvPpK/EOq9+HIH0nCNmqH+Q==}
+  quill-toolbar-tip@0.0.7:
+    resolution: {integrity: sha512-dD3qMLAI0ZVQFdHP2ZxOAydwDnqN6tbKsvtBhieOF47vjYnbgCCeMU5PXgSVYNlknxYoeBuUrlkqTLZyyJCA7g==}
     peerDependencies:
       quill: ^2.0.0
 
@@ -8936,7 +8936,7 @@ snapshots:
     dependencies:
       quill: 1.3.7
 
-  quill-toolbar-tip@0.0.6(quill@2.0.3):
+  quill-toolbar-tip@0.0.7(quill@2.0.3):
     dependencies:
       '@floating-ui/dom': 1.6.12
       quill: 2.0.3
