@@ -1,13 +1,13 @@
-import type { FluentEditor } from '../fluent-editor'
+import type FluentEditor from '../fluent-editor'
 import { CHANGE_LANGUAGE_EVENT, defaultLanguage, LANG_CONF } from '../config'
 import { isUndefined } from '../utils/is'
 
-export interface I18NOptions {
+interface I18NOptions {
   lang: string
   langText: Record<string, string>
 }
 
-export class I18N {
+class I18N {
   isFullscreen: boolean = false
   options: I18NOptions = {
     lang: 'en-US',
@@ -41,3 +41,7 @@ export class I18N {
     this.quill.emitter.emit(CHANGE_LANGUAGE_EVENT, this.options.lang, this.options.langText)
   }
 }
+
+export { I18NOptions }
+
+export default I18N

@@ -1,4 +1,4 @@
-import { FluentEditor } from './fluent-editor'
+import FluentEditor from './fluent-editor'
 
 export * from './config'
 export * from './toolbar/toolbar-tip'
