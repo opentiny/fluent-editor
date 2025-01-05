@@ -1,6 +1,7 @@
 import type { FluentEditorToolbar } from '../config/types'
-import { ICONS_CONFIG, namespace } from '../config'
+import { namespace } from '../config'
 import { lockScroll } from '../utils/scroll-lock'
+import { ICONS_CONFIG } from '../ui/icons'
 
 let exitEscHandlerBindToolbar: (e: KeyboardEvent) => void
 let resizeHandlerBindToolbar: () => void
