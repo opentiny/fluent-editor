@@ -42,6 +42,6 @@ class I18N {
   }
 }
 
-export { I18NOptions}
+export { I18NOptions }
 
 export default I18N

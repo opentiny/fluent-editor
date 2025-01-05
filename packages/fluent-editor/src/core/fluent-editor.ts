@@ -1,8 +1,8 @@
 import type { ExpandedQuillOptions } from 'quill'
 import type { IEditorConfig } from '../config/types'
+import type I18N from '../i18n'
 import Quill from 'quill'
 import { defaultLanguage, LANG_CONF } from '../config'
-import I18N from '../i18n'
 
 class FluentEditor extends Quill {
   isFullscreen: boolean = false
@@ -26,7 +26,7 @@ class FluentEditor extends Quill {
 
 export type {
   Module,
-  Parchment as TypeParchment
+  Parchment as TypeParchment,
 } from 'quill'
 
 export default FluentEditor

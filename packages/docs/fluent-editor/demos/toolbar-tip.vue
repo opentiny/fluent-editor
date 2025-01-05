@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import QuillToolbarTip from 'quill-toolbar-tip'
-import { onBeforeUnmount, onMounted, ref } from 'vue'
-import 'quill-toolbar-tip/dist/index.css'
-
 // 代码块高亮
 import hljs from 'highlight.js'
-import 'highlight.js/styles/atom-one-dark.css'
-
-// 插入公式
-import katex from 'katex'
-import 'katex/dist/katex.min.css'
-
 // 截屏
 import Html2Canvas from 'html2canvas'
+// 插入公式
+import katex from 'katex'
+
+import QuillToolbarTip from 'quill-toolbar-tip'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
+import 'quill-toolbar-tip/dist/index.css'
+import 'highlight.js/styles/atom-one-dark.css'
+
+import 'katex/dist/katex.min.css'
 
 window.hljs = hljs
 window.katex = katex
