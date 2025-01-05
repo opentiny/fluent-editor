@@ -1,5 +1,8 @@
 import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
 import FluentEditor from './core/fluent-editor'
+import SoftBreak from './formats/soft-break' // 软回车
+import Strike from './formats/strike' // 删除线
+import Video from './formats/video' // 视频
 import Counter from './modules/counter' // 字符统计
 import CustomClipboard from './modules/custom-clipboard' // 粘贴板
 import Image from './modules/custom-image/BlotFormatter' // 图片
@@ -13,15 +16,12 @@ import Link from './modules/link' // 超链接
 import MathliveModule from './modules/mathlive' // latex公式
 import MathliveBlot from './modules/mathlive/formats'
 import Mention from './modules/mention/Mention' // @提醒
-import SoftBreak from './formats/soft-break' // 软回车
-import Strike from './formats/strike' // 删除线
 import Syntax from './modules/syntax' // 代码块高亮
 import BetterTable from './modules/table/better-table' // 表格
+import Toolbar from './modules/toolbar' // 工具栏
 // import QuickMenu from './modules/quick-menu' // 快捷菜单
 import SnowTheme from './themes/snow'
-import Toolbar from './modules/toolbar' // 工具栏
 import Icons from './ui/icons'
-import Video from './formats/video' // 视频
 
 FluentEditor.register(
   {

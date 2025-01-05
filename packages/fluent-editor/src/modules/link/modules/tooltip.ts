@@ -1,9 +1,9 @@
 import Quill, { Range } from 'quill'
 import Emitter from 'quill/core/emitter'
 import { BaseTooltip } from 'quill/themes/base'
-import { debounce } from '../../../utils/debounce'
 import { CHANGE_LANGUAGE_EVENT, LANG_CONF } from '../../../config'
 import { hadProtocol, isNullOrUndefined } from '../../../config/editor.utils'
+import { debounce } from '../../../utils/debounce'
 import LinkBlot from '../formats/link'
 
 // @dynamic

@@ -1,5 +1,5 @@
-import type FluentEditor from '../fluent-editor'
 import type { ICounterOption } from '../config/types'
+import type FluentEditor from '../fluent-editor'
 import Quill from 'quill'
 import { CHANGE_LANGUAGE_EVENT } from '../config'
 

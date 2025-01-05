@@ -1,6 +1,6 @@
 import Quill from 'quill'
-import { EMOJI_SPRITE as emojiSprite } from '../emoji-sprite'
 import emojiList from '../emoji-list'
+import { EMOJI_SPRITE as emojiSprite } from '../emoji-sprite'
 
 const Module = Quill.imports['core/module']
 
