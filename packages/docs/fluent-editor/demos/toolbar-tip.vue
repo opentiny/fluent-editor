@@ -54,8 +54,8 @@ onMounted(() => {
         'syntax': true,
         'toolbar-tip': {
           defaultTooltipOptions: {
-            tipHoverable: false
-          }
+            tipHoverable: false,
+          },
         },
       },
     })
