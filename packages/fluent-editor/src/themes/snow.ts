@@ -1,11 +1,11 @@
 import type { Module, TypeParchment } from '../core/fluent-editor'
 import { getListValue, inputFile } from '../config'
 import FluentEditor from '../core/fluent-editor'
-import { CustomImageSpec } from '../custom-image/specs/CustomImageSpec'
-import { FormatPainter } from '../format-painter'
-import { fullscreenHandler } from '../fullscreen/handler'
-import { Screenshot } from '../screenshot'
-import BetterTable from '../table/better-table'
+import { CustomImageSpec } from '../modules/custom-image/specs/CustomImageSpec'
+import { FormatPainter } from '../tools/format-painter'
+import { fullscreenHandler } from '../tools/fullscreen'
+import { Screenshot } from '../tools/screenshot'
+import BetterTable from '../modules/table/better-table'
 
 const SnowTheme = FluentEditor.imports['themes/snow'] as typeof Module
 
