@@ -1,27 +1,27 @@
 import { FontStyle, LineHeightStyle, SizeStyle, TextIndentStyle } from './attributors'
 import FluentEditor from './core/fluent-editor'
-import Counter from './counter' // 字符统计
-import CustomClipboard from './custom-clipboard' // 粘贴板
-import Image from './custom-image/BlotFormatter' // 图片
-import Uploader from './custom-uploader' // 上传
-import DividerBlot from './divider' // 分割线
-import Emoji from './emoji' // 表情
-import FileModule from './file' // 文件
-// import GlobalLink from './global-link' // 全局链接
-import I18N from './i18n'
-import Link from './link' // 超链接
-import MathliveModule from './mathlive' // latex公式
-import MathliveBlot from './mathlive/formats'
-import Mention from './mention/Mention' // @提醒
-import SoftBreak from './soft-break' // 软回车
-import Strike from './strike' // 删除线
-import Syntax from './syntax' // 代码块高亮
-import BetterTable from './table/better-table' // 表格
-// import QuickMenu from './quick-menu' // 快捷菜单
+import SoftBreak from './formats/soft-break' // 软回车
+import Strike from './formats/strike' // 删除线
+import Video from './formats/video' // 视频
+import Counter from './modules/counter' // 字符统计
+import CustomClipboard from './modules/custom-clipboard' // 粘贴板
+import Image from './modules/custom-image/BlotFormatter' // 图片
+import Uploader from './modules/custom-uploader' // 上传
+import DividerBlot from './modules/divider' // 分割线
+import Emoji from './modules/emoji' // 表情
+import FileModule from './modules/file' // 文件
+// import GlobalLink from './modules/global-link' // 全局链接
+import I18N from './modules/i18n'
+import Link from './modules/link' // 超链接
+import MathliveModule from './modules/mathlive' // latex公式
+import MathliveBlot from './modules/mathlive/formats'
+import Mention from './modules/mention/Mention' // @提醒
+import Syntax from './modules/syntax' // 代码块高亮
+import BetterTable from './modules/table/better-table' // 表格
+import Toolbar from './modules/toolbar' // 工具栏
+// import QuickMenu from './modules/quick-menu' // 快捷菜单
 import SnowTheme from './themes/snow'
-import Toolbar from './toolbar' // 工具栏
 import Icons from './ui/icons'
-import Video from './video' // 视频
 
 FluentEditor.register(
   {

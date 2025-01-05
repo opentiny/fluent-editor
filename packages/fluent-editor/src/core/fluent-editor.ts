@@ -1,6 +1,6 @@
 import type { ExpandedQuillOptions } from 'quill'
 import type { IEditorConfig } from '../config/types'
-import type I18N from '../i18n'
+import type I18N from '../modules/i18n'
 import Quill from 'quill'
 import { defaultLanguage, LANG_CONF } from '../config'
 

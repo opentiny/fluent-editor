@@ -1,5 +1,5 @@
 import type { QuillOptions } from 'quill'
-import type { ScreenShotOptions } from '../../screenshot'
+import type { ScreenShotOptions } from '../../tools/screenshot'
 import type { IEditorModules } from './editor-modules.interface'
 import type { EditorFormat } from './type'
 
