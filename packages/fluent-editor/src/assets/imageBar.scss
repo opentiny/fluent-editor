@@ -1,0 +1,143 @@
+.ql-image-bar {
+  position: absolute;
+  transform: translateY(10px);
+  transition: width 0.5s ease-in-out; /* 动画持续0.5秒，平滑过渡宽度变化 */
+  align-items: center;
+  background-color: #fff;
+  background-color: var(--devui-base-bg, #fff);
+  border: 1px solid #adb0b8;
+  border: 1px solid var(--devui-line, #adb0b8);
+  box-shadow: 0 0 5px rgb(37 43 58 / 20%);
+  box-shadow: 0 0 5px var(--devui-light-shadow, rgba(37, 43, 58, 0.2));
+  color: #252b3a;
+  color: var(--devui-text, #252b3a);
+  display: flex;
+  padding: 4px;
+  white-space: nowrap;
+
+  .ql-split {
+    width: 1px;
+    height: 16px;
+    line-height: 16px;
+    margin: 4px 8px;
+    vertical-align: bottom;
+    border-left: 1px solid #adb0b8;
+    border-left: 1px solid var(--devui-line, #adb0b8);
+  }
+  .ql-image-preview {
+    line-height: 28px;
+    margin: 0 4px;
+    padding: 0 4px;
+    min-width: 28px;
+    display: inline-block;
+    text-align: center;
+    color: #babbc0;
+    color: var(--devui-placeholder, #babbc0);
+    border-radius: 2px 2px;
+    text-decoration: none;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+    vertical-align: bottom;
+    i {
+      display: block;
+      font-size: 16px;
+      color: #252b3a;
+      color: var(--devui-text, #252b3a);
+      line-height: 28px;
+    }
+
+    &:hover {
+      background-color: #aaaaaf;
+      background-color: var(--devui-list-item-active-bg, #aaaaaf);
+    }
+    .icon-preview {
+      font-family: 'iconfont' !important;
+      font-size: 16px;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      &::before {
+        content: '\e600';
+      }
+    }
+  }
+  .ql-image-download {
+    line-height: 28px;
+    margin: 0 4px;
+    padding: 0 4px;
+    min-width: 28px;
+    display: inline-block;
+    text-align: center;
+    color: #babbc0;
+    color: var(--devui-placeholder, #babbc0);
+    border-radius: 2px 2px;
+    text-decoration: none;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+    vertical-align: bottom;
+    i {
+      display: block;
+      font-size: 16px;
+      color: #252b3a;
+      color: var(--devui-text, #252b3a);
+      line-height: 28px;
+    }
+
+    &:hover {
+      background-color: #aaaaaf;
+      background-color: var(--devui-list-item-active-bg, #aaaaaf);
+    }
+    .icon-download {
+      font-family: 'iconfont' !important;
+      font-size: 16px;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      &::before {
+        content: '\e600';
+      }
+    }
+  }
+  .ql-image-copy {
+    line-height: 28px;
+    margin: 0 4px;
+    padding: 0 4px;
+    min-width: 28px;
+    display: inline-block;
+    text-align: center;
+    color: #babbc0;
+    color: var(--devui-placeholder, #babbc0);
+    border-radius: 2px 2px;
+    text-decoration: none;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+    vertical-align: bottom;
+
+    i {
+      display: block;
+      font-size: 16px;
+      color: #252b3a;
+      color: var(--devui-text, #252b3a);
+      line-height: 28px;
+    }
+
+    &:hover {
+      background-color: #aaaaaf;
+      background-color: var(--devui-list-item-active-bg, #aaaaaf);
+    }
+    .icon-copy {
+      font-family: 'iconfont' !important;
+      font-size: 16px;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+      // &::before {
+      //   content: '\ec45';
+      // }
+    }
+  }
+}
