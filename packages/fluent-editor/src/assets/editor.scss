@@ -212,6 +212,16 @@
       content: counter(list-9, decimal) '. ';
     }
 
+    li.ql-direction-rtl {
+      &::before,
+      &.checked > .ql-ui,
+      &.unchecked > .ql-ui {
+        margin-left: 0.3em;
+        margin-right: -1.5em;
+        text-align: left;
+      }
+    }
+
     // 任务列表
     @include tasklist;
 
@@ -314,6 +324,7 @@
       border: 1px solid #adb0b8;
       padding: 5px 10px;
     }
+
     @include table;
 
     // 字体
