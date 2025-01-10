@@ -4,6 +4,7 @@ import type BlotSpec from './specs/BlotSpec'
 import { merge as deepmerge } from 'lodash-es'
 import Quill from 'quill'
 import ImageBlot, { ImageContainerBlot } from './image'
+import ImageBar from './image-bar'
 import DefaultOptions from './Options'
 import { CustomImageSpec } from './specs/CustomImageSpec'
 
@@ -18,6 +19,7 @@ export default class BlotFormatter {
   overlay: HTMLElement
   actions: Action[]
   observer: any
+  imageBar: ImageBar
 
   static register() {
     Quill.register('formats/image', ImageBlot, true)
@@ -39,6 +41,7 @@ export default class BlotFormatter {
     // disable native image resizing on firefox
     document.execCommand('enableObjectResizing', false, 'false') // eslint-disable-next-line-line no-undef
     this.quill.root.addEventListener('click', this.onClick)
+    this.quill.root.addEventListener('contextmenu', event => this.onContextmenu(event))
     this.specs = this.options.specs.map((SpecClass: any) => new SpecClass(this))
     this.specs.forEach(spec => spec.init())
   }
@@ -152,6 +155,28 @@ export default class BlotFormatter {
 
   onClick = () => {
     this.hide()
+    if (this.imageBar) {
+      this.imageBar.destroy()
+      this.imageBar = null
+    }
+  }
+
+  onContextmenu = (event) => {
+    this.hide()
+    event.preventDefault()
+    const target = event.target
+    const imageDom = target.closest('img')
+
+    if (imageDom) {
+      if (this.imageBar) {
+        this.imageBar.destroy()
+      }
+      this.imageBar = new ImageBar(this.quill, imageDom)
+    }
+    else if (this.imageBar && !target.closest('.ql-image-bar')) {
+      this.imageBar.destroy()
+      this.imageBar = null
+    }
   }
 
   hideImageOverlay = (event) => {
