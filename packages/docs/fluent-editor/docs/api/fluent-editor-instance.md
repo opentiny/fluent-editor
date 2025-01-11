@@ -34,7 +34,7 @@ const toolbar = quill.getModule('toolbar')
 const i18n = quill.getModule('i18n')
 ```
 
-- 参考[国际化](/docs/i18n)
+- 参考[国际化](/docs/demo/i18n)
 
 ## getContents
 
@@ -84,4 +84,4 @@ editor.setContents([
 
 - 参考[内容初始化](/docs/demo/set-content)
 
-更多实例方法请参考 Quill 官方文档：[https://quilljs.com/docs/api](https://quilljs.com/docs/api)
+更多实例方法请参考 Quill 官方文档：[https://quilljs.com/docs/api](https://quilljs.com/docs/api)。

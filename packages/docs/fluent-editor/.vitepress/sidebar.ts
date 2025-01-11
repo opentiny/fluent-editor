@@ -35,5 +35,12 @@ export function sidebar() {
         { text: 'Fluent Editor 类', link: '/docs/api/fluent-editor-class' },
       ],
     },
+    {
+      text: '模块生态',
+      items: [
+        { text: '工具栏提示', link: '/docs/modules/toolbar-tip' },
+        { text: '标题列表', link: '/docs/modules/header-list' },
+      ],
+    },
   ]
 }

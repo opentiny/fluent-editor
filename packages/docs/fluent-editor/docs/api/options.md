@@ -66,4 +66,4 @@ export interface FluentEditorOptions extends QuillOptions {
 }
 ```
 
-更多配置项请参考 Quill 官方文档：[https://quilljs.com/docs/configuration](https://quilljs.com/docs/configuration)
+更多配置项请参考 Quill 官方文档：[https://quilljs.com/docs/configuration](https://quilljs.com/docs/configuration)。

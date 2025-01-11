@@ -86,6 +86,6 @@ Quill.register({
 Quill.register(CustomFormat)
 ```
 
-- 参考[工具栏提示](/docs/toolbar-tip)
+- 参考[工具栏提示](/docs/demo/toolbar-tip)
 
-更多静态变量和静态方法请参考 Quill 官方文档：[https://quilljs.com/docs/api](https://quilljs.com/docs/api)
+更多静态变量和静态方法请参考 Quill 官方文档：[https://quilljs.com/docs/api](https://quilljs.com/docs/api)。
