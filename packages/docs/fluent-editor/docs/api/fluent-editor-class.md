@@ -19,7 +19,9 @@ FluentEditor 类继承自 Quill 类，包含了 Quill 类的全部静态变量�
 - 类型
 
 ```typescript
-Quill.import(path): any
+class Quill {
+  static import(path): any
+}
 ```
 
 - 详细信息
@@ -51,9 +53,12 @@ const Link = FluentEditor.import('formats/link')
 - 类型
 
 ```typescript
-Quill.register(format: Attributor | BlotDefinintion, supressWarning: boolean = false)
-Quill.register(path: string, def: any, supressWarning: boolean = false)
-Quill.register(defs: { [path: string]: any }, supressWarning: boolean = false)
+class Quill {
+  static register(format: Attributor | BlotDefinintion, supressWarning: boolean = false): void
+  static register(path: string, def: any, supressWarning: boolean = false): void
+  static register(defs: { [path: string]: any }, supressWarning: boolean = false): void
+  static register(...args: any[]): void
+}
 ```
 
 - 详细信息

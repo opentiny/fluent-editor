@@ -23,8 +23,8 @@ new FluentEditor('#editor', {
     'toolbar': {
       container: [[{ header: [null, 1, 2, 3, 4, 5, 6] }, 'header-list']],
       handlers: {
-        'header-list': HeaderList.toolbarHandle
-      }
+        'header-list': HeaderList.toolbarHandle,
+      },
     },
     'header-list': {
       container: document.getElementById('directory'), // 指定一个元素来接收头部列表
@@ -35,16 +35,16 @@ new FluentEditor('#editor', {
 
 ## Options 配置
 
-| 名称            | 类型                     | 描述                                                                                                                            | 默认值     | 是否必选 |
-| --------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------- |
-| container       | `string \| HTMLElement`  | 列表容器，字符串必须是元素的id                                                                                      | -           | `true`   |
-| scrollContainer | `string \| HTMLElement`  | 编辑器滚动容器，默认是 `quill.root`                                                                                       | -           | `false`  |
-| hideClass       | `number`                 | 列表隐藏时的类名                                                                                                        | `is-hidden` | `false`  |
-| topOffset       | `number \| () => number` | 从顶部的偏移量（单位为 `px`）                                                                                                          | `0`         | `false`  |
+| 名称            | 类型                     | 描述                                                                         | 默认值      | 是否必选 |
+| --------------- | ------------------------ | ---------------------------------------------------------------------------- | ----------- | -------- |
+| container       | `string \| HTMLElement`  | 列表容器，字符串必须是元素的id                                               | -           | `true`   |
+| scrollContainer | `string \| HTMLElement`  | 编辑器滚动容器，默认是 `quill.root`                                          | -           | `false`  |
+| hideClass       | `number`                 | 列表隐藏时的类名                                                             | `is-hidden` | `false`  |
+| topOffset       | `number \| () => number` | 从顶部的偏移量（单位为 `px`）                                                | `0`         | `false`  |
 | headerHeight    | `number`                 | 编辑器中的头部高度，这是用于计算头部滚动高亮的，不要使h1和h6之间的高度差过大 | `36`        | `false`  |
-| onBeforeShow    | `() => boolean`          | 在显示前触发，返回 `true` 将取消显示                                                                              | -           | `false`  |
-| onBeforeHide    | `() => boolean`          | 在隐藏前触发，返回 `true` 将取消隐藏                                                                                | -           | `false`  |
-| onItemClick     | `(id: string) => void`   | 点击列表项时触发，id是头部元素的id                                                                              | -           | `false`  |
+| onBeforeShow    | `() => boolean`          | 在显示前触发，返回 `true` 将取消显示                                         | -           | `false`  |
+| onBeforeHide    | `() => boolean`          | 在隐藏前触发，返回 `true` 将取消隐藏                                         | -           | `false`  |
+| onItemClick     | `(id: string) => void`   | 点击列表项时触发，id是头部元素的id                                           | -           | `false`  |
 
 ## 其他
 
@@ -54,7 +54,7 @@ new FluentEditor('#editor', {
 new FluentEditor('#editor', {
   theme: 'snow',
   modules: {
-    'toolbar': [[{ header: [null, 1, 2, 3, 4, 5, 6] }, 'header-list'],],
+    'toolbar': [[{ header: [null, 1, 2, 3, 4, 5, 6] }, 'header-list']],
     'header-list': {
       container: document.getElementById('directory'), // 指定一个元素来接收头部列表
       topOffset: () => {
