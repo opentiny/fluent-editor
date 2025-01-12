@@ -7,7 +7,7 @@ import Html2Canvas from 'html2canvas'
 import katex from 'katex'
 
 import QuillToolbarTip from 'quill-toolbar-tip'
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import 'quill-toolbar-tip/dist/index.css'
 import 'highlight.js/styles/atom-one-dark.css'
@@ -60,9 +60,6 @@ onMounted(() => {
       },
     })
   })
-})
-onBeforeUnmount(() => {
-  editor.getModule('toolbar-tip').destroyAllTips()
 })
 </script>
 
