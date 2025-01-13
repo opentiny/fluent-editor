@@ -47,6 +47,7 @@ export default antfu(
 
       'no-restricted-globals': 'off',
       'eqeqeq': 'off',
+      'no-new': 'off',
       'no-new-func': 'off',
       'no-alert': 'off',
       'prefer-promise-reject-errors': 'off',

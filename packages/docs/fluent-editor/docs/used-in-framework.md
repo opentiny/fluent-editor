@@ -18,7 +18,6 @@ import FluentEditor from '@opentiny/fluent-editor'
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  // eslint-disable-next-line no-new
   new FluentEditor('#editor', {
     theme: 'snow',
   })
@@ -106,7 +105,6 @@ export class AppComponent {
   title = 'my-app'
 
   ngAfterViewInit() {
-    // eslint-disable-next-line no-new
     new FluentEditor('#editor', {
       theme: 'snow',
     })
