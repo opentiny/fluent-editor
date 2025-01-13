@@ -19,8 +19,10 @@ Fluent Editor 基于 Quill，因此 Fluent Editor 的实例对象包含 Quill �
 
 - 类型
 
-```typescript
-getModule(name: string): any
+```ts
+class Quill {
+  getModule(name: string): any
+}
 ```
 
 - 详细信息
@@ -43,7 +45,9 @@ const i18n = quill.getModule('i18n')
 - 类型
 
 ```typescript
-getContents(index: number = 0, length: number = remaining): Delta
+class Quill {
+  getContents(index: number = 0, length: number = remaining): Delta
+}
 ```
 
 - 详细信息
@@ -65,7 +69,9 @@ const delta = editor.getContents()
 - 类型
 
 ```typescript
-setContents(delta: Delta, source: string = 'api'): Delta
+class Quill {
+  setContents(delta: Delta, source: string = 'api'): Delta
+}
 ```
 
 - 详细信息
@@ -79,7 +85,7 @@ editor.setContents([
   { insert: 'Hello ' },
   { insert: 'World!', attributes: { bold: true } },
   { insert: '\n' },
-]);
+])
 ```
 
 - 参考[内容初始化](/docs/demo/set-content)
