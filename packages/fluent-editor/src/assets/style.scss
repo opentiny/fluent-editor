@@ -6,6 +6,7 @@
     url('./iconfont/iconfont.ttf') format('truetype');
 }
 @import 'quill/dist/quill.snow';
+@import 'quill-shortcut-key/index.css';
 
 @import './variable.scss';
 @import './common';

@@ -16,11 +16,11 @@ import Link from './modules/link' // 超链接
 import MathliveModule from './modules/mathlive' // latex公式
 import MathliveBlot from './modules/mathlive/formats'
 import Mention from './modules/mention/Mention' // @提醒
+import { ShortCutKey } from './modules/shortcut-key'
 import Syntax from './modules/syntax' // 代码块高亮
 import BetterTable from './modules/table/better-table' // 表格
 import Toolbar from './modules/toolbar' // 工具栏
 import { ColorPicker, Picker } from './modules/toolbar/better-picker'
-// import QuickMenu from './modules/quick-menu' // 快捷菜单
 import SnowTheme from './themes/snow'
 import Icons from './ui/icons'
 
@@ -54,6 +54,7 @@ FluentEditor.register(
     'modules/uploader': Uploader,
     // make sure register after `HeaderList`
     'modules/better-table': BetterTable,
+    'modules/shortcut-key': ShortCutKey,
 
     'themes/snow': SnowTheme,
 

@@ -85,8 +85,11 @@ importers:
         specifier: ^2.0.0
         version: 2.0.3
       quill-easy-color:
-        specifier: ^0.0.5
-        version: 0.0.5(quill@2.0.3)
+        specifier: ^0.0.8
+        version: 0.0.8(quill@2.0.3)
+      quill-shortcut-key:
+        specifier: 0.0.1
+        version: 0.0.1(quill@2.0.3)
     devDependencies:
       '@types/jest':
         specifier: ^26.0.23
@@ -3730,8 +3733,8 @@ packages:
     resolution: {integrity: sha512-X74oCeRI4/p0ucjb5Ma8adTXd9Scumz367kkMK5V/IatcX6A0vlgLgKbzXWy5nZmCGeNJm2oQX0d2Eqj+ZIlCA==}
     engines: {node: '>= 12.0.0'}
 
-  quill-easy-color@0.0.5:
-    resolution: {integrity: sha512-0+qMTzJLXRIgiyQaSTaD6wPlD4cYrvWViAQkEHME3K+qMTwMC9HNKbgO/vrC4j5X9uuvU1MKkZZ8YbhGsA6bwg==}
+  quill-easy-color@0.0.8:
+    resolution: {integrity: sha512-nZ25opQtkinvP/QdRJEDvrxbw5GS69DRpdyqp6CkAK58LZb14anox0UXBEjE5co/61kJgj40OuzdJ+wfeh8GBA==}
     peerDependencies:
       quill: '>=1.3.7'
 
@@ -3742,6 +3745,11 @@ packages:
 
   quill-markdown-shortcuts@0.0.10:
     resolution: {integrity: sha512-2FFFqqo65JgDgAGSer7cFQTCeiSjJF4N8lRGXGv/xjppCxSwj42OnNdGPZ/zeeCxdUY/j1LW4AiSvPQaTIkY2A==}
+
+  quill-shortcut-key@0.0.1:
+    resolution: {integrity: sha512-/6EY/pjhrEanRKcF4Jjta9j+IKViNQ53PoOzADQX3/HgKGYAykgCr07T0+a+avsO2gux7yfImDnEAzveue65uA==}
+    peerDependencies:
+      quill: ^2.0.0
 
   quill-toolbar-tip@0.0.10:
     resolution: {integrity: sha512-2VPctu6yNH/+97ImywNTx94YWP5OGFWNv1NZ99VnjSIHAd//e+NQefBkIdLfUVWbkvZHLvfV2Ch9opuwCDLwuw==}
@@ -5435,7 +5443,7 @@ snapshots:
       '@types/istanbul-lib-coverage': 2.0.6
       collect-v8-coverage: 1.0.2
 
-  '@jest/test-sequencer@26.6.3':
+  '@jest/test-sequencer@26.6.3(ts-node@9.1.1(typescript@4.9.5))':
     dependencies:
       '@jest/test-result': 26.6.2
       graceful-fs: 4.2.11
@@ -5443,7 +5451,11 @@ snapshots:
       jest-runner: 26.6.3(ts-node@9.1.1(typescript@4.9.5))
       jest-runtime: 26.6.3(ts-node@9.1.1(typescript@4.9.5))
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   '@jest/transform@26.6.2':
     dependencies:
@@ -7671,7 +7683,7 @@ snapshots:
   jest-config@26.6.3(ts-node@9.1.1(typescript@4.9.5)):
     dependencies:
       '@babel/core': 7.26.0
-      '@jest/test-sequencer': 26.6.3
+      '@jest/test-sequencer': 26.6.3(ts-node@9.1.1(typescript@4.9.5))
       '@jest/types': 26.6.2
       babel-jest: 26.6.3(@babel/core@7.26.0)
       chalk: 4.1.2
@@ -8932,7 +8944,7 @@ snapshots:
       lodash.clonedeep: 4.5.0
       lodash.isequal: 4.5.0
 
-  quill-easy-color@0.0.5(quill@2.0.3):
+  quill-easy-color@0.0.8(quill@2.0.3):
     dependencies:
       quill: 2.0.3
 
@@ -8943,6 +8955,10 @@ snapshots:
   quill-markdown-shortcuts@0.0.10:
     dependencies:
       quill: 1.3.7
+
+  quill-shortcut-key@0.0.1(quill@2.0.3):
+    dependencies:
+      quill: 2.0.3
 
   quill-toolbar-tip@0.0.10(quill@2.0.3):
     dependencies:
