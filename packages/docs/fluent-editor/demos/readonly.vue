@@ -11,9 +11,9 @@ onMounted(() => {
     editor = new FluentEditor('#editor-readonly', {
       theme: 'snow',
       modules: {
-        toolbar: false
+        toolbar: false,
       },
-      readOnly: true
+      readOnly: true,
     })
   })
 })
