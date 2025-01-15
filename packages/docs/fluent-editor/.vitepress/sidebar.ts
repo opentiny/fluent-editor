@@ -25,6 +25,7 @@ export function sidebar() {
         { text: '国际化', link: '/docs/demo/i18n' },
         { text: '标题列表', link: '/docs/demo/header-list' },
         { text: '工具栏提示', link: '/docs/demo/toolbar-tip' },
+        { text: '只读模式', link: '/docs/demo/readonly' },
       ],
     },
     {
