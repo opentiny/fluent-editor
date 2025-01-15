@@ -1,21 +1,30 @@
-import type Quill from 'quill'
+import Quill, { Delta } from 'quill'
+import { Range } from 'quill/core/selection'
+import CustomImage from './image'
 
 export default class ImageBar {
   quill: Quill
   image: HTMLImageElement
   domNode: HTMLElement
+  imageRange: any
   template: string
 
   constructor(quill, target) {
     this.quill = quill
     this.image = target
+    const imageBlot = Quill.find(target)
+    const index = this.quill.getIndex(imageBlot)
+    const [imageItem, offset] = this.quill.scroll.descendant(CustomImage, index)
+    const length = imageItem && imageItem.length()
+    this.imageRange = new Range(index - offset, length)
 
     this.template = [
       // `<a class="ql-image-preview"><i class="icon-preview"></i></a>`,
       `<a class="ql-image-download"><i class="icon-download"></i></a>`,
       `<a class="ql-image-copy">
-          <svg width="16" height="16" t="1736062378465" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1630"><path d="M394.666667 106.666667h448a74.666667 74.666667 0 0 1 74.666666 74.666666v448a74.666667 74.666667 0 0 1-74.666666 74.666667H394.666667a74.666667 74.666667 0 0 1-74.666667-74.666667V181.333333a74.666667 74.666667 0 0 1 74.666667-74.666666z m0 64a10.666667 10.666667 0 0 0-10.666667 10.666666v448a10.666667 10.666667 0 0 0 10.666667 10.666667h448a10.666667 10.666667 0 0 0 10.666666-10.666667V181.333333a10.666667 10.666667 0 0 0-10.666666-10.666666H394.666667z m245.333333 597.333333a32 32 0 0 1 64 0v74.666667a74.666667 74.666667 0 0 1-74.666667 74.666666H181.333333a74.666667 74.666667 0 0 1-74.666666-74.666666V394.666667a74.666667 74.666667 0 0 1 74.666666-74.666667h74.666667a32 32 0 0 1 0 64h-74.666667a10.666667 10.666667 0 0 0-10.666666 10.666667v448a10.666667 10.666667 0 0 0 10.666666 10.666666h448a10.666667 10.666667 0 0 0 10.666667-10.666666v-74.666667z" fill="#000000" p-id="1631"></path></svg>
+          <svg width="16" height="16" t="1736062378465" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1630"><path d="M394.666667 106.666667h448a74.666667 74.666667 0 0 1 74.666666 74.666666v448a74.666667 74.666667 0 0 1-74.666666 74.666667H394.666667a74.666667 74.666667 0 0 1-74.666667-74.666667V181.333333a74.666667 74.666667 0 0 1 74.666667-74.666666z m0 64a10.666667 10.666667 0 0 0-10.666667 10.666666v448a10.666667 10.666667 0 0 0 10.666667 10.666667h448a10.666667 10.666667 0 0 0 10.666666-10.666667V181.333333a10.666667 10.666667 0 0 0-10.666666-10.666666H394.666667z m245.333333 597.333333a32 32 0 0 1 64 0v74.666667a74.666667 74.666667 0 0 1-74.666667 74.666666H181.333333a74.666667 74.666667 0 0 1-74.666666-74.666666V394.666667a74.666667 74.666667 0 0 1 74.666666-74.666667h74.666667a32 32 0 0 1 0 64h-74.666667a10.666667 10.666667 0 0 0-10.666666 10.666667v448a10.666667 10.666667 0 0 0 10.666666 10.666666h448a10.666667 10.666667 0 0 0 10.666667-10.666666v-74.666667z" fill="#000000" p-id="1631"></path></svg>
       </a>`,
+      `<a class="ql-image-delete"><i class="icon-delete"></i></a>`,
     ].join('')
 
     this.createImageBar()
@@ -39,6 +48,13 @@ export default class ImageBar {
         this.operateImage(event, 'copy')
       })
     }
+    // 删除图片
+    const imageDelete = this.domNode.querySelector('a.ql-image-delete')
+    if (imageDelete) {
+      imageDelete.addEventListener('click', (event) => {
+        this.operateImage(event, 'delete')
+      })
+    }
 
     this.setPosition()
     this.quill.root.parentNode.appendChild(this.domNode)
@@ -54,15 +70,8 @@ export default class ImageBar {
 
   async operateImage(event, operate) {
     event.preventDefault()
-    // const imageId = this.image.dataset.id || ''
     const imageName = this.image.dataset.title || ''
     const imageDownloadUrl = this.image.src || ''
-    // if (imageId) {
-    //   this.quill.emitter.emit('image-change', {
-    //     operation: operate,
-    //     data: { imageId, imageDownloadUrl },
-    //   })
-    // }
     if (operate === 'download') {
       try {
         const a = document.createElement('a')
@@ -93,6 +102,18 @@ export default class ImageBar {
         throw new Error('Copy image failed')
       }
     }
+    else if (operate === 'delete') {
+      try {
+        const delta = new Delta()
+          .retain(this.imageRange.index)
+          .delete(this.imageRange.length)
+        this.quill.updateContents(delta, Quill.sources.USER)
+        this.quill.setSelection(this.imageRange.index)
+      }
+      catch (_e) {
+        throw new Error('Delete image failed')
+      }
+    }
     this.destroy()
   }
 
@@ -102,7 +123,7 @@ export default class ImageBar {
       const containerRect = parent.getBoundingClientRect()
       const imageRect = this.image.getBoundingClientRect()
       this.css(this.domNode, {
-        left: `${imageRect.left + imageRect.width - containerRect.left - 92}px`,
+        left: `${imageRect.left + imageRect.width - containerRect.left - 125}px`,
         top: `${imageRect.top - containerRect.top}px`,
       })
     }

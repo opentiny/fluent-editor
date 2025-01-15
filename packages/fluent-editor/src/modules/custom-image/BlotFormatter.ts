@@ -20,6 +20,7 @@ export default class BlotFormatter {
   actions: Action[]
   observer: any
   imageBar: ImageBar
+  private debounceTimer: number | null = null
 
   static register() {
     Quill.register('formats/image', ImageBlot, true)
@@ -41,7 +42,7 @@ export default class BlotFormatter {
     // disable native image resizing on firefox
     document.execCommand('enableObjectResizing', false, 'false') // eslint-disable-next-line-line no-undef
     this.quill.root.addEventListener('click', this.onClick)
-    this.quill.root.addEventListener('contextmenu', event => this.onContextmenu(event))
+    this.quill.root.addEventListener('mouseover', event => this.onMouseOver(event))
     this.specs = this.options.specs.map((SpecClass: any) => new SpecClass(this))
     this.specs.forEach(spec => spec.init())
   }
@@ -155,25 +156,31 @@ export default class BlotFormatter {
 
   onClick = () => {
     this.hide()
-    if (this.imageBar) {
-      this.imageBar.destroy()
-      this.imageBar = null
-    }
+    this.hideImageBar()
   }
 
-  onContextmenu = (event) => {
-    this.hide()
-    event.preventDefault()
-    const target = event.target
-    const imageDom = target.closest('img')
-
-    if (imageDom) {
-      if (this.imageBar) {
-        this.imageBar.destroy()
-      }
-      this.imageBar = new ImageBar(this.quill, imageDom)
+  onMouseOver = (event) => {
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer)
     }
-    else if (this.imageBar && !target.closest('.ql-image-bar')) {
+    this.debounceTimer = window.setTimeout(() => {
+      if (event.target.tagName === 'IMG') {
+        const target = event.target
+        if (target) {
+          if (this.imageBar) {
+            this.imageBar.destroy()
+          }
+          this.imageBar = new ImageBar(this.quill, target)
+        }
+      }
+      else {
+        this.hideImageBar()
+      }
+    }, 150)
+  }
+
+  hideImageBar = () => {
+    if (this.imageBar) {
       this.imageBar.destroy()
       this.imageBar = null
     }
