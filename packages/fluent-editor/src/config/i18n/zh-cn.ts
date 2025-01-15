@@ -121,4 +121,6 @@ export const ZH_CN = {
   'header-5': '标题5',
   'header-6': '标题6',
   'header-list': '标题列表',
+  'clear-color': '清除颜色',
+  'custom-color': '选择颜色',
 }

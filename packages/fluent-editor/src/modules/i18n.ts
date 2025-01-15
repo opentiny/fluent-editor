@@ -16,7 +16,8 @@ class I18N {
 
   constructor(public quill: FluentEditor, options: Partial<I18NOptions>) {
     this.options = Object.assign({}, options, this.resolveLanguageOption(options || {}))
-    this.changeLanguage(this.options)
+    // wait until registe end
+    Promise.resolve().then(() => this.changeLanguage(this.options, true))
   }
 
   resolveLanguageOption(options: Partial<I18NOptions>): I18NOptions {
@@ -33,9 +34,10 @@ class I18N {
     }
   }
 
-  changeLanguage(options: Partial<I18NOptions>) {
+  changeLanguage(options: Partial<I18NOptions>, force: boolean = false) {
+    const currentLang = this.options.lang
     const langOps = this.resolveLanguageOption(options)
-    if (langOps.lang === this.quill.lang) return
+    if (langOps.lang === currentLang && !force) return
     this.options.lang = langOps.lang
     this.options.langText = langOps.langText
     this.quill.emitter.emit(CHANGE_LANGUAGE_EVENT, this.options.lang, this.options.langText)

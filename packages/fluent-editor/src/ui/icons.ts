@@ -47,16 +47,8 @@ const ICONS_CONFIG: { [key: string]: any } = {
   'font': '',
   'size': '',
 
-  'color': `<span class="ql-color-inner">
-    ${COLOR_ICON}
-    ${TRIANGLE_DOWN_ICON}
-    <span class="current-color-line"></span>
-  </span>`,
-  'background': `<span class="ql-color-inner">
-    ${BACKGROUND_COLOR_ICON}
-    ${TRIANGLE_DOWN_ICON}
-    <span class="current-color-line color-line-background"></span>
-  </span>`,
+  'color': COLOR_ICON,
+  'background': BACKGROUND_COLOR_ICON,
 
   'align': {
     '': ALIGN_LEFT_ICON,

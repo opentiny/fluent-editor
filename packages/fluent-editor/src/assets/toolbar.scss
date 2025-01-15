@@ -19,13 +19,11 @@ html {
 $iconHeight: 18px; // 工具栏按钮高度
 $iconPadding: 7.5px; // 工具栏按钮左/右间距
 $splitPadding: 20px; // 分隔线左/右间距
-$arrowPadding: 10px; // 下拉框箭头左间距
-
-$smallIconWidth: 14px; // 下拉框按钮宽度
-$arrowWidth: 5px; // 下拉框箭头宽度
 
 // 模块：工具栏 toolbar
 @mixin toolbar {
+  @import 'quill-easy-color/dist/index.css';
+
   .ql-toolbar {
     position: relative;
     border: solid 1px #adb0b8;
@@ -159,16 +157,59 @@ $arrowWidth: 5px; // 下拉框箭头宽度
     }
   }
 
-  $colorGroup: '#000000', '#e60000', '#ff9900', '#ffff00', '#008a00', '#0066cc', '#9933ff', '#ffffff', '#facccc',
-    '#ffebcc', '#ffffcc', '#cce8cc', '#cce0f5', '#ebd6ff', '#bbbbbb', '#f06666', '#ffc266', '#ffff66', '#66b966',
-    '#66a3e0', '#c285ff', '#888888', '#a10000', '#b26b00', '#b2b200', '#006100', '#0047b2', '#6b24b2', '#444444',
-    '#5c0000', '#663d00', '#666600', '#003700', '#002966', '#3d1466';
-
+  .ql-snow.ql-toolbar,
+  .ql-bubble .ql-toolbar {
+    .ql-color-picker {
+      &.ql-color,
+      &.ql-background {
+        .ql-picker-item {
+          width: 18px;
+          height: 18px;
+          margin: 2px;
+          border: 1px solid #141414;
+          &.blank {
+            width: 100%;
+            &:hover::before {
+              content: none;
+            }
+          }
+          &.custom {
+            &:hover::before {
+              content: none;
+            }
+          }
+          &.ql-selected {
+            &::before {
+              margin-left: 5px;
+              margin-top: 1px;
+              width: 6px;
+              height: 12px;
+            }
+          }
+          &:hover {
+            &::before {
+              content: '';
+              flex-shrink: 0;
+              display: block;
+              width: 22px;
+              height: 22px;
+              margin-top: -3px;
+              margin-left: -3px;
+              border: 1px solid #38383c;
+              box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+              transform: rotate(0deg);
+              filter: none;
+            }
+          }
+        }
+      }
+    }
+  }
   .ql-toolbar {
     .ql-picker.ql-expanded {
       .ql-picker-label {
         color: inherit;
-        border-color: transparent !important;
+        border-color: transparent;
       }
 
       .ql-picker-options {
@@ -262,14 +303,19 @@ $arrowWidth: 5px; // 下拉框箭头宽度
         font-size: 1.17em;
       }
 
-      &.ql-color,
-      &.ql-background {
-        @include pickerValue($colorGroup, length($colorGroup));
+      .ql-picker-item {
+        &:hover {
+          color: #252b3a;
+          background-color: #f2f5fc;
+        }
       }
-
-      .ql-picker-item:hover {
-        color: #252b3a;
-        background-color: #f2f5fc;
+      &.ql-color-picker {
+        .ql-picker-item {
+          &:hover {
+            color: inherit;
+            background-color: var(--bg);
+          }
+        }
       }
     }
 
@@ -278,58 +324,38 @@ $arrowWidth: 5px; // 下拉框箭头宽度
       border: 0;
     }
 
-    // 颜色选择器
     .ql-color-picker {
-      width: $smallIconWidth + $arrowPadding + $arrowWidth;
+      display: flex;
+      width: 36px;
       margin: 0 5px;
-
-      .ql-color-inner {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-
-        .icon-arrow-down {
-          margin-left: 6px;
+      .ql-picker {
+        &-label {
+          width: 28px;
+          flex-shrink: 0;
         }
-
-        i.icon-triangle-down {
-          height: 0;
-          width: 0;
-          margin-left: 6px;
-          margin-top: 3px;
-          border: 2.5px solid transparent;
-          border-top: 3px solid #252b3a;
-        }
-
-        .icon-down {
-          @include arrowIcon;
-
-          display: inline-block;
-          height: 16px;
-          margin-top: 1px;
-        }
-
-        .current-color-line {
-          position: absolute;
-          bottom: 0;
-          left: 1px;
-          border-width: 1px;
-          border-style: solid;
-          width: 14px;
-
-          &.color-line-background {
-            left: -1px;
-            width: 16px;
+        &-expand {
+          display: inline-flex;
+          height: 100%;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          &:hover {
+            color: #fff;
+            i.icon {
+              border-top-color: #5e7ce0;
+            }
           }
         }
       }
-      @include currentColorIndicator($colorGroup, length($colorGroup));
+
+      i.icon {
+        @include arrowIcon;
+        position: static;
+        margin-top: 2.5px;
+      }
 
       &:hover {
-        .icon-down {
-          border-top-color: #5e7ce0;
-        }
-
         &.ql-picker.ql-expanded {
           .ql-picker-label {
             color: #5e7ce0;
@@ -337,83 +363,35 @@ $arrowWidth: 5px; // 下拉框箭头宽度
         }
       }
 
-      .ql-picker-label.ql-active {
-        .icon-down {
-          border-top-color: #5e7ce0;
-        }
-      }
-
       .ql-picker-options {
-        width: 210px;
-        padding: 15px 20px;
-      }
-
-      .ql-picker-item {
-        width: 20px;
-        height: 20px;
-        margin: 0 5px 5px 0;
-        display: inline-flex;
-        align-items: center;
-        color: #fff;
-
-        &:hover {
-          color: #fff;
-        }
-
-        &:nth-child(7n + 7) {
-          margin-right: 0;
-        }
-
-        &:nth-last-child(-n + 7) {
-          margin-bottom: 0;
-        }
-      }
-
-      &.ql-expanded {
-        .ql-picker-item {
-          color: #fff;
-
+        width: 240px;
+        padding: 16px 10px;
+        .custom {
+          position: relative;
+          margin-top: 4px;
+          height: 22px;
           &:hover {
-            color: #fff;
-          }
-
-          &[data-value='#ffffff'],
-          &[data-value='#f3f6f8'],
-          &[data-value='#fce5e4'],
-          &[data-value='#fff1d0'],
-          &[data-value='#ccf7ec'],
-          &[data-value='#c7d9fa'],
-          &[data-value='#e3e5e9'] {
-            color: #8a8e99;
-
-            &:hover {
-              color: #8a8e99;
-            }
-          }
-
-          &[data-value=''] {
-            position: relative;
-            background-color: #f5f5f5;
-            border: 1px solid #e9edfa;
-
-            &::after {
-              content: '';
-              display: block;
-              position: absolute;
-              top: 8px;
-              left: -3px;
-              width: 24px;
-              height: 0;
-              border-bottom: 2px solid #c7000b;
-              transform: rotate(45deg);
-            }
+            background-color: rgba(0, 0, 0, 0.04);
           }
         }
       }
     }
 
+    .ql-color-picker {
+      .ql-picker-label {
+        &:hover,
+        &.ql-active {
+          @include toolbarSvgColor {
+            fill: #252b3a;
+          }
+          @include toolbarFontIconColor {
+            color: #252b3a;
+          }
+        }
+      }
+    }
     button,
-    span.ql-picker-label {
+    .ql-picker-label {
       &:hover,
       &.ql-active {
         @include toolbarSvgColor {
