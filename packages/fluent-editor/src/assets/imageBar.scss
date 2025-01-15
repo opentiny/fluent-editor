@@ -1,3 +1,39 @@
+@mixin image-icon {
+  line-height: 28px;
+  margin: 0 4px;
+  padding: 0 4px;
+  min-width: 28px;
+  display: inline-block;
+  text-align: center;
+  color: #babbc0;
+  color: var(--devui-placeholder, #babbc0);
+  border-radius: 2px 2px;
+  text-decoration: none;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+  vertical-align: bottom;
+
+  i {
+    display: block;
+    font-size: 16px;
+    color: #252b3a;
+    color: var(--devui-text, #252b3a);
+    line-height: 28px;
+  }
+
+  svg {
+    display: block;
+    line-height: 28px;
+    margin: 6px 0;
+    margin-left: 2px;
+  }
+  &:hover {
+    background-color: #aaaaaf;
+    background-color: var(--devui-list-item-active-bg, #aaaaaf);
+  }
+}
+
 .ql-image-bar {
   position: absolute;
   transform: translateY(10px);
@@ -25,32 +61,7 @@
     border-left: 1px solid var(--devui-line, #adb0b8);
   }
   .ql-image-preview {
-    line-height: 28px;
-    margin: 0 4px;
-    padding: 0 4px;
-    min-width: 28px;
-    display: inline-block;
-    text-align: center;
-    color: #babbc0;
-    color: var(--devui-placeholder, #babbc0);
-    border-radius: 2px 2px;
-    text-decoration: none;
-    -webkit-transition: background-color 0.3s ease-in-out;
-    transition: background-color 0.3s ease-in-out;
-    cursor: pointer;
-    vertical-align: bottom;
-    i {
-      display: block;
-      font-size: 16px;
-      color: #252b3a;
-      color: var(--devui-text, #252b3a);
-      line-height: 28px;
-    }
-
-    &:hover {
-      background-color: #aaaaaf;
-      background-color: var(--devui-list-item-active-bg, #aaaaaf);
-    }
+    @include image-icon;
     .icon-preview {
       font-family: 'iconfont' !important;
       font-size: 16px;
@@ -63,32 +74,7 @@
     }
   }
   .ql-image-download {
-    line-height: 28px;
-    margin: 0 4px;
-    padding: 0 4px;
-    min-width: 28px;
-    display: inline-block;
-    text-align: center;
-    color: #babbc0;
-    color: var(--devui-placeholder, #babbc0);
-    border-radius: 2px 2px;
-    text-decoration: none;
-    -webkit-transition: background-color 0.3s ease-in-out;
-    transition: background-color 0.3s ease-in-out;
-    cursor: pointer;
-    vertical-align: bottom;
-    i {
-      display: block;
-      font-size: 16px;
-      color: #252b3a;
-      color: var(--devui-text, #252b3a);
-      line-height: 28px;
-    }
-
-    &:hover {
-      background-color: #aaaaaf;
-      background-color: var(--devui-list-item-active-bg, #aaaaaf);
-    }
+    @include image-icon;
     .icon-download {
       font-family: 'iconfont' !important;
       font-size: 16px;
@@ -101,43 +87,20 @@
     }
   }
   .ql-image-copy {
-    line-height: 28px;
-    margin: 0 4px;
-    padding: 0 4px;
-    min-width: 28px;
-    display: inline-block;
-    text-align: center;
-    color: #babbc0;
-    color: var(--devui-placeholder, #babbc0);
-    border-radius: 2px 2px;
-    text-decoration: none;
-    -webkit-transition: background-color 0.3s ease-in-out;
-    transition: background-color 0.3s ease-in-out;
-    cursor: pointer;
-    vertical-align: bottom;
-
-    i {
-      display: block;
-      font-size: 16px;
-      color: #252b3a;
-      color: var(--devui-text, #252b3a);
-      line-height: 28px;
-    }
-
-    &:hover {
-      background-color: #aaaaaf;
-      background-color: var(--devui-list-item-active-bg, #aaaaaf);
-    }
-    .icon-copy {
+    @include image-icon;
+  }
+  .ql-image-delete {
+    @include image-icon;
+    .icon-delete {
       font-family: 'iconfont' !important;
       font-size: 16px;
       font-style: normal;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
 
-      // &::before {
-      //   content: '\ec45';
-      // }
+      &::before {
+        content: '\ec45';
+      }
     }
   }
 }
