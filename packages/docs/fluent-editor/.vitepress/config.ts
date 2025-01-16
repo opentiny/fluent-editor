@@ -18,6 +18,7 @@ export default defineConfig({
     ['script', { src: 'https://cdn.jsdelivr.net/npm/lottie-web/build/player/lottie.js' }],
     ['script', { src: 'https://cdn.jsdelivr.net/npm/@petercatai/assistant@1.0.7/dist/umd/assistant.min.js' }],
     ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@petercatai/assistant@1.0.7/dist/umd/assistant.min.css' }],
+    ['script', { src: 'https://cdn.staticfile.net/translate.js/3.12.0/translate.js' }],
   ],
   themeConfig: {
     logo: '/logo.svg',
@@ -28,6 +29,9 @@ export default defineConfig({
         items: [
           { text: 'TinyVue', link: 'https://opentiny.design/tiny-vue/' },
         ],
+      },
+      {
+        component: 'TranslateComponent'
       },
     ],
     socialLinks: [

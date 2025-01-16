@@ -5,6 +5,8 @@ import * as Toast from 'vue-toastification'
 import { insertBaiduScript } from './insert-baidu-script'
 import { inertDepsVersion } from './insert-deps-version'
 import { insertPeterCatAssistant } from './insert-petercat-assistant'
+import { insertTranslate } from './insert-translate'
+import TranslateComponent from '../components/TranslateComponent.vue'
 import '@vitepress-code-preview/container/dist/style.css'
 import './style.css'
 import 'vue-toastification/dist/index.css'
@@ -13,6 +15,7 @@ export const define = <T>(value: T): T => value
 export default define<Theme>({
   ...DefaultTheme,
   enhanceApp({ app }) {
+    app.component('TranslateComponent', TranslateComponent)
     app.use(Toast.default, {
       position: 'top-center',
       timeout: 3000,
@@ -24,5 +27,8 @@ export default define<Theme>({
     setTimeout(() => {
       insertPeterCatAssistant()
     }, 300)
+    setTimeout(() => {
+      insertTranslate()
+    }, 3000)
   },
 })
