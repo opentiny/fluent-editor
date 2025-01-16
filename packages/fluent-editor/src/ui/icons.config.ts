@@ -72,18 +72,18 @@ export const STRIKE_ICON = `<svg width="14px" height="16px" viewBox="0 0 14 16">
 </g>
 </svg>`
 
-export const COLOR_ICON = `<svg width="16px" height="16px" viewBox="0 0 16 16">
+export const COLOR_ICON = `<svg viewBox="0 0 16 16">
 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-    <polygon fill="#293040" points="2 14 14 14 14 16 2 16"></polygon>
+    <polygon class="ql-color-label" points="2 14 14 14 14 16 2 16"></polygon>
     <path d="M10.9166667,8.5 L5.08333333,8.5 L4.26618123,10.461165 L3.62338765,12 L2,12 L7,0 L9,0 L14,12 L12.3824972,12
     L11.5753038,10.0807292 L10.9166667,8.5 Z M10.2916667,7 L8,1.5 L5.70833333,7 L10.2916667,7 Z"
     fill="#293040" fill-rule="nonzero"></path>
 </g>
 </svg>`
 
-export const BACKGROUND_COLOR_ICON = `  <svg width="16px" height="16px" viewBox="0 0 16 16">
+export const BACKGROUND_COLOR_ICON = `<svg viewBox="0 0 16 16">
 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-    <path d="M4.64447006,9.66583547 L3.17597929,8.33216965 L6.15933183,5.11039074 L5.42508645,4.44355783
+    <path class="ql-color-label" d="M4.64447006,9.66583547 L3.17597929,8.33216965 L6.15933183,5.11039074 L5.42508645,4.44355783
     L9.39179153,1.0658141e-13 L16,6.00149616 L12.0332949,10.445054 L11.2990495,9.77822108 L8.31569698,13 L6.84720621,11.6663342
     L5.69344476,12.9587937 L2.36400649,12.9587937 L2,12.6282074 L4.64447006,9.66583547 Z M4.57134219,8.25840959
     L8.24256911,11.5925741 L10.5648041,9.11138818 L6.89357722,5.77722364 L4.57134219,8.25840959 Z M14.6046371,6.07525623

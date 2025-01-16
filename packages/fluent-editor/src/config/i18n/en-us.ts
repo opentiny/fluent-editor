@@ -123,4 +123,6 @@ export const EN_US = {
   'header-5': 'Heading 5',
   'header-6': 'Heading 6',
   'header-list': 'Heading List',
+  'clear-color': 'Clear color',
+  'custom-color': 'Color picker',
 }

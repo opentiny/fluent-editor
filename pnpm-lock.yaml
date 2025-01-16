@@ -84,6 +84,9 @@ importers:
       quill:
         specifier: ^2.0.0
         version: 2.0.3
+      quill-easy-color:
+        specifier: ^0.0.5
+        version: 0.0.5(quill@2.0.3)
     devDependencies:
       '@types/jest':
         specifier: ^26.0.23
@@ -1845,7 +1848,7 @@ packages:
     resolution: {integrity: sha512-T0+barUSQRTUQASh8bx02dl+DhF54GtIDY13Y3m9oWTklKbb3Wv974meRpeZ3lp1JpLVECWWNHC4vaG2XHXouQ==}
 
   concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   confbox@0.1.8:
     resolution: {integrity: sha512-RMtmw0iFkeR4YV+fUOSucriAQNb9g8zFR52MWCtl+cCZOFRNL6zeB395vPzFhEjjn4fMxXudmELnl/KF/WrK6w==}
@@ -3727,6 +3730,11 @@ packages:
     resolution: {integrity: sha512-X74oCeRI4/p0ucjb5Ma8adTXd9Scumz367kkMK5V/IatcX6A0vlgLgKbzXWy5nZmCGeNJm2oQX0d2Eqj+ZIlCA==}
     engines: {node: '>= 12.0.0'}
 
+  quill-easy-color@0.0.5:
+    resolution: {integrity: sha512-0+qMTzJLXRIgiyQaSTaD6wPlD4cYrvWViAQkEHME3K+qMTwMC9HNKbgO/vrC4j5X9uuvU1MKkZZ8YbhGsA6bwg==}
+    peerDependencies:
+      quill: '>=1.3.7'
+
   quill-header-list@0.0.2:
     resolution: {integrity: sha512-ZuWDtofVa6VI539zIxlx9xoe/ZC5BAVwATJUFYcCmwxGVBJeDfxzbplhK+qo+2TnaxsioNhZvyXKqnK0jxD4Aw==}
     peerDependencies:
@@ -5427,7 +5435,7 @@ snapshots:
       '@types/istanbul-lib-coverage': 2.0.6
       collect-v8-coverage: 1.0.2
 
-  '@jest/test-sequencer@26.6.3(ts-node@9.1.1(typescript@4.9.5))':
+  '@jest/test-sequencer@26.6.3':
     dependencies:
       '@jest/test-result': 26.6.2
       graceful-fs: 4.2.11
@@ -5435,11 +5443,7 @@ snapshots:
       jest-runner: 26.6.3(ts-node@9.1.1(typescript@4.9.5))
       jest-runtime: 26.6.3(ts-node@9.1.1(typescript@4.9.5))
     transitivePeerDependencies:
-      - bufferutil
-      - canvas
       - supports-color
-      - ts-node
-      - utf-8-validate
 
   '@jest/transform@26.6.2':
     dependencies:
@@ -7667,7 +7671,7 @@ snapshots:
   jest-config@26.6.3(ts-node@9.1.1(typescript@4.9.5)):
     dependencies:
       '@babel/core': 7.26.0
-      '@jest/test-sequencer': 26.6.3(ts-node@9.1.1(typescript@4.9.5))
+      '@jest/test-sequencer': 26.6.3
       '@jest/types': 26.6.2
       babel-jest: 26.6.3(@babel/core@7.26.0)
       chalk: 4.1.2
@@ -8927,6 +8931,10 @@ snapshots:
       fast-diff: 1.3.0
       lodash.clonedeep: 4.5.0
       lodash.isequal: 4.5.0
+
+  quill-easy-color@0.0.5(quill@2.0.3):
+    dependencies:
+      quill: 2.0.3
 
   quill-header-list@0.0.2(quill@2.0.3):
     dependencies:

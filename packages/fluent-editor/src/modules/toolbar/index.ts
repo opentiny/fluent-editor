@@ -1,7 +1,6 @@
 import type TypeToolbar from 'quill/modules/toolbar'
 import Quill from 'quill'
 import { isNullOrUndefined } from '../../config/editor.utils'
-import './better-picker'
 
 const Delta = Quill.import('delta')
 const Parchment = Quill.import('parchment')
@@ -28,7 +27,6 @@ debuglogger.level = namespace.level
 const debug = namespace('quill:toolbar')
 
 const Toolbar = Quill.import('modules/toolbar') as typeof TypeToolbar
-// let oldClean = Toolbar.DEFAULTS.handlers.clean
 
 class BetterToolbar extends Toolbar {
   update(range) {

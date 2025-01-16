@@ -8,9 +8,12 @@
 }
 
 @mixin arrowIcon {
+  position: absolute;
+  right: 0;
+  top: 50%;
   height: 0;
-  width: 0 !important;
-  margin-top: -2.5px !important;
+  width: 0;
+  margin-top: -2.5px;
   border: 2.5px solid transparent;
   border-top: 3px solid #252b3a;
 }
@@ -29,7 +32,7 @@
   &:hover {
     color: #5e7ce0;
 
-    svg {
+    i.icon {
       border-top-color: #5e7ce0;
     }
   }
@@ -42,13 +45,13 @@
       display: none;
     }
 
-    svg {
+    i.icon {
       @include arrowIcon;
     }
 
     &.ql-active,
     &:hover {
-      svg {
+      i.icon {
         border-top-color: #5e7ce0;
       }
     }
@@ -207,47 +210,6 @@
       }
     }
     @include pickerLabel($group, $i - 1);
-  }
-}
-
-// 解决颜色面板高亮问题
-@mixin pickerValue($group, $i) {
-  @if $i>0 {
-    $data-label-value: nth($group, $i);
-
-    .ql-picker-label[data-value='#{""+$data-label-value}'] {
-      & + .ql-picker-options {
-        .ql-picker-item[data-value='#{""+$data-label-value}'] {
-          &::after {
-            margin-left: 5px;
-            margin-top: -3px;
-            content: 'L';
-            font-size: initial;
-            font-family: arial;
-            -ms-transform: scaleX(-1) rotate(-45deg); /* IE 9 */
-            -webkit-transform: scaleX(-1) rotate(-45deg); /* Chrome, Safari, Opera */
-            transform: scaleX(-1) rotate(-45deg);
-          }
-        }
-      }
-    }
-    @include pickerValue($group, $i - 1);
-  }
-}
-
-// 当前颜色下划线指示器
-@mixin currentColorIndicator($group, $i) {
-  @if $i>0 {
-    $data-label-value: nth($group, $i);
-
-    .ql-picker-label[data-value='#{""+$data-label-value}'] {
-      .ql-color-inner {
-        .current-color-line {
-          border-color: $data-label-value;
-        }
-      }
-    }
-    @include currentColorIndicator($group, $i - 1);
   }
 }
 
