@@ -98,3 +98,8 @@
   padding-top: 0;
   line-height: 22px;
 }
+
+/* 翻译工具 */
+#translate {
+  display: none;
+}
