@@ -31,7 +31,7 @@ export default defineConfig({
         ],
       },
       {
-        component: 'TranslateComponent'
+        component: 'TranslateComponent',
       },
     ],
     socialLinks: [
