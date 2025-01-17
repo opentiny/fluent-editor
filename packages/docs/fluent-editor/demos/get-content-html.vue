@@ -122,7 +122,7 @@ onMounted(() => {
 
 <template>
   <div id="editor-get-content-html">
-    <p>Hello <strong>Fluent Editor</strong>!</p>
+    <p>Hello <strong>TinyEditor</strong>!</p>
   </div>
   <br>
   预览效果：

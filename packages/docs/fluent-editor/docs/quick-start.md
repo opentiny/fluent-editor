@@ -1,6 +1,6 @@
 # 快速开始
 
-安装 Fluent Editor：
+安装 TinyEditor：
 
 ```shell
 npm i @opentiny/fluent-editor
@@ -10,7 +10,7 @@ npm i @opentiny/fluent-editor
 
 ```html
 <div id="editor">
-  <p>Hello Fluent Editor!</p>
+  <p>Hello TinyEditor!</p>
 </div>
 ```
 
@@ -20,7 +20,7 @@ npm i @opentiny/fluent-editor
 @import '@opentiny/fluent-editor/style.css';
 ```
 
-初始化 Fluent Editor 编辑器：
+初始化 TinyEditor 编辑器：
 
 ```javascript
 import FluentEditor from '@opentiny/fluent-editor'
@@ -33,7 +33,7 @@ const editor = new FluentEditor('#editor', {
 
 ## 通过 CDN 方式使用
 
-你也可以通过 CDN 方式使用 Fluent Editor，只需要在 HTML 文件中增加以下内容：
+你也可以通过 CDN 方式使用 TinyEditor，只需要在 HTML 文件中增加以下内容：
 
 ```html
 <head>
@@ -50,7 +50,7 @@ const editor = new FluentEditor('#editor', {
 </head>
 ```
 
-接着就可以导入 Fluent Editor，并通过 `new FluentEditor(selector, options)` 进行初始化。
+接着就可以导入 TinyEditor，并通过 `new FluentEditor(selector, options)` 进行初始化。
 
 ```html
 <body>
@@ -59,7 +59,7 @@ const editor = new FluentEditor('#editor', {
     // 引入 @opentiny/fluent-editor
     import FluentEditor from '@opentiny/fluent-editor'
 
-    // 初始化 Fluent Editor 富文本编辑器
+    // 初始化 TinyEditor 富文本编辑器
     const editor = new FluentEditor('#editor', {
       theme: 'snow',
     })

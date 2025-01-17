@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const currentLang = ref('chinese_simplified')
 
@@ -9,11 +9,12 @@ onMounted(() => {
   }, 3000)
 })
 
-const switchLang = () => {
+function switchLang() {
   if (translate.language.getCurrent() === 'chinese_simplified') {
     translate.changeLanguage('english')
     currentLang.value = 'english'
-  } else {
+  }
+  else {
     translate.changeLanguage('chinese_simplified')
     currentLang.value = 'chinese_simplified'
   }
