@@ -1,10 +1,10 @@
 # 在前端框架中使用
 
-Fluent Editor 是一个框架无关的富文本编辑器，既可以在原生 JavaScript 项目中使用，也可以在 Vue、React 等前端框架中使用。
+TinyEditor 是一个框架无关的富文本编辑器，既可以在原生 JavaScript 项目中使用，也可以在 Vue、React 等前端框架中使用。
 
 ## Vue
 
-安装 Fluent Editor：
+安装 TinyEditor：
 
 ```shell
 npm i @opentiny/fluent-editor
@@ -37,7 +37,7 @@ onMounted(() => {
 
 ## React
 
-安装 Fluent Editor：
+安装 TinyEditor：
 
 ```shell
 npm i @opentiny/fluent-editor
@@ -71,7 +71,7 @@ export default App
 
 ## Angular
 
-安装 Fluent Editor：
+安装 TinyEditor：
 
 ```shell
 npm i @opentiny/fluent-editor

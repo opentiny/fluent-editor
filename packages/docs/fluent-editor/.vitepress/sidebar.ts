@@ -32,8 +32,8 @@ export function sidebar() {
       text: 'API 参考',
       items: [
         { text: '配置项', link: '/docs/api/options' },
-        { text: 'Fluent Editor 实例', link: '/docs/api/fluent-editor-instance' },
-        { text: 'Fluent Editor 类', link: '/docs/api/fluent-editor-class' },
+        { text: 'TinyEditor 实例', link: '/docs/api/fluent-editor-instance' },
+        { text: 'TinyEditor 类', link: '/docs/api/fluent-editor-class' },
       ],
     },
     {
