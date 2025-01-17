@@ -2,14 +2,14 @@
 
 We are delighted that you are interested in contributing to the TinyEditor open-source project. There are many ways to contribute, and you can choose one or more based on your strengths and interests:
 
-- Report [new issues](https://github.com/opentiny/fluent-editor/issues/new?assignees=&labels=%F0%9F%90%9B++bug&projects=&template=bug-report.yml&title=%F0%9F%90%9B+%5BBug%5D%3A+)
-- Provide more detailed information for [existing issues](https://github.com/opentiny/fluent-editor/labels/bug), such as additional screenshots, detailed reproduction steps, or providing a minimal reproducible demo link
+- Report [new issues](https://github.com/opentiny/tiny-editor/issues/new?assignees=&labels=%F0%9F%90%9B++bug&projects=&template=bug-report.yml&title=%F0%9F%90%9B+%5BBug%5D%3A+)
+- Provide more detailed information for [existing issues](https://github.com/opentiny/tiny-editor/labels/bug), such as additional screenshots, detailed reproduction steps, or providing a minimal reproducible demo link
 - Submit Pull requests to fix typos in the documentation or to make the documentation clearer and more comprehensive
 - Add the official assistant WeChat: opentiny-official (note: TinyEditor), join the technical discussion group
 
 Once you have used TinyEditor rich text and participated in several of the above forms of contributions, and have become familiar with TinyEditor, you can try more challenging tasks, such as:
 
-- Fixing bugs, starting with [good first issue](https://github.com/opentiny/fluent-editor/labels/good%20first%20issue)
+- Fixing bugs, starting with [good first issue](https://github.com/opentiny/tiny-editor/labels/good%20first%20issue)
 - Implementing new features
 - Improving unit tests
 - Translating documentation
@@ -19,7 +19,7 @@ Once you have used TinyEditor rich text and participated in several of the above
 
 If you encounter problems while using TinyEditor, we welcome you to submit an Issue. Before submitting an Issue, please read the relevant [official documentation](https://opentiny.github.io/fluent-editor) to confirm whether it is a defect or a feature that has not yet been implemented.
 
-If it is a defect, create a new Issue using the [Bug report](https://github.com/opentiny/fluent-editor/issues/new?assignees=&labels=%F0%9F%90%9B++bug&projects=&template=bug-report.yml&title=%F0%9F%90%9B+%5BBug%5D%3A+) template. Example title: `After setting and saving the background color of table cells in the table module, the background color is lost when rendering the cells next time`.
+If it is a defect, create a new Issue using the [Bug report](https://github.com/opentiny/tiny-editor/issues/new?assignees=&labels=%F0%9F%90%9B++bug&projects=&template=bug-report.yml&title=%F0%9F%90%9B+%5BBug%5D%3A+) template. Example title: `After setting and saving the background color of table cells in the table module, the background color is lost when rendering the cells next time`.
 
 The Issue for reporting defects mainly requires the following information:
 
@@ -27,7 +27,7 @@ The Issue for reporting defects mainly requires the following information:
 - The manifestation of the defect, which can be supplemented with screenshots, and if there is an error, the error message can be pasted
 - The reproduction steps of the defect, preferably providing a minimal reproducible demo link
 
-If it is a new feature, choose the [Feature request](https://github.com/opentiny/fluent-editor/issues/new?assignees=&labels=%E2%9C%A8+feature&projects=&template=feature-request.yml&title=%E2%9C%A8+%5BFeature%5D%3A+) template. Example title: `I hope to add the functionality of a format painter`.
+If it is a new feature, choose the [Feature request](https://github.com/opentiny/tiny-editor/issues/new?assignees=&labels=%E2%9C%A8+feature&projects=&template=feature-request.yml&title=%E2%9C%A8+%5BFeature%5D%3A+) template. Example title: `I hope to add the functionality of a format painter`.
 
 The Issue for new features mainly requires the following information:
 
@@ -36,7 +36,7 @@ The Issue for new features mainly requires the following information:
 
 ## Submitting PRs
 
-Before submitting a PR, please ensure that the content you submit is in line with the overall planning of TinyEditor. Generally, Issues already marked as [bug](https://github.com/opentiny/fluent-editor/labels/bug) encourage submitting PRs. If you are not sure, you can create a [Discussion](https://github.com/opentiny/fluent-editor/discussions) for discussion.
+Before submitting a PR, please ensure that the content you submit is in line with the overall planning of TinyEditor. Generally, Issues already marked as [bug](https://github.com/opentiny/tiny-editor/labels/bug) encourage submitting PRs. If you are not sure, you can create a [Discussion](https://github.com/opentiny/tiny-editor/discussions) for discussion.
 
 ### Pull Request Standards
 
@@ -71,7 +71,7 @@ The PR description uses a template and requires filling in the relevant PR infor
 
 ### Local Startup Steps
 
-- Click the Fork button at the top right of the [TinyEditor](https://github.com/opentiny/fluent-editor) code repository to Fork the upstream repository to your personal repository
+- Click the Fork button at the top right of the [TinyEditor](https://github.com/opentiny/tiny-editor) code repository to Fork the upstream repository to your personal repository
 - Clone your personal repository to the local
 - Associate the upstream repository to synchronize the latest code from the upstream repository
 - Run `pnpm i` in the root directory of TinyEditor to install dependencies
@@ -101,7 +101,7 @@ pnpm dev
 - Local coding
 - Follow the [Commit Message Format](https://www.conventionalcommits.org/zh-hans/v1.0.0/) standard for submission, PRs that do not conform to the submission standard will not be merged
 - Submit to the remote repository: git push origin branchName
-- Open the [Pull requests](https://github.com/opentiny/fluent-editor/pulls) link of the TinyEditor code repository, click the New pull request button to submit PR
+- Open the [Pull requests](https://github.com/opentiny/tiny-editor/pulls) link of the TinyEditor code repository, click the New pull request button to submit PR
 - Supplement the relevant information according to the PR template, including PR checklist, PR type, associated Issue number, whether it is a destructive change
 - The project Committer conducts Code Review and provides feedback
 - The PR author adjusts the code according to the feedback, please note that after a branch has initiated a PR, subsequent commits will be synchronized automatically, no need to resubmit PR

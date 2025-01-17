@@ -6,8 +6,8 @@ import { sidebar } from './sidebar'
 export default defineConfig({
   title: 'TinyEditor',
   titleTemplate: '基于 Quill 2.0 的富文本编辑器',
-  description: '富文本编辑器, Rich text editor, rich-text-editor, rich-text, wysiwyg, wysiwyg-editor, quill, fluent-editor',
-  base: '/fluent-editor/',
+  description: '富文本编辑器, Rich text editor, rich-text-editor, rich-text, wysiwyg, wysiwyg-editor, quill, fluent-editor, tiny-editor',
+  base: '/tiny-editor/',
   cleanUrls: true,
   head: [
     ['link', { rel: 'icon', href: 'favicon.ico' }],
@@ -35,7 +35,7 @@ export default defineConfig({
       },
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/opentiny/fluent-editor/' },
+      { icon: 'github', link: 'https://github.com/opentiny/tiny-editor/' },
     ],
     sidebar: {
       '/docs/': sidebar(),
