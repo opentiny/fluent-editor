@@ -17,6 +17,6 @@ onMounted(() => {
 
 <template>
   <div id="editor">
-    <p>Hello <strong>Fluent Editor</strong>!</p>
+    <p>Hello <strong>TinyEditor</strong>!</p>
   </div>
 </template>

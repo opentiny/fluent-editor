@@ -44,7 +44,7 @@ const Link = FluentEditor.import('formats/link')
 
 ## FluentEditor.register()
 
-注册一个 FluentEditor 模块，只有注册过的模块才可以在 Fluent Editor 中使用。
+注册一个 FluentEditor 模块，只有注册过的模块才可以在 TinyEditor 中使用。
 
 注册过的模块可以通过 FluentEditor.import() 进行导入。
 

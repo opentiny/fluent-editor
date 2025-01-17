@@ -1,13 +1,13 @@
 # Contributing
 
-We are delighted that you are interested in contributing to the Fluent Editor open-source project. There are many ways to contribute, and you can choose one or more based on your strengths and interests:
+We are delighted that you are interested in contributing to the TinyEditor open-source project. There are many ways to contribute, and you can choose one or more based on your strengths and interests:
 
 - Report [new issues](https://github.com/opentiny/fluent-editor/issues/new?assignees=&labels=%F0%9F%90%9B++bug&projects=&template=bug-report.yml&title=%F0%9F%90%9B+%5BBug%5D%3A+)
 - Provide more detailed information for [existing issues](https://github.com/opentiny/fluent-editor/labels/bug), such as additional screenshots, detailed reproduction steps, or providing a minimal reproducible demo link
 - Submit Pull requests to fix typos in the documentation or to make the documentation clearer and more comprehensive
-- Add the official assistant WeChat: opentiny-official (note: Fluent Editor), join the technical discussion group
+- Add the official assistant WeChat: opentiny-official (note: TinyEditor), join the technical discussion group
 
-Once you have used Fluent Editor rich text and participated in several of the above forms of contributions, and have become familiar with Fluent Editor, you can try more challenging tasks, such as:
+Once you have used TinyEditor rich text and participated in several of the above forms of contributions, and have become familiar with TinyEditor, you can try more challenging tasks, such as:
 
 - Fixing bugs, starting with [good first issue](https://github.com/opentiny/fluent-editor/labels/good%20first%20issue)
 - Implementing new features
@@ -17,7 +17,7 @@ Once you have used Fluent Editor rich text and participated in several of the ab
 
 ## Submitting Issues
 
-If you encounter problems while using Fluent Editor, we welcome you to submit an Issue. Before submitting an Issue, please read the relevant [official documentation](https://opentiny.github.io/fluent-editor) to confirm whether it is a defect or a feature that has not yet been implemented.
+If you encounter problems while using TinyEditor, we welcome you to submit an Issue. Before submitting an Issue, please read the relevant [official documentation](https://opentiny.github.io/fluent-editor) to confirm whether it is a defect or a feature that has not yet been implemented.
 
 If it is a defect, create a new Issue using the [Bug report](https://github.com/opentiny/fluent-editor/issues/new?assignees=&labels=%F0%9F%90%9B++bug&projects=&template=bug-report.yml&title=%F0%9F%90%9B+%5BBug%5D%3A+) template. Example title: `After setting and saving the background color of table cells in the table module, the background color is lost when rendering the cells next time`.
 
@@ -36,7 +36,7 @@ The Issue for new features mainly requires the following information:
 
 ## Submitting PRs
 
-Before submitting a PR, please ensure that the content you submit is in line with the overall planning of Fluent Editor. Generally, Issues already marked as [bug](https://github.com/opentiny/fluent-editor/labels/bug) encourage submitting PRs. If you are not sure, you can create a [Discussion](https://github.com/opentiny/fluent-editor/discussions) for discussion.
+Before submitting a PR, please ensure that the content you submit is in line with the overall planning of TinyEditor. Generally, Issues already marked as [bug](https://github.com/opentiny/fluent-editor/labels/bug) encourage submitting PRs. If you are not sure, you can create a [Discussion](https://github.com/opentiny/fluent-editor/discussions) for discussion.
 
 ### Pull Request Standards
 
@@ -71,10 +71,10 @@ The PR description uses a template and requires filling in the relevant PR infor
 
 ### Local Startup Steps
 
-- Click the Fork button at the top right of the [Fluent Editor](https://github.com/opentiny/fluent-editor) code repository to Fork the upstream repository to your personal repository
+- Click the Fork button at the top right of the [TinyEditor](https://github.com/opentiny/fluent-editor) code repository to Fork the upstream repository to your personal repository
 - Clone your personal repository to the local
 - Associate the upstream repository to synchronize the latest code from the upstream repository
-- Run `pnpm i` in the root directory of Fluent Editor to install dependencies
+- Run `pnpm i` in the root directory of TinyEditor to install dependencies
 - Run `pnpm dev` to start the rich text website
 - Open the browser to visit: [http://localhost:5173/fluent-editor/](http://localhost:5173/fluent-editor/)
 
@@ -101,7 +101,7 @@ pnpm dev
 - Local coding
 - Follow the [Commit Message Format](https://www.conventionalcommits.org/zh-hans/v1.0.0/) standard for submission, PRs that do not conform to the submission standard will not be merged
 - Submit to the remote repository: git push origin branchName
-- Open the [Pull requests](https://github.com/opentiny/fluent-editor/pulls) link of the Fluent Editor code repository, click the New pull request button to submit PR
+- Open the [Pull requests](https://github.com/opentiny/fluent-editor/pulls) link of the TinyEditor code repository, click the New pull request button to submit PR
 - Supplement the relevant information according to the PR template, including PR checklist, PR type, associated Issue number, whether it is a destructive change
 - The project Committer conducts Code Review and provides feedback
 - The PR author adjusts the code according to the feedback, please note that after a branch has initiated a PR, subsequent commits will be synchronized automatically, no need to resubmit PR
@@ -113,9 +113,9 @@ The contribution process ends, thank you for your contribution!
 
 If you are interested in our open-source projects, you are welcome to join our open-source community through the following methods.
 
-- Add the official assistant WeChat: opentiny-official (note: Fluent Editor), join our technical discussion group
+- Add the official assistant WeChat: opentiny-official (note: TinyEditor), join our technical discussion group
 
-If you have submitted an Issue or PR for Fluent Editor, please comment the following content under the Issue or PR to add yourself to the contributor list.
+If you have submitted an Issue or PR for TinyEditor, please comment the following content under the Issue or PR to add yourself to the contributor list.
 
 ```
 @all-contributors please add @<username> for <contributions>
@@ -123,4 +123,4 @@ If you have submitted an Issue or PR for Fluent Editor, please comment the follo
 
 For detailed rules, please refer to: [https://allcontributors.org/docs/en/bot/usage](https://allcontributors.org/docs/en/bot/usage)
 
-We sincerely thank every developer who has contributed to the Fluent Editor open-source project! ❤
+We sincerely thank every developer who has contributed to the TinyEditor open-source project! ❤
