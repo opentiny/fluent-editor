@@ -4,13 +4,13 @@
   "description": "A rich text editor based on Quill 2.0, which extends rich modules and formats on the basis of Quill. It's powerful and out-of-the-box.",
   "author": "OpenTiny Team",
   "license": "MIT",
-  "homepage": "https://opentiny.github.io/fluent-editor/",
+  "homepage": "https://opentiny.github.io/tiny-editor/",
   "repository": {
     "type": "git",
-    "url": "git@github.com:opentiny/fluent-editor.git"
+    "url": "git@github.com:opentiny/tiny-editor.git"
   },
   "bugs": {
-    "url": "https://github.com/opentiny/fluent-editor/issues"
+    "url": "https://github.com/opentiny/tiny-editor/issues"
   },
   "keywords": [
     "editor",
