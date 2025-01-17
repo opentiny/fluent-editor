@@ -8,10 +8,10 @@
   "homepage": "",
   "repository": {
     "type": "git",
-    "url": "git@github.com:opentiny/fluent-editor.git"
+    "url": "git@github.com:opentiny/tiny-editor.git"
   },
   "bugs": {
-    "url": "https://github.com/opentiny/fluent-editor/issues"
+    "url": "https://github.com/opentiny/tiny-editor/issues"
   },
   "keywords": [
     "editor",
@@ -21,7 +21,8 @@
     "wysiwyg-editor",
     "quill",
     "opentiny",
-    "fluent-editor"
+    "fluent-editor",
+    "tiny-editor"
   ],
   "scripts": {
     "dev": "pnpm -F docs dev",

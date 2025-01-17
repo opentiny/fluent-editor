@@ -13,7 +13,7 @@ hero:
       link: /docs/quick-start
     - theme: alt
       text: GitHub
-      link: https://github.com/opentiny/fluent-editor
+      link: https://github.com/opentiny/tiny-editor
 features:
 - icon: 📦
   title: 开箱即用
