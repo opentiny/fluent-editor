@@ -21,7 +21,7 @@
   display: none;
 }
 
-/* 解决 Fluent Editor 与 VitePress 样式冲突 */
+/* 解决 TinyEditor 与 VitePress 样式冲突 */
 ._example-showcase_8jhae_14 {
   position: relative;
 }

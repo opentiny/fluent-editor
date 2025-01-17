@@ -1,4 +1,4 @@
-# Fluent Editor 富文本编辑器
+# TinyEditor 富文本编辑器
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -6,24 +6,24 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Fluent Editor 是一个基于 Quill 2.0 的富文本编辑器，在 Quill 基础上扩展了表格、图片、超链接、复制粘贴、插入表情、文件上传、@提醒、斜杆菜单等丰富的模块和格式，框架无关、兼容 Quill API、兼容 Quill 模块生态。
+TinyEditor 是一个基于 Quill 2.0 的富文本编辑器，在 Quill 基础上扩展了表格、图片、超链接、复制粘贴、插入表情、文件上传、@提醒、斜杆菜单等丰富的模块和格式，框架无关、兼容 Quill API、兼容 Quill 模块生态。
 
 [English](README.md) | 简体中文
 
 ## 项目优势
 
-Fluent Editor 主要有以下特点和优势：
+TinyEditor 主要有以下特点和优势：
 
 - 包含 30 多种丰富的模块和格式，除了 Quill 内置的 21 种格式之外，还扩展和增强了表格、图片、超链接、字数统计、表情、文件上传、复制粘贴、@提醒、斜杆快捷菜单、截图等 15 种模块和格式
 - 强大的表格功能，支持在工具栏插入指定行列的表格、表格行高/列宽拖拽、插入行/列、删除行/列、合并/拆分单元格等丰富的表格操作
 - 与框架无关，可以在 Vue、React、Angular 等多种框架中使用
 - 兼容 Quill 所有 API，兼容 Quill 生态模块和格式
 
-![Fluent Editor](fluent-editor.png)
+![TinyEditor](fluent-editor.png)
 
 ## 快速入门
 
-安装 Fluent Editor：
+安装 TinyEditor：
 
 ```shell
 npm i @opentiny/fluent-editor
@@ -33,7 +33,7 @@ npm i @opentiny/fluent-editor
 
 ```html
 <div id="editor">
-  <p>Hello Fluent Editor!</p>
+  <p>Hello TinyEditor!</p>
 </div>
 ```
 
@@ -43,7 +43,7 @@ npm i @opentiny/fluent-editor
 @import '@opentiny/fluent-editor/style.css';
 ```
 
-初始化 Fluent Editor 编辑器：
+初始化 TinyEditor 编辑器：
 
 ```javascript
 import FluentEditor from '@opentiny/fluent-editor'

@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 import { sidebar } from './sidebar'
 
 export default defineConfig({
-  title: 'Fluent Editor',
+  title: 'TinyEditor',
   titleTemplate: '基于 Quill 2.0 的富文本编辑器',
   description: '富文本编辑器, Rich text editor, rich-text-editor, rich-text, wysiwyg, wysiwyg-editor, quill, fluent-editor',
   base: '/fluent-editor/',
