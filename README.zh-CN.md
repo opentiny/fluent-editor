@@ -46,9 +46,9 @@ npm i @opentiny/fluent-editor
 初始化 TinyEditor 编辑器：
 
 ```javascript
-import FluentEditor from '@opentiny/fluent-editor'
+import TinyEditor from '@opentiny/fluent-editor'
 
-const editor = new FluentEditor('#editor', {
+const editor = new TinyEditor('#editor', {
   theme: 'snow',
 })
 ```
@@ -56,13 +56,13 @@ const editor = new FluentEditor('#editor', {
 ## 本地开发
 
 ```shell
-git clone git@github.com:opentiny/fluent-editor.git
-cd fluent-editor
+git clone git@github.com:opentiny/tiny-editor.git
+cd tiny-editor
 pnpm i
 pnpm dev
 ```
 
-打开浏览器访问：[http://localhost:5173/fluent-editor/](http://localhost:5173/fluent-editor/)
+打开浏览器访问：[http://localhost:5173/tiny-editor/](http://localhost:5173/tiny-editor/)
 
 ## ✨ 贡献者
 
@@ -76,12 +76,12 @@ pnpm dev
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/zzxming"><img src="https://avatars.githubusercontent.com/u/74341337?v=4?s=100" width="100px;" alt="zzxming"/><br /><sub><b>zzxming</b></sub></a><br /><a href="https://github.com/opentiny/fluent-editor/commits?author=zzxming" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Janson1012"><img src="https://avatars.githubusercontent.com/u/60996238?v=4?s=100" width="100px;" alt="Janson1012"/><br /><sub><b>Janson1012</b></sub></a><br /><a href="https://github.com/opentiny/fluent-editor/commits?author=Janson1012" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://kagol.github.io/blogs"><img src="https://avatars.githubusercontent.com/u/9566362?v=4?s=100" width="100px;" alt="Kagol"/><br /><sub><b>Kagol</b></sub></a><br /><a href="https://github.com/opentiny/fluent-editor/commits?author=kagol" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kiss-keray"><img src="https://avatars.githubusercontent.com/u/24504763?v=4?s=100" width="100px;" alt="keray"/><br /><sub><b>keray</b></sub></a><br /><a href="https://github.com/opentiny/fluent-editor/commits?author=kiss-keray" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/qwangry"><img src="https://avatars.githubusercontent.com/u/58112936?v=4?s=100" width="100px;" alt="qwangry"/><br /><sub><b>qwangry</b></sub></a><br /><a href="https://github.com/opentiny/fluent-editor/commits?author=qwangry" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/jany55555"><img src="https://avatars.githubusercontent.com/u/173228510?v=4?s=100" width="100px;" alt="jany55555"/><br /><sub><b>jany55555</b></sub></a><br /><a href="https://github.com/opentiny/fluent-editor/commits?author=jany55555" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/zzxming"><img src="https://avatars.githubusercontent.com/u/74341337?v=4?s=100" width="100px;" alt="zzxming"/><br /><sub><b>zzxming</b></sub></a><br /><a href="https://github.com/opentiny/tiny-editor/commits?author=zzxming" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Janson1012"><img src="https://avatars.githubusercontent.com/u/60996238?v=4?s=100" width="100px;" alt="Janson1012"/><br /><sub><b>Janson1012</b></sub></a><br /><a href="https://github.com/opentiny/tiny-editor/commits?author=Janson1012" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://kagol.github.io/blogs"><img src="https://avatars.githubusercontent.com/u/9566362?v=4?s=100" width="100px;" alt="Kagol"/><br /><sub><b>Kagol</b></sub></a><br /><a href="https://github.com/opentiny/tiny-editor/commits?author=kagol" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kiss-keray"><img src="https://avatars.githubusercontent.com/u/24504763?v=4?s=100" width="100px;" alt="keray"/><br /><sub><b>keray</b></sub></a><br /><a href="https://github.com/opentiny/tiny-editor/commits?author=kiss-keray" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/qwangry"><img src="https://avatars.githubusercontent.com/u/58112936?v=4?s=100" width="100px;" alt="qwangry"/><br /><sub><b>qwangry</b></sub></a><br /><a href="https://github.com/opentiny/tiny-editor/commits?author=qwangry" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/jany55555"><img src="https://avatars.githubusercontent.com/u/173228510?v=4?s=100" width="100px;" alt="jany55555"/><br /><sub><b>jany55555</b></sub></a><br /><a href="https://github.com/opentiny/tiny-editor/commits?author=jany55555" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
@@ -95,10 +95,10 @@ pnpm dev
 
 感谢：
 
-- [quill](https://github.com/slab/quill) 项目，它是一款 API 驱动的富文本编辑器，采用模块化架构，可扩展性好，易于使用，支持跨平台，FluentEditor 基于 Quill 扩展和增强了表格、图片、超链接等大量模块和格式。
-- [quill-better-table](https://github.com/soccerloway/quill-better-table) 项目，它增强了 Quill 内置表格模块，增加了丰富的功能，FluentEditor 的表格操作功能基于 quill-better-table。
-- [quill-emoji](https://github.com/contentco/quill-emoji) 项目，它是一个用于表情符号的 Quill 模块，FluentEditor 的插入表情功能基于 quill-emoji。
-- [quill-blot-formatter](https://github.com/Fandom-OSS/quill-blot-formatter) 项目，它是一个用于调整图像和视频大小的 Quill 模块，FluentEditor 的图片缩放功能基于 quill-blot-formatter。
+- [quill](https://github.com/slab/quill) 项目，它是一款 API 驱动的富文本编辑器，采用模块化架构，可扩展性好，易于使用，支持跨平台，TinyEditor 基于 Quill 扩展和增强了表格、图片、超链接等大量模块和格式。
+- [quill-better-table](https://github.com/soccerloway/quill-better-table) 项目，它增强了 Quill 内置表格模块，增加了丰富的功能，TinyEditor 的表格操作功能基于 quill-better-table。
+- [quill-emoji](https://github.com/contentco/quill-emoji) 项目，它是一个用于表情符号的 Quill 模块，TinyEditor 的插入表情功能基于 quill-emoji。
+- [quill-blot-formatter](https://github.com/Fandom-OSS/quill-blot-formatter) 项目，它是一个用于调整图像和视频大小的 Quill 模块，TinyEditor 的图片缩放功能基于 quill-blot-formatter。
 
 ## License
 
