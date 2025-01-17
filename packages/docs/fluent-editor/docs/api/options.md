@@ -1,6 +1,6 @@
 # 配置项
 
-通过以下方式可以初始化 Fluent Editor 富文本编辑器。
+通过以下方式可以初始化 TinyEditor 富文本编辑器。
 
 ```typescript
 import FluentEditor from '@opentiny/fluent-editor'
@@ -10,7 +10,7 @@ const editor = new FluentEditor(container, options)
 
 第一个参数 container 是用来配置富文本编辑器容器，可以是一个 CSS 选择器，也可以是一个 DOM 对象。
 
-第二个参数 options 是一个对象，用来做一些编辑器配置，需要注意的是 Fluent Editor 的 options 配置项在 Quill 的基础上做了一些扩展。
+第二个参数 options 是一个对象，用来做一些编辑器配置，需要注意的是 TinyEditor 的 options 配置项在 Quill 的基础上做了一些扩展。
 
 ```typescript
 import type { QuillOptions } from 'quill'

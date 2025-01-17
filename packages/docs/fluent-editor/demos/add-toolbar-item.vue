@@ -60,6 +60,6 @@ onMounted(() => {
 
 <template>
   <div id="editor-add-toolbar-item">
-    <p>Hello <strong>Fluent Editor</strong>!</p>
+    <p>Hello <strong>TinyEditor</strong>!</p>
   </div>
 </template>

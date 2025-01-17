@@ -1,4 +1,4 @@
-# Fluent Editor
+# TinyEditor
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -6,24 +6,24 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Fluent Editor is a rich text editor based on Quill 2.0, which extends Quill with rich modules and formats such as table, image, link, clipboard, emoji, file, mention, and quick menu. It is framework-independent, compatible with Quill API, and compatible with Quill module ecosystem.
+TinyEditor is a rich text editor based on Quill 2.0, which extends Quill with rich modules and formats such as table, image, link, clipboard, emoji, file, mention, and quick menu. It is framework-independent, compatible with Quill API, and compatible with Quill module ecosystem.
 
 English | [简体中文](README.zh-CN.md)
 
 ## Features
 
-Fluent Editor has the following features and advantages:
+TinyEditor has the following features and advantages:
 
 - Contains more than 30 modules and formats, in addition to the 21 built-in formats in Quill, it also extends and enhances 15 modules and formats such as table, image, link, counter, emoji, file, clipboard, mention, quick menu, screenshot, etc.
 - Powerful table function, supports inserting table with specified rows and columns in the toolbar, table row height/column width dragging, inserting rows/columns, deleting rows/columns, merging/splitting cells, and other rich table operations.
 - It is not related to frameworks and can be used in multiple frameworks such as Vue, React, Angular, etc.
 - Compatible with all Quill APIs, Quill ecosystem modules and formats.
 
-![Fluent Editor](fluent-editor.png)
+![TinyEditor](fluent-editor.png)
 
 ## Quick Start
 
-Install Fluent Editor:
+Install TinyEditor:
 
 ```shell
 npm i @opentiny/fluent-editor
@@ -33,7 +33,7 @@ Write html：
 
 ```html
 <div id="editor">
-  <p>Hello Fluent Editor!</p>
+  <p>Hello TinyEditor!</p>
 </div>
 ```
 
@@ -43,7 +43,7 @@ Import style:
 @import '@opentiny/fluent-editor/style.css';
 ```
 
-Initialize the Fluent Editor editor:
+Initialize the TinyEditor editor:
 
 ```javascript
 import FluentEditor from '@opentiny/fluent-editor'
@@ -95,10 +95,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 Thanks to:
 
-- The [quill](https://github.com/slab/quill) project, which is an API-driven rich text editor with a modular architecture, good scalability, ease of use, and cross-platform support. Fluent Editor extends and enhances a large number of modules and formats such as tables, images, and hyperlinks based on Quill.
-- The [quill-better-table](https://github.com/soccerloway/quill-better-table) project, which enhances the built-in table module of Quill and adds rich functionality. Fluent Editor's table operation functionality is based on quill-better-table.
-- The [quill-emoji](https://github.com/contentco/quill-emoji) project, which is a Quill module for emoji. Fluent Editor's insert emoji function is based on quill-emoji.
-- The [quill-blot-formatter](https://github.com/Fandom-OSS/quill-blot-formatter) project, which is a Quill module for resizing images and videos. Fluent Editor's image scaling function is based on quill-blot-formatter.
+- The [quill](https://github.com/slab/quill) project, which is an API-driven rich text editor with a modular architecture, good scalability, ease of use, and cross-platform support. TinyEditor extends and enhances a large number of modules and formats such as tables, images, and hyperlinks based on Quill.
+- The [quill-better-table](https://github.com/soccerloway/quill-better-table) project, which enhances the built-in table module of Quill and adds rich functionality. TinyEditor's table operation functionality is based on quill-better-table.
+- The [quill-emoji](https://github.com/contentco/quill-emoji) project, which is a Quill module for emoji. TinyEditor's insert emoji function is based on quill-emoji.
+- The [quill-blot-formatter](https://github.com/Fandom-OSS/quill-blot-formatter) project, which is a Quill module for resizing images and videos. TinyEditor's image scaling function is based on quill-blot-formatter.
 
 ## License
 

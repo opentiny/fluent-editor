@@ -1,15 +1,15 @@
 # 实例 API
 
-通过以下方式可以初始化 Fluent Editor 富文本编辑器，并获得 Fluent Editor 实例对象。
+通过以下方式可以初始化 TinyEditor 富文本编辑器，并获得 TinyEditor 实例对象。
 
 ```typescript
 import FluentEditor from '@opentiny/fluent-editor'
 
-// Fluent Editor 实例对象
+// TinyEditor 实例对象
 const editor = new FluentEditor(container, options)
 ```
 
-Fluent Editor 基于 Quill，因此 Fluent Editor 的实例对象包含 Quill 实例对象的所有变量和方法。
+TinyEditor 基于 Quill，因此 TinyEditor 的实例对象包含 Quill 实例对象的所有变量和方法。
 
 这里仅列出几个常用的实例变量和实例方法。
 

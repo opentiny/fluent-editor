@@ -12,7 +12,7 @@ test('has toolbar', async ({ page }) => {
     [
       '<p>',
       'Hello ',
-      `<strong>Fluent Editor</strong>`,
+      `<strong>TinyEditor</strong>`,
       '!',
       `</p>`,
     ].join(''),

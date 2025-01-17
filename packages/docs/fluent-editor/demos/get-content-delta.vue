@@ -122,7 +122,7 @@ onMounted(() => {
 
 <template>
   <div id="editor-get-content-delta">
-    <p>Hello <strong>Fluent Editor</strong>!</p>
+    <p>Hello <strong>TinyEditor</strong>!</p>
   </div>
   <br>
   Delta 内容：

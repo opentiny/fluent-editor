@@ -12,7 +12,7 @@ onMounted(() => {
       theme: 'snow',
     })
 
-    const html = '<p>Hello <strong>Fluent Editor</strong>!</p>'
+    const html = '<p>Hello <strong>TinyEditor</strong>!</p>'
 
     editor.root.innerHTML = html
   })
