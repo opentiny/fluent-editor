@@ -20,7 +20,38 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
     resolveOptions(options: Partial<Record<string, any>>): Record<string, any> {
       const result = super.resolveOptions(options)
       if (!this.quill.lang) return result
+      const shortKeyMap = {
+        'bold': 'ctrl + B',
+        'italic': 'ctrl + I',
+        'underline': 'ctrl + U',
+        'strike': 'ctrl + D',
+        'clean': 'ctrl + /',
+        'align-left': 'alt + L',
+        'align-center': 'alt + C',
+        'align-right': 'alt + R',
+        'align-justify': 'alt + J',
+        'indent-+1': 'ctrl + ]',
+        'indent--1': 'ctrl + [',
+        'script-sub': 'ctrl + ;',
+        'script-super': 'ctrl + \'',
+        'code': 'ctrl + E',
+        'direction-rtl': 'ctrl + R',
+        'direction-ltr': 'ctrl + L',
+        'undo': 'ctrl + Z',
+        'redo': 'ctrl + shift + Z',
+        'color': 'ctrl + alt + C',
+        'background': 'ctrl + alt + B',
+        'link': 'ctrl + K',
+      }
+      const shortcutModule = this.quill.getModule('shortcut-key')
+      const getShortKey = (name: string) => {
+        if (!shortcutModule) return ''
+        const shortKey = shortKeyMap[name]
+        return shortKey ? `\n${shortKey}` : ''
+      }
       const btnTips = [
+        'color',
+        'background',
         'bold',
         'italic',
         'strike',
@@ -43,19 +74,17 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
         'format-painter',
         'header-list',
       ].reduce((map, name) => {
-        map[name] = this.quill.getLangText(name)
+        map[name] = this.quill.getLangText(name) + getShortKey(name)
         return map
       }, {} as Record<string, string>)
       const selectTips = [
-        'color',
-        'background',
         'font',
         'size',
         'lineheight',
       ].reduce((map, name) => {
         map[name] = {
           onShow: () => {
-            return this.quill.getLangText(name)
+            return this.quill.getLangText(name) + getShortKey(name)
           },
         }
         return map
@@ -81,7 +110,7 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
                 value = 'normal'
               }
             }
-            return this.quill.getLangText(`${name}-${value}`)
+            return this.quill.getLangText(`${name}-${value}`) + getShortKey(`${name}-${value}`)
           },
         }
         return map

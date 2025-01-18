@@ -48,7 +48,6 @@ FluentEditor.register(
     'modules/link': Link,
     'modules/mathlive': MathliveModule,
     'modules/mention': Mention,
-    // 'modules/quickmenu': QuickMenu, // TODO
     'modules/syntax': Syntax,
     'modules/toolbar': Toolbar,
     'modules/uploader': Uploader,
