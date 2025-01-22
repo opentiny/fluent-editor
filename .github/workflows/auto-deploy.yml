@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - 'packages/docs/**'
+      - 'packages/projects/**'
       - '!packages/docs/**/*.spec.ts'
 
   # Allows you to run this workflow manually from the Actions tab
@@ -38,6 +39,8 @@ jobs:
         run: pnpm i --no-frozen-lockfile
       - name: Build site
         run: pnpm build
+      - name: Build projects
+        run: pnpm build:projects
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Build with Jekyll
