@@ -26,7 +26,9 @@
   ],
   "scripts": {
     "dev": "pnpm -F docs dev",
+    "dev:projects": "pnpm -F projects dev",
     "build": "pnpm -F docs build",
+    "build:projects": "pnpm -F projects build",
     "build:lib": "pnpm -F @opentiny/fluent-editor build",
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --fix",
