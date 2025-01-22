@@ -1,3 +1,3 @@
 <template>
-  <RouterView />
+  <div>Not Found</div>
 </template>
