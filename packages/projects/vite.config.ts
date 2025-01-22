@@ -1,6 +1,6 @@
 import path from 'node:path'
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
 
 const fluentEditorRoot = path.resolve(__dirname, '../fluent-editor')
 export default defineConfig({
@@ -15,6 +15,6 @@ export default defineConfig({
     ],
   },
   build: {
-    outDir: '../docs/fluent-editor/.vitepress/dist/projects'
-  }
+    outDir: '../docs/fluent-editor/.vitepress/dist/projects',
+  },
 })
