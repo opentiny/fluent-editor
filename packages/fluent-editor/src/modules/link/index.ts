@@ -23,14 +23,6 @@ SnowTheme.prototype.extendToolbar = function (toolbar) {
   this.buildButtons(toolbar.container.querySelectorAll('button'), icons)
   this.buildPickers(toolbar.container.querySelectorAll('select'), icons)
   this.tooltip = new Tooltip(this.quill, this.options.bounds)
-  if (toolbar.container.querySelector('.ql-link')) {
-    this.quill.keyboard.addBinding(
-      { key: 'k', shortKey: true },
-      (_range, context) => {
-        toolbar.handlers.link.call(toolbar, !context.format.link)
-      },
-    )
-  }
 }
 
 export default Link

@@ -35,7 +35,8 @@
   "dependencies": {
     "lodash-es": "^4.17.15",
     "quill": "^2.0.0",
-    "quill-easy-color": "^0.0.5"
+    "quill-easy-color": "^0.0.9",
+    "quill-shortcut-key": "0.0.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",

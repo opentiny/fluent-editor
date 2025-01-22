@@ -5,6 +5,7 @@ import type { TypeParchment } from '../core/fluent-editor'
 import { CHANGE_LANGUAGE_EVENT, getListValue, inputFile, isNullOrUndefined } from '../config'
 import FluentEditor from '../core/fluent-editor'
 import { CustomImageSpec } from '../modules/custom-image/specs/CustomImageSpec'
+import { shortKey } from '../modules/shortcut-key'
 import BetterTable from '../modules/table/better-table'
 import { ColorPicker, Picker } from '../modules/toolbar/better-picker'
 import { FormatPainter } from '../tools/format-painter'
@@ -20,6 +21,7 @@ OriginSnowTheme.DEFAULTS = {
     'keyboard': {
       bindings: {
         ...BetterTable.keyboardBindings,
+        ...shortKey,
       },
     },
     'toolbar': {
@@ -122,6 +124,7 @@ OriginSnowTheme.DEFAULTS = {
         },
       },
     },
+    'shortcut-key': true,
   },
 }
 

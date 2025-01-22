@@ -102,6 +102,7 @@ export const EN_US = {
   'background': 'Background Color',
   'font': 'Font',
   'size': 'Size',
+  'list': 'List',
   'list-ordered': 'Ordered List',
   'list-bullet': 'Unordered List',
   'list-check': 'Task List',
@@ -123,6 +124,7 @@ export const EN_US = {
   'header-5': 'Heading 5',
   'header-6': 'Heading 6',
   'header-list': 'Heading List',
+  'input-recall-menu-placeholder': 'Input / recall menu',
   'clear-color': 'Clear color',
   'custom-color': 'Color picker',
 }

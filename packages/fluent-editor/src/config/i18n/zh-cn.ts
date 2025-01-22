@@ -100,6 +100,7 @@ export const ZH_CN = {
   'background': '背景色',
   'font': '字体',
   'size': '字号',
+  'list': '列表',
   'list-ordered': '有序列表',
   'list-bullet': '无序列表',
   'list-check': '任务列表',
@@ -121,6 +122,7 @@ export const ZH_CN = {
   'header-5': '标题5',
   'header-6': '标题6',
   'header-list': '标题列表',
+  'input-recall-menu-placeholder': '输入 / 唤起菜单',
   'clear-color': '清除颜色',
   'custom-color': '选择颜色',
 }
