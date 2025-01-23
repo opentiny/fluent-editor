@@ -1,1 +1,2 @@
-@import '@opentiny/fluent-editor/style.scss';
+@import 'tailwindcss';
+@import '@opentiny/fluent-editor/style.css';
