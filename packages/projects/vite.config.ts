@@ -1,6 +1,6 @@
 import path from 'node:path'
-import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
+import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 
 const fluentEditorRoot = path.resolve(__dirname, '../fluent-editor')
