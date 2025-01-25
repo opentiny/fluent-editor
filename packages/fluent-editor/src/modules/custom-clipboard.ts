@@ -446,9 +446,9 @@ class CustomClipboard extends Clipboard {
           const hexImage = hexImages.length && hexImages.shift()
           const newImage
             = hexImage
-            && `data:${hexImage.type};base64,${this.convertHexToBase64(
-              hexImage.hex,
-            )}`
+              && `data:${hexImage.type};base64,${this.convertHexToBase64(
+                hexImage.hex,
+              )}`
           imageIndex = index
           file = await imageUrlToFile(newImage || image.src || image)
         }

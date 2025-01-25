@@ -196,7 +196,7 @@ class Picker {
     }
     const isActive
       = !isNullOrUndefined(option)
-      && option !== this.select.querySelector('option[selected]')
+        && option !== this.select.querySelector('option[selected]')
 
     if (isActive) {
       this.label.classList.add('ql-active')

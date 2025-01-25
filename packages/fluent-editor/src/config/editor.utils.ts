@@ -196,9 +196,9 @@ export function isInside(position, dom) {
   } = areaPosition
   const inside
     = left > areaLeft
-    && left < areaLeft + areaWidth
-    && top > areaTop
-    && top < areaTop + areaHeight
+      && left < areaLeft + areaWidth
+      && top > areaTop
+      && top < areaTop + areaHeight
   return inside
 }
 

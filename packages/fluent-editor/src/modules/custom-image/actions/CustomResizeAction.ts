@@ -131,8 +131,8 @@ export default class CustomResizeAction extends Action {
       rootStyle = getElementStyle(root)
     }
     this.maxWidth = root.clientWidth
-    - Number.parseFloat(rootStyle.paddingRight)
-    - Number.parseFloat(rootStyle.paddingLeft)
+      - Number.parseFloat(rootStyle.paddingRight)
+      - Number.parseFloat(rootStyle.paddingLeft)
 
     document.addEventListener('mousemove', this.onDrag)
     document.addEventListener('mouseup', this.onMouseUp)

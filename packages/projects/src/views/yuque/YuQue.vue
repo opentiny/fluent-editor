@@ -12,7 +12,7 @@ onMounted(() => {
   editor = new FluentEditor('#editor', {
     theme: 'snow',
     modules: {
-      toolbar: {
+      'toolbar': {
         container: '#toolbar',
         handlers: {
           'header-list': HeaderList.toolbarHandle,
@@ -30,7 +30,9 @@ onMounted(() => {
   <div
     class="fixed top-0 z-1 h-[52px] w-full flex items-center pl-[16px] bg-white"
   >
-    <RouterLink to="/"> &lt;返回 </RouterLink>
+    <RouterLink to="/">
+      &lt;返回
+    </RouterLink>
   </div>
   <div
     id="toolbar"
@@ -92,45 +94,45 @@ onMounted(() => {
         <option value="rgb(29, 192, 201)" />
         <option value="rgb(17, 124, 238)" />
 
-        <option value="rgb(251, 228, 231)"></option>
-        <option value="rgb(253, 230, 211)"></option>
-        <option value="rgb(249, 239, 205)"></option>
-        <option value="rgb(251, 245, 203)"></option>
-        <option value="rgb(232, 247, 207)"></option>
-        <option value="rgb(206, 245, 247)"></option>
-        <option value="rgb(217, 234, 252)"></option>
+        <option value="rgb(251, 228, 231)" />
+        <option value="rgb(253, 230, 211)" />
+        <option value="rgb(249, 239, 205)" />
+        <option value="rgb(251, 245, 203)" />
+        <option value="rgb(232, 247, 207)" />
+        <option value="rgb(206, 245, 247)" />
+        <option value="rgb(217, 234, 252)" />
 
-        <option value="rgb(241, 162, 171)"></option>
-        <option value="rgb(248, 184, 129)"></option>
-        <option value="rgb(245, 212, 128)"></option>
-        <option value="rgb(252, 231, 90)"></option>
-        <option value="rgb(193, 231, 126)"></option>
-        <option value="rgb(129, 223, 228)"></option>
-        <option value="rgb(129, 187, 248)"></option>
+        <option value="rgb(241, 162, 171)" />
+        <option value="rgb(248, 184, 129)" />
+        <option value="rgb(245, 212, 128)" />
+        <option value="rgb(252, 231, 90)" />
+        <option value="rgb(193, 231, 126)" />
+        <option value="rgb(129, 223, 228)" />
+        <option value="rgb(129, 187, 248)" />
 
-        <option value="rgb(228, 73, 91)"></option>
-        <option value="rgb(243, 143, 57)"></option>
-        <option value="rgb(243, 187, 47)"></option>
-        <option value="rgb(237, 206, 2)"></option>
-        <option value="rgb(140, 207, 23)"></option>
-        <option value="rgb(1, 178, 188)"></option>
-        <option value="rgb(47, 142, 244)"></option>
+        <option value="rgb(228, 73, 91)" />
+        <option value="rgb(243, 143, 57)" />
+        <option value="rgb(243, 187, 47)" />
+        <option value="rgb(237, 206, 2)" />
+        <option value="rgb(140, 207, 23)" />
+        <option value="rgb(1, 178, 188)" />
+        <option value="rgb(47, 142, 244)" />
 
-        <option value="rgb(173, 26, 43)"></option>
-        <option value="rgb(199, 92, 0)"></option>
-        <option value="rgb(201, 145, 3)"></option>
-        <option value="rgb(165, 143, 4)"></option>
-        <option value="rgb(92, 141, 7)"></option>
-        <option value="rgb(7, 120, 126)"></option>
-        <option value="rgb(12, 104, 202)"></option>
+        <option value="rgb(173, 26, 43)" />
+        <option value="rgb(199, 92, 0)" />
+        <option value="rgb(201, 145, 3)" />
+        <option value="rgb(165, 143, 4)" />
+        <option value="rgb(92, 141, 7)" />
+        <option value="rgb(7, 120, 126)" />
+        <option value="rgb(12, 104, 202)" />
 
-        <option value="rgb(112, 0, 13)"></option>
-        <option value="rgb(102, 48, 0)"></option>
-        <option value="rgb(102, 73, 0)"></option>
-        <option value="rgb(102, 88, 0)"></option>
-        <option value="rgb(42, 66, 0)"></option>
-        <option value="rgb(0, 67, 71)"></option>
-        <option value="rgb(0, 52, 107)"></option>
+        <option value="rgb(112, 0, 13)" />
+        <option value="rgb(102, 48, 0)" />
+        <option value="rgb(102, 73, 0)" />
+        <option value="rgb(102, 88, 0)" />
+        <option value="rgb(42, 66, 0)" />
+        <option value="rgb(0, 67, 71)" />
+        <option value="rgb(0, 52, 107)" />
       </select>
       <select class="ql-background">
         <option value="rgb(0, 0, 0)" />
@@ -149,45 +151,45 @@ onMounted(() => {
         <option value="rgb(29, 192, 201)" />
         <option value="rgb(17, 124, 238)" />
 
-        <option value="rgb(251, 228, 231)"></option>
-        <option value="rgb(253, 230, 211)"></option>
-        <option value="rgb(249, 239, 205)"></option>
-        <option value="rgb(251, 245, 203)"></option>
-        <option value="rgb(232, 247, 207)"></option>
-        <option value="rgb(206, 245, 247)"></option>
-        <option value="rgb(217, 234, 252)"></option>
+        <option value="rgb(251, 228, 231)" />
+        <option value="rgb(253, 230, 211)" />
+        <option value="rgb(249, 239, 205)" />
+        <option value="rgb(251, 245, 203)" />
+        <option value="rgb(232, 247, 207)" />
+        <option value="rgb(206, 245, 247)" />
+        <option value="rgb(217, 234, 252)" />
 
-        <option value="rgb(241, 162, 171)"></option>
-        <option value="rgb(248, 184, 129)"></option>
-        <option value="rgb(245, 212, 128)"></option>
-        <option value="rgb(252, 231, 90)"></option>
-        <option value="rgb(193, 231, 126)"></option>
-        <option value="rgb(129, 223, 228)"></option>
-        <option value="rgb(129, 187, 248)"></option>
+        <option value="rgb(241, 162, 171)" />
+        <option value="rgb(248, 184, 129)" />
+        <option value="rgb(245, 212, 128)" />
+        <option value="rgb(252, 231, 90)" />
+        <option value="rgb(193, 231, 126)" />
+        <option value="rgb(129, 223, 228)" />
+        <option value="rgb(129, 187, 248)" />
 
-        <option value="rgb(228, 73, 91)"></option>
-        <option value="rgb(243, 143, 57)"></option>
-        <option value="rgb(243, 187, 47)"></option>
-        <option value="rgb(237, 206, 2)"></option>
-        <option value="rgb(140, 207, 23)"></option>
-        <option value="rgb(1, 178, 188)"></option>
-        <option value="rgb(47, 142, 244)"></option>
+        <option value="rgb(228, 73, 91)" />
+        <option value="rgb(243, 143, 57)" />
+        <option value="rgb(243, 187, 47)" />
+        <option value="rgb(237, 206, 2)" />
+        <option value="rgb(140, 207, 23)" />
+        <option value="rgb(1, 178, 188)" />
+        <option value="rgb(47, 142, 244)" />
 
-        <option value="rgb(173, 26, 43)"></option>
-        <option value="rgb(199, 92, 0)"></option>
-        <option value="rgb(201, 145, 3)"></option>
-        <option value="rgb(165, 143, 4)"></option>
-        <option value="rgb(92, 141, 7)"></option>
-        <option value="rgb(7, 120, 126)"></option>
-        <option value="rgb(12, 104, 202)"></option>
+        <option value="rgb(173, 26, 43)" />
+        <option value="rgb(199, 92, 0)" />
+        <option value="rgb(201, 145, 3)" />
+        <option value="rgb(165, 143, 4)" />
+        <option value="rgb(92, 141, 7)" />
+        <option value="rgb(7, 120, 126)" />
+        <option value="rgb(12, 104, 202)" />
 
-        <option value="rgb(112, 0, 13)"></option>
-        <option value="rgb(102, 48, 0)"></option>
-        <option value="rgb(102, 73, 0)"></option>
-        <option value="rgb(102, 88, 0)"></option>
-        <option value="rgb(42, 66, 0)"></option>
-        <option value="rgb(0, 67, 71)"></option>
-        <option value="rgb(0, 52, 107)"></option>
+        <option value="rgb(112, 0, 13)" />
+        <option value="rgb(102, 48, 0)" />
+        <option value="rgb(102, 73, 0)" />
+        <option value="rgb(102, 88, 0)" />
+        <option value="rgb(42, 66, 0)" />
+        <option value="rgb(0, 67, 71)" />
+        <option value="rgb(0, 52, 107)" />
       </select>
     </span>
     <span class="ql-formats">
@@ -217,7 +219,7 @@ onMounted(() => {
       <button class="ql-divider" />
     </span>
     <span class="ql-formats">
-      <button class="ql-header-list"></button>
+      <button class="ql-header-list" />
     </span>
   </div>
   <div class="!mt-[94px]">
@@ -230,8 +232,7 @@ onMounted(() => {
           class="ql-normal-link"
           href="https://opentiny.github.io/tiny-editor/"
           target="_blank"
-          >测试文档</a
-        >
+        >测试文档</a>
       </p>
       <p>这是<strong>粗体</strong></p>
       <p>这是<em>斜体</em></p>
@@ -241,123 +242,121 @@ onMounted(() => {
       <p>
         这是<span style="color: rgb(223, 42, 63)">文本色</span>和<span
           style="background-color: rgb(116, 182, 2)"
-          >背景色</span
-        >
+        >背景色</span>
       </p>
       <ol class="unchecked">
         <li class="bullet">
-          <span class="ql-ui" contenteditable="false"></span>这是一个无序列表
+          <span class="ql-ui" contenteditable="false" />这是一个无序列表
         </li>
         <li class="bullet">
-          <span class="ql-ui" contenteditable="false"></span>这是一个无序列表
+          <span class="ql-ui" contenteditable="false" />这是一个无序列表
         </li>
         <li class="ordered">
-          <span class="ql-ui" contenteditable="false"></span>这是一个有序列表
+          <span class="ql-ui" contenteditable="false" />这是一个有序列表
         </li>
         <li class="ordered">
-          <span class="ql-ui" contenteditable="false"></span>这是一个有序列表
+          <span class="ql-ui" contenteditable="false" />这是一个有序列表
         </li>
         <li class="unchecked">
-          <span class="ql-ui" contenteditable="false"></span>这是一个任务项
+          <span class="ql-ui" contenteditable="false" />这是一个任务项
         </li>
         <li class="unchecked">
-          <span class="ql-ui" contenteditable="false"></span>这是一个任务项
+          <span class="ql-ui" contenteditable="false" />这是一个任务项
         </li>
       </ol>
       <blockquote>这是一段引用</blockquote>
       <blockquote>这是一段引用</blockquote>
       <p>
-        这是一段<code style="background-color: rgba(0, 0, 0, 0.06)">行内代码</code
-        >。
+        这是一段<code style="background-color: rgba(0, 0, 0, 0.06)">行内代码</code>。
       </p>
-      <hr contenteditable="false" />
+      <hr contenteditable="false">
       <h1><span style="line-height: 36px">标题1</span></h1>
       <h2><span style="line-height: 32px">标题2</span></h2>
       <h3><span style="line-height: 28px">标题3</span></h3>
       <h4><span style="line-height: 24px">标题4</span></h4>
       <h5><span style="line-height: 24px">标题5</span></h5>
       <h6><span style="line-height: 24px">标题6</span></h6>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
       <h1><span style="line-height: 36px">标题2</span></h1>
       <p>正文</p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
-      <p><br /></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
       <p>这是测试文档的底部。</p>
     </div>
   </div>
