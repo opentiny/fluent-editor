@@ -65,10 +65,10 @@ class BetterToolbar extends Toolbar {
         // '1' should match with 1 (headers)
         let isActive
           = formats[format] === input.getAttribute('value')
-          || (!isNullOrUndefined(formats[format])
-            && (formats[format].value === input.getAttribute('value')
-              || formats[format].toString() === input.getAttribute('value')))
-            || (isNullOrUndefined(formats[format]) && !input.getAttribute('value'))
+            || (!isNullOrUndefined(formats[format])
+              && (formats[format].value === input.getAttribute('value')
+                || formats[format].toString() === input.getAttribute('value')))
+              || (isNullOrUndefined(formats[format]) && !input.getAttribute('value'))
 
         if (!isActive) {
           const checkFormat = formats[format]
