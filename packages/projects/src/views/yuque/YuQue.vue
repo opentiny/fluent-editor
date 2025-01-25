@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import FluentEditor from '@opentiny/fluent-editor'
-import { onMounted } from 'vue'
+import HeaderList from 'quill-header-list'
+import { onMounted, ref } from 'vue'
+
+FluentEditor.register({ 'modules/header-list': HeaderList }, true)
 
 let editor
+const headerListRef = ref()
 
 onMounted(() => {
   editor = new FluentEditor('#editor', {
@@ -10,6 +14,12 @@ onMounted(() => {
     modules: {
       toolbar: {
         container: '#toolbar',
+        handlers: {
+          'header-list': HeaderList.toolbarHandle,
+        },
+      },
+      'header-list': {
+        container: headerListRef.value,
       },
     },
   })
@@ -17,12 +27,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="fixed h-[52px] w-full flex items-center pl-[16px]">
-    <RouterLink to="/">
-      &lt;返回
-    </RouterLink>
+  <div
+    class="fixed top-0 z-1 h-[52px] w-full flex items-center pl-[16px] bg-white"
+  >
+    <RouterLink to="/"> &lt;返回 </RouterLink>
   </div>
-  <div id="toolbar" class="fixed h-[42px] w-full top-[52px] !border-l-0 !border-r-0 !border-[rgba(0,0,0,0.04)] text-center">
+  <div
+    id="toolbar"
+    class="!fixed z-1 h-[42px] w-full top-[52px] !border-l-0 !border-r-0 !border-[rgba(0,0,0,0.04)] text-center"
+  >
     <span class="ql-formats">
       <button class="ql-undo" />
       <button class="ql-redo" />
@@ -70,6 +83,7 @@ onMounted(() => {
         <option value="rgb(216, 218, 217)" />
         <option value="rgb(231, 233, 232)" />
         <option value="rgb(239, 240, 240)" />
+
         <option value="rgb(223, 42, 63)" />
         <option value="rgb(237, 116, 12)" />
         <option value="rgb(236, 170, 4)" />
@@ -77,6 +91,46 @@ onMounted(() => {
         <option value="rgb(116, 182, 2)" />
         <option value="rgb(29, 192, 201)" />
         <option value="rgb(17, 124, 238)" />
+
+        <option value="rgb(251, 228, 231)"></option>
+        <option value="rgb(253, 230, 211)"></option>
+        <option value="rgb(249, 239, 205)"></option>
+        <option value="rgb(251, 245, 203)"></option>
+        <option value="rgb(232, 247, 207)"></option>
+        <option value="rgb(206, 245, 247)"></option>
+        <option value="rgb(217, 234, 252)"></option>
+
+        <option value="rgb(241, 162, 171)"></option>
+        <option value="rgb(248, 184, 129)"></option>
+        <option value="rgb(245, 212, 128)"></option>
+        <option value="rgb(252, 231, 90)"></option>
+        <option value="rgb(193, 231, 126)"></option>
+        <option value="rgb(129, 223, 228)"></option>
+        <option value="rgb(129, 187, 248)"></option>
+
+        <option value="rgb(228, 73, 91)"></option>
+        <option value="rgb(243, 143, 57)"></option>
+        <option value="rgb(243, 187, 47)"></option>
+        <option value="rgb(237, 206, 2)"></option>
+        <option value="rgb(140, 207, 23)"></option>
+        <option value="rgb(1, 178, 188)"></option>
+        <option value="rgb(47, 142, 244)"></option>
+
+        <option value="rgb(173, 26, 43)"></option>
+        <option value="rgb(199, 92, 0)"></option>
+        <option value="rgb(201, 145, 3)"></option>
+        <option value="rgb(165, 143, 4)"></option>
+        <option value="rgb(92, 141, 7)"></option>
+        <option value="rgb(7, 120, 126)"></option>
+        <option value="rgb(12, 104, 202)"></option>
+
+        <option value="rgb(112, 0, 13)"></option>
+        <option value="rgb(102, 48, 0)"></option>
+        <option value="rgb(102, 73, 0)"></option>
+        <option value="rgb(102, 88, 0)"></option>
+        <option value="rgb(42, 66, 0)"></option>
+        <option value="rgb(0, 67, 71)"></option>
+        <option value="rgb(0, 52, 107)"></option>
       </select>
       <select class="ql-background">
         <option value="rgb(0, 0, 0)" />
@@ -86,6 +140,7 @@ onMounted(() => {
         <option value="rgb(216, 218, 217)" />
         <option value="rgb(231, 233, 232)" />
         <option value="rgb(239, 240, 240)" />
+
         <option value="rgb(223, 42, 63)" />
         <option value="rgb(237, 116, 12)" />
         <option value="rgb(236, 170, 4)" />
@@ -93,6 +148,46 @@ onMounted(() => {
         <option value="rgb(116, 182, 2)" />
         <option value="rgb(29, 192, 201)" />
         <option value="rgb(17, 124, 238)" />
+
+        <option value="rgb(251, 228, 231)"></option>
+        <option value="rgb(253, 230, 211)"></option>
+        <option value="rgb(249, 239, 205)"></option>
+        <option value="rgb(251, 245, 203)"></option>
+        <option value="rgb(232, 247, 207)"></option>
+        <option value="rgb(206, 245, 247)"></option>
+        <option value="rgb(217, 234, 252)"></option>
+
+        <option value="rgb(241, 162, 171)"></option>
+        <option value="rgb(248, 184, 129)"></option>
+        <option value="rgb(245, 212, 128)"></option>
+        <option value="rgb(252, 231, 90)"></option>
+        <option value="rgb(193, 231, 126)"></option>
+        <option value="rgb(129, 223, 228)"></option>
+        <option value="rgb(129, 187, 248)"></option>
+
+        <option value="rgb(228, 73, 91)"></option>
+        <option value="rgb(243, 143, 57)"></option>
+        <option value="rgb(243, 187, 47)"></option>
+        <option value="rgb(237, 206, 2)"></option>
+        <option value="rgb(140, 207, 23)"></option>
+        <option value="rgb(1, 178, 188)"></option>
+        <option value="rgb(47, 142, 244)"></option>
+
+        <option value="rgb(173, 26, 43)"></option>
+        <option value="rgb(199, 92, 0)"></option>
+        <option value="rgb(201, 145, 3)"></option>
+        <option value="rgb(165, 143, 4)"></option>
+        <option value="rgb(92, 141, 7)"></option>
+        <option value="rgb(7, 120, 126)"></option>
+        <option value="rgb(12, 104, 202)"></option>
+
+        <option value="rgb(112, 0, 13)"></option>
+        <option value="rgb(102, 48, 0)"></option>
+        <option value="rgb(102, 73, 0)"></option>
+        <option value="rgb(102, 88, 0)"></option>
+        <option value="rgb(42, 66, 0)"></option>
+        <option value="rgb(0, 67, 71)"></option>
+        <option value="rgb(0, 52, 107)"></option>
       </select>
     </span>
     <span class="ql-formats">
@@ -121,19 +216,174 @@ onMounted(() => {
       <button class="ql-blockquote" />
       <button class="ql-divider" />
     </span>
+    <span class="ql-formats">
+      <button class="ql-header-list"></button>
+    </span>
   </div>
-  <div id="editor" class="!mt-[52px] !border-0 max-w-[750px] !ml-auto !mr-auto">
-    <p>这是一篇测试文档。</p>
+  <div class="!mt-[94px]">
+    <div class="flex justify-center pt-[33px] pb-[26px]">
+      <textarea placeholder="请输入标题" class="w-[750px] text-[#262626] h-[54px] outline-none resize-none text-[36px] font-bold placeholder-[#bfbfbf]">测试文档</textarea>
+    </div>
+    <div id="editor" class="!border-0 max-w-[750px] !ml-auto !mr-auto">
+      <p>
+        这是一篇<a
+          class="ql-normal-link"
+          href="https://opentiny.github.io/tiny-editor/"
+          target="_blank"
+          >测试文档</a
+        >
+      </p>
+      <p>这是<strong>粗体</strong></p>
+      <p>这是<em>斜体</em></p>
+      <p>这是<u class="ql-custom-strike">删除线</u></p>
+      <p>这是<u>下划线</u></p>
+      <p>这是上标X<sup>2</sup>和下标X<sub>2</sub></p>
+      <p>
+        这是<span style="color: rgb(223, 42, 63)">文本色</span>和<span
+          style="background-color: rgb(116, 182, 2)"
+          >背景色</span
+        >
+      </p>
+      <ol class="unchecked">
+        <li class="bullet">
+          <span class="ql-ui" contenteditable="false"></span>这是一个无序列表
+        </li>
+        <li class="bullet">
+          <span class="ql-ui" contenteditable="false"></span>这是一个无序列表
+        </li>
+        <li class="ordered">
+          <span class="ql-ui" contenteditable="false"></span>这是一个有序列表
+        </li>
+        <li class="ordered">
+          <span class="ql-ui" contenteditable="false"></span>这是一个有序列表
+        </li>
+        <li class="unchecked">
+          <span class="ql-ui" contenteditable="false"></span>这是一个任务项
+        </li>
+        <li class="unchecked">
+          <span class="ql-ui" contenteditable="false"></span>这是一个任务项
+        </li>
+      </ol>
+      <blockquote>这是一段引用</blockquote>
+      <blockquote>这是一段引用</blockquote>
+      <p>
+        这是一段<code style="background-color: rgba(0, 0, 0, 0.06)">行内代码</code
+        >。
+      </p>
+      <hr contenteditable="false" />
+      <h1><span style="line-height: 36px">标题1</span></h1>
+      <h2><span style="line-height: 32px">标题2</span></h2>
+      <h3><span style="line-height: 28px">标题3</span></h3>
+      <h4><span style="line-height: 24px">标题4</span></h4>
+      <h5><span style="line-height: 24px">标题5</span></h5>
+      <h6><span style="line-height: 24px">标题6</span></h6>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <h1><span style="line-height: 36px">标题2</span></h1>
+      <p>正文</p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p><br /></p>
+      <p>这是测试文档的底部。</p>
+    </div>
+  </div>
+  <div ref="headerListRef" class="header-list is-hidden fixed top-[140px] right-0">
+    <p>大纲</p>
   </div>
 </template>
 
 <style lang="scss">
 .ql-editor {
+  padding: 0 !important;
   min-height: calc(100vh - 94px);
+  font-family:
+    PingFang SC,
+    Hiragino Sans GB,
+    Microsoft YaHei,
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif,
+    Segoe UI;
+  font-size: 15px !important;
+  color: #262626;
 
   p {
-    line-height: 1.74;
-    margin-bottom: 7.83px !important;
+    line-height: 2.2;
   }
 
   hr {
@@ -191,12 +441,60 @@ onMounted(() => {
     margin: 0 !important;
     border-left: solid 2px #d8dad9 !important;
     padding-left: 10px !important;
-    padding-bottom: 7.83px !important;
+    opacity: 0.7;
+    line-height: 24px;
   }
 
   a {
     color: #117cee !important;
     text-decoration: none !important;
+  }
+
+  ol {
+    padding-left: 0 !important;
+  }
+
+  li {
+    padding-left: 2em !important;
+  }
+
+  li.checked > .ql-ui,
+  li.unchecked > .ql-ui {
+    border-radius: 4px;
+    transition: all 0.3s;
+    margin-left: -20px !important;
+    top: 3px;
+  }
+
+  li.unchecked > .ql-ui {
+    border-color: #e7e9e8 !important;
+  }
+
+  li.checked > .ql-ui {
+    border-color: #00b96b !important;
+    background-color: #00b96b !important;
+  }
+
+  li.bullet::before,
+  li.ordered::before {
+    position: absolute;
+  }
+
+  li.bullet::before {
+    left: 26px;
+    font-size: 16px;
+  }
+
+  li.ordered::before {
+    left: 28px;
+    font-size: 14px;
+  }
+
+  code {
+    margin: 1px 3px;
+    font-size: 15px !important;
+    background-color: #0000000f !important;
+    border-color: #e7e9e8;
   }
 }
 </style>
