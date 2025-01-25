@@ -251,9 +251,9 @@ export default class TableSelection {
       const { x, y, width, height } = getRelativeRect(tableCell.domNode.getBoundingClientRect(), this.quill.root.parentNode)
       const isCellIncluded
         = x + ERROR_LIMIT >= this.boundary.x
-        && x - ERROR_LIMIT + width <= this.boundary.x1
-        && y + ERROR_LIMIT >= this.boundary.y
-        && y - ERROR_LIMIT + height <= this.boundary.y1
+          && x - ERROR_LIMIT + width <= this.boundary.x1
+          && y + ERROR_LIMIT >= this.boundary.y
+          && y - ERROR_LIMIT + height <= this.boundary.y1
 
       if (isCellIncluded) {
         selectedCells.push(tableCell)
