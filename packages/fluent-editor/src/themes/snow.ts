@@ -94,7 +94,7 @@ OriginSnowTheme.DEFAULTS = {
         },
         [FormatPainter.toolName]: FormatPainter,
         [Screenshot.toolName]: Screenshot,
-        'lineheight': function (value) {
+        'line-height': function (value) {
           this.quill.format('line-height', value)
         },
         'divider': function () {
@@ -203,6 +203,7 @@ const COLORS = [
 const FONTS = [false, 'serif', 'monospace']
 const HEADERS = ['1', '2', '3', false]
 const SIZES = ['small', false, 'large', 'huge']
+const LINEHEIGHT = [false, '1.2', '1.5', '2']
 
 class SnowTheme extends OriginSnowTheme {
   constructor(public quill: FluentEditor, options: ThemeOptions) {
@@ -261,6 +262,9 @@ class SnowTheme extends OriginSnowTheme {
         }
         else if (select.classList.contains('ql-size')) {
           fillSelect(select, SIZES)
+        }
+        else if (select.classList.contains('ql-line-height')) {
+          fillSelect(select, LINEHEIGHT)
         }
       }
       return new Picker(select)

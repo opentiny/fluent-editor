@@ -130,11 +130,6 @@ $splitPadding: 20px; // 分隔线左/右间距
       @include toolbarPicker('', 98px);
     }
 
-    .ql-picker.ql-lineheight .ql-picker-item[data-label]:not([data-label=''])::before,
-    .ql-picker.ql-lineheight .ql-picker-label[data-label]:not([data-label=''])::before {
-      content: attr(data-label);
-    }
-
     // 文件
     input.ql-file[type='file'] {
       display: none;
@@ -222,7 +217,7 @@ $splitPadding: 20px; // 分隔线左/右间距
 
       &.ql-header,
       &.ql-font,
-      &.ql-lineheight,
+      &.ql-line-height,
       &.ql-size {
         .ql-picker-options {
           margin-left: -6px;

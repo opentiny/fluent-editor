@@ -28,7 +28,8 @@ FluentEditor.register(
   {
     'attributors/style/font': FontStyle,
     'attributors/style/size': SizeStyle,
-
+    'attributors/style/line-height': LineHeightStyle,
+    
     'formats/font': FontStyle,
     'formats/line-height': LineHeightStyle,
     'formats/size': SizeStyle,

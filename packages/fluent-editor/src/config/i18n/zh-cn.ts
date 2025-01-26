@@ -9,7 +9,7 @@ export const ZH_CN = {
   'h5': '标题5',
   'h6': '标题6',
 
-  'lineheight': '行距',
+  'line-height': '行距',
   'songti': '宋体',
   'yahei': '微软雅黑',
   'kaiti': '楷体',

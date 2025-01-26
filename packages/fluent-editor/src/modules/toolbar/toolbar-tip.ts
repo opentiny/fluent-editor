@@ -80,7 +80,7 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
       const selectTips = [
         'font',
         'size',
-        'lineheight',
+        'line-height',
       ].reduce((map, name) => {
         map[name] = {
           onShow: () => {

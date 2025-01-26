@@ -27,7 +27,7 @@ const TOOLBAR_CONFIG = [
     { header: [] },
     { font: [] },
     { size: [] },
-    { lineheight: [] },
+    { 'line-height': [] },
   ],
   ['bold', 'italic', 'strike', 'underline', 'divider'],
   [{ color: [] }, { background: [] }],
