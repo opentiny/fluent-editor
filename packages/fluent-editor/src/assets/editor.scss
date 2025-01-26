@@ -327,10 +327,6 @@
 
     @include table;
 
-    // 字体
-
-    @include fontFamilyContent;
-
     // 全局链接
     .ql-wiki-link,
     .ql-doc-link {
