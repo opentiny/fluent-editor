@@ -5,6 +5,7 @@ import type { TypeParchment } from '../core/fluent-editor'
 import { CHANGE_LANGUAGE_EVENT, getListValue, inputFile, isNullOrUndefined } from '../config'
 import FluentEditor from '../core/fluent-editor'
 import { CustomImageSpec } from '../modules/custom-image/specs/CustomImageSpec'
+import Tooltip from '../modules/link/modules/tooltip'
 import { shortKey } from '../modules/shortcut-key'
 import BetterTable from '../modules/table/better-table'
 import { ColorPicker, Picker } from '../modules/toolbar/better-picker'
@@ -271,6 +272,14 @@ class SnowTheme extends OriginSnowTheme {
       })
     }
     this.quill.on(FluentEditor.events.EDITOR_CHANGE, update)
+  }
+
+  extendToolbar(toolbar) {
+    const icons = FluentEditor.import('ui/icons') as Record<string, any>
+    toolbar.container.classList.add('ql-snow')
+    this.buildButtons(toolbar.container.querySelectorAll('button'), icons)
+    this.buildPickers(toolbar.container.querySelectorAll('select'), icons)
+    this.tooltip = new Tooltip(this.quill, this.options.bounds)
   }
 }
 

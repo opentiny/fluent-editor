@@ -244,51 +244,20 @@ $splitPadding: 20px; // 分隔线左/右间距
               margin-top: -6px;
               content: '';
             }
+            // 解决工具栏下拉框高亮问题
+            &.ql-selected {
+              &::after {
+                margin-top: -12px;
+                content: 'L';
+                font-size: initial;
+                font-family: arial;
+                -ms-transform: scaleX(-1) rotate(-45deg); /* IE 9 */
+                -webkit-transform: scaleX(-1) rotate(-45deg); /* Chrome, Safari, Opera */
+                transform: scaleX(-1) rotate(-45deg);
+              }
+            }
           }
         }
-
-        // 根据选中的选项，勾选相应的项
-        $pickerGroup:
-          'undefined',
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          // 标题下拉框
-          'songti',
-          'yahei',
-          'kaiti',
-          'heiti',
-          'lishu',
-          'mono',
-          'arial',
-          'arialblack',
-          'comic',
-          'impact',
-          'times',
-          // 字体下拉框
-          '12px',
-          '13px',
-          '14px',
-          '16px',
-          '18px',
-          '19px',
-          '20px',
-          '22px',
-          '24px',
-          '29px',
-          '32px',
-          '36px',
-          '40px',
-          '48px',
-          '72px',
-          // 字号下拉框
-          '2.5',
-          '4',
-          '5'; // 行距下拉框
-        @include pickerLabel($pickerGroup, length($pickerGroup));
       }
 
       &.ql-header .ql-picker-item[data-value='1']::after {

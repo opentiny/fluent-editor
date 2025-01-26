@@ -26,11 +26,14 @@ import Icons from './ui/icons'
 
 FluentEditor.register(
   {
-    'formats/emoji': Emoji.EmojiBlot,
+    'attributors/style/font': FontStyle,
+    'attributors/style/size': SizeStyle,
+
     'formats/font': FontStyle,
     'formats/line-height': LineHeightStyle,
-    [`formats/${MathliveBlot.blotName}`]: MathliveBlot,
     'formats/size': SizeStyle,
+    'formats/emoji': Emoji.EmojiBlot,
+    [`formats/${MathliveBlot.blotName}`]: MathliveBlot,
     'formats/softBreak': SoftBreak,
     'formats/strike': Strike,
     'formats/text-indent': TextIndentStyle,
