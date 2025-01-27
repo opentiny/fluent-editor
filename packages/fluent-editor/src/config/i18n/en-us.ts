@@ -9,7 +9,7 @@ export const EN_US = {
   'h5': 'Heading 5',
   'h6': 'Heading 6',
 
-  'lineheight': 'Line Height',
+  'line-height': 'Line Height',
   'songti': 'SimSun',
   'yahei': 'Microsoft Yahei',
   'kaiti': 'KaiTi',

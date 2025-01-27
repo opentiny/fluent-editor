@@ -1,16 +1,17 @@
 // 文字大小
 @import './common';
 
-.ql-lineheight > span {
-  width: 50px;
-
-  span::before {
-    font-size: 14px;
+.ql-line-height.ql-picker {
+  .ql-picker-label,
+  .ql-picker-item {
+    &::before {
+      content: 'Normal';
+    }
   }
-}
-.ql-lineheight.ql-picker {
-  span.ql-picker-label:before,
-  .ql-picker-options > span.ql-picker-item::before {
-    content: attr(data-value);
+  .ql-picker-label[data-value],
+  .ql-picker-item[data-value] {
+    &::before {
+      content: attr(data-value);
+    }
   }
 }

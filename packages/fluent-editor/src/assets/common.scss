@@ -78,12 +78,12 @@
 }
 
 @mixin lineHeightList {
-  .ql-lineheight {
-    @include toolbarPicker('', 45px);
+  .ql-line-height {
+    @include toolbarPicker('', 72px);
   }
 
-  .ql-lineheight span.ql-picker-options {
-    width: 70px;
+  .ql-line-height span.ql-picker-options {
+    width: 98px;
 
     span::before {
       font-size: 14px;

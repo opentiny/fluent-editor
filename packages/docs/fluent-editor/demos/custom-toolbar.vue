@@ -23,7 +23,7 @@ const TOOLBAR_CONFIG = [
     { header: [1, 2, 3, 4, 5, 6, false] },
     { font: [false, '仿宋_GB2312, 仿宋', '楷体', '隶书', '黑体', '无效字体, 隶书'] },
     { size: [false, '12px', '14px', '16px', '18px', '20px', '24px', '32px', '36px', '48px', '72px'] },
-    { lineheight: [false, '1.2', '1.5', '1.75', '2', '3', '4', '5'] },
+    { 'line-height': [false, '1.2', '1.5', '1.75', '2', '3', '4', '5'] },
   ],
   ['bold', 'italic', 'strike', 'underline', 'divider'],
   [{ color: [] }, { background: [] }],
