@@ -1,0 +1,43 @@
+version: v1
+
+labels:
+  - label: "enhancement"
+    sync: true
+    matcher:
+      title: "^feat.*: ?.*"
+      commit: "^feat.*: ?.*"
+  - label: "bug"
+    sync: true
+    matcher:
+      title: "^fix.*: ?.*"
+      commit: "^fix.*: ?.*"
+  - label: "documentation"
+    sync: true
+    matcher:
+      title: "^docs?: ?.*"
+      commit: "^docs?: ?.*"
+  - label: "refactoring"
+    sync: true
+    matcher:
+      title: "^refactor.*: ?.*"
+      commit: "^refactor.*: ?.*"
+  - label: "ci"
+    sync: true
+    matcher:
+      title: "^ci.*: ?.*"
+      commit: "^ci.*: ?.*"
+  - label: "e2e-test"
+    sync: true
+    matcher:
+      title: "^test.*: ?.*"
+      commit: "^test.*: ?.*"
+      files:
+        any: [packages/docs/**/*.spec.ts]
+  - label: "v3"
+    sync: true
+    matcher:
+      baseBranch: 'main'
+  - label: "v4"
+    sync: true
+    matcher:
+      baseBranch: 'v4'
