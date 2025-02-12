@@ -22,13 +22,14 @@
     "opentiny",
     "fluent-editor"
   ],
+  "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "types": "types/index.d.ts",
   "scripts": {
     "start": "vite build && vite",
     "dev": "vite",
-    "build": "pnpm build:theme && vite build && node scripts/pre-release.js",
+    "build": "pnpm build:theme && vite build && node scripts/pre-release.cjs",
     "build:theme": "vite build --config vite.config.theme.ts",
     "test": "jest"
   },
