@@ -1,6 +1,8 @@
-import Quill, { Delta } from 'quill'
+import Quill from 'quill'
 import { Range } from 'quill/core/selection'
 import CustomImage from './image'
+
+const Delta = Quill.import('delta')
 
 export default class ImageBar {
   quill: Quill
@@ -119,7 +121,7 @@ export default class ImageBar {
 
   setPosition() {
     if (this.domNode && this.image) {
-      const parent = this.quill.root.parentNode
+      const parent = this.quill.root.parentNode as HTMLElement
       const containerRect = parent.getBoundingClientRect()
       const imageRect = this.image.getBoundingClientRect()
       this.css(this.domNode, {
