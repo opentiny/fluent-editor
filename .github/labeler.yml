@@ -1,43 +1,43 @@
 version: v1
 
 labels:
-  - label: "enhancement"
+  - label: enhancement
     sync: true
     matcher:
-      title: "^feat.*: ?.*"
-      commit: "^feat.*: ?.*"
-  - label: "bug"
+      title: '^feat.*: ?.*'
+      commit: '^feat.*: ?.*'
+  - label: bug
     sync: true
     matcher:
-      title: "^fix.*: ?.*"
-      commit: "^fix.*: ?.*"
-  - label: "documentation"
+      title: '^fix.*: ?.*'
+      commit: '^fix.*: ?.*'
+  - label: documentation
     sync: true
     matcher:
-      title: "^docs?: ?.*"
-      commit: "^docs?: ?.*"
-  - label: "refactoring"
+      title: '^docs?: ?.*'
+      commit: '^docs?: ?.*'
+  - label: refactoring
     sync: true
     matcher:
-      title: "^refactor.*: ?.*"
-      commit: "^refactor.*: ?.*"
-  - label: "ci"
+      title: '^refactor.*: ?.*'
+      commit: '^refactor.*: ?.*'
+  - label: ci
     sync: true
     matcher:
-      title: "^ci.*: ?.*"
-      commit: "^ci.*: ?.*"
-  - label: "e2e-test"
+      title: '^ci.*: ?.*'
+      commit: '^ci.*: ?.*'
+  - label: e2e-test
     sync: true
     matcher:
-      title: "^test.*: ?.*"
-      commit: "^test.*: ?.*"
+      title: '^test.*: ?.*'
+      commit: '^test.*: ?.*'
       files:
         any: [packages/docs/**/*.spec.ts]
-  - label: "v3"
+  - label: v3
     sync: true
     matcher:
-      baseBranch: 'main'
-  - label: "v4"
+      baseBranch: main
+  - label: v4
     sync: true
     matcher:
-      baseBranch: 'v4'
+      baseBranch: v4
