@@ -1,4 +1,5 @@
 import type { Range } from 'quill'
+import type { QuillShortcutKeyInputOptions, QuillShortcutKeyOptions } from 'quill-shortcut-key'
 import type { Context } from 'quill/modules/keyboard'
 import type TypeToolbar from 'quill/modules/toolbar'
 import type FluentEditor from '../../fluent-editor'
@@ -6,8 +7,13 @@ import Quill from 'quill'
 import QuillShortcutKey, { defaultShortKey } from 'quill-shortcut-key'
 import { CHANGE_LANGUAGE_EVENT } from '../../config'
 
+interface ShortCutKeyCustomOptions { isMenuItemsAdd: boolean }
+type ShortCutKeyInputOptions = QuillShortcutKeyInputOptions & ShortCutKeyCustomOptions
+type ShortCutKeyOptions = QuillShortcutKeyOptions & ShortCutKeyCustomOptions
+
 export class ShortCutKey extends QuillShortcutKey {
-  constructor(public quill: FluentEditor, options: any) {
+  options: ShortCutKeyOptions
+  constructor(public quill: FluentEditor, options: Partial<ShortCutKeyInputOptions>) {
     super(quill, options)
 
     this.quill.emitter.on(CHANGE_LANGUAGE_EVENT, () => {
@@ -19,12 +25,19 @@ export class ShortCutKey extends QuillShortcutKey {
     })
   }
 
-  resolveOptions(options: any) {
-    return Object.assign({
+  resolveOptions(options: Partial<ShortCutKeyInputOptions>) {
+    const defaultMenuItems = this.defaultMenuList()
+    const value = Object.assign({
       placeholder: this.quill.getLangText('input-recall-menu-placeholder'),
-      menuItems: this.defaultMenuList(),
+      menuItems: defaultMenuItems,
+      isMenuItemsAdd: false,
       menuKeyboardControls: () => false,
     }, options)
+    if (value.isMenuItemsAdd) {
+      value.menuItems = [...defaultMenuItems, ...value.menuItems]
+    }
+
+    return value
   }
 
   defaultMenuList() {
@@ -60,7 +73,6 @@ export class ShortCutKey extends QuillShortcutKey {
         icon: icons.blockquote,
         title: this.quill.getLangText('blockquote'),
         onClick: formatHandler('blockquote', true),
-
       },
       {
         type: 'item' as const,

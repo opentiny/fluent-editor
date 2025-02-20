@@ -47,6 +47,9 @@ importers:
       quill-markdown-shortcuts:
         specifier: ^0.0.10
         version: 0.0.10
+      quill-table-up:
+        specifier: ^2.1.2
+        version: 2.1.2(quill@2.0.3)
       quill-toolbar-tip:
         specifier: ^0.0.11
         version: 0.0.11(quill@2.0.3)
@@ -1993,7 +1996,7 @@ packages:
     resolution: {integrity: sha512-T0+barUSQRTUQASh8bx02dl+DhF54GtIDY13Y3m9oWTklKbb3Wv974meRpeZ3lp1JpLVECWWNHC4vaG2XHXouQ==}
 
   concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   confbox@0.1.8:
     resolution: {integrity: sha512-RMtmw0iFkeR4YV+fUOSucriAQNb9g8zFR52MWCtl+cCZOFRNL6zeB395vPzFhEjjn4fMxXudmELnl/KF/WrK6w==}
@@ -3962,6 +3965,11 @@ packages:
 
   quill-shortcut-key@0.0.1:
     resolution: {integrity: sha512-/6EY/pjhrEanRKcF4Jjta9j+IKViNQ53PoOzADQX3/HgKGYAykgCr07T0+a+avsO2gux7yfImDnEAzveue65uA==}
+    peerDependencies:
+      quill: ^2.0.0
+
+  quill-table-up@2.1.2:
+    resolution: {integrity: sha512-AtmOT/vd6MKMCb4ZXklnw6B1vyBmZ7D5r9Q7SP5MTVt5mcVCSxd2f6EKvZ/jXpjxoQ3trITgvrSZnmanNO3ufw==}
     peerDependencies:
       quill: ^2.0.0
 
@@ -9353,6 +9361,11 @@ snapshots:
 
   quill-shortcut-key@0.0.1(quill@2.0.3):
     dependencies:
+      quill: 2.0.3
+
+  quill-table-up@2.1.2(quill@2.0.3):
+    dependencies:
+      '@floating-ui/dom': 1.6.13
       quill: 2.0.3
 
   quill-toolbar-tip@0.0.11(quill@2.0.3):
