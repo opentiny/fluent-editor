@@ -44,9 +44,6 @@ OriginSnowTheme.DEFAULTS = {
         'redo': function () {
           this.quill.history.redo()
         },
-        'better-table': function () {
-          this.quill.getModule('better-table').insertTable(3, 3)
-        },
         'file': function () {
           const accept = this.quill.options?.uploadOption?.fileAccept
           inputFile.call(this, 'file', accept)
@@ -105,11 +102,7 @@ OriginSnowTheme.DEFAULTS = {
         },
       },
     },
-    'better-table': {
-      operationMenu: {
-        color: true,
-      },
-    },
+    'better-table': true,
     'image': {
       specs: [CustomImageSpec],
       overlay: {

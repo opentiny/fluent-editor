@@ -5,8 +5,6 @@ import {
   isNullOrUndefined,
   isPureIE,
 } from '../../config/editor.utils'
-import Header from './formats/header'
-import List from './formats/list'
 import {
   cellId,
   rowId,
@@ -67,13 +65,9 @@ class BetterTable extends Module {
     Quill.register(TableBody, true)
     Quill.register(TableContainer, true)
     Quill.register(TableViewWrapper, true)
-    // register customized Header, overwriting quill built-in Header
-    Quill.register('formats/header', Header, true)
-    // register customized List, overwriting quill built-in Header
-    Quill.register('formats/list', List, true)
   }
 
-  constructor(quill, options) {
+  constructor(quill, options = {}) {
     super(quill, options)
 
     // handle click on quill-better-table

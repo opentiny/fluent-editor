@@ -29,7 +29,6 @@ import {
   SCREENSHOT_ICON,
   STRIKE_ICON,
   TABLE_ICON,
-  TRIANGLE_DOWN_ICON,
   UNDERLINE_ICON,
   UNDO_ICON,
 } from './icons.config'
