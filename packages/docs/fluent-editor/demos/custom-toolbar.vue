@@ -76,17 +76,20 @@ onMounted(() => {
 .ql-container {
   font-family: 宋体;
 }
+
 /* 修改下拉框显示文字 */
 /* 默认字体显示文字 */
 :deep(.ql-snow .ql-picker.ql-font .ql-picker-label::before),
 :deep(.ql-snow .ql-picker.ql-font .ql-picker-item::before) {
   content: '宋体';
 }
+
 /* 自定义字体显示文字 */
 :deep(.ql-formats .ql-font.ql-picker .ql-picker-label[data-value='仿宋_GB2312, 仿宋']::before),
 :deep(.ql-formats .ql-font.ql-picker .ql-picker-item[data-value='仿宋_GB2312, 仿宋']::before) {
   content: '仿宋';
 }
+
 :deep(.ql-formats .ql-font.ql-picker .ql-picker-label[data-value='无效字体, 隶书']::before),
 :deep(.ql-formats .ql-font.ql-picker .ql-picker-item[data-value='无效字体, 隶书']::before) {
   content: '无效字体降级显示';

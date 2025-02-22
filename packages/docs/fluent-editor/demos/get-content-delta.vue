@@ -126,8 +126,5 @@ onMounted(() => {
   </div>
   <br>
   Delta 内容：
-  <div
-    ref="articleRef"
-    class="article ql-editor"
-  />
+  <div ref="articleRef" class="article ql-editor" />
 </template>

@@ -32,6 +32,7 @@ onMounted(() => {
         theme: 'snow',
         modules: {
           'toolbar': TOOLBAR_CONFIG,
+          'better-table': false,
           'table-up': {
             customSelect: defaultCustomSelect,
             selection: TableSelection,
@@ -46,8 +47,9 @@ onMounted(() => {
       editorContextmenu = new FluentEditor(editorContextmenuRef.value, {
         theme: 'snow',
         modules: {
-          toolbar: TOOLBAR_CONFIG,
-          [TableUp.moduleName]: {
+          'toolbar': TOOLBAR_CONFIG,
+          'better-table': false,
+          'table-up': {
             customSelect: defaultCustomSelect,
             selection: TableSelection,
             selectionOptions: {

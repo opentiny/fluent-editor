@@ -19,6 +19,8 @@ import Mention from './modules/mention/Mention' // @提醒
 import { ShortCutKey } from './modules/shortcut-key'
 import Syntax from './modules/syntax' // 代码块高亮
 import BetterTable from './modules/table/better-table' // 表格
+import Header from './modules/table/formats/header'
+import ListItem from './modules/table/formats/list'
 import Toolbar from './modules/toolbar' // 工具栏
 import { ColorPicker, Picker } from './modules/toolbar/better-picker'
 import SnowTheme from './themes/snow'
@@ -39,6 +41,9 @@ FluentEditor.register(
     'formats/strike': Strike,
     'formats/text-indent': TextIndentStyle,
     'formats/video': Video,
+    // overwrite Header/List to fit 'better-table'
+    'formats/header': Header,
+    'formats/list': ListItem,
 
     'modules/clipboard': CustomClipboard,
     'modules/counter': Counter,

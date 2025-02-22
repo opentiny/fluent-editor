@@ -48,8 +48,8 @@ importers:
         specifier: ^0.0.10
         version: 0.0.10
       quill-table-up:
-        specifier: ^2.1.2
-        version: 2.1.2(quill@2.0.3)
+        specifier: ^2.1.4
+        version: 2.1.4(quill@2.0.3)
       quill-toolbar-tip:
         specifier: ^0.0.11
         version: 0.0.11(quill@2.0.3)
@@ -3353,6 +3353,7 @@ packages:
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
@@ -3968,8 +3969,8 @@ packages:
     peerDependencies:
       quill: ^2.0.0
 
-  quill-table-up@2.1.2:
-    resolution: {integrity: sha512-AtmOT/vd6MKMCb4ZXklnw6B1vyBmZ7D5r9Q7SP5MTVt5mcVCSxd2f6EKvZ/jXpjxoQ3trITgvrSZnmanNO3ufw==}
+  quill-table-up@2.1.4:
+    resolution: {integrity: sha512-kplD+fMdS0nmu0qp8/ZWU7BLo5d0ZyGqw4AynMmxdr/NByA2hoKrbOUMnyOoi81/X6TbtOwuXW6M8MoW9yjNWQ==}
     peerDependencies:
       quill: ^2.0.0
 
@@ -9363,7 +9364,7 @@ snapshots:
     dependencies:
       quill: 2.0.3
 
-  quill-table-up@2.1.2(quill@2.0.3):
+  quill-table-up@2.1.4(quill@2.0.3):
     dependencies:
       '@floating-ui/dom': 1.6.13
       quill: 2.0.3

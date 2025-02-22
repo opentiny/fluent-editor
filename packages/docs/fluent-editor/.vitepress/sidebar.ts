@@ -41,7 +41,7 @@ export function sidebar() {
       items: [
         { text: '工具栏提示', link: '/docs/modules/toolbar-tip' },
         { text: '标题列表', link: '/docs/modules/header-list' },
-        { text: '表格', link: '/docs/modules/table-up' },
+        { text: '表格up', link: '/docs/modules/table-up' },
       ],
     },
   ]
