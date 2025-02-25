@@ -7,7 +7,6 @@ import FluentEditor from '../core/fluent-editor'
 import { CustomImageSpec } from '../modules/custom-image/specs/CustomImageSpec'
 import Tooltip from '../modules/link/modules/tooltip'
 import { shortKey } from '../modules/shortcut-key'
-import BetterTable from '../modules/table/better-table'
 import { ColorPicker, Picker } from '../modules/toolbar/better-picker'
 import { FormatPainter } from '../tools/format-painter'
 import { fullscreenHandler } from '../tools/fullscreen'
@@ -21,7 +20,6 @@ OriginSnowTheme.DEFAULTS = {
     'i18n': true,
     'keyboard': {
       bindings: {
-        ...BetterTable.keyboardBindings,
         ...shortKey,
       },
     },
@@ -54,41 +52,6 @@ OriginSnowTheme.DEFAULTS = {
         },
         'emoji': function () {},
         'fullscreen': fullscreenHandler,
-        'list': function (value) {
-          const range = this.quill.getSelection()
-          const formats = this.quill.getFormat(range)
-          const preListValue = Array.isArray(formats.list) ? formats.list[0]?.value : formats.list?.value
-          const curListValue = getListValue(value, preListValue)
-          // 如果设置list的选区中有表格，判断第一个table-col位置，将表格前的内容设置为list格式
-          const lines = this.quill.getLines(range.index, range.length)
-          const tableCols = lines.filter(line => line.statics.blotName === 'table-col' && !line.prev)
-          if (tableCols.length) {
-            let start = range.index
-            // 遍历table-col群组，以之获取表格，将表格前选区设置为对应list格式
-            tableCols.forEach((item, index) => {
-              const table = item.domNode.closest('table.quill-better-table')
-              const tableBlot = FluentEditor.find(table) as TypeParchment.Blot
-              const tableLength = tableBlot.length()
-              const tableStart = this.quill.getIndex(item)
-              const tableEnd = tableStart + tableLength
-              const beforeTableRangeLength = tableStart - start
-              // 在表格前设置列表
-              this.quill.setSelection(start, beforeTableRangeLength, FluentEditor.sources.SILENT)
-              this.quill.format('list', curListValue, FluentEditor.sources.USER)
-              table.parentNode.classList.remove('quill-better-table-selected')
-              // 当前表格末尾为下一个选取的开始
-              start = tableEnd
-              if (index === tableCols.length - 1) {
-                // 将最后一个表格之后所有选区内容设置list格式
-                this.quill.setSelection(tableEnd, range.index + range.length - tableEnd)
-                this.quill.format('list', curListValue, FluentEditor.sources.USER)
-              }
-            })
-          }
-          else {
-            this.quill.format('list', curListValue, FluentEditor.sources.USER)
-          }
-        },
         [FormatPainter.toolName]: FormatPainter,
         [Screenshot.toolName]: Screenshot,
         'line-height': function (value) {
@@ -102,7 +65,6 @@ OriginSnowTheme.DEFAULTS = {
         },
       },
     },
-    'better-table': true,
     'image': {
       specs: [CustomImageSpec],
       overlay: {

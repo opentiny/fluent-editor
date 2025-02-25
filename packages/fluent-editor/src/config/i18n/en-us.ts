@@ -92,7 +92,6 @@ export const EN_US = {
   'link': 'Hyperlink',
   'code': 'Inline Code',
   'table': 'Table',
-  'better-table': 'Table',
   'table-up': 'Table',
   'code-block': 'Code Block',
   'formula': 'Formula',

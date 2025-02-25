@@ -10,7 +10,6 @@ import Uploader from './modules/custom-uploader' // 上传
 import DividerBlot from './modules/divider' // 分割线
 import Emoji from './modules/emoji' // 表情
 import FileModule from './modules/file' // 文件
-// import GlobalLink from './modules/global-link' // 全局链接
 import I18N from './modules/i18n'
 import Link from './modules/link' // 超链接
 import MathliveModule from './modules/mathlive' // latex公式
@@ -18,9 +17,6 @@ import MathliveBlot from './modules/mathlive/formats'
 import Mention from './modules/mention/Mention' // @提醒
 import { ShortCutKey } from './modules/shortcut-key'
 import Syntax from './modules/syntax' // 代码块高亮
-import BetterTable from './modules/table/better-table' // 表格
-import Header from './modules/table/formats/header'
-import ListItem from './modules/table/formats/list'
 import Toolbar from './modules/toolbar' // 工具栏
 import { ColorPicker, Picker } from './modules/toolbar/better-picker'
 import SnowTheme from './themes/snow'
@@ -41,9 +37,6 @@ FluentEditor.register(
     'formats/strike': Strike,
     'formats/text-indent': TextIndentStyle,
     'formats/video': Video,
-    // overwrite Header/List to fit 'better-table'
-    'formats/header': Header,
-    'formats/list': ListItem,
 
     'modules/clipboard': CustomClipboard,
     'modules/counter': Counter,
@@ -51,7 +44,6 @@ FluentEditor.register(
     'modules/emoji-shortname': Emoji.ShortNameEmoji,
     'modules/emoji-toolbar': Emoji.ToolbarEmoji,
     'modules/file': FileModule,
-    // 'modules/global-link': GlobalLink, // TODO
     'modules/i18n': I18N,
     'modules/image': Image,
     'modules/link': Link,
@@ -60,8 +52,6 @@ FluentEditor.register(
     'modules/syntax': Syntax,
     'modules/toolbar': Toolbar,
     'modules/uploader': Uploader,
-    // make sure register after `HeaderList`
-    'modules/better-table': BetterTable,
     'modules/shortcut-key': ShortCutKey,
 
     'themes/snow': SnowTheme,

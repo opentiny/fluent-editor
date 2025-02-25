@@ -12,7 +12,6 @@ import {
   hexToRgbA,
   imageFileToUrl,
   imageUrlToFile,
-  insideTable,
   isNullOrUndefined,
   omit,
   replaceDeltaImage,
@@ -159,100 +158,9 @@ class CustomClipboard extends Clipboard {
 
     const linePos = { index: range.index, length: range.length, fix: 0 }
     const [line, offset] = this.quill.getLine(range.index)
-    const isInsideTable = insideTable.call(this)
 
     const handlePasteContent = (content: any) => {
       let pastedContent = content
-      // fix: 阻止粘贴代码块和引用导致表格断裂
-      const tableBreaker = pastedContent.ops.find((op) => {
-        return (
-          op.attributes
-          && (op.attributes.blockquote || op.attributes['code-block'])
-        )
-      })
-      if (isInsideTable) {
-        // fix: 阻止带有表格内容粘贴在表格里
-        const table = line.domNode.closest('table.quill-better-table')
-        const tableBlot = Quill.find(table) as TypeParchment.Blot
-        const tableIndex = this.quill.getIndex(tableBlot)
-        const tableLength = tableBlot.length()
-        const tableEndPos = tableIndex + tableLength
-        const anchorNode = getSelection().anchorNode
-        if (tableBreaker) {
-          return
-        }
-        if (formats['table-col']) {
-          // fix: 光标在表格前端的table-col处时，获取整个表格的index后以此为基准向前移动一位插入粘贴内容且不删除任何内容
-          linePos.index = tableIndex - 1
-          linePos.length = 0
-        }
-        else if (
-          range.index === tableEndPos - 1
-          && anchorNode instanceof HTMLDivElement
-          && anchorNode.classList.contains('quill-better-table-wrapper')
-        ) {
-          const list = pastedContent.filter(
-            op => op.attributes && op.attributes.list,
-          )
-          if (list && list.length) {
-            return
-          }
-          // fix: 光标在表格末端时，向后移动一位插入粘贴内容且不删除任何内容
-          // TODO
-          // 当表格最后一格有内容时，没法区分在表格最后一格最末尾和光标在表格后这两种情况，它们的 range 是一样
-          // 这会导致在这两处粘贴表格内容都会将该内容粘贴到表格下一行中
-          linePos.index = tableEndPos
-          linePos.length = 0
-        }
-        else {
-          if (!formats['table-cell-line']) {
-            return
-          }
-          // fix: 解决表格内粘贴问题
-          // 缺陷描述：将表格内的换行文本复制粘贴到别的单元格，会导致表格断开
-          // 原因是：换行的文本delta对象有问题，delta对象前面多了一个纯换行和表格控制头（table-col）
-          // 解决方法：将多余的delta项移除
-          pastedContent = {
-            ops: pastedContent.filter((op, index) => {
-              const regexp = /^[\n\r]+$/
-              const isString = op.insert && typeof op.insert === 'string'
-              const isLine = isString && regexp.test(op.insert)
-              const isCellLine
-                = isLine && op.attributes && op.attributes['table-cell-line']
-              const isList = isLine && op.attributes && op.attributes.list
-              const isPureLine = isLine && !isCellLine && !isList
-              const isTableCol
-                = isLine && op.attributes && op.attributes['table-col']
-              const isLastCellLine = isCellLine && index === deltaLength - 1
-              return !isPureLine && !isTableCol && !isLastCellLine
-            }),
-          }
-          // fix: 解决从表格外粘贴多行文本导致表格断开的问题
-          pastedContent = rebuildDelta(
-            new Delta(pastedContent.ops),
-            formats['table-cell-line'],
-          )
-        }
-      }
-
-      // fix: 粘贴内容末尾为List，且粘贴位置的block或table-cell-line无内容则删除该block或table-cell-line
-      // TODO 这里的lastChild如果不存在，则可能报错
-      const lastChild = pastedContent.ops[pastedContent.ops.length - 1]
-      const hasList
-        = lastChild && lastChild.attributes && lastChild.attributes.list
-      if (
-        hasList
-        && offset === 0
-        && line
-        && (line as TypeBlock).cache.length === 1
-        && (line.statics.blotName === 'block'
-          || line.statics.blotName === 'table-cell-line')
-        && (!line.next || line.next.statics.blotName !== 'table-view')
-      ) {
-        linePos.index = this.quill.getIndex(line)
-        linePos.length = line.length()
-        linePos.fix = 1
-      }
 
       const oldDelta = new Delta().retain(linePos.index).delete(linePos.length)
       const delta = oldDelta.concat(pastedContent)
