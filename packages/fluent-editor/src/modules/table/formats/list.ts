@@ -226,4 +226,4 @@ function getFormats(dom): any {
   }, formats)
 }
 
-export { ListItem as default, ListContainer }
+export { ListItem as default, ListContainer, ListItem }

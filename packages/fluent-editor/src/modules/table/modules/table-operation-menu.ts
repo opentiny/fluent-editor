@@ -13,6 +13,8 @@ import {
 } from '../table-config'
 import { arrayFrom, css, elementRemove, getRelativeRect } from '../utils'
 
+type BetterTableOpertaionMenuOptions = any
+
 const DEFAULT_CELL_COLORS = ['white', 'red', 'yellow', 'blue']
 const NODE_EVENT_MAP = new WeakMap()
 export default class TableOperationMenu {
@@ -36,7 +38,7 @@ export default class TableOperationMenu {
     handler: () => void
   }>
 
-  constructor(params, quill, options) {
+  constructor(params, quill, options: BetterTableOpertaionMenuOptions = { color: true }) {
     const betterTableModule = quill.getModule('better-table')
     this.tableSelection = betterTableModule.tableSelection
     this.table = params.table
