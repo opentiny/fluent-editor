@@ -28,6 +28,7 @@
     "dev": "pnpm -F docs dev",
     "dev:projects": "pnpm -F projects dev",
     "build": "pnpm -F docs build",
+    "build:v3": "pnpm -F docs build:v3",
     "build:projects": "pnpm -F projects build",
     "build:lib": "pnpm -F @opentiny/fluent-editor build",
     "lint": "eslint . --cache",

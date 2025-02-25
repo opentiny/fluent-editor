@@ -1,13 +1,15 @@
 import { fileURLToPath, URL } from 'node:url'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
-import { defineConfig } from 'vitepress'
+import { defineConfig, loadEnv } from 'vitepress'
 import { sidebar } from './sidebar'
+
+const env = loadEnv(process.env.VITE_BASE_URL, fileURLToPath(new URL('../', import.meta.url)))
 
 export default defineConfig({
   title: 'TinyEditor',
   titleTemplate: '基于 Quill 2.0 的富文本编辑器',
   description: '富文本编辑器, Rich text editor, rich-text-editor, rich-text, wysiwyg, wysiwyg-editor, quill, fluent-editor, tiny-editor',
-  base: '/tiny-editor/',
+  base: env.VITE_BASE_URL || '/tiny-editor/',
   cleanUrls: true,
   head: [
     ['link', { rel: 'icon', href: 'favicon.ico' }],
