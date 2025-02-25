@@ -2,6 +2,7 @@ import type { MathfieldElement } from 'mathlive'
 import type { Bounds } from 'quill/core/selection'
 import type TypeTooltip from 'quill/ui/tooltip'
 import Quill from 'quill'
+import { isString } from '../../utils/is'
 
 const Delta = Quill.import('delta')
 const Tooltip = Quill.import('ui/tooltip') as typeof TypeTooltip
@@ -64,13 +65,17 @@ export default class MathliveTooltip extends Tooltip {
     const range = this.quill.getSelection(true)
     const inputValue = this.mathliveDom.value
     if (!inputValue) return
-    const index = range ? range.index : this.quill.getLength() - 1
+    const contentData = this.quill.getContents(range.index, 1).ops[0].insert
+    let deleteCount = 0
+    if (!isString(contentData) && contentData.mathlive) {
+      deleteCount += 1
+    }
     const delta = new Delta()
-      .retain(index)
-      .delete(this.editValue ? 1 : range?.length || 0)
+      .retain(range.index)
+      .delete(Math.max(deleteCount, range.length))
       .insert({ mathlive: { value: inputValue, mode: 'dialog' } })
     this.quill.updateContents(delta, Quill.sources.USER)
-    this.quill.setSelection(index + 1, Quill.sources.SILENT)
+    this.quill.setSelection(range.index + 1, Quill.sources.SILENT)
     this.hide()
   }
 
