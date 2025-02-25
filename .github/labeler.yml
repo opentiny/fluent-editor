@@ -36,8 +36,4 @@ labels:
   - label: v3
     sync: true
     matcher:
-      baseBranch: main
-  - label: v4
-    sync: true
-    matcher:
-      baseBranch: v4
+      baseBranch: v3.x
