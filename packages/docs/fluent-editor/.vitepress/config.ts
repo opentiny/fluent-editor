@@ -1,9 +1,11 @@
 import { fileURLToPath, URL } from 'node:url'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
+import packageJson from '@opentiny/fluent-editor/package.json' with { type: 'json'}
 import { defineConfig, loadEnv } from 'vitepress'
 import { sidebar } from './sidebar'
 
 const env = loadEnv(process.env.VITE_BASE_URL, fileURLToPath(new URL('../', import.meta.url)))
+const currentVersion = packageJson.version
 
 export default defineConfig({
   title: 'TinyEditor',
@@ -30,6 +32,12 @@ export default defineConfig({
         text: '生态',
         items: [
           { text: 'TinyVue', link: 'https://opentiny.design/tiny-vue/' },
+        ],
+      },
+      {
+        text: currentVersion,
+        items: [
+          { text: 'v3.x', link: 'https://tiny-editor-v3.github.io' },
         ],
       },
       {
