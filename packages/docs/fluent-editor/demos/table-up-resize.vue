@@ -34,7 +34,6 @@ onMounted(() => {
         theme: 'snow',
         modules: {
           'toolbar': TOOLBAR_CONFIG,
-          'better-table': false,
           'table-up': {
             customSelect: defaultCustomSelect,
             resize: TableResizeBox,
@@ -47,7 +46,6 @@ onMounted(() => {
         theme: 'snow',
         modules: {
           'toolbar': TOOLBAR_CONFIG,
-          'better-table': false,
           'table-up': {
             customSelect: defaultCustomSelect,
             resize: TableResizeLine,
@@ -60,7 +58,6 @@ onMounted(() => {
         theme: 'snow',
         modules: {
           'toolbar': TOOLBAR_CONFIG,
-          'better-table': false,
           'table-up': {
             customSelect: defaultCustomSelect,
             resizeScale: TableResizeScale,

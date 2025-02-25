@@ -43,7 +43,6 @@ onMounted(() => {
         theme: 'snow',
         modules: {
           'toolbar': TOOLBAR_CONFIG,
-          'better-table': false,
           'table-up': {
             customSelect: defaultCustomSelect,
           },

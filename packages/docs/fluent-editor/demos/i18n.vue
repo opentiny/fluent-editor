@@ -17,10 +17,8 @@ onMounted(() => {
           ['bold', 'italic', 'strike', 'underline'],
           ['link', 'image'],
           [{ color: [] }, { background: [] }],
-          ['better-table'],
         ],
         'counter': true,
-        'better-table': true,
         'i18n': {
           lang: lang.value,
         },

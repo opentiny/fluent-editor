@@ -1,7 +1,6 @@
 @use './common/config.scss' as *;
 @import './common';
 @import './tasklist';
-@import './better-table';
 @import './emoji/emoji';
 
 @mixin editor {
@@ -324,8 +323,6 @@
       border: 1px solid #adb0b8;
       padding: 5px 10px;
     }
-
-    @include table;
 
     // 全局链接
     .ql-wiki-link,

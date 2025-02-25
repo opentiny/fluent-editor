@@ -67,7 +67,6 @@ const ICONS_CONFIG: { [key: string]: any } = {
 
   'image': IMAGE_ICON,
   'file': FILE_ICON,
-  'better-table': TABLE_ICON,
   'link': LINK_ICON,
   'global-link': GLOBAL_LINK_ICON,
   'fullscreen': FULLSCREEN_ICON,

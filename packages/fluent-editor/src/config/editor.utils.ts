@@ -62,16 +62,6 @@ export function imageUrlToFile(imageUrl, isErrorImage?: boolean) {
   })
 }
 
-export function insideTable(range = null, quill = this.quill) {
-  let currentRange = range
-  if (!currentRange) {
-    currentRange = quill.getSelection()
-  }
-  // fix: 原有formats方法无法判断表格内的list和head附近粘贴
-  const [line] = quill.getLine(currentRange.index)
-  return line && !!line.domNode.closest('table.quill-better-table')
-}
-
 export function isNullOrUndefined(param) {
   return param === null || param === undefined
 }

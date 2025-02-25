@@ -20,7 +20,7 @@ onMounted(() => {
         modules: {
           'toolbar': {
             container: [
-              [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'header-list', 'better-table'],
+              [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'header-list'],
             ],
             handlers: {
               'header-list': HeaderList.toolbarHandle,
@@ -29,7 +29,6 @@ onMounted(() => {
           'header-list': {
             container: headerListRef.value,
           },
-          'better-table': {},
         },
       })
 

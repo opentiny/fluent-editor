@@ -72,7 +72,6 @@ export function generateToolbarTip(QuillToolbarTip: Constructor) {
         'formula',
         'format-painter',
         'header-list',
-        'better-table',
         'table-up',
       ].reduce((map, name) => {
         map[name] = this.quill.getLangText(name) + getShortKey(name)

@@ -91,7 +91,6 @@ export const ZH_CN = {
   'divider': '分割线',
   'code': '行内代码',
   'table': '表格',
-  'better-table': '表格',
   'table-up': '表格',
   'code-block': '代码块',
   'formula': '公式',

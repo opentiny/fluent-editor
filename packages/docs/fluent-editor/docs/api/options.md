@@ -17,9 +17,6 @@ import type { QuillOptions } from 'quill'
 
 export interface FluentEditorOptions extends QuillOptions {
   modules?: QuillModules & {
-    // 表格模块
-    'better-table'?: boolean | BetterTableOptions
-
     // 字符统计模块
     'counter': boolean | CounterOption
 

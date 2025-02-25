@@ -8,7 +8,6 @@ const TOOLBAR_CONFIG = [
   ['bold', 'italic', 'underline', 'link'],
   [{ list: 'ordered' }, { list: 'bullet' }],
   ['clean'],
-  ['better-table'],
 ]
 
 const editorRef = ref()
@@ -25,18 +24,6 @@ onMounted(() => {
       },
       modules: {
         'toolbar': TOOLBAR_CONFIG,
-        'better-table': {
-          operationMenu: {
-            items: {
-              copyCells: {
-                text: '复制单元格',
-              },
-            },
-            color: {
-              text: '主题色2',
-            },
-          },
-        },
       },
     })
   })

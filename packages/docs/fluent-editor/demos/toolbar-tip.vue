@@ -37,7 +37,7 @@ const TOOLBAR_CONFIG = [
   [{ indent: '-1' }, { indent: '+1' }],
   [{ direction: 'rtl' }],
   ['link', 'blockquote', 'code', 'code-block'],
-  ['image', 'file', 'better-table'],
+  ['image', 'file'],
   ['emoji', 'video', 'formula', 'screenshot', 'fullscreen'],
 ]
 
